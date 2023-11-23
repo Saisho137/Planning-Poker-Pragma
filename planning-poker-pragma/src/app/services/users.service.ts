@@ -12,8 +12,11 @@ export class UsersService {
   constructor(private http: HttpClient, private router: Router) {}
 
   public validateUser(email: string, password: string): void {
-    const url = 'http://localhost:8080/sign_in_user';
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url: string = 'http://localhost:8080/sign_in_user';
+    const headers: HttpHeaders = new HttpHeaders().set(
+      'Content-Type',
+      'application/json'
+    );
     const body = {
       email: email,
       password: password,
@@ -36,11 +39,36 @@ export class UsersService {
         this.router.navigate(['']);
       },
       error: (err) => {
-        window.alert('Wrong User!, try Again!');
+        window.alert('Wrong User!, try Again!' + err);
         this.router.navigate(['login']);
       },
     });
   }
 
-  public createUSer(username: string, email: string, password: string): void {}
+  public createUSer(username: string, email: string, password: string): void {
+    const url: string = 'http://localhost:8080/register_user';
+    const headers: HttpHeaders = new HttpHeaders().set(
+      'Content-Type',
+      'application/json'
+    );
+    const body = {
+      username: username,
+      email: email,
+      password: password,
+    };
+
+    this.http.post(url, body, { headers }).subscribe({
+      next: (res) => {
+        this.apiResponse = res;
+
+        this.apiResponse.userCreated === true
+          ? this.router.navigate(['login'])
+          : window.alert('Something Went Wrong! Try again!');
+      },
+      error: (err) => {
+        window.alert('Something Went Wrong! Try again!' + err);
+        this.router.navigate(['register']);
+      },
+    });
+  }
 }

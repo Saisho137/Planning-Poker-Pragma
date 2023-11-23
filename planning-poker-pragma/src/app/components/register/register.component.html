@@ -1,2 +1,28 @@
 <p>register works!</p>
+<section class="row">
+  <div class="col-12 d-flex justify-content-center mt-5">
+    <h2><b>Sign In</b></h2>
+  </div>
+  <div class="col-6 d-flex justify-content-end mt-4">
+    <label for="tbUsername">Username</label>
+  </div>
+  <div class="col-6 mt-4">
+    <input type="text" id="tbUsername" [(ngModel)]="username" />
+  </div>
+  <div class="col-6 d-flex justify-content-end mt-4">
+    <label for="tbEmail">Email</label>
+  </div>
+  <div class="col-6 mt-4">
+    <input type="text" id="tbEmail" [(ngModel)]="email" />
+  </div>
+  <div class="col-6 d-flex justify-content-end mt-2">
+    <label for="tbPassword">Password</label>
+  </div>
+  <div class="col-6 mt-2">
+    <input type="password" id="tbPassword" [(ngModel)]="password" />
+  </div>
+  <div class="col-12 d-flex justify-content-center mt-3">
+    <button class="btn btn-primary" (click)="createUser()">Log-in</button>
+  </div>
+</section>
 <a href="/login">Login</a>

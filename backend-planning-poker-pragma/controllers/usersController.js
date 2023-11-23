@@ -20,8 +20,8 @@ function registerUser(req, res) {
     newUser.password = hash
 
     newUser.save().then(
-        (savedUser) => {
-            res.status(200).send({ userCreated: savedUser })
+        () => {
+            res.status(200).send({ userCreated: true })
         },
         err => {
             res.status(500).send({ message: "Could not create the User", err })
