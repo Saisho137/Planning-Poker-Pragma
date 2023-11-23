@@ -42,7 +42,7 @@ function signInUser(req, res) {
             }
             else {
                 if (bcrypt.compareSync(sentPassword, foundUser.password)) {
-                    res.status(200).send({ message: "User Authenticated.", token: token.getUserToken(foundUser) })
+                    res.status(200).send({ user: foundUser, token: token.getUserToken(foundUser) })
                 }
                 else {
                     res.status(403).send({ message: "Invalid Password." })

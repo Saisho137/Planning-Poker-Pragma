@@ -10,13 +10,31 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
-  constructor(private router: Router) {}
+  username: string =
+    localStorage.getItem('user_username') !== null
+      ? localStorage.getItem('user_username')!
+      : '';
+  constructor(private router: Router) {
+    console.log('Token: ', sessionStorage.getItem('session_token'));
+    console.log(
+      'User: ',
+      localStorage.getItem('user_id'),
+      localStorage.getItem('user_username'),
+      localStorage.getItem('user_email')
+    );
+  }
 
   ngOnInit() {
-    const token = sessionStorage.getItem('session_token');
-
-    if (token == null) {
-      this.router.navigate(['/login']);
+    if (sessionStorage.getItem('session_token') === null) {
+      this.router.navigate(['login']);
     }
+  }
+
+  logOut() {
+    sessionStorage.removeItem('session_token');
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('user_username');
+    localStorage.removeItem('user_email');
+    this.router.navigate(['login']);
   }
 }

@@ -5,8 +5,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { ClassroomComponent } from './components/classroom/classroom.component';
 
 export const routes: Routes = [
-  { path: '', title: 'Home', component: HomeComponent },
+  { path: '',  title: 'Home', component: HomeComponent },
   { path: 'login', title: 'Login', component: LoginComponent },
   { path: 'register', title: 'Register', component: RegisterComponent },
-  { path: 'classroom/:id', title: 'Register', component: ClassroomComponent },
+  { path: 'classroom/:id', title: 'Classroom', component: ClassroomComponent },
 ];
