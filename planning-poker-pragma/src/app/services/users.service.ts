@@ -62,7 +62,7 @@ export class UsersService {
         this.apiResponse = res;
 
         this.apiResponse.userCreated === true
-          ? this.router.navigate(['login'])
+          ? this.validateUser(email, password)
           : window.alert('Something Went Wrong! Try again!');
       },
       error: (err) => {
