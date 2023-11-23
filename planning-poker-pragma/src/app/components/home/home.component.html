@@ -1,9 +1,15 @@
 <h1>home works!</h1>
-<h4>Hello {{username}}</h4>
-<a href="/classroom/3">Sala 3</a>
-<br/>
+<h4>Hello {{ username }}</h4>
+<br />
 <a href="/login">login</a>
-<br/>
+<br />
 <a href="/register">register</a>
-<br/>
+<br />
 <button (click)="logOut()">Log Out</button>
+<br />
+
+@if (createWindow) {
+<app-create-classroom />
+}
+
+<button (click)="switchWindow()">Launch party generator</button>
