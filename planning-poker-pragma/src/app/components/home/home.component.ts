@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { UserInterface } from '../../interfaces/user-interface';
 
 @Component({
   selector: 'app-home',
@@ -16,12 +17,12 @@ export class HomeComponent {
       : '';
   constructor(private router: Router) {
     console.log('Token: ', sessionStorage.getItem('session_token'));
-    console.log(
-      'User: ',
-      localStorage.getItem('user_id'),
-      localStorage.getItem('user_username'),
-      localStorage.getItem('user_email')
-    );
+
+    const userJson: UserInterface =
+      localStorage.getItem('user_object') !== null
+        ? JSON.parse(localStorage.getItem('user_object')!)
+        : {};
+    console.log('User: ', userJson._id, userJson.username, userJson.email);
   }
 
   ngOnInit() {

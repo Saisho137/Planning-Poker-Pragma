@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserInterface } from '../interfaces/user-interface';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -26,15 +27,23 @@ export class UsersService {
         sessionStorage.setItem('session_token', token);
 
         const user = this.apiResponse.user;
+        const temp: UserInterface = {
+          _id: user._id,
+          username: user.username,
+          email: user.email,
+        };
+        localStorage.setItem('user_object', JSON.stringify(temp));
         localStorage.setItem('user_id', user._id);
         localStorage.setItem('user_username', user.username);
         localStorage.setItem('user_email', user.email);
         this.router.navigate(['']);
       },
       error: (err) => {
-        window.alert("Wrong User!, try Again!");
+        window.alert('Wrong User!, try Again!');
         this.router.navigate(['login']);
       },
     });
   }
+
+  public createUSer(username: string, email: string, password: string): void {}
 }
