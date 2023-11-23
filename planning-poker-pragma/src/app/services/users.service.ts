@@ -33,9 +33,6 @@ export class UsersService {
           email: user.email,
         };
         localStorage.setItem('user_object', JSON.stringify(temp));
-        localStorage.setItem('user_id', user._id);
-        localStorage.setItem('user_username', user.username);
-        localStorage.setItem('user_email', user.email);
         this.router.navigate(['']);
       },
       error: (err) => {

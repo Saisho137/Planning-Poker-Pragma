@@ -11,18 +11,23 @@ import { UserInterface } from '../../interfaces/user-interface';
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
+
+  userJson: UserInterface =
+    localStorage.getItem('user_object') !== null
+      ? JSON.parse(localStorage.getItem('user_object')!)
+      : {};
+      
   username: string =
-    localStorage.getItem('user_username') !== null
-      ? localStorage.getItem('user_username')!
-      : '';
+    this.userJson.username !== null ? this.userJson.username : '';
+
   constructor(private router: Router) {
     console.log('Token: ', sessionStorage.getItem('session_token'));
-
-    const userJson: UserInterface =
-      localStorage.getItem('user_object') !== null
-        ? JSON.parse(localStorage.getItem('user_object')!)
-        : {};
-    console.log('User: ', userJson._id, userJson.username, userJson.email);
+    console.log(
+      'User: ',
+      this.userJson._id,
+      this.userJson.username,
+      this.userJson.email
+    );
   }
 
   ngOnInit() {
@@ -33,9 +38,7 @@ export class HomeComponent {
 
   logOut() {
     sessionStorage.removeItem('session_token');
-    localStorage.removeItem('user_id');
-    localStorage.removeItem('user_username');
-    localStorage.removeItem('user_email');
+    localStorage.removeItem('user_object');
     this.router.navigate(['login']);
   }
 }
