@@ -2,16 +2,19 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CreateVisualizationModeComponent } from './create-visualization-mode/create-visualization-mode.component';
 
 @Component({
   selector: 'app-create-classroom',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, CreateVisualizationModeComponent],
   templateUrl: './create-classroom.component.html',
   styleUrl: './create-classroom.component.css',
 })
 export class CreateClassroomComponent {
+
   partyName: string = '';
+  nextWindow: boolean = false;
 
   constructor(private router: Router) {}
 
@@ -27,11 +30,12 @@ export class CreateClassroomComponent {
       return;
     } else if (numeros.length === name.length) {
       window.alert('El nombre no puede estar compuesto únicamente de números!');
+      return;
     }
     this.createPary();
   }
 
   createPary(): void {
-    this.router.navigate(['classroom/' + this.partyName]);
+    this.nextWindow = true;
   }
 }

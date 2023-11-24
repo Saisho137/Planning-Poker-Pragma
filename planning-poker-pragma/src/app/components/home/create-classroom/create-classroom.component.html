@@ -3,3 +3,8 @@
     <input class="col-12 border rounded-4 border-secondary" type="text" id="partyName" [(ngModel)]="partyName" required/>
     <button class="col-6 my-2 border rounded-4 border-secondary" (click)="validateName(partyName)">Create Party</button>
 </section>
+<section class="row d-flex justify-content-center">
+    @if (nextWindow) {
+    <app-create-visualization-mode class="col-12" />
+    }
+</section>
