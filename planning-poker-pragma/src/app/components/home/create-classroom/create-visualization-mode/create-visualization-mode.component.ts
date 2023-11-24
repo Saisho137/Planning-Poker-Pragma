@@ -2,11 +2,13 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserInterface } from '../../../../interfaces/user-interface';
 import { Router } from '@angular/router';
+import { ValidatorService } from '../../../../services/validator.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-create-visualization-mode',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './create-visualization-mode.component.html',
   styleUrl: './create-visualization-mode.component.css',
 })
@@ -23,7 +25,7 @@ export class CreateVisualizationModeComponent {
 
   selectedMode: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private validator: ValidatorService) {}
 
   switchCheckbox(checkbox: string): void {
     if (
@@ -35,8 +37,10 @@ export class CreateVisualizationModeComponent {
     this.selectedMode = checkbox;
   }
   continueToRoom(): void {
-    this.selectedMode.length > 0
+    if (this.validator.validateString(this.username)) {
+      this.selectedMode.length > 0
       ? this.router.navigate(['classroom/' + this.classroomId])
       : window.alert('Debes seleccionar un modo de visualización!');
+    }
   }
 }
