@@ -11,5 +11,5 @@ input[type="checkbox"] {
 
 input[type="checkbox"]:checked {
   border-color: black;
-  background-color: black;
+  background-color: purple;
 }
