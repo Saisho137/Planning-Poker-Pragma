@@ -10,6 +10,8 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  title: string = 'planning-poker-pragma';
+
   constructor() {
     console.log('Token: ', sessionStorage.getItem('session_token'));
     console.log(
@@ -18,5 +20,4 @@ export class AppComponent {
       sessionStorage.getItem('user_username')
     );
   }
-  title = 'planning-poker-pragma';
 }

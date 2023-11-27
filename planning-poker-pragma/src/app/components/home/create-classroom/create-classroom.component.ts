@@ -12,7 +12,6 @@ import { ValidatorService } from '../../../services/validator.service';
   styleUrl: './create-classroom.component.css',
 })
 export class CreateClassroomComponent {
-
   partyName: string = '';
   nextWindow: boolean = false;
 

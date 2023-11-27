@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ValidatorService {
-
-  constructor() { }
+  constructor() {}
 
   public validateString(string: string): boolean {
     const regex = /^[a-zA-Z0-9]{5,20}$/;

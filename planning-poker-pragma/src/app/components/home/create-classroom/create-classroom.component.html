@@ -1,10 +1,25 @@
-<section class="row mt-3 mx-5 px-2 d-flex justify-content-center border rounded-4 border-dark">
-    <label class="col-12 mt-2 d-flex justify-content-start" for="partyName"><h6>Name the Party</h6></label>
-    <input class="col-12 border rounded-4 border-secondary" type="text" id="partyName" [(ngModel)]="partyName" required/>
-    <button class="col-6 my-2 border rounded-4 border-secondary" (click)="validateName(partyName)">Create Party</button>
+<section
+  class="row mt-3 mx-5 px-2 d-flex justify-content-center border rounded-4 border-dark"
+>
+  <label class="col-12 mt-2 d-flex justify-content-start" for="partyName"
+    ><h6>Name the Party</h6></label
+  >
+  <input
+    class="col-12 border rounded-4 border-secondary"
+    type="text"
+    id="partyName"
+    [(ngModel)]="partyName"
+    required
+  />
+  <button
+    class="col-6 my-2 border rounded-4 border-secondary"
+    (click)="validateName(partyName)"
+  >
+    Create Party
+  </button>
 </section>
 <section class="row d-flex justify-content-center">
-    @if (nextWindow) {
-    <app-create-visualization-mode class="col-12" [classroomId]="partyName" />
-    }
+  @if (nextWindow) {
+  <app-create-visualization-mode class="col-12" [classroomId]="partyName" />
+  }
 </section>

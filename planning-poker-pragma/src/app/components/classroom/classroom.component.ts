@@ -15,7 +15,8 @@ export class ClassroomComponent {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.snapshot.paramMap.get('id')! !== null ? this.roomId = this.route.snapshot.paramMap.get('id')!
-    : this.roomId = '0'; //Get Classroom Id from URL
+    this.route.snapshot.paramMap.get('id')! !== null
+      ? (this.roomId = this.route.snapshot.paramMap.get('id')!)
+      : (this.roomId = '0'); //Get Classroom Id from URL
   }
 }
