@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserInterface } from '../../../../interfaces/user-interface';
 import { Router } from '@angular/router';
 import { ValidatorService } from '../../../../services/validator.service';
 import { FormsModule } from '@angular/forms';
@@ -15,13 +14,10 @@ import { FormsModule } from '@angular/forms';
 export class CreateVisualizationModeComponent {
   @Input() classroomId: string = '';
 
-  userJson: UserInterface =
-    localStorage.getItem('user_object') !== null
-      ? JSON.parse(localStorage.getItem('user_object')!)
-      : {};
-
   username: string =
-    this.userJson.username !== null ? this.userJson.username : '';
+    sessionStorage.getItem('user_username') !== null
+      ? sessionStorage.getItem('user_username')!
+      : '';
 
   selectedMode: string = '';
 
@@ -29,7 +25,8 @@ export class CreateVisualizationModeComponent {
 
   switchCheckbox(checkbox: string): void {
     if (
-      (this.selectedMode === 'player' && checkbox === 'player') || (this.selectedMode === 'spectator' && checkbox === 'spectator')
+      (this.selectedMode === 'player' && checkbox === 'player') ||
+      (this.selectedMode === 'spectator' && checkbox === 'spectator')
     ) {
       this.selectedMode = '';
       return;
@@ -38,9 +35,10 @@ export class CreateVisualizationModeComponent {
   }
   continueToRoom(): void {
     if (this.validator.validateString(this.username)) {
+      sessionStorage.setItem('user_username', this.username);
       this.selectedMode.length > 0
-      ? this.router.navigate(['classroom/' + this.classroomId])
-      : window.alert('Debes seleccionar un modo de visualización!');
+        ? this.router.navigate(['classroom/' + this.classroomId])
+        : window.alert('Debes seleccionar un modo de visualización!');
     }
   }
 }

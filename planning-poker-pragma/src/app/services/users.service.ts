@@ -30,12 +30,8 @@ export class UsersService {
         sessionStorage.setItem('session_token', token);
 
         const user = this.apiResponse.user;
-        const temp: UserInterface = {
-          _id: user._id,
-          username: user.username,
-          email: user.email,
-        };
-        localStorage.setItem('user_object', JSON.stringify(temp));
+        sessionStorage.setItem('user_id', user._id);
+        sessionStorage.setItem('user_username', user.username);
         this.router.navigate(['']);
       },
       error: (err) => {

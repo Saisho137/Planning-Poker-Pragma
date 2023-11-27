@@ -12,25 +12,14 @@ import { CreateClassroomComponent } from './create-classroom/create-classroom.co
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
-  userJson: UserInterface =
-    localStorage.getItem('user_object') !== null
-      ? JSON.parse(localStorage.getItem('user_object')!)
-      : {};
-
-  username: string =
-    this.userJson.username !== null ? this.userJson.username : '';
+  username: string | null =
+    sessionStorage.getItem('user_username') !== null
+      ? sessionStorage.getItem('user_username')
+      : null;
 
   createWindow: boolean = false;
 
-  constructor(private router: Router) {
-    console.log('Token: ', sessionStorage.getItem('session_token'));
-    console.log(
-      'User: ',
-      this.userJson._id,
-      this.userJson.username,
-      this.userJson.email
-    );
-  }
+  constructor(private router: Router) {}
 
   ngOnInit() {
     if (sessionStorage.getItem('session_token') === null) {
@@ -40,7 +29,8 @@ export class HomeComponent {
 
   logOut() {
     sessionStorage.removeItem('session_token');
-    localStorage.removeItem('user_object');
+    sessionStorage.removeItem('user_id');
+    sessionStorage.removeItem('user_username');
     this.router.navigate(['login']);
   }
 
