@@ -1,5 +1,5 @@
 export interface UserInRoomInterface {
   id: string;
   username: string;
-  rol: 'player' | 'spectator'
+  rol: 'player' | 'spectator';
 }

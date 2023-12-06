@@ -18,7 +18,8 @@ export class LoginComponent {
   constructor(private userService: UsersService, private router: Router) {}
 
   ngOnInit() {
-    const token = sessionStorage.getItem('session_token');
+    const token: string | null | undefined =
+      sessionStorage.getItem('session_token');
     if (token !== null && token !== undefined) {
       this.router.navigate(['']);
     }

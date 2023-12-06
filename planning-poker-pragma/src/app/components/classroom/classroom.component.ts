@@ -26,7 +26,8 @@ export class ClassroomComponent {
       : (this.roomId = '0'); //Get Classroom Id from URL
     this.visualization = this.classrooms.userIsPlayer(
       this.roomId,
-      sessionStorage.getItem('user_id')!)
+      sessionStorage.getItem('user_id')!
+    )
       ? 'player'
       : 'spectator';
     console.log(this.classrooms.getRoom(this.roomId));
