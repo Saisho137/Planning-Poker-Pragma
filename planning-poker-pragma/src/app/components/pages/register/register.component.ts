@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { UsersService } from '../../services/users.service';
+import { UsersService } from '../../../services/users.service';
 import { FormsModule } from '@angular/forms';
-import { ValidatorService } from '../../services/validator.service';
+import { ValidatorService } from '../../../services/validator.service';
 
 @Component({
   selector: 'app-register',

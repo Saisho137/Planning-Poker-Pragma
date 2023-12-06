@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { ValidatorService } from '../../../../services/validator.service';
+import { ValidatorService } from '../../../services/validator.service';
 import { FormsModule } from '@angular/forms';
-import { ClassroomsService } from '../../../../services/classrooms.service';
+import { ClassroomsService } from '../../../services/classrooms.service';
 
 @Component({
   selector: 'app-create-visualization-mode',

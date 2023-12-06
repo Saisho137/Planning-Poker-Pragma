@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { CreateClassroomComponent } from './create-classroom/create-classroom.component';
+import { CreateClassroomComponent } from '../../molecules/create-classroom/create-classroom.component';
 
 @Component({
   selector: 'app-home',

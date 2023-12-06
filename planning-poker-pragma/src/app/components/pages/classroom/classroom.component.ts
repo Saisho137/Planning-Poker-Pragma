@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { ClassroomsService } from '../../services/classrooms.service';
+import { ClassroomsService } from '../../../services/classrooms.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
