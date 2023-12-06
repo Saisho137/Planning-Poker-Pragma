@@ -41,7 +41,7 @@ export class CreateVisualizationModeComponent {
   continueToRoom(): void {
     if (this.validator.validateString(this.username)) {
       sessionStorage.setItem('user_username', this.username);
-      if (this.selectedMode === 'player' || 'spectator') {
+      if (this.selectedMode.length > 0) {
         this.classrooms.createRoom(
           this.classroomId,
           sessionStorage.getItem('user_id')!,
