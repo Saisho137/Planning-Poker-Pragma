@@ -33,10 +33,6 @@ export class ClassroomComponent {
   }
 
   validateAdminUser(): boolean {
-    console.log(
-      sessionStorage.getItem('user_id'),
-      this.classrooms.getRoom(this.roomId)?.admin
-    );
     if (
       sessionStorage.getItem('user_id') ===
       this.classrooms.getRoom(this.roomId)?.admin
