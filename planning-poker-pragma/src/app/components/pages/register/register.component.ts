@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { UsersService } from '../../../services/users.service';
 import { FormsModule } from '@angular/forms';
 import { ValidatorService } from '../../../services/validator.service';
+import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, GenericButtonComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })

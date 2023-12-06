@@ -11,7 +11,12 @@
     [(ngModel)]="partyName"
     required
   />
-  <app-generic-button class="col-8 my-2 d-flex justify-content-center" (click)="validateName(partyName)" [buttonText]="'crear partida'" [disabledState]="!partyName"></app-generic-button>
+  <app-generic-button
+    class="col-8 my-2 d-flex justify-content-center"
+    (click)="validateName(partyName)"
+    [buttonText]="'crear partida'"
+    [disabledState]="!partyName"
+  ></app-generic-button>
 </section>
 <section class="row d-flex justify-content-center">
   @if (nextWindow) {

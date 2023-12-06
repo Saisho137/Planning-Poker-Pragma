@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { UsersService } from '../../../services/users.service';
 import { FormsModule } from '@angular/forms';
+import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, GenericButtonComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })

@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CreateClassroomComponent } from '../../molecules/create-classroom/create-classroom.component';
+import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CreateClassroomComponent],
+  imports: [CommonModule, CreateClassroomComponent, GenericButtonComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
