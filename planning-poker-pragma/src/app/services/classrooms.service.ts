@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ClassroomInterface } from '../interfaces/classroom-interface';
-import { UserInRoomInterface } from '../interfaces/userInRoom-interface';
+import { UserInRoomInterface } from '../interfaces/user-in-room-interface';
 
 @Injectable({
   providedIn: 'root',

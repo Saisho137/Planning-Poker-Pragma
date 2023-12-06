@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserInRoomInterface } from '../interfaces/userInRoom-interface';
+import { UserInRoomInterface } from '../interfaces/user-in-room-interface';
 import { Router } from '@angular/router';
+import { UserResponseInterface } from '../interfaces/user-response-interface';
+import { RegisterInterface } from '../interfaces/register-interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-  private apiResponse: any = '';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -22,14 +23,12 @@ export class UsersService {
       password: password,
     };
 
-    this.http.post(url, body, { headers }).subscribe({
-      next: (res) => {
-        this.apiResponse = res;
-
-        const token = this.apiResponse.token;
+    this.http.post<UserResponseInterface>(url, body, { headers }).subscribe({
+      next: (res: UserResponseInterface) => {
+        const token = res.token;
         sessionStorage.setItem('session_token', token);
 
-        const user = this.apiResponse.user;
+        const user = res.user;
         sessionStorage.setItem('user_id', user._id);
         sessionStorage.setItem('user_username', user.username);
         this.router.navigate(['']);
@@ -53,11 +52,9 @@ export class UsersService {
       password: password,
     };
 
-    this.http.post(url, body, { headers }).subscribe({
-      next: (res) => {
-        this.apiResponse = res;
-
-        this.apiResponse.userCreated === true
+    this.http.post<RegisterInterface>(url, body, { headers }).subscribe({
+      next: (res: RegisterInterface) => {
+        res.userCreated === true
           ? this.validateUser(email, password)
           : window.alert('Something Went Wrong! Try again!');
       },

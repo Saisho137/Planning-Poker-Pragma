@@ -1,4 +1,4 @@
-import { UserInRoomInterface } from './userInRoom-interface';
+import { UserInRoomInterface } from './user-in-room-interface';
 
 export interface ClassroomInterface {
   id: string;
