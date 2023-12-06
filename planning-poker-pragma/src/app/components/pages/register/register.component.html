@@ -39,7 +39,7 @@
   <div class="my-1 col-7 d-flex justify-content-center">
     <app-generic-button
       class="col-6 my-2 d-flex justify-content-center"
-      (click)="createUser()"
+      (clickEvent)="createUser()"
       [buttonText]="'Register'"
       [disabledState]="!email || !password || !username"
     ></app-generic-button>

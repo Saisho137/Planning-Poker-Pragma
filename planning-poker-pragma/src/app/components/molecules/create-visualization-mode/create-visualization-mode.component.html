@@ -34,5 +34,5 @@
       [checked]="selectedMode === 'spectator'"
     />
   </div>
-  <app-generic-button class="col-6 my-2 d-flex justify-content-center" (click)="continueToRoom()" [buttonText]="'Continuar'" [disabledState]="!selectedMode"></app-generic-button>
+  <app-generic-button class="col-6 my-2 d-flex justify-content-center" (clickEvent)="continueToRoom()" [buttonText]="'Continuar'" [disabledState]="!selectedMode"></app-generic-button>
 </section>

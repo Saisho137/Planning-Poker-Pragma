@@ -18,8 +18,8 @@ export class CreateClassroomComponent {
 
   constructor(private validator: ValidatorService) {}
 
-  validateName(name: string): void {
-    this.validator.validateString(name) ? this.createPary() : null;
+  validateName(): void {
+    this.validator.validateString(this.partyName) ? this.createPary() : null;
   }
 
   createPary(): void {
