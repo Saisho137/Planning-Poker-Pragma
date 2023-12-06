@@ -1,16 +1,10 @@
 <section
-  class="row mt-3 mx-5 px-2 d-flex justify-content-center border rounded-4 border-dark"
+  class="row mt-3 mx-5 px-2 d-flex justify-content-center border rounded-4 border-white"
 >
   <label class="col-12 mt-2 d-flex justify-content-start" for="partyName"
     ><h6>Name the Party</h6></label
   >
-  <input
-    class="col-12 border rounded-4 border-secondary"
-    type="text"
-    id="partyName"
-    [(ngModel)]="partyName"
-    required
-  />
+  <app-generic-input [id]="'partyName'" [type]="'text'" (message)="partyName = $event"></app-generic-input>
   <app-generic-button
     class="col-8 my-2 d-flex justify-content-center"
     (clickEvent)="validateName()"

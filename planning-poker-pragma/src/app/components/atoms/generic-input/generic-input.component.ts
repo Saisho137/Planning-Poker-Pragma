@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './generic-input.component.css',
 })
 export class GenericInputComponent {
+  @Input() type: string = 'text';
+  @Input() id: string = '';
   @Output() message: EventEmitter<string> = new EventEmitter<string>();
   string: string = '';
 
