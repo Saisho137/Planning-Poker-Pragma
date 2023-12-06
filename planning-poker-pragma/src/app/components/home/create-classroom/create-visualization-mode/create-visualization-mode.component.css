@@ -1,0 +1,15 @@
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.5em;
+  height: 1.5em;
+  border: 2px solid purple;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+input[type="checkbox"]:checked {
+  border-color: black;
+  background-color: purple;
+}

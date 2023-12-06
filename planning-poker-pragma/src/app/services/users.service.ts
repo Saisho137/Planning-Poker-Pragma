@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserInterface } from '../interfaces/user-interface';
+import { UserInRoomInterface } from '../interfaces/userInRoom-interface';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -30,12 +30,8 @@ export class UsersService {
         sessionStorage.setItem('session_token', token);
 
         const user = this.apiResponse.user;
-        const temp: UserInterface = {
-          _id: user._id,
-          username: user.username,
-          email: user.email,
-        };
-        localStorage.setItem('user_object', JSON.stringify(temp));
+        sessionStorage.setItem('user_id', user._id);
+        sessionStorage.setItem('user_username', user.username);
         this.router.navigate(['']);
       },
       error: (err) => {

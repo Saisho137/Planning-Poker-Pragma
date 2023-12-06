@@ -10,6 +10,14 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'planning-poker-pragma';
-}
+  title: string = 'planning-poker-pragma';
 
+  constructor() {
+    console.log('Token: ', sessionStorage.getItem('session_token'));
+    console.log(
+      'User: ',
+      sessionStorage.getItem('user_id'),
+      sessionStorage.getItem('user_username')
+    );
+  }
+}

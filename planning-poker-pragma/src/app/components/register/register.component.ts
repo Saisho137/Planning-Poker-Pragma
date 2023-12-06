@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { FormsModule } from '@angular/forms';
+import { ValidatorService } from '../../services/validator.service';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,11 @@ export class RegisterComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private userService: UsersService, private router: Router) {}
+  constructor(
+    private userService: UsersService,
+    private validator: ValidatorService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     const token = sessionStorage.getItem('session_token');
@@ -30,6 +35,8 @@ export class RegisterComponent {
       window.alert('You should fill all the fields.');
       return;
     }
-    this.userService.createUSer(this.username, this.email, this.password);
+    this.validator.validateString(this.username)
+      ? this.userService.createUSer(this.username, this.email, this.password)
+      : null;
   }
 }

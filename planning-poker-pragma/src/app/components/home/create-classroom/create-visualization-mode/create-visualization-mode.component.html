@@ -1,0 +1,44 @@
+<section
+  class="row mt-3 mx-5 d-flex justify-content-evenly border rounded-4 border-dark"
+>
+  <div class="row my-1 d-flex justify-content-center">
+    <label class="col-12 mt-1 d-flex justify-content-start" for="name">
+      Your name:</label
+    >
+    <input
+      class="col-12 mt-1 border rounded-4"
+      type="text"
+      id="name"
+      [(ngModel)]="username"
+    />
+  </div>
+  <div class="row my-1 d-flex justify-content-evenly">
+    <label class="col-2 d-flex justify-content-center" for="player">
+      Player</label
+    >
+    <input
+      class="col-2"
+      type="checkbox"
+      id="player"
+      (change)="switchCheckbox('player')"
+      [checked]="selectedMode === 'player'"
+    />
+    <label class="col-3 d-flex justify-content-center" for="spectator">
+      Spectator</label
+    >
+    <input
+      class="col-2"
+      type="checkbox"
+      id="spectator"
+      (change)="switchCheckbox('spectator')"
+      [checked]="selectedMode === 'spectator'"
+    />
+  </div>
+
+  <button
+    class="col-6 my-2 border rounded-4 border-secondary"
+    (click)="continueToRoom()"
+  >
+    Continue
+  </button>
+</section>
