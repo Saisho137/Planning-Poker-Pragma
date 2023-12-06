@@ -20,7 +20,7 @@ export class CreateVisualizationModeComponent {
       ? sessionStorage.getItem('user_username')!
       : '';
 
-  selectedMode: string = '';
+  selectedMode: 'player' | 'spectator' | '' = '';
 
   constructor(
     private router: Router,
@@ -28,7 +28,7 @@ export class CreateVisualizationModeComponent {
     private classrooms: ClassroomsService
   ) {}
 
-  switchCheckbox(checkbox: string): void {
+  switchCheckbox(checkbox: 'player' | 'spectator'): void {
     if (
       (this.selectedMode === 'player' && checkbox === 'player') ||
       (this.selectedMode === 'spectator' && checkbox === 'spectator')
@@ -41,9 +41,14 @@ export class CreateVisualizationModeComponent {
   continueToRoom(): void {
     if (this.validator.validateString(this.username)) {
       sessionStorage.setItem('user_username', this.username);
-      if (this.selectedMode.length > 0) {
-        this.classrooms.createRoom(this.classroomId, sessionStorage.getItem('user_id')!)
-        this.router.navigate(['classroom/' + this.classroomId])
+      if (this.selectedMode === 'player' || 'spectator') {
+        this.classrooms.createRoom(
+          this.classroomId,
+          sessionStorage.getItem('user_id')!,
+          sessionStorage.getItem('user_username')!,
+          this.selectedMode
+        );
+        this.router.navigate(['classroom/' + this.classroomId]);
       } else {
         window.alert('Debes seleccionar un modo de visualización!');
       }

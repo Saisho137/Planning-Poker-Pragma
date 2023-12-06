@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { UserInterface } from '../../interfaces/user-interface';
 import { CreateClassroomComponent } from './create-classroom/create-classroom.component';
 
 @Component({

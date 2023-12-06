@@ -3,6 +3,8 @@
   <div class="col-6 border rounded-5 border-dark p-5 bg-success">
     @if (validateAdminUser()) {
         <h3>You're an admin!</h3>
+    }@else {
+      <h3>You're not an admin!</h3>
     }
   </div>
 </section>

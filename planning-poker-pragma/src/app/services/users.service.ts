@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserInterface } from '../interfaces/user-interface';
+import { UserInRoomInterface } from '../interfaces/userInRoom-interface';
 import { Router } from '@angular/router';
 
 @Injectable({
