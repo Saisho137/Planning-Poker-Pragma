@@ -1,9 +1,16 @@
 body {
-    background-color: #1F0D3F;
+  background-color: #1f0d3f;
 }
 section {
-    background-color: #370578;
+  background-color: #370578;
 }
-h1, h2, h3, h4, h5, h6, p, label {
-    color: white;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label {
+  color: white;
 }

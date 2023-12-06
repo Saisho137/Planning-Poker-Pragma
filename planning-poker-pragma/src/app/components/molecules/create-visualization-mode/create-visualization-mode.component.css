@@ -3,13 +3,22 @@ input[type="checkbox"] {
   -webkit-appearance: none;
   width: 1.5em;
   height: 1.5em;
-  border: 2px solid purple;
+  border: 2px solid #ba64fd;
+  background-color: #331569;
   border-radius: 100%;
   cursor: pointer;
   transition: border-color 0.3s ease;
+  position: relative;
 }
 
-input[type="checkbox"]:checked {
-  border-color: black;
-  background-color: purple;
+input[type="checkbox"]:checked:before {
+  content: "";
+  width: 65%;
+  height: 65%;
+  background-color: #ba64fd;
+  border-radius: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
 }
