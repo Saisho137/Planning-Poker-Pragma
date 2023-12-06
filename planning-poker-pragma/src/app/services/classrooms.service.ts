@@ -18,7 +18,8 @@ export class ClassroomsService {
     return newRoom;
   }
 
-  public getRooms(): ClassroomInterface[] {
-    return this.rooms;
+  public getRoom(classroomId: string): ClassroomInterface | undefined {
+    const selectedRoom: ClassroomInterface | undefined = this.rooms.find((room) => room.id === classroomId);
+    return selectedRoom;
   }
 }

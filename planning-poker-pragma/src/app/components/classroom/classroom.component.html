@@ -1,2 +1,11 @@
-<p>Hola! {{ roomId }}</p>
-<a href="/">Volver al home</a>
+<section class="row d-flex justify-content-center">
+  <h1 class="col-12 d-flex justify-content-center">{{ roomId }}</h1>
+  <div class="col-6 border rounded-5 border-dark p-5 bg-success">
+    @if (validateAdminUser()) {
+        <h3>You're an admin!</h3>
+    }
+  </div>
+</section>
+<section class="row">
+  <a href="/">Go back to home</a>
+</section>
