@@ -34,11 +34,5 @@
       [checked]="selectedMode === 'spectator'"
     />
   </div>
-
-  <button
-    class="col-6 my-2 border rounded-4 border-secondary"
-    (click)="continueToRoom()"
-  >
-    Continue
-  </button>
+  <app-generic-button class="col-6 my-2" (click)="continueToRoom()" [buttonText]="'Continuar'" [disabledState]="false"></app-generic-button>
 </section>
