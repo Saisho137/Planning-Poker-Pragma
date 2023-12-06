@@ -35,4 +35,10 @@ export class ClassroomsService {
     const selectedRoom: ClassroomInterface | undefined = this.rooms.find((room) => room.id === classroomId);
     return selectedRoom;
   }
+
+  public userIsPlayer(classroomId: string, userId: string): boolean {
+    const room = this.getRoom(classroomId)
+    const user = room?.users.find( (user) => (user.id === userId))
+    return user ? user.rol === 'player' : false
+  }
 }

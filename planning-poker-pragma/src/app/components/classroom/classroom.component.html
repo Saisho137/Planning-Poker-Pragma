@@ -2,11 +2,12 @@
   <h1 class="col-12 d-flex justify-content-center">{{ roomId }}</h1>
   <div class="col-6 border rounded-5 border-dark p-5 bg-success">
     @if (validateAdminUser()) {
-        <h3>You're an admin!</h3>
+    <h3>You're an admin!</h3>
     }@else {
-      <h3>You're not an admin!</h3>
+    <h3>You're not an admin!</h3>
     }
   </div>
+  <h4>You're a {{visualization}} User!</h4>
 </section>
 <section class="row">
   <a href="/">Go back to home</a>
