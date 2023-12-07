@@ -7,7 +7,7 @@ input {
   border: 1px solid #ba64fd;
   background-color: transparent;
   color: white;
-  font-size: 14px;
+  font-size: 16px;
   outline: none;
 }
 input:-webkit-autofill {

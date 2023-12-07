@@ -1,0 +1,11 @@
+<section
+  class="default-container row py-5 px-1 d-flex justify-content-center border border-white"
+>
+  <app-navbar
+    class="col-12"
+    [buttonText]="'Logout'"
+    [tittle]="'Crear Partida'"
+    (clickEvent)="logOut()"
+  />
+  <app-create-classroom class="col-3" />
+</section>

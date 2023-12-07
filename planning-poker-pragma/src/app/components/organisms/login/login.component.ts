@@ -5,11 +5,20 @@ import { UsersService } from '../../../services/users.service';
 import { FormsModule } from '@angular/forms';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
 import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
+import { NavbarComponent } from '../../molecules/navbar/home-navbar.component';
+import { LoginFormComponent } from '../../molecules/login-form/login-form.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, GenericButtonComponent, GenericInputComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    GenericButtonComponent,
+    GenericInputComponent,
+    NavbarComponent,
+    LoginFormComponent
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
