@@ -12,8 +12,8 @@ import { FormsModule } from '@angular/forms';
 export class GenericInputComponent {
   @Input() type: string = 'text';
   @Input() id: string = '';
+  @Input() string: string = '';
   @Output() message: EventEmitter<string> = new EventEmitter<string>();
-  string: string = '';
 
   onInputChange() {
     this.message.emit(this.string);

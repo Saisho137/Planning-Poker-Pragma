@@ -5,11 +5,12 @@ import { ValidatorService } from '../../../services/validator.service';
 import { FormsModule } from '@angular/forms';
 import { ClassroomsService } from '../../../services/classrooms.service';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
+import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
 
 @Component({
   selector: 'app-create-visualization-mode',
   standalone: true,
-  imports: [CommonModule, FormsModule, GenericButtonComponent],
+  imports: [CommonModule, FormsModule, GenericButtonComponent, GenericInputComponent],
   templateUrl: './create-visualization-mode.component.html',
   styleUrl: './create-visualization-mode.component.css',
 })

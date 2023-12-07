@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { UsersService } from '../../../services/users.service';
 import { FormsModule } from '@angular/forms';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
+import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, GenericButtonComponent],
+  imports: [CommonModule, FormsModule, GenericButtonComponent, GenericInputComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })

@@ -5,12 +5,7 @@
     <label class="col-12 mt-1 d-flex justify-content-start" for="name">
       <h6>Your name:</h6></label
     >
-    <input
-      class="col-12 mt-1 border rounded-4"
-      type="text"
-      id="name"
-      [(ngModel)]="username"
-    />
+    <app-generic-input class="col-12" [string]="username" [id]="'name'" [type]="'text'" (message)="username = $event"></app-generic-input>
   </div>
   <div class="row my-1 d-flex justify-content-evenly">
     <label class="col-2 d-flex justify-content-center" for="player">

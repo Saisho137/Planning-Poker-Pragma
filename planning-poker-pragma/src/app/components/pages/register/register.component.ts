@@ -5,11 +5,12 @@ import { UsersService } from '../../../services/users.service';
 import { FormsModule } from '@angular/forms';
 import { ValidatorService } from '../../../services/validator.service';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
+import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, GenericButtonComponent],
+  imports: [CommonModule, FormsModule, GenericButtonComponent, GenericInputComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
