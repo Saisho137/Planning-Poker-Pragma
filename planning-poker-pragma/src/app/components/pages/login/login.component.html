@@ -4,13 +4,25 @@
     <label class="col-3 d-flex justify-content-end" for="tbEmail"
       ><b>Email</b></label
     >
-    <app-generic-input class="col-6" [string]="email" [id]="'tbEmail'" [type]="'email'" (message)="email = $event"></app-generic-input>
+    <app-generic-input
+      class="col-6"
+      [string]="email"
+      [id]="'tbEmail'"
+      [type]="'email'"
+      (message)="email = $event"
+    />
   </div>
   <div class="row my-1 col-7">
     <label class="col-3 d-flex justify-content-end" for="tbPassword"
       ><b>Password</b></label
     >
-    <app-generic-input class="col-6" [string]="password" [id]="'tbPassword'" [type]="'password'" (message)="password = $event"></app-generic-input>
+    <app-generic-input
+      class="col-6"
+      [string]="password"
+      [id]="'tbPassword'"
+      [type]="'password'"
+      (message)="password = $event"
+    />
   </div>
   <div class="my-1 col-7 d-flex justify-content-center">
     <app-generic-button
@@ -18,7 +30,7 @@
       (clickEvent)="validateUser()"
       [buttonText]="'Login'"
       [disabledState]="!email || !password"
-    ></app-generic-button>
+    />
   </div>
 </section>
 <section class="row d-flex justify-content-center">

@@ -4,13 +4,19 @@
   <label class="col-12 mt-2 d-flex justify-content-start" for="partyName"
     ><h6>Name the Party</h6></label
   >
-  <app-generic-input class="col-12" [string]="partyName" [id]="'partyName'" [type]="'text'" (message)="partyName = $event"></app-generic-input>
+  <app-generic-input
+    class="col-12"
+    [string]="partyName"
+    [id]="'partyName'"
+    [type]="'text'"
+    (message)="partyName = $event"
+  />
   <app-generic-button
     class="col-8 my-2 d-flex justify-content-center"
     (clickEvent)="validateName()"
     [buttonText]="'crear partida'"
     [disabledState]="!partyName"
-  ></app-generic-button>
+  />
 </section>
 <section class="row d-flex justify-content-center">
   @if (nextWindow) {

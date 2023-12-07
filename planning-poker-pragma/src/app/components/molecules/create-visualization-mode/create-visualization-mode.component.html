@@ -5,7 +5,13 @@
     <label class="col-12 mt-1 d-flex justify-content-start" for="name">
       <h6>Your name:</h6></label
     >
-    <app-generic-input class="col-12" [string]="username" [id]="'name'" [type]="'text'" (message)="username = $event"></app-generic-input>
+    <app-generic-input
+      class="col-12"
+      [string]="username"
+      [id]="'name'"
+      [type]="'text'"
+      (message)="username = $event"
+    />
   </div>
   <div class="row my-1 d-flex justify-content-evenly">
     <label class="col-2 d-flex justify-content-center" for="player">
@@ -29,5 +35,10 @@
       [checked]="selectedMode === 'spectator'"
     />
   </div>
-  <app-generic-button class="col-6 my-2 d-flex justify-content-center" (clickEvent)="continueToRoom()" [buttonText]="'Continuar'" [disabledState]="!selectedMode"></app-generic-button>
+  <app-generic-button
+    class="col-6 my-2 d-flex justify-content-center"
+    (clickEvent)="continueToRoom()"
+    [buttonText]="'Continuar'"
+    [disabledState]="!selectedMode"
+  />
 </section>
