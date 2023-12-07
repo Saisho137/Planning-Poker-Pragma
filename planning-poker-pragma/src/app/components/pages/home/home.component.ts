@@ -2,13 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CreateClassroomComponent } from '../../molecules/create-classroom/create-classroom.component';
-import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
-import { CreateVisualizationModeComponent } from '../../molecules/create-visualization-mode/create-visualization-mode.component';
+import { HomeNavbarComponent } from '../../molecules/home-navbar/home-navbar.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CreateClassroomComponent, GenericButtonComponent, CreateVisualizationModeComponent],
+  imports: [CommonModule, CreateClassroomComponent, HomeNavbarComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

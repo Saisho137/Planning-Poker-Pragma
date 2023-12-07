@@ -1,0 +1,8 @@
+<section class="row d-flex justify-content-evenly">
+  <h1 class="col-6 my-1 d-flex justify-content-start">{{tittle}}</h1>
+  <app-generic-button
+    class="col-6 my-1 d-flex justify-content-end"
+    (clickEvent)="onButtonClick()"
+    [buttonText]="buttonText"
+  />
+</section>
