@@ -1,6 +1,7 @@
 button {
   padding: 5px 15px;
   border-radius: 100px;
+  height: 2rem;
   border: none;
   background-color: #f6f7fc;
   color: #330072;

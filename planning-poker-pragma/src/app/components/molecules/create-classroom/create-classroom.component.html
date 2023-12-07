@@ -1,3 +1,4 @@
+@if (!nextWindow) {
 <section
   class="row mt-3 mx-5 px-2 d-flex justify-content-center border rounded-4 border-white"
 >
@@ -18,8 +19,8 @@
     [disabledState]="!partyName"
   />
 </section>
+} @if (nextWindow) {
 <section class="row d-flex justify-content-center">
-  @if (nextWindow) {
-  <app-create-visualization-mode class="col-12" [classroomId]="partyName" />
-  }
+  <app-create-visualization-mode class="section col-12" [classroomId]="partyName" />
 </section>
+}

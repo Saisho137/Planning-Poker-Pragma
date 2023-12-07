@@ -1,18 +1,21 @@
-<section class="row d-flex mx-1 justify-content-center border border-white">
-  <button class="col-3 my-1" (click)="switchWindow()">
-    Launch party generator
-  </button>
-  <div class="col-1"></div>
-  <h3 class="col-4 d-flex justify-content-center">Hello {{ username }}</h3>
-  <div class="col-2"></div>
+<section
+  id="bodyHome"
+  class="row d-flex py-5 px-2 mx-1 justify-content-center border border-white"
+>
+  <app-generic-button
+    class="col-2 my-1 d-flex justify-content-center"
+    (clickEvent)="switchWindow()"
+    [buttonText]="'Crear Partida'"
+  />
+  <h3 class="col-8 d-flex justify-content-center">Hello {{ username }}</h3>
   <app-generic-button
     class="col-2 my-1 d-flex justify-content-center"
     (clickEvent)="logOut()"
     [buttonText]="'Log out'"
   />
 </section>
-<section class="row d-flex justify-content-center border border-white">
-  @if (createWindow) {
-  <app-create-classroom class="col-4" />
-  }
+@if (createWindow) {
+<section class="row">
+  <app-create-classroom class="section col-4"/>
 </section>
+}
