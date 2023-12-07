@@ -1,9 +1,7 @@
-<section
-  class="row mt-3 mx-5 d-flex justify-content-evenly border rounded-4 border-white"
->
-  <div class="row my-1 d-flex justify-content-center">
+<section class="visualization-mode-section row d-flex justify-content-center">
+  <div class="row mt-4 d-flex justify-content-center">
     <label class="col-12 mt-1 d-flex justify-content-start" for="name">
-      <h6>Your name:</h6></label
+      <h6>Tu nombre:</h6></label
     >
     <app-generic-input
       class="col-12"
@@ -13,22 +11,24 @@
       (message)="username = $event"
     />
   </div>
-  <div class="row my-1 d-flex">
-    <label class="col-3 d-flex justify-content-start" for="player">
-      Player</label
+  <div class="row col-5 my-3 d-flex justify-content-center">
+    <label class="checkbox-label col-7 d-flex justify-content-end" for="player">
+      Jugador</label
     >
     <app-checkbox-input
-      class="col-2 d-flex justify-content-center"
+      class="input-checkbox col-4"
       [id]="'player'"
       [selectedMode]="selectedMode"
       [condition]="'player'"
       (switchEvent)="switchCheckbox('player')"
     />
-    <label class="col-4 d-flex justify-content-start" for="spectator">
-      Spectator</label
+  </div>
+  <div class="row col-6 my-3  d-flex justify-content-center">
+    <label class="checkbox-label col-6 d-flex justify-content-end" for="spectator">
+      Espectador</label
     >
     <app-checkbox-input
-      class="col-2 d-flex justify-content-start"
+      class="input-checkbox col-4"
       [id]="'spectator'"
       [selectedMode]="selectedMode"
       [condition]="'spectator'"
@@ -36,7 +36,7 @@
     />
   </div>
   <app-generic-button
-    class="col-6 my-2 d-flex justify-content-center"
+    class="col-6 mb-4 d-flex justify-content-center"
     (clickEvent)="continueToRoom()"
     [buttonText]="'Continuar'"
     [disabledState]="!selectedMode"

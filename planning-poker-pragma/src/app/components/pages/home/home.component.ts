@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CreateClassroomComponent } from '../../molecules/create-classroom/create-classroom.component';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
+import { CreateVisualizationModeComponent } from '../../molecules/create-visualization-mode/create-visualization-mode.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CreateClassroomComponent, GenericButtonComponent],
+  imports: [CommonModule, CreateClassroomComponent, GenericButtonComponent, CreateVisualizationModeComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -16,8 +17,6 @@ export class HomeComponent {
     sessionStorage.getItem('user_username') !== null
       ? sessionStorage.getItem('user_username')
       : null;
-
-  createWindow: boolean = false;
 
   constructor(private router: Router) {}
 
@@ -32,9 +31,5 @@ export class HomeComponent {
     sessionStorage.removeItem('user_id');
     sessionStorage.removeItem('user_username');
     this.router.navigate(['login']);
-  }
-
-  switchWindow(): void {
-    this.createWindow = !this.createWindow;
   }
 }

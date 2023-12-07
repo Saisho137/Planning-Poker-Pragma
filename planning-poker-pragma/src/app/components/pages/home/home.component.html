@@ -1,21 +1,17 @@
 <section
   id="bodyHome"
-  class="row d-flex py-5 px-2 mx-1 justify-content-center border border-white"
+  class="row py-5 px-2 d-flex justify-content-center border border-white"
 >
-  <app-generic-button
-    class="col-2 my-1 d-flex justify-content-center"
-    (clickEvent)="switchWindow()"
-    [buttonText]="'Crear Partida'"
-  />
-  <h3 class="col-8 d-flex justify-content-center">Hello {{ username }}</h3>
-  <app-generic-button
-    class="col-2 my-1 d-flex justify-content-center"
-    (clickEvent)="logOut()"
-    [buttonText]="'Log out'"
-  />
+  <div class="row d-flex justify-content-center">
+    <h4 class="col-2 my-1 d-flex justify-content-center">Crear Partida</h4>
+    <h3 class="col-8 d-flex justify-content-center"></h3>
+    <app-generic-button
+      class="col-2 my-1 d-flex justify-content-center"
+      (clickEvent)="logOut()"
+      [buttonText]="'Log out'"
+    />
+  </div>
+  <section class="row d-flex justify-content-center">
+    <app-create-classroom class="create-room-section col-4" />
+  </section>
 </section>
-@if (createWindow) {
-<section class="row">
-  <app-create-classroom class="section col-4"/>
-</section>
-}

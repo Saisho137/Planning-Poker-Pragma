@@ -1,1 +1,18 @@
+.visualization-mode-section {
+  border-radius: 15px;
+  border: 1px solid #ba64fd;
+  background-color: #1f0d3f;
+}
 
+.checkbox-label {
+  font-size: 90%;
+  padding-left: 2rem;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.input-checkbox {
+  height: fit-content;
+  width: fit-content;
+}
