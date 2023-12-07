@@ -3,17 +3,19 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ClassroomsService } from '../../../services/classrooms.service';
 import { FormsModule } from '@angular/forms';
+import { CreateVisualizationModeComponent } from '../../molecules/create-visualization-mode/create-visualization-mode.component';
 
 @Component({
   selector: 'app-classroom',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, CreateVisualizationModeComponent],
   templateUrl: './classroom.component.html',
   styleUrl: './classroom.component.css',
 })
 export class ClassroomComponent {
   roomId: string = '';
   visualization: string | undefined = '';
+  configurationWindow: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,6 +26,9 @@ export class ClassroomComponent {
     this.route.snapshot.paramMap.get('id')! !== null
       ? (this.roomId = this.route.snapshot.paramMap.get('id')!)
       : (this.roomId = '0'); //Get Classroom Id from URL
+  }
+
+  getUserVisualizationMode(): void {
     this.visualization = this.classrooms.userIsPlayer(
       this.roomId,
       sessionStorage.getItem('user_id')!

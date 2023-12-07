@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ValidatorService } from '../../../services/validator.service';
@@ -23,6 +23,7 @@ import { CheckboxInputComponent } from '../../atoms/checkbox-input/checkbox-inpu
 })
 export class CreateVisualizationModeComponent {
   @Input() classroomId: string = '';
+  @Output() roomGeneratedEvent: EventEmitter<void> = new EventEmitter<void>();
 
   username: string =
     sessionStorage.getItem('user_username') !== null
@@ -57,7 +58,7 @@ export class CreateVisualizationModeComponent {
           sessionStorage.getItem('user_username')!,
           this.selectedMode
         );
-        this.router.navigate(['classroom/' + this.classroomId]);
+        this.roomGeneratedEvent.emit();
       } else {
         window.alert('Debes seleccionar un modo de visualización!');
       }

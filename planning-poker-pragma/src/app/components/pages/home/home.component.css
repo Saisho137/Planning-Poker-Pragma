@@ -1,10 +1,5 @@
-#bodyHome {
-  min-height: 32em;
-}
-
-.create-room-section {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.home-container {
+  width: 98vw;
+  height: 98vh;
+  margin: auto auto;
 }

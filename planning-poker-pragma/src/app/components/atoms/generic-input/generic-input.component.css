@@ -1,6 +1,8 @@
 input {
   padding: 5px 15px;
-  height: 2rem;
+  height: 3rem;
+  min-height: fit-content;
+  min-width: fit-content;
   border-radius: 100px;
   border: 1px solid #ba64fd;
   background-color: transparent;

@@ -1,17 +1,15 @@
 <section
-  id="bodyHome"
-  class="row py-5 px-2 d-flex justify-content-center border border-white"
+  class="home-container row py-5 px-2 d-flex justify-content-center border border-white"
 >
-  <div class="row d-flex justify-content-center">
-    <h4 class="col-2 my-1 d-flex justify-content-center">Crear Partida</h4>
-    <h3 class="col-8 d-flex justify-content-center"></h3>
+  <div class="row d-flex justify-content-evenly">
+    <h1 class="col-6 my-1 d-flex justify-content-start">Crear Partida</h1>
     <app-generic-button
-      class="col-2 my-1 d-flex justify-content-center"
+      class="col-6 my-1 d-flex justify-content-end"
       (clickEvent)="logOut()"
       [buttonText]="'Log out'"
     />
   </div>
   <section class="row d-flex justify-content-center">
-    <app-create-classroom class="create-room-section col-4" />
+    <app-create-classroom class="create-room-section col-3" />
   </section>
 </section>

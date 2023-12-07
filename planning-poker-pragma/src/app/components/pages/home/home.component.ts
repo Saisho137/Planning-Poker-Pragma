@@ -13,11 +13,6 @@ import { CreateVisualizationModeComponent } from '../../molecules/create-visuali
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
-  username: string | null =
-    sessionStorage.getItem('user_username') !== null
-      ? sessionStorage.getItem('user_username')
-      : null;
-
   constructor(private router: Router) {}
 
   ngOnInit() {

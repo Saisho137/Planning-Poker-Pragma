@@ -1,9 +1,6 @@
-@if (!nextWindow) {
-<section
-  class="row px-2 d-flex justify-content-center"
->
+<section class="row px-2 d-flex justify-content-center">
   <label class="col-12 mt-2 d-flex justify-content-start" for="partyName"
-    ><h6>Nombra la partida</h6></label
+    ><h6><b>Nombra la partida</b></h6></label
   >
   <app-generic-input
     class="col-12"
@@ -13,14 +10,9 @@
     (message)="partyName = $event"
   />
   <app-generic-button
-    class="col-8 my-2 d-flex justify-content-center"
+    class="col-8 mt-4  d-flex justify-content-center"
     (clickEvent)="validateName()"
-    [buttonText]="'crear partida'"
+    [buttonText]="'Crear partida'"
     [disabledState]="!partyName"
   />
 </section>
-} @if (nextWindow) {
-<section class="row d-flex justify-content-center">
-  <app-create-visualization-mode class="section col-12" [classroomId]="partyName" />
-</section>
-}

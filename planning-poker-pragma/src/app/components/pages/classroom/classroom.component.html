@@ -1,18 +1,28 @@
-<section class="row d-flex justify-content-center">
+<section class="classroom-container row d-flex justify-content-center">
   <h1 class="col-12 d-flex justify-content-center">{{ roomId }}</h1>
   <div
     class="col-6 border rounded-5 border-white my-3 p-5 bg-success d-flex justify-content-center"
   >
     @if (validateAdminUser()) {
     <h3>You're an admin!</h3>
-    }@else {
-    <h3>You're not an admin!</h3>
     }
   </div>
   <div class="col-12"></div>
   <h4 class="col-6 border border-white my-3 d-flex justify-content-center">
-    You're a {{ visualization }} User!
+    @if (visualization) { You're a {{ visualization }} User! }
   </h4>
+  @if (configurationWindow) {
+  <section class="row d-flex justify-content-center">
+    <div class="blur"></div>
+    <app-create-visualization-mode
+      class="section col-4"
+      (roomGeneratedEvent)="validateAdminUser()"
+      (roomGeneratedEvent)="getUserVisualizationMode()"
+      (roomGeneratedEvent)="configurationWindow = !configurationWindow"
+      [classroomId]="roomId"
+    />
+  </section>
+  }
 </section>
 <section class="row">
   <a href="/">Go back to home</a>
