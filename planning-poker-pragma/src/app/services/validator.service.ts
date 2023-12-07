@@ -7,7 +7,7 @@ export class ValidatorService {
   constructor() {}
 
   public validateString(string: string): boolean {
-    const regex: RegExp = /^[a-zA-Z0-9]{5,20}$/;
+    const regex: RegExp = /^[a-zA-Z0-9\s]{5,20}$/;
     const numbers: string = string.replace(/[^0-9]/g, '');
 
     if (!string.match(regex)) {
