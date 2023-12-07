@@ -1,6 +1,7 @@
 .classroom-container {
-  width: 90vw;
-  height: 95vh;
+  width: 98vw;
+  height: 98vh;
+  margin: auto auto;
 }
 
 .section {

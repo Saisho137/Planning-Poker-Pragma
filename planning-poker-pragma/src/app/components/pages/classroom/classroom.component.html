@@ -1,16 +1,16 @@
-<section class="classroom-container row d-flex justify-content-center">
+<section
+  class="classroom-container row py-5 px-1 d-flex justify-content-center border border-white"
+>
   <h1 class="col-12 d-flex justify-content-center">{{ roomId }}</h1>
   <div
     class="col-6 border rounded-5 border-white my-3 p-5 bg-success d-flex justify-content-center"
   >
     @if (validateAdminUser()) {
-    <h3>You're an admin!</h3>
+    <h3>You're an admin! |</h3>
+    } @if (visualization) {
+    <h3>| You're a {{ visualization }} User!</h3>
     }
   </div>
-  <div class="col-12"></div>
-  <h4 class="col-6 border border-white my-3 d-flex justify-content-center">
-    @if (visualization) { You're a {{ visualization }} User! }
-  </h4>
   @if (configurationWindow) {
   <section class="row d-flex justify-content-center">
     <div class="blur"></div>
@@ -23,7 +23,9 @@
     />
   </section>
   }
-</section>
-<section class="row">
-  <a href="/">Go back to home</a>
+  <section class="row d-flex justify-content-center">
+    <a class="col'12 d-flex justify-content-center" href="/"
+      >Abandonar la Sala</a
+    >
+  </section>
 </section>
