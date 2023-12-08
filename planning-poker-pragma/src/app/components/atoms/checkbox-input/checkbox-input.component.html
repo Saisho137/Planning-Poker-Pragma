@@ -1,8 +1,9 @@
 <input
 class="col-12"
-type="checkbox"
+type="radio"
 [id]="id"
 (change)="onInputChange()"
-[checked]="selectedMode === condition"
+[(ngModel)]="selectedMode"
+[value]="condition"
 required
 />

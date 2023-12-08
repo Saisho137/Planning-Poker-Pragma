@@ -39,13 +39,6 @@ export class CreateVisualizationModeComponent {
   ) {}
 
   switchCheckbox(checkbox: 'player' | 'spectator'): void {
-    if (
-      (this.selectedMode === 'player' && checkbox === 'player') ||
-      (this.selectedMode === 'spectator' && checkbox === 'spectator')
-    ) {
-      this.selectedMode = '';
-      return;
-    }
     this.selectedMode = checkbox;
   }
   continueToRoom(): void {

@@ -1,4 +1,4 @@
-input[type="checkbox"] {
+input[type="radio"] {
   appearance: none;
   -webkit-appearance: none;
   width: 1.5rem;
@@ -11,7 +11,7 @@ input[type="checkbox"] {
   position: relative;
 }
 
-input[type="checkbox"]:checked:before {
+input[type="radio"]:checked:before {
   content: "";
   width: 65%;
   height: 65%;
