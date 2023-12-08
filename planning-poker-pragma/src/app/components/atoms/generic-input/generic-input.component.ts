@@ -13,6 +13,7 @@ export class GenericInputComponent {
   @Input() type: string = 'text';
   @Input() id: string = '';
   @Input() string: string = '';
+  @Input() required: boolean = true;
   @Output() message: EventEmitter<string> = new EventEmitter<string>();
 
   onInputChange() {

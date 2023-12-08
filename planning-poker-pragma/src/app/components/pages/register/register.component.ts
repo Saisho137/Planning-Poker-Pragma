@@ -4,13 +4,13 @@ import { Router } from '@angular/router';
 import { UsersService } from '../../../services/users.service';
 import { FormsModule } from '@angular/forms';
 import { ValidatorService } from '../../../services/validator.service';
-import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
-import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
+import { RegisterFormComponent } from '../../templates/register-form/register-form.component';
+import { NavbarComponent } from '../../molecules/navbar/home-navbar.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, GenericButtonComponent, GenericInputComponent],
+  imports: [CommonModule, FormsModule, RegisterFormComponent, NavbarComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
