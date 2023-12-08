@@ -1,8 +1,11 @@
 body {
-  background-color: #1f0d3f;
-}
-section {
-  background-color: #370578;
+  background: rgb(51, 2, 114);
+  background: radial-gradient(
+    circle,
+    rgba(51, 2, 114, 1) 0%,
+    rgba(75, 47, 113, 1) 45%,
+    rgba(97, 85, 120, 1) 90%
+  );
 }
 h1,
 h2,
