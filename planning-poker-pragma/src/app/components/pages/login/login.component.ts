@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
 import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
 import { NavbarComponent } from '../../molecules/navbar/home-navbar.component';
-import { LoginFormComponent } from '../../molecules/login-form/login-form.component';
+import { LoginFormComponent } from '../../templates/login-form/login-form.component'
 
 @Component({
   selector: 'app-login',
