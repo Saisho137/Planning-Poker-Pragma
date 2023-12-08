@@ -10,6 +10,7 @@
       [id]="'tbUsername'"
       [type]="'text'"
       (message)="username = $event"
+      (message)="onInputChange()"
     />
   </div>
   <div class="row my-1 col-7">
@@ -22,6 +23,7 @@
       [id]="'tbEmail'"
       [type]="'email'"
       (message)="email = $event"
+      (message)="onInputChange()"
     />
   </div>
   <div class="row my-1 col-7">
@@ -34,6 +36,7 @@
       [id]="'tbPassword'"
       [type]="'password'"
       (message)="password = $event"
+      (message)="onInputChange()"
     />
   </div>
   <div class="my-1 col-7 d-flex justify-content-center">
