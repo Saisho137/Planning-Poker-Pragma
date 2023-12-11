@@ -1,0 +1,21 @@
+.card-user {
+  width: 100px;
+  height: 150px;
+  font-size: 24px;
+  display: inline;
+  background-color: transparent;
+  border: 1px solid #ba64fd;
+  border-radius: 10px;
+  color: white;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.card-user.selected {
+  background-color: #e3a4ff;
+  color: #531d8c;
+  transform: translateY(-5px);
+}
+
+.card-user:hover {
+  cursor: pointer;
+}

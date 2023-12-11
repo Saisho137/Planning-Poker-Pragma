@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClassroomsService } from '../../../services/classrooms.service';
 import { FormsModule } from '@angular/forms';
 import { CreateVisualizationModeComponent } from '../../molecules/create-visualization-mode/create-visualization-mode.component';
+import { UserCardComponent } from '../../atoms/user-card/user-card.component';
 
 @Component({
   selector: 'app-classroom',
@@ -12,6 +13,7 @@ import { CreateVisualizationModeComponent } from '../../molecules/create-visuali
     CommonModule,
     FormsModule,
     CreateVisualizationModeComponent,
+    UserCardComponent,
     RouterLink,
   ],
   templateUrl: './classroom.component.html',
