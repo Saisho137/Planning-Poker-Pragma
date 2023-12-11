@@ -1,4 +1,6 @@
-<section class="default-container row py-5 px-1 d-flex justify-content-center border border-white">
+<section
+  class="default-container row py-5 px-1 d-flex justify-content-center border border-white"
+>
   <app-navbar class="navbar-login" [tittle]="'Pragma'" />
   <app-register-form
     class="row d-flex justify-content-center"
@@ -7,5 +9,7 @@
     (sendUsername)="username = $event"
     (clickEvent)="createUser()"
   />
-  <a class="col-1 mt-3 d-flex justify-content-center" href="/login">Login</a>
+  <a class="col-1 mt-3 d-flex justify-content-center" routerLink="/login"
+    >Login</a
+  >
 </section>

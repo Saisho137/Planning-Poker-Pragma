@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../../services/users.service';
-import { FormsModule } from '@angular/forms';
-import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
-import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
 import { NavbarComponent } from '../../molecules/navbar/home-navbar.component';
 import { LoginFormComponent } from '../../templates/login-form/login-form.component'
 
@@ -13,11 +10,9 @@ import { LoginFormComponent } from '../../templates/login-form/login-form.compon
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
-    GenericButtonComponent,
-    GenericInputComponent,
     NavbarComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',

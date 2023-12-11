@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../../services/users.service';
 import { FormsModule } from '@angular/forms';
 import { ValidatorService } from '../../../services/validator.service';
@@ -10,7 +10,7 @@ import { NavbarComponent } from '../../molecules/navbar/home-navbar.component';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, RegisterFormComponent, NavbarComponent],
+  imports: [CommonModule, RegisterFormComponent, NavbarComponent, RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })

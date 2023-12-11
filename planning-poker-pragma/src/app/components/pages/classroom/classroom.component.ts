@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClassroomsService } from '../../../services/classrooms.service';
 import { FormsModule } from '@angular/forms';
 import { CreateVisualizationModeComponent } from '../../molecules/create-visualization-mode/create-visualization-mode.component';
@@ -8,7 +8,12 @@ import { CreateVisualizationModeComponent } from '../../molecules/create-visuali
 @Component({
   selector: 'app-classroom',
   standalone: true,
-  imports: [CommonModule, FormsModule, CreateVisualizationModeComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    CreateVisualizationModeComponent,
+    RouterLink,
+  ],
   templateUrl: './classroom.component.html',
   styleUrl: './classroom.component.css',
 })
