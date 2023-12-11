@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CreateClassroomComponent } from '../../molecules/create-classroom/create-classroom.component';
 import { NavbarComponent } from '../../molecules/navbar/home-navbar.component';
+import { GenericImageComponent } from '../../atoms/generic-image/generic-image.component';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,7 @@ import { NavbarComponent } from '../../molecules/navbar/home-navbar.component';
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
+  pragmaIconUrl: string = '../../../../assets/images/pragma.png'
   constructor(private router: Router) {}
 
   ngOnInit() {

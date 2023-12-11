@@ -1,10 +1,11 @@
 <section
-  class="default-container row py-5 px-1 d-flex justify-content-center border border-white"
+  class="default-container row py-4 px-1 d-flex justify-content-center align-items-start"
 >
   <app-navbar
     class="col-12"
     [buttonText]="'Logout'"
     [tittle]="'Crear Partida'"
+    [imgUrl]="pragmaIconUrl"
     (clickEvent)="logOut()"
   />
   <app-create-classroom class="col-3" />

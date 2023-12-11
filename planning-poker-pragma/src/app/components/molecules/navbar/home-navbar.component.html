@@ -1,11 +1,21 @@
 <section class="row">
   @if (buttonText) {
-  <h1 class="col-6 my-1 d-flex justify-content-start">{{ tittle }}</h1>
-  <app-generic-button
-    class="col-6 my-1 d-flex justify-content-end"
-    (clickEvent)="onButtonClick()"
-    [buttonText]="buttonText"
-  />
+  <div class="col-12 d-flex align-items-center">
+    <app-generic-image
+      class="col-1 d-flex justify-content-end"
+      [imgUrl]="imgUrl"
+      [imgAlt]="'Alt Here'"
+      [imgWidth]="'120'"
+      [imgHeight]="'100'"
+    />
+    <h2 class="col-5 my-1 d-flex justify-content-start">{{ tittle }}</h2>
+    <app-generic-button
+      class="col-6 my-1 d-flex justify-content-end"
+      (clickEvent)="onButtonClick()"
+      [buttonText]="buttonText"
+    />
+  </div>
+
   } @else {
   <h1 class="col-12 my-1 d-flex justify-content-center">{{ tittle }}</h1>
   }
