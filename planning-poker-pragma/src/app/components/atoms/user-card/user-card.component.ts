@@ -9,8 +9,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './user-card.component.css',
 })
 export class UserCardComponent {
-  @Input() isSelected: boolean = false;
   @Input() cardValue: string = '';
+  isSelected: boolean = false;
 
   toggleSelection(): void {
     this.isSelected = !this.isSelected;
