@@ -4,7 +4,7 @@
     <app-generic-image
       class="col-1 d-flex justify-content-end"
       [imgUrl]="imgUrl"
-      [imgAlt]="'Alt Here'"
+      [imgAlt]="''"
       [imgWidth]="'120'"
       [imgHeight]="'100'"
     />
@@ -15,8 +15,17 @@
       [buttonText]="buttonText"
     />
   </div>
-
   } @else {
-  <h1 class="col-12 my-1 d-flex justify-content-center">{{ tittle }}</h1>
+  <div class="col-12 d-flex justify-content-center align-items-center">
+    <app-generic-image
+      class="col-2 d-flex justify-content-end"
+      [imgUrl]="imgUrl"
+      [imgAlt]="''"
+      [imgWidth]="'120'"
+      [imgHeight]="'100'"
+    />
+    <h1 class="col-3 my-1 d-flex justify-content-start">{{ tittle }}</h1>
+  </div>
+
   }
 </section>

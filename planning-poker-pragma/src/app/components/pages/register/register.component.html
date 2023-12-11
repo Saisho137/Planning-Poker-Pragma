@@ -1,7 +1,11 @@
 <section
-  class="default-container row py-5 px-1 d-flex justify-content-center border border-white"
+  class="default-container row py-5 px-1 d-flex justify-content-center"
 >
-  <app-navbar class="navbar-login" [tittle]="'Pragma'" />
+  <app-navbar
+    class="navbar-login"
+    [tittle]="'Pragma'"
+    [imgUrl]="pragmaIconUrl"
+  />
   <app-register-form
     class="row d-flex justify-content-center"
     (sendEmail)="email = $event"

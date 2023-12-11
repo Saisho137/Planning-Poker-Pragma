@@ -15,6 +15,7 @@ import { NavbarComponent } from '../../molecules/navbar/home-navbar.component';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
+  pragmaIconUrl: string = '../../../../assets/images/pragma.png';
   username: string = '';
   email: string = '';
   password: string = '';

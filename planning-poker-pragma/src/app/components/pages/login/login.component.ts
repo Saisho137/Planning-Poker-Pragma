@@ -3,21 +3,17 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../../services/users.service';
 import { NavbarComponent } from '../../molecules/navbar/home-navbar.component';
-import { LoginFormComponent } from '../../templates/login-form/login-form.component'
+import { LoginFormComponent } from '../../templates/login-form/login-form.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    CommonModule,
-    NavbarComponent,
-    LoginFormComponent,
-    RouterLink
-  ],
+  imports: [CommonModule, NavbarComponent, LoginFormComponent, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
+  pragmaIconUrl: string = '../../../../assets/images/pragma.png';
   email: string = '';
   password: string = '';
 
