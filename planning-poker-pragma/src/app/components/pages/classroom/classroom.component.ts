@@ -21,7 +21,7 @@ import { UserCardComponent } from '../../atoms/user-card/user-card.component';
 })
 export class ClassroomComponent {
   roomId: string = '';
-  visualization: string | undefined = '';
+  visualization: 'player' | 'spectator' | '' = '';
   configurationWindow: boolean = true;
   
   constructor(
