@@ -16,9 +16,9 @@
       [classroomId]="roomId"
     />
   </section>
+  } @for (item of scoringMode; track item) {
+  <app-user-card class="col-1" [cardValue]="item" />
   }
-  <app-user-card class="col-1" [cardValue]="'8'" />
-  <app-user-card class="col-1" [cardValue]="'13'" />
   <section class="row d-flex justify-content-center">
     <a class="col'12 d-flex justify-content-center" routerLink="/"
       >Abandonar la Sala</a

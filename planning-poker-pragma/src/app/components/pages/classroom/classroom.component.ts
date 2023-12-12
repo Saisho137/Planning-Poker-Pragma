@@ -23,16 +23,19 @@ export class ClassroomComponent {
   roomId: string = '';
   visualization: string | undefined = '';
   configurationWindow: boolean = true;
-
+  
   constructor(
     private route: ActivatedRoute,
     private classrooms: ClassroomsService
   ) {}
 
+  scoringMode = this.classrooms.createScoringMode('fibonacci')
+
   ngOnInit(): void {
     this.route.snapshot.paramMap.get('id')! !== null
       ? (this.roomId = this.route.snapshot.paramMap.get('id')!)
       : (this.roomId = '0'); //Get Classroom Id from URL
+    console.log("COMPONENTE: ", this.scoringMode);
   }
 
   getUserVisualizationMode(): void {

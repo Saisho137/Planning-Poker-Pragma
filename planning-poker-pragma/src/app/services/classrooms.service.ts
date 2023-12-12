@@ -10,6 +10,26 @@ export class ClassroomsService {
 
   private rooms: ClassroomInterface[] = [];
   private users: UserInRoomInterface[] = [];
+  private scoringMode = [
+    ['1', '2', '3', '5', '8', '13', '21', '?', '☕'],
+    ['1', '2', '3', '4', '5', '?', '☕'],
+    ['10', '20', '30', '40', '50', '60', '70', '80', '90', '100', '?', '☕'],
+  ];
+
+  public createScoringMode(mode: string) {
+    switch (mode) {
+      case 'fibonacci':
+        console.log(this.scoringMode[0]);
+        return this.scoringMode[0];
+      case 'oneToFive':
+        console.log(this.scoringMode[1]);
+        return this.scoringMode[1];
+      case 'oneHundred':
+        console.log(this.scoringMode[2]);
+        return this.scoringMode[2];
+    }
+    return ['void'];
+  }
 
   public createRoom(
     classroomId: string,
