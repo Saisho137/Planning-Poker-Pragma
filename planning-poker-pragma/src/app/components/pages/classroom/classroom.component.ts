@@ -32,18 +32,14 @@ export class ClassroomComponent {
 
   scoringMode = this.classrooms.createScoringMode('fibonacci');
 
-  
-
   selectCard(value: string): void {
     this.selectedCard = value;
-    console.log(this.selectedCard);
   }
 
   ngOnInit(): void {
     this.route.snapshot.paramMap.get('id')! !== null
       ? (this.roomId = this.route.snapshot.paramMap.get('id')!)
       : (this.roomId = '0'); //Get Classroom Id from URL
-    console.log('COMPONENTE: ', this.scoringMode);
   }
 
   getUserVisualizationMode(): void {

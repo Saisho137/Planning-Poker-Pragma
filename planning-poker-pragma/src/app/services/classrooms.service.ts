@@ -19,13 +19,10 @@ export class ClassroomsService {
   public createScoringMode(mode: string) {
     switch (mode) {
       case 'fibonacci':
-        console.log(this.scoringMode[0]);
         return this.scoringMode[0];
       case 'oneToFive':
-        console.log(this.scoringMode[1]);
         return this.scoringMode[1];
       case 'oneHundred':
-        console.log(this.scoringMode[2]);
         return this.scoringMode[2];
     }
     return ['void'];
