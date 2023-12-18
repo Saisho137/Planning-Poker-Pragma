@@ -4,7 +4,7 @@
   background-color: #1f0d3f;
 }
 
-.checkbox-label {
+.radio-label {
   font-size: 90%;
   padding-left: 2rem;
   padding-right: 0;
@@ -12,7 +12,7 @@
   margin-right: 0;
 }
 
-.input-checkbox {
+.input-radio {
   height: fit-content;
   width: fit-content;
 }

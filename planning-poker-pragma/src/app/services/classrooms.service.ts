@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ClassroomInterface } from '../interfaces/classroom-interface';
 import { UserInRoomInterface } from '../interfaces/user-in-room-interface';
+import { ScoringModeInterface } from '../interfaces/scoring-mode-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,54 @@ export class ClassroomsService {
 
   private rooms: ClassroomInterface[] = [];
   private users: UserInRoomInterface[] = [];
+  private scoringMode = [
+    [
+      { id: 1, value: '1' },
+      { id: 2, value: '2' },
+      { id: 3, value: '3' },
+      { id: 4, value: '5' },
+      { id: 5, value: '8' },
+      { id: 6, value: '13' },
+      { id: 7, value: '21' },
+      { id: 8, value: '?' },
+      { id: 9, value: '☕' },
+    ],
+    [
+      { id: 1, value: '1' },
+      { id: 2, value: '2' },
+      { id: 3, value: '3' },
+      { id: 4, value: '4' },
+      { id: 5, value: '5' },
+      { id: 6, value: '?' },
+      { id: 7, value: '☕' },
+    ],
+    [
+      { id: 1, value: '10' },
+      { id: 2, value: '20' },
+      { id: 3, value: '30' },
+      { id: 4, value: '40' },
+      { id: 5, value: '50' },
+      { id: 6, value: '60' },
+      { id: 7, value: '70' },
+      { id: 8, value: '80' },
+      { id: 9, value: '90' },
+      { id: 10, value: '100' },
+      { id: 11, value: '?' },
+      { id: 12, value: '☕' },
+    ],
+  ];
+
+  public createScoringMode(mode: string): ScoringModeInterface[] {
+    switch (mode) {
+      case 'fibonacci':
+        return this.scoringMode[0];
+      case 'oneToFive':
+        return this.scoringMode[1];
+      case 'oneHundred':
+        return this.scoringMode[2];
+    }
+    return [{ id: 0, value: 'null' }];
+  }
 
   public createRoom(
     classroomId: string,

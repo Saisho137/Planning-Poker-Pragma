@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ClassroomsService } from '../../../services/classrooms.service';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
 import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
-import { CheckboxInputComponent } from '../../atoms/checkbox-input/checkbox-input.component';
+import { RadioInputComponent } from '../../atoms/radio-input/radio-input.component';
 
 @Component({
   selector: 'app-create-visualization-mode',
@@ -16,7 +16,7 @@ import { CheckboxInputComponent } from '../../atoms/checkbox-input/checkbox-inpu
     FormsModule,
     GenericButtonComponent,
     GenericInputComponent,
-    CheckboxInputComponent,
+    RadioInputComponent,
   ],
   templateUrl: './create-visualization-mode.component.html',
   styleUrl: './create-visualization-mode.component.css',
@@ -38,8 +38,8 @@ export class CreateVisualizationModeComponent {
     private classrooms: ClassroomsService
   ) {}
 
-  switchCheckbox(checkbox: 'player' | 'spectator'): void {
-    this.selectedMode = checkbox;
+  switchRadio(radio: 'player' | 'spectator'): void {
+    this.selectedMode = radio;
   }
   continueToRoom(): void {
     if (this.validator.validateString(this.username)) {

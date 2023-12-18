@@ -1,0 +1,7 @@
+<article
+  class="card-user d-flex justify-content-center align-items-center"
+  [class.selected]="cardValue === selectedCard"
+  (click)="onCardClick()"
+>
+  <b>{{ cardValue }}</b>
+</article>

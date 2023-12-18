@@ -12,27 +12,27 @@
     />
   </div>
   <div class="row col-5 my-3 d-flex justify-content-center">
-    <label class="checkbox-label col-7 d-flex justify-content-end" for="player">
+    <label class="radio-label col-7 d-flex justify-content-end" for="player">
       Jugador</label
     >
-    <app-checkbox-input
-      class="input-checkbox col-4"
+    <app-radio-input
+      class="input-radio col-4"
       [id]="'player'"
       [selectedMode]="selectedMode"
       [condition]="'player'"
-      (switchEvent)="switchCheckbox('player')"
+      (switchEvent)="switchRadio('player')"
     />
   </div>
   <div class="row col-6 my-3  d-flex justify-content-center">
-    <label class="checkbox-label col-6 d-flex justify-content-end" for="spectator">
+    <label class="radio-label col-6 d-flex justify-content-end" for="spectator">
       Espectador</label
     >
-    <app-checkbox-input
-      class="input-checkbox col-4"
+    <app-radio-input
+      class="input-radio col-4"
       [id]="'spectator'"
       [selectedMode]="selectedMode"
       [condition]="'spectator'"
-      (switchEvent)="switchCheckbox('spectator')"
+      (switchEvent)="switchRadio('spectator')"
     />
   </div>
   <app-generic-button
