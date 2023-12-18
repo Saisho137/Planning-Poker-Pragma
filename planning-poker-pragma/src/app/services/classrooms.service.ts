@@ -20,8 +20,11 @@ export class ClassroomsService {
       { id: 5, value: '8' },
       { id: 6, value: '13' },
       { id: 7, value: '21' },
-      { id: 8, value: '?' },
-      { id: 9, value: '☕' },
+      { id: 8, value: '34' },
+      { id: 9, value: '55' },
+      { id: 10, value: '89' },
+      { id: 11, value: '?' },
+      { id: 12, value: '☕' },
     ],
     [
       { id: 1, value: '1' },

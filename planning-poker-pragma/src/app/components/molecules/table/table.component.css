@@ -16,6 +16,7 @@
   height: 30vh;
   width: 30vw;
   background-color: #270953;
+  border: 1px solid #6328CB;
   z-index: 4;
 }
 .second {
