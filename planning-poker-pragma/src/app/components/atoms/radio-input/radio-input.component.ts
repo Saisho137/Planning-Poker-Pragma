@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-checkbox-input',
+  selector: 'app-radio-input',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './checkbox-input.component.html',
-  styleUrl: './checkbox-input.component.css'
+  templateUrl: './radio-input.component.html',
+  styleUrl: './radio-input.component.css'
 })
-export class CheckboxInputComponent {
+export class RadioInputComponent {
   @Input() id: string = '';
   @Input() selectedMode: 'player' | 'spectator' | '' = '';
   @Input() condition: 'player' | 'spectator' | '' = '';
