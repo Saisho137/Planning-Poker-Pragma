@@ -2,29 +2,29 @@
   class="classroom-container row py-5 px-1 d-flex justify-content-center border border-white"
 >
   <h1 class="col-12 d-flex justify-content-center">{{ roomId }}</h1>
-  <div
-    class="col-12 border rounded-5 border-white my-3 p-5 bg-success d-flex justify-content-center"
-  ></div>
-  @if (configurationWindow) {
-  <section class="row d-flex justify-content-center">
-    <div class="blur"></div>
-    <app-create-visualization-mode
-      class="section col-3"
-      (roomGeneratedEvent)="validateAdminUser()"
-      (roomGeneratedEvent)="getUserVisualizationMode()"
-      (roomGeneratedEvent)="configurationWindow = !configurationWindow"
-      [classroomId]="roomId"
+  <app-table class="table col-6 d-flex justify-content-center" />
+  <section class="row justify-content-center">
+    @if (configurationWindow) {
+    <section class="row d-flex justify-content-center">
+      <div class="blur"></div>
+      <app-create-visualization-mode
+        class="section col-3"
+        (roomGeneratedEvent)="validateAdminUser()"
+        (roomGeneratedEvent)="getUserVisualizationMode()"
+        (roomGeneratedEvent)="configurationWindow = !configurationWindow"
+        [classroomId]="roomId"
+      />
+    </section>
+    } @if (visualization === 'player') { @for (item of scoringMode; track
+    item.id) {
+    <app-user-card
+      class="col-1"
+      [cardValue]="item.value"
+      (clickEvent)="selectCard(item.value)"
+      [selectedCard]="selectedCard"
     />
+    } }
   </section>
-  } @if (visualization === 'player') { @for (item of scoringMode; track item.id)
-  {
-  <app-user-card
-    class="col-1"
-    [cardValue]="item.value"
-    (clickEvent)="selectCard(item.value)"
-    [selectedCard]="selectedCard"
-  />
-  } }
   <section class="row d-flex justify-content-center">
     <a class="col-2 d-flex justify-content-center" routerLink="/"
       >Abandonar la Sala</a

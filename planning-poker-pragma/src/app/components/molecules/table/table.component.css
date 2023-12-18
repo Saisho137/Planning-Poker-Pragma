@@ -1,0 +1,35 @@
+.voting-table {
+  position: relative;
+  height: 40vh;
+  width: 36vw;
+}
+
+.table {
+  position: absolute;
+  border-radius: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.first {
+  height: 30vh;
+  width: 30vw;
+  background-color: #270953;
+  z-index: 4;
+}
+.second {
+  height: 35vh;
+  width: 33vw;
+  background-color: transparent;
+  border: 2px solid #9175E4;
+  z-index: 3;
+}
+
+.third {
+  height: 40vh;
+  width: 36vw;
+  background-color: transparent;
+  border: 2px solid #7242D3;
+  z-index: 2;
+}
