@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ClassroomInterface } from '../interfaces/classroom-interface';
 import { UserInRoomInterface } from '../interfaces/user-in-room-interface';
+import { ScoringModeInterface } from '../interfaces/scoring-mode-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -47,7 +48,7 @@ export class ClassroomsService {
     ],
   ];
 
-  public createScoringMode(mode: string): { id: number; value: string }[] {
+  public createScoringMode(mode: string): ScoringModeInterface[] {
     switch (mode) {
       case 'fibonacci':
         return this.scoringMode[0];
