@@ -1,9 +1,9 @@
-<article>
+<article class="row d-flex justify-content-center">
   <div
-    class="card-user d-flex justify-content-center align-items-center"
-    [class.selected]="selectedCard"
+    class="card-user col-12"
+    [class.selected]="selectedCard.length > 0"
   ></div>
-  <p class="name-user">
-    <b>{{ cardValue }}</b>
+  <p class="name-user col-12 d-flex justify-content-center">
+    {{ cardValue }}
   </p>
 </article>

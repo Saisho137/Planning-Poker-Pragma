@@ -27,7 +27,8 @@ export class ClassroomComponent {
   roomId: string = '';
   visualization: 'player' | 'spectator' | '' = '';
   configurationWindow: boolean = true;
-  selectedCard: string = 'null';
+  selectedCard: string = '';
+  username: string = sessionStorage.getItem('user_username')!;
 
   constructor(
     private route: ActivatedRoute,

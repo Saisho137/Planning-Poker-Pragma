@@ -3,6 +3,11 @@
 >
   <h1 class="col-12 d-flex justify-content-center">{{ roomId }}</h1>
   <app-table class="table col-6 d-flex justify-content-center" />
+  <app-user-card
+    class="col-12 d-flex justify-content-center"
+    [cardValue]="username"
+    [selectedCard]="selectedCard"
+  />
 
   @if (configurationWindow) {
   <section class="row d-flex justify-content-center">
