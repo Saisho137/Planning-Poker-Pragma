@@ -21,7 +21,7 @@
     <h3 class="col-12 d-flex justify-content-center">👇 Elige una carta 👇</h3>
     <article class="col-8 d-flex justify-content-center">
       @for (item of scoringMode; track item.id) {
-      <app-user-card
+      <app-card
         class="col-1"
         [cardValue]="item.value"
         (clickEvent)="selectCard(item.value)"

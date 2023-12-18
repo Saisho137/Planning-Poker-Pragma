@@ -1,7 +1,9 @@
-<article
-  class="card-user d-flex justify-content-center align-items-center"
-  [class.selected]="cardValue === selectedCard"
-  (click)="onCardClick()"
->
-  <b>{{ cardValue }}</b>
+<article>
+  <div
+    class="card-user d-flex justify-content-center align-items-center"
+    [class.selected]="selectedCard"
+  ></div>
+  <p class="name-user">
+    <b>{{ cardValue }}</b>
+  </p>
 </article>

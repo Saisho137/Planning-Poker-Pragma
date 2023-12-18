@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CreateVisualizationModeComponent } from '../../molecules/create-visualization-mode/create-visualization-mode.component';
 import { UserCardComponent } from '../../atoms/user-card/user-card.component';
 import { TableComponent } from '../../molecules/table/table.component';
+import { CardComponent } from '../../atoms/card/card.component';
 
 @Component({
   selector: 'app-classroom',
@@ -14,6 +15,7 @@ import { TableComponent } from '../../molecules/table/table.component';
     CommonModule,
     FormsModule,
     CreateVisualizationModeComponent,
+    CardComponent,
     UserCardComponent,
     TableComponent,
     RouterLink,

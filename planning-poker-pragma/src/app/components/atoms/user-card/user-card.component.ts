@@ -11,13 +11,4 @@ import { CommonModule } from '@angular/common';
 export class UserCardComponent {
   @Input() cardValue: string = '';
   @Input() selectedCard: string = '';
-  @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
-  isSelected: boolean = false;
-
-  toggleSelection(): void {
-    this.isSelected = !this.isSelected;
-  }
-  onCardClick() {
-    this.clickEvent.emit();
-  }
 }
