@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ClassroomsService } from '../../../services/classrooms.service';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
 import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
-import { CheckboxInputComponent } from '../../atoms/checkbox-input/checkbox-input.component';
+import { CheckboxInputComponent } from '../../atoms/radio-input/checkbox-input.component';
 
 @Component({
   selector: 'app-create-visualization-mode',

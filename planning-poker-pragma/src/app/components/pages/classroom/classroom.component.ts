@@ -23,19 +23,27 @@ export class ClassroomComponent {
   roomId: string = '';
   visualization: 'player' | 'spectator' | '' = '';
   configurationWindow: boolean = true;
-  
+  selectedCard: string = 'null';
+
   constructor(
     private route: ActivatedRoute,
     private classrooms: ClassroomsService
   ) {}
 
-  scoringMode = this.classrooms.createScoringMode('fibonacci')
+  scoringMode = this.classrooms.createScoringMode('fibonacci');
+
+  
+
+  selectCard(value: string): void {
+    this.selectedCard = value;
+    console.log(this.selectedCard);
+  }
 
   ngOnInit(): void {
     this.route.snapshot.paramMap.get('id')! !== null
       ? (this.roomId = this.route.snapshot.paramMap.get('id')!)
       : (this.roomId = '0'); //Get Classroom Id from URL
-    console.log("COMPONENTE: ", this.scoringMode);
+    console.log('COMPONENTE: ', this.scoringMode);
   }
 
   getUserVisualizationMode(): void {

@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class UserCardComponent {
   @Input() cardValue: string = '';
+  @Input() selectedCard: string = '';
   isSelected: boolean = false;
 
   toggleSelection(): void {

@@ -17,7 +17,7 @@
     />
   </section>
   } @if (visualization === 'player') { @for (item of scoringMode; track item) {
-  <app-user-card class="col-1" [cardValue]="item" />
+  <app-user-card class="col-1" [cardValue]="item" (click)="selectCard(item)" [selectedCard]="selectedCard" />
   } }
   <section class="row d-flex justify-content-center">
     <a class="col'12 d-flex justify-content-center" routerLink="/"
