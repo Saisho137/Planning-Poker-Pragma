@@ -69,7 +69,7 @@ export class ClassroomsService {
     username: string,
     rol: 'player' | 'spectator' | ''
   ): ClassroomInterface {
-    rol === '' ? (rol = 'player') : null;
+    rol === '' ? (rol = 'player') : null; //Si rol está vacío se asigna player automáticamente
 
     const user: UserInRoomInterface = {
       id: user_id,
@@ -86,6 +86,11 @@ export class ClassroomsService {
     this.rooms.push(newRoom);
 
     return newRoom;
+  }
+
+  public deleteRoom(): void {
+    this.users.pop();
+    this.rooms.pop();
   }
 
   public getRoom(classroomId: string): ClassroomInterface | undefined {
