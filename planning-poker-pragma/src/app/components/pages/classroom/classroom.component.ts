@@ -50,7 +50,7 @@ export class ClassroomComponent {
   }
 
   ngOnDestroy(): void {
-    this.classrooms.deleteRoom();
+    this.classrooms.deleteRoom(this.roomId);
   }
 
   getUserVisualizationMode(): void {

@@ -7,8 +7,6 @@ import { ScoringModeInterface } from '../interfaces/scoring-mode-interface';
   providedIn: 'root',
 })
 export class ClassroomsService {
-  constructor() {}
-
   private rooms: ClassroomInterface[] = [];
   private users: UserInRoomInterface[] = [];
   private scoringMode = [
@@ -51,6 +49,8 @@ export class ClassroomsService {
     ],
   ];
 
+  constructor() {}
+
   public createScoringMode(mode: string): ScoringModeInterface[] {
     switch (mode) {
       case 'fibonacci':
@@ -69,15 +69,21 @@ export class ClassroomsService {
     );
     return selectedRoom;
   }
-  public deleteRoom(): void {
-    this.users.pop();
-    this.rooms.pop();
+
+  public deleteRoom(classroomId: string): void {
+    for (let i = 0; i < this.rooms.length; i++) {
+      if (this.rooms[i].id === classroomId) {
+        this.rooms.splice(i, 1);
+        this.users.length = 0;
+        break;
+      }
+    }
   }
 
   public createRoom(
     classroomId: string,
-    user: UserInRoomInterface): ClassroomInterface {
-
+    user: UserInRoomInterface
+  ): ClassroomInterface {
     this.users.push(user);
 
     const newRoom: ClassroomInterface = {
