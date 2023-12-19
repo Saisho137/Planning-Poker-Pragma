@@ -2,6 +2,14 @@
   class="classroom-container row py-5 px-1 d-flex justify-content-center"
 >
   <h1 class="col-12 d-flex justify-content-center">{{ roomId }}</h1>
+  @for (item of room?.users; track item.id) {
+  <app-user-card
+    class="col-1 d-flex justify-content-center"
+    [cardValue]="item.username"
+    [selectedCard]="selectedCard"
+    [visualization]="item.rol"
+  />
+  }
   <app-table class="table col-6 d-flex justify-content-center" />
   <app-user-card
     class="col-12 d-flex justify-content-center"
@@ -15,6 +23,7 @@
     <div class="blur"></div>
     <app-create-visualization-mode
       class="section col-3"
+      (roomGeneratedEvent)="users()"
       (roomGeneratedEvent)="validateAdminUser()"
       (roomGeneratedEvent)="getUserVisualizationMode()"
       (roomGeneratedEvent)="configurationWindow = !configurationWindow"

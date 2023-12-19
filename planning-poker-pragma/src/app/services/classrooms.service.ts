@@ -92,7 +92,10 @@ export class ClassroomsService {
     return newRoom;
   }
 
-  public addUsersToRoom(classroomId: string, newUsers: UserInRoomInterface[] ): void {
+  public addUsersToRoom(
+    classroomId: string,
+    newUsers: UserInRoomInterface[]
+  ): void {
     const selectedRoom: ClassroomInterface | undefined =
       this.getRoom(classroomId);
 
@@ -102,7 +105,10 @@ export class ClassroomsService {
   }
 
   public addMockUpUsers(classroomId: string): void {
-    this.addUsersToRoom(classroomId, [{id: "1", username: "Daiko", rol: 'spectator'}])
+    this.addUsersToRoom(classroomId, [
+      { id: '1', username: 'Daiko', rol: 'spectator' },
+      { id: '2', username: 'rotten', rol: 'player' },
+    ]);
   }
 
   public userIsPlayer(classroomId: string, userId: string): boolean {

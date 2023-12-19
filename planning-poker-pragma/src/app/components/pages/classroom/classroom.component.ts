@@ -7,6 +7,7 @@ import { CreateVisualizationModeComponent } from '../../molecules/create-visuali
 import { UserCardComponent } from '../../atoms/user-card/user-card.component';
 import { TableComponent } from '../../molecules/table/table.component';
 import { CardComponent } from '../../atoms/card/card.component';
+import { ClassroomInterface } from '../../../interfaces/classroom-interface';
 
 @Component({
   selector: 'app-classroom',
@@ -29,18 +30,14 @@ export class ClassroomComponent {
   configurationWindow: boolean = true;
   selectedCard: string = '';
   username: string;
+  room: ClassroomInterface | undefined = this.classrooms.getRoom(this.roomId);
+  scoringMode = this.classrooms.createScoringMode('fibonacci');
 
   constructor(
     private route: ActivatedRoute,
     private classrooms: ClassroomsService
   ) {
     this.username = sessionStorage.getItem('user_username')!;
-  }
-
-  scoringMode = this.classrooms.createScoringMode('fibonacci');
-
-  selectCard(value: string): void {
-    this.selectedCard = value;
   }
 
   ngOnInit(): void {
@@ -51,6 +48,15 @@ export class ClassroomComponent {
 
   ngOnDestroy(): void {
     this.classrooms.deleteRoom(this.roomId);
+  }
+
+  selectCard(value: string): void {
+    this.selectedCard = value;
+  }
+
+  users():void {
+    this.classrooms.addMockUpUsers(this.roomId)
+    this.room = this.classrooms.getRoom(this.roomId)
   }
 
   getUserVisualizationMode(): void {
