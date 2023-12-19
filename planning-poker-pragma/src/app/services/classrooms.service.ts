@@ -114,6 +114,7 @@ export class ClassroomsService {
         id: user._id,
         username: user.username,
         rol: Math.random() <= 0.7 ? 'player' : 'spectator',
+        cardSelected: '',
       };
     }
 
@@ -122,6 +123,10 @@ export class ClassroomsService {
       .filter((user) => user.id !== sessionStorage.getItem('user_id')); //Filtra el usuario host de la sala
 
     this.addUsersToRoom(classroomId, usersToAdd);
+  }
+
+  public selectCardForMockUpUsers(mode: ScoringModeInterface[]): void {
+    
   }
 
   public userIsPlayer(classroomId: string, userId: string): boolean {

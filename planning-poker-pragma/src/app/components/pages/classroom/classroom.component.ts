@@ -8,6 +8,7 @@ import { UserCardComponent } from '../../atoms/user-card/user-card.component';
 import { TableComponent } from '../../molecules/table/table.component';
 import { CardComponent } from '../../atoms/card/card.component';
 import { ClassroomInterface } from '../../../interfaces/classroom-interface';
+import { ScoringModeInterface } from '../../../interfaces/scoring-mode-interface';
 
 @Component({
   selector: 'app-classroom',
@@ -31,7 +32,7 @@ export class ClassroomComponent {
   selectedCard: string = '';
   username: string;
   room: ClassroomInterface | undefined = this.classrooms.getRoom(this.roomId);
-  scoringMode = this.classrooms.createScoringMode('fibonacci');
+  scoringMode: ScoringModeInterface[] = this.classrooms.createScoringMode('fibonacci');
 
   constructor(
     private route: ActivatedRoute,
@@ -52,6 +53,8 @@ export class ClassroomComponent {
 
   selectCard(value: string): void {
     this.selectedCard = value;
+    setTimeout(()=>{}, 3000)
+    this.classrooms.selectCardForMockUpUsers(this.scoringMode)
   }
 
   users():void {

@@ -50,6 +50,7 @@ export class CreateVisualizationModeComponent {
           id: sessionStorage.getItem('user_id')!,
           username: sessionStorage.getItem('user_username')!,
           rol: this.selectedMode,
+          cardSelected: '',
         };
 
         this.classrooms.createRoom(this.classroomId, user);
