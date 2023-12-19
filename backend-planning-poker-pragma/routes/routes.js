@@ -9,6 +9,7 @@ const app = express.Router()
 //Users Controller
 app.post('/register_user', usersController.registerUser)
 app.post('/sign_in_user', usersController.signInUser)
+app.get('/get_users', usersController.getUsers)
 app.get('/test', token.validateUserToken, usersController.test)
 
 module.exports = app

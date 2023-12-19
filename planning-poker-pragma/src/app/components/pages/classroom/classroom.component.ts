@@ -5,6 +5,9 @@ import { ClassroomsService } from '../../../services/classrooms.service';
 import { FormsModule } from '@angular/forms';
 import { CreateVisualizationModeComponent } from '../../molecules/create-visualization-mode/create-visualization-mode.component';
 import { UserCardComponent } from '../../atoms/user-card/user-card.component';
+import { TableComponent } from '../../molecules/table/table.component';
+import { CardComponent } from '../../atoms/card/card.component';
+import { ClassroomInterface } from '../../../interfaces/classroom-interface';
 
 @Component({
   selector: 'app-classroom',
@@ -13,7 +16,9 @@ import { UserCardComponent } from '../../atoms/user-card/user-card.component';
     CommonModule,
     FormsModule,
     CreateVisualizationModeComponent,
+    CardComponent,
     UserCardComponent,
+    TableComponent,
     RouterLink,
   ],
   templateUrl: './classroom.component.html',
@@ -23,23 +28,35 @@ export class ClassroomComponent {
   roomId: string = '';
   visualization: 'player' | 'spectator' | '' = '';
   configurationWindow: boolean = true;
-  selectedCard: string = 'null';
+  selectedCard: string = '';
+  username: string;
+  room: ClassroomInterface | undefined = this.classrooms.getRoom(this.roomId);
+  scoringMode = this.classrooms.createScoringMode('fibonacci');
 
   constructor(
     private route: ActivatedRoute,
     private classrooms: ClassroomsService
-  ) {}
-
-  scoringMode = this.classrooms.createScoringMode('fibonacci');
-
-  selectCard(value: string): void {
-    this.selectedCard = value;
+  ) {
+    this.username = sessionStorage.getItem('user_username')!;
   }
 
   ngOnInit(): void {
     this.route.snapshot.paramMap.get('id')! !== null
       ? (this.roomId = this.route.snapshot.paramMap.get('id')!)
       : (this.roomId = '0'); //Get Classroom Id from URL
+  }
+
+  ngOnDestroy(): void {
+    this.classrooms.deleteRoom(this.roomId);
+  }
+
+  selectCard(value: string): void {
+    this.selectedCard = value;
+  }
+
+  users():void {
+    this.classrooms.addMockUpUsers(this.roomId)
+    this.room = this.classrooms.getRoom(this.roomId)
   }
 
   getUserVisualizationMode(): void {

@@ -1,7 +1,21 @@
-<article
-  class="card-user d-flex justify-content-center align-items-center"
-  [class.selected]="cardValue === selectedCard"
-  (click)="onCardClick()"
->
-  <b>{{ cardValue }}</b>
+@if (visualization === 'player') {
+<article class="row d-flex justify-content-center">
+  <div class="card-user-player col-12" [class.selected]="selectedCard"></div>
+  <p class="name-user col-12 d-flex justify-content-center">
+    {{ cardValue }}
+  </p>
 </article>
+} @else if (visualization === 'spectator') {
+<article class="row d-flex justify-content-center">
+  <div
+    class="card-user-spectator d-flex justify-content-center align-items-center"
+  >
+    <b>{{ defaultUser }}</b>
+  </div>
+  <p class="col-12 d-flex justify-content-center">
+    {{ cardValue }}
+  </p>
+</article>
+} @else {
+<div></div>
+}

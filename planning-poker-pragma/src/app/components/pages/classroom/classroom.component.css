@@ -1,11 +1,11 @@
 .classroom-container {
-  width: 98vw;
-  height: 98vh;
+  min-height: 98vh;
   margin: 0 auto;
 }
 
 .section {
   position: absolute;
+  z-index: 5;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -13,6 +13,7 @@
 
 .blur {
   position: absolute;
+  z-index: 5;
   top: 0;
   left: 0;
   width: 100%;

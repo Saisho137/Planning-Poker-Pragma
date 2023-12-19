@@ -1,23 +1,29 @@
-.card-user {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 5rem;
-  height: 7.5rem;
-  font-size: 24px;
-  display: inline;
+.card-user-player {
+  width: 3rem;
+  height: 4.5rem;
+  display: inline-block;
   background-color: transparent;
   border: 1px solid #ba64fd;
   border-radius: 10px;
-  color: white;
   transition: transform 0.3s, background-color 0.3s, color 0.3s;
 }
 
-.card-user.selected {
-  background-color: #e3a4ff;
-  color: #531d8c;
-  transform: translateY(-10px);
+.card-user-player.selected {
+  background-color: #bb65ff;
 }
 
-.card-user:hover {
-  cursor: pointer;
+.card-user-spectator {
+  width: 4.5rem;
+  height: 4.5rem;
+  display: inline-block;
+  background-color: #bdbdff;
+  border-radius: 100%;
+  font-size: 20px;
+  color: #330072;
+  transition: transform 0.3s, background-color 0.3s, color 0.3s;
+}
+
+.name-user {
+  font-size: 16px;
+  color: white;
 }

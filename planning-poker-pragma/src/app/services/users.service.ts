@@ -1,16 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserInRoomInterface } from '../interfaces/user-in-room-interface';
 import { Router } from '@angular/router';
 import { UserResponseInterface } from '../interfaces/user-response-interface';
 import { RegisterInterface } from '../interfaces/register-interface';
+import { AllUsersInterface } from '../interfaces/all-users-interface';
+import { UserInterface } from '../interfaces/user-interface';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-
   constructor(private http: HttpClient, private router: Router) {}
+
+  public async getAllUsers(): Promise<UserInterface[]> {
+    const url: string = 'http://localhost:8080/get_users';
+
+    try {
+      const response = await firstValueFrom(this.http.get<AllUsersInterface>(url));
+      return response.users;
+    } catch (err) {
+      window.alert('Something went wrong!' + err);
+      return [];
+    }
+  }
 
   public validateUser(email: string, password: string): void {
     const url: string = 'http://localhost:8080/sign_in_user';

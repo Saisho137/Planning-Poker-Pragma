@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { ClassroomInterface } from '../interfaces/classroom-interface';
 import { UserInRoomInterface } from '../interfaces/user-in-room-interface';
 import { ScoringModeInterface } from '../interfaces/scoring-mode-interface';
+import { UsersService } from './users.service';
+import { UserInterface } from '../interfaces/user-interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClassroomsService {
-  constructor() {}
-
   private rooms: ClassroomInterface[] = [];
   private users: UserInRoomInterface[] = [];
   private scoringMode = [
@@ -20,8 +20,11 @@ export class ClassroomsService {
       { id: 5, value: '8' },
       { id: 6, value: '13' },
       { id: 7, value: '21' },
-      { id: 8, value: '?' },
-      { id: 9, value: '☕' },
+      { id: 8, value: '34' },
+      { id: 9, value: '55' },
+      { id: 10, value: '89' },
+      { id: 11, value: '?' },
+      { id: 12, value: '☕' },
     ],
     [
       { id: 1, value: '1' },
@@ -48,6 +51,8 @@ export class ClassroomsService {
     ],
   ];
 
+  constructor(private usersService: UsersService) {}
+
   public createScoringMode(mode: string): ScoringModeInterface[] {
     switch (mode) {
       case 'fibonacci':
@@ -60,24 +65,28 @@ export class ClassroomsService {
     return [{ id: 0, value: 'null' }];
   }
 
+  public getRoom(classroomId: string): ClassroomInterface | undefined {
+    const selectedRoom: ClassroomInterface | undefined = this.rooms.find(
+      (room) => room.id === classroomId
+    );
+    return selectedRoom;
+  }
+
+  public deleteRoom(classroomId: string): void {
+    const index = this.rooms.findIndex((room) => room.id === classroomId);
+    this.rooms.splice(index, 1);
+    this.users.length = 0;
+  }
+
   public createRoom(
     classroomId: string,
-    user_id: string,
-    username: string,
-    rol: 'player' | 'spectator' | ''
+    user: UserInRoomInterface
   ): ClassroomInterface {
-    rol === '' ? (rol = 'player') : null;
-
-    const user: UserInRoomInterface = {
-      id: user_id,
-      username: username,
-      rol: rol,
-    };
     this.users.push(user);
 
-    const newRoom = {
+    const newRoom: ClassroomInterface = {
       id: classroomId,
-      admin: user_id,
+      admin: user.id,
       users: this.users,
     };
     this.rooms.push(newRoom);
@@ -85,11 +94,34 @@ export class ClassroomsService {
     return newRoom;
   }
 
-  public getRoom(classroomId: string): ClassroomInterface | undefined {
-    const selectedRoom: ClassroomInterface | undefined = this.rooms.find(
-      (room) => room.id === classroomId
-    );
-    return selectedRoom;
+  public addUsersToRoom(
+    classroomId: string,
+    newUsers: UserInRoomInterface[]
+  ): void {
+    const selectedRoom: ClassroomInterface | undefined =
+      this.getRoom(classroomId);
+
+    if (selectedRoom) {
+      selectedRoom.users = [...selectedRoom.users, ...newUsers];
+    }
+  }
+
+  public async addMockUpUsers(classroomId: string): Promise<void> {
+    const mockUpUsers: UserInterface[] = await this.usersService.getAllUsers();
+
+    function convertToUserInRoom(user: UserInterface): UserInRoomInterface {
+      return {
+        id: user._id,
+        username: user.username,
+        rol: Math.random() <= 0.7 ? 'player' : 'spectator',
+      };
+    }
+
+    const usersToAdd: UserInRoomInterface[] = mockUpUsers
+      .map(convertToUserInRoom)
+      .filter((user) => user.id !== sessionStorage.getItem('user_id')); //Filtra el usuario host de la sala
+
+    this.addUsersToRoom(classroomId, usersToAdd);
   }
 
   public userIsPlayer(classroomId: string, userId: string): boolean {
