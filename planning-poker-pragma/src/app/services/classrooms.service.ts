@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ClassroomInterface } from '../interfaces/classroom-interface';
 import { UserInRoomInterface } from '../interfaces/user-in-room-interface';
 import { ScoringModeInterface } from '../interfaces/scoring-mode-interface';
+import { UsersService } from './users.service';
+import { UserInterface } from '../interfaces/user-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -49,7 +51,7 @@ export class ClassroomsService {
     ],
   ];
 
-  constructor() {}
+  constructor(private usersService: UsersService) {}
 
   public createScoringMode(mode: string): ScoringModeInterface[] {
     switch (mode) {
@@ -104,11 +106,23 @@ export class ClassroomsService {
     }
   }
 
-  public addMockUpUsers(classroomId: string): void {
-    this.addUsersToRoom(classroomId, [
-      { id: '1', username: 'Daiko', rol: 'spectator' },
-      { id: '2', username: 'rotten', rol: 'player' },
-    ]);
+  public async addMockUpUsers(classroomId: string): Promise<void> {
+    const mockUpUsers: UserInterface[] = await this.usersService.getAllUsers();
+    
+    function convertToUserInRoom(user: UserInterface): UserInRoomInterface {
+      return {
+        id: user._id,
+        username: user.username,
+        rol: 'player',
+      };
+    }
+
+    const usersToAdd: UserInRoomInterface[] =
+      mockUpUsers.map(convertToUserInRoom);
+
+    console.log(usersToAdd);
+    
+    this.addUsersToRoom(classroomId, usersToAdd);
   }
 
   public userIsPlayer(classroomId: string, userId: string): boolean {
