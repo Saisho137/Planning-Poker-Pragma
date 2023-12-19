@@ -28,12 +28,14 @@ export class ClassroomComponent {
   visualization: 'player' | 'spectator' | '' = '';
   configurationWindow: boolean = true;
   selectedCard: string = '';
-  username: string = sessionStorage.getItem('user_username')!;
+  username: string;
 
   constructor(
     private route: ActivatedRoute,
     private classrooms: ClassroomsService
-  ) {}
+  ) {
+    this.username = sessionStorage.getItem('user_username')!;
+  }
 
   scoringMode = this.classrooms.createScoringMode('fibonacci');
 

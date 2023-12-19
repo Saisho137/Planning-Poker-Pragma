@@ -11,4 +11,12 @@ import { CommonModule } from '@angular/common';
 export class UserCardComponent {
   @Input() cardValue: string = '';
   @Input() selectedCard: string = '';
+  @Input() visualization: string = '';
+  defaultUser: string = '';
+
+  ngOnInit() {
+    if (this.cardValue) {
+      this.defaultUser = this.cardValue.substring(0, 2).toUpperCase();
+    }
+  }
 }

@@ -1,6 +1,6 @@
 .classroom-container {
   width: 98vw;
-  height: 98vh;
+  min-height: 98vh;
   margin: 0 auto;
 }
 

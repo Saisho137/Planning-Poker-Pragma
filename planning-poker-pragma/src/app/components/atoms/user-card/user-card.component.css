@@ -1,4 +1,4 @@
-.card-user {
+.card-user-player {
   width: 3rem;
   height: 4.5rem;
   display: inline-block;
@@ -8,8 +8,19 @@
   transition: transform 0.3s, background-color 0.3s, color 0.3s;
 }
 
-.card-user.selected {
+.card-user-player.selected {
   background-color: #bb65ff;
+}
+
+.card-user-spectator {
+  width: 4.5rem;
+  height: 4.5rem;
+  display: inline-block;
+  background-color: #bdbdff;
+  border-radius: 100%;
+  font-size: 20px;
+  color: #330072;
+  transition: transform 0.3s, background-color 0.3s, color 0.3s;
 }
 
 .name-user {
