@@ -108,7 +108,7 @@ export class ClassroomsService {
 
   public async addMockUpUsers(classroomId: string): Promise<void> {
     const mockUpUsers: UserInterface[] = await this.usersService.getAllUsers();
-    
+
     function convertToUserInRoom(user: UserInterface): UserInRoomInterface {
       return {
         id: user._id,
@@ -120,9 +120,11 @@ export class ClassroomsService {
     const usersToAdd: UserInRoomInterface[] =
       mockUpUsers.map(convertToUserInRoom);
 
-    console.log(usersToAdd);
-    
-    this.addUsersToRoom(classroomId, usersToAdd);
+    const usersToAddCleaned: UserInRoomInterface[] = usersToAdd.filter(
+      (user) => user.id !== sessionStorage.getItem('user_id')
+    );
+
+    this.addUsersToRoom(classroomId, usersToAddCleaned);
   }
 
   public userIsPlayer(classroomId: string, userId: string): boolean {
