@@ -113,18 +113,15 @@ export class ClassroomsService {
       return {
         id: user._id,
         username: user.username,
-        rol: 'player',
+        rol: Math.random() < 0.5 ? 'player' : 'spectator',
       };
     }
 
-    const usersToAdd: UserInRoomInterface[] =
-      mockUpUsers.map(convertToUserInRoom);
+    const usersToAdd: UserInRoomInterface[] = mockUpUsers
+      .map(convertToUserInRoom)
+      .filter((user) => user.id !== sessionStorage.getItem('user_id')); //Filtra el usuario host de la sala
 
-    const usersToAddCleaned: UserInRoomInterface[] = usersToAdd.filter(
-      (user) => user.id !== sessionStorage.getItem('user_id')
-    );
-
-    this.addUsersToRoom(classroomId, usersToAddCleaned);
+    this.addUsersToRoom(classroomId, usersToAdd);
   }
 
   public userIsPlayer(classroomId: string, userId: string): boolean {
