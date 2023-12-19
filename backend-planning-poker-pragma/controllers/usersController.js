@@ -55,6 +55,24 @@ function signInUser(req, res) {
     )
 }
 
+async function getUsers(req, res) {
+    await Users.find({}).then(
+        (foundUsers) => {
+            if (foundUsers == null) {
+                res.status(403).send({ message: "Does not exit any user." })
+            }
+            else {
+                res.status(200).send({ users: foundUsers })
+            }
+        },
+        err => {
+            res.status(500).send({ message: "Could not found Users.", err })
+        }
+    )
+
+
+}
+
 module.exports = {
-    test, registerUser, signInUser
+    test, registerUser, signInUser, getUsers
 }
