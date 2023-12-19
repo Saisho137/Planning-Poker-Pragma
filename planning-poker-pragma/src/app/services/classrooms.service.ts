@@ -71,13 +71,9 @@ export class ClassroomsService {
   }
 
   public deleteRoom(classroomId: string): void {
-    for (let i = 0; i < this.rooms.length; i++) {
-      if (this.rooms[i].id === classroomId) {
-        this.rooms.splice(i, 1);
-        this.users.length = 0;
-        break;
-      }
-    }
+    const index = this.rooms.findIndex((room) => room.id === classroomId);
+    this.rooms.splice(index, 1);
+    this.users.length = 0;
   }
 
   public createRoom(
@@ -95,6 +91,8 @@ export class ClassroomsService {
 
     return newRoom;
   }
+
+  public addUsersToRoom(): void {}
 
   public userIsPlayer(classroomId: string, userId: string): boolean {
     const room: ClassroomInterface | undefined = this.getRoom(classroomId);
