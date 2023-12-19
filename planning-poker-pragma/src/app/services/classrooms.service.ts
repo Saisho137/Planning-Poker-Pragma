@@ -63,41 +63,31 @@ export class ClassroomsService {
     return [{ id: 0, value: 'null' }];
   }
 
-  public createRoom(
-    classroomId: string,
-    user_id: string,
-    username: string,
-    rol: 'player' | 'spectator' | ''
-  ): ClassroomInterface {
-    rol === '' ? (rol = 'player') : null; //Si rol está vacío se asigna player automáticamente
-
-    const user: UserInRoomInterface = {
-      id: user_id,
-      username: username,
-      rol: rol,
-    };
-    this.users.push(user);
-
-    const newRoom = {
-      id: classroomId,
-      admin: user_id,
-      users: this.users,
-    };
-    this.rooms.push(newRoom);
-
-    return newRoom;
-  }
-
-  public deleteRoom(): void {
-    this.users.pop();
-    this.rooms.pop();
-  }
-
   public getRoom(classroomId: string): ClassroomInterface | undefined {
     const selectedRoom: ClassroomInterface | undefined = this.rooms.find(
       (room) => room.id === classroomId
     );
     return selectedRoom;
+  }
+  public deleteRoom(): void {
+    this.users.pop();
+    this.rooms.pop();
+  }
+
+  public createRoom(
+    classroomId: string,
+    user: UserInRoomInterface): ClassroomInterface {
+
+    this.users.push(user);
+
+    const newRoom: ClassroomInterface = {
+      id: classroomId,
+      admin: user.id,
+      users: this.users,
+    };
+    this.rooms.push(newRoom);
+
+    return newRoom;
   }
 
   public userIsPlayer(classroomId: string, userId: string): boolean {

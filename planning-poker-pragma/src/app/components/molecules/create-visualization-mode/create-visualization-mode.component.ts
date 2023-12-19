@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { ValidatorService } from '../../../services/validator.service';
 import { FormsModule } from '@angular/forms';
 import { ClassroomsService } from '../../../services/classrooms.service';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
 import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
 import { RadioInputComponent } from '../../atoms/radio-input/radio-input.component';
+import { UserInRoomInterface } from '../../../interfaces/user-in-room-interface';
 
 @Component({
   selector: 'app-create-visualization-mode',
@@ -33,7 +33,6 @@ export class CreateVisualizationModeComponent {
   selectedMode: 'player' | 'spectator' | '' = '';
 
   constructor(
-    private router: Router,
     private validator: ValidatorService,
     private classrooms: ClassroomsService
   ) {}
@@ -45,12 +44,15 @@ export class CreateVisualizationModeComponent {
     if (this.validator.validateString(this.username)) {
       sessionStorage.setItem('user_username', this.username);
       if (this.selectedMode.length > 0) {
-        this.classrooms.createRoom(
-          this.classroomId,
-          sessionStorage.getItem('user_id')!,
-          sessionStorage.getItem('user_username')!,
-          this.selectedMode
-        );
+        this.selectedMode === '' ? (this.selectedMode = 'player') : null; //Si rol está vacío se asigna player automáticamente
+
+        const user: UserInRoomInterface = {
+          id: sessionStorage.getItem('user_id')!,
+          username: sessionStorage.getItem('user_username')!,
+          rol: this.selectedMode,
+        };
+
+        this.classrooms.createRoom(this.classroomId, user);
         this.roomGeneratedEvent.emit();
       } else {
         window.alert('Debes seleccionar un modo de visualización!');
