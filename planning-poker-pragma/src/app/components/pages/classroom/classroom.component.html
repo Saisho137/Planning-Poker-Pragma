@@ -2,21 +2,49 @@
   class="classroom-container row py-5 px-1 d-flex justify-content-center"
 >
   <h1 class="col-12 d-flex justify-content-center">{{ roomId }}</h1>
-  @for (item of room?.users; track item.id) {
-  <app-user-card
-    class="col-1 d-flex justify-content-center"
-    [cardValue]="item.username"
-    [selectedCard]="selectedCard"
-    [visualization]="item.rol"
-  />
-  }
-  <app-table class="table col-6 d-flex justify-content-center" />
-  <app-user-card
-    class="col-12 d-flex justify-content-center"
-    [cardValue]="username"
-    [selectedCard]="selectedCard"
-    [visualization]="visualization"
-  />
+  <section class="col-12 mt-5 d-flex justify-content-center">
+    @for (item of room?.users?.slice(3, 6); track item.id) {
+    <app-user-card
+      class="col-1 d-flex justify-content-center"
+      [cardValue]="item.username"
+      [selectedCard]="selectedCard"
+      [visualization]="item.rol"
+    />
+    }
+  </section>
+  <section class="col-3 d-flex justify-content-end align-items-center">
+    @for (item of room?.users?.slice(6, 7); track item.id) {
+    <app-user-card
+      class="col-1 d-flex justify-content-center"
+      [cardValue]="item.username"
+      [selectedCard]="selectedCard"
+      [visualization]="item.rol"
+    />
+    }
+  </section>
+
+  <app-table class="col-6 d-flex justify-content-center" />
+
+  <section class="col-3 d-flex justify-content-start align-items-center">
+    @for (item of room?.users?.slice(7, 8); track item.id) {
+    <app-user-card
+      class="col-1 d-flex justify-content-center"
+      [cardValue]="item.username"
+      [selectedCard]="selectedCard"
+      [visualization]="item.rol"
+    />
+    }
+  </section>
+  <section class="col-12 mt-3 d-flex justify-content-center">
+    @for (item of room?.users?.slice(0, 3); track item.id) {
+    <app-user-card
+      class="col-1 d-flex justify-content-center"
+      [cardValue]="item.username"
+      [selectedCard]="selectedCard"
+      [visualization]="item.rol"
+    />
+    }
+  </section>
 
   @if (configurationWindow) {
   <section class="row d-flex justify-content-center">
@@ -31,13 +59,13 @@
     />
   </section>
   }
-  <section class="row d-flex justify-content-center">
+  <section class="row mt-4 d-flex justify-content-center">
     @if (visualization === 'player') {
     <h3 class="col-12 d-flex justify-content-center">👇 Elige una carta 👇</h3>
     <article class="col-8 d-flex justify-content-center">
       @for (item of scoringMode; track item.id) {
       <app-card
-        class="col-1"
+        class="col-1 mt-4"
         [cardValue]="item.value"
         (clickEvent)="selectCard(item.value)"
         [selectedCard]="selectedCard"
@@ -46,7 +74,7 @@
     </article>
     }
   </section>
-  <section class="row d-flex justify-content-center">
+  <section class="row mt-5 d-flex justify-content-center">
     <a class="col-2 d-flex justify-content-center" routerLink="/"
       >Abandonar la Sala</a
     >

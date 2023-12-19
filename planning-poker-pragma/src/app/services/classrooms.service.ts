@@ -113,7 +113,7 @@ export class ClassroomsService {
       return {
         id: user._id,
         username: user.username,
-        rol: Math.random() < 0.5 ? 'player' : 'spectator',
+        rol: Math.random() <= 0.7 ? 'player' : 'spectator',
       };
     }
 
