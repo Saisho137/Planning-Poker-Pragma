@@ -69,8 +69,6 @@ async function getUsers(req, res) {
             res.status(500).send({ message: "Could not found Users.", err })
         }
     )
-
-
 }
 
 module.exports = {
