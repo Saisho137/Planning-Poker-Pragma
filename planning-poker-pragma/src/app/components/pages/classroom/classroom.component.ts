@@ -55,7 +55,12 @@ export class ClassroomComponent {
   selectCard(value: string): void {
     this.selectedCard = value;
     setTimeout(() => {
-      this.classrooms.selectCardForMockUpUsers(this.scoringMode, this.roomId, sessionStorage.getItem('user_id')!, this.selectedCard);
+      this.classrooms.selectCardForMockUpUsers(
+        this.scoringMode,
+        this.roomId,
+        sessionStorage.getItem('user_id')!,
+        this.selectedCard
+      );
     }, 3000);
   }
 
@@ -71,7 +76,6 @@ export class ClassroomComponent {
     )
       ? 'player'
       : 'spectator';
-    console.log(this.classrooms.getRoom(this.roomId));
   }
 
   validateAdminUser(): boolean {

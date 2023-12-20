@@ -116,10 +116,12 @@ export class ClassroomsService {
       this.getRoom(classroomId);
     if (selectedRoom) {
       selectedRoom.users.map((user) => {
-        user.id === userId
-          ? (user.cardSelected = hostValue)
-          : (user.cardSelected =
-              mode[Math.floor(Math.random() * mode.length)].value);
+        if (user.id === userId && user.rol === 'player') {
+          user.cardSelected = hostValue;
+        } else if (user.rol === 'player') {
+          user.cardSelected =
+            mode[Math.floor(Math.random() * mode.length)].value;
+        }
       });
     }
   }

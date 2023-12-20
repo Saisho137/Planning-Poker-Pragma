@@ -6,9 +6,8 @@
     <div class="blur"></div>
     <app-create-visualization-mode
       class="section col-3"
-      (roomGeneratedEvent)="users()"
-      (roomGeneratedEvent)="validateAdminUser()"
       (roomGeneratedEvent)="getUserVisualizationMode()"
+      (roomGeneratedEvent)="users()"
       (roomGeneratedEvent)="configurationWindow = !configurationWindow"
       [classroomId]="roomId"
     />
