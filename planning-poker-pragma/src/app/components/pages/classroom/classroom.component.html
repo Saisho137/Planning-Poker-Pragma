@@ -4,8 +4,7 @@
   @if (configurationWindow) {
   <app-create-visualization-mode
     class="col-3"
-    (roomGeneratedEvent)="getUserVisualizationMode()"
-    (roomGeneratedEvent)="users()"
+    (roomGeneratedEvent)="initializeRoom()"
     (roomGeneratedEvent)="configurationWindow = !configurationWindow"
     [classroomId]="roomId"
   />

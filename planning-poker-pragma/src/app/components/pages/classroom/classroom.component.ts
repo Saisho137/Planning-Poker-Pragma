@@ -2,11 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClassroomsService } from '../../../services/classrooms.service';
-import { FormsModule } from '@angular/forms';
 import { CreateVisualizationModeComponent } from '../../molecules/create-visualization-mode/create-visualization-mode.component';
-import { UserCardComponent } from '../../molecules/user-card/user-card.component';
-import { TableComponent } from '../../molecules/table/table.component';
-import { CardComponent } from '../../atoms/card/card.component';
 import { ClassroomInterface } from '../../../interfaces/classroom-interface';
 import { ScoringModeInterface } from '../../../interfaces/scoring-mode-interface';
 import { CardMenuComponent } from '../../organisms/card-menu/card-menu.component';
@@ -17,7 +13,6 @@ import { UsersTableMenuComponent } from '../../organisms/users-table-menu/users-
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
     CreateVisualizationModeComponent,
     CardMenuComponent,
     UsersTableMenuComponent,
@@ -28,23 +23,21 @@ import { UsersTableMenuComponent } from '../../organisms/users-table-menu/users-
 })
 export class ClassroomComponent {
   roomId: string = '';
-  visualization: 'player' | 'spectator' | '' = '';
+  room: ClassroomInterface | undefined = this.classrooms.getRoom(this.roomId);
   configurationWindow: boolean = true;
   selectedCard: string = '';
-  username: string;
-  room: ClassroomInterface | undefined = this.classrooms.getRoom(this.roomId);
+  visualization: 'player' | 'spectator' | '' = '';
   scoringMode: ScoringModeInterface[] =
     this.classrooms.createScoringMode('fibonacci');
+  userId: string = sessionStorage.getItem('user_id')!;
 
   constructor(
     private route: ActivatedRoute,
     private classrooms: ClassroomsService
-  ) {
-    this.username = sessionStorage.getItem('user_username')!;
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.route.snapshot.paramMap.get('id')! !== null
+    this.route.snapshot.paramMap.get('id')
       ? (this.roomId = this.route.snapshot.paramMap.get('id')!)
       : (this.roomId = '0'); //Get Classroom Id from URL
   }
@@ -55,35 +48,35 @@ export class ClassroomComponent {
 
   selectCard(value: string): void {
     this.selectedCard = value;
-    
+
     setTimeout(() => {
       this.classrooms.selectCardForMockUpUsers(
         this.scoringMode,
         this.roomId,
-        sessionStorage.getItem('user_id')!,
+        this.userId,
         this.selectedCard
       );
     }, 3000);
   }
 
-  users(): void {
+  initializeRoom(): void {
+    this.addUsers();
+    this.setVisualization();
+    this.updateRoom();
+  }
+
+  isAdminUser(): boolean {
+    return this.userId === this.room?.admin;
+  }
+  addUsers(): void {
     this.classrooms.addMockUpUsers(this.roomId);
+  }
+  updateRoom(): void {
     this.room = this.classrooms.getRoom(this.roomId);
   }
-
-  getUserVisualizationMode(): void {
-    this.visualization = this.classrooms.userIsPlayer(
-      this.roomId,
-      sessionStorage.getItem('user_id')!
-    )
+  setVisualization(): void {
+    this.visualization = this.classrooms.userIsPlayer(this.roomId, this.userId)
       ? 'player'
       : 'spectator';
-  }
-
-  validateAdminUser(): boolean {
-    if (sessionStorage.getItem('user_id') === this.room?.admin) {
-      return true;
-    }
-    return false;
   }
 }
