@@ -10,6 +10,7 @@ import { CardComponent } from '../../atoms/card/card.component';
 import { ClassroomInterface } from '../../../interfaces/classroom-interface';
 import { ScoringModeInterface } from '../../../interfaces/scoring-mode-interface';
 import { CardMenuComponent } from '../../organisms/card-menu/card-menu.component';
+import { UsersTableMenuComponent } from '../../organisms/users-table-menu/users-table-menu.component';
 
 @Component({
   selector: 'app-classroom',
@@ -19,8 +20,7 @@ import { CardMenuComponent } from '../../organisms/card-menu/card-menu.component
     FormsModule,
     CreateVisualizationModeComponent,
     CardMenuComponent,
-    UserCardComponent,
-    TableComponent,
+    UsersTableMenuComponent,
     RouterLink,
   ],
   templateUrl: './classroom.component.html',
