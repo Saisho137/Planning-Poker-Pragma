@@ -2,9 +2,8 @@
   class="classroom-container row py-5 px-1 d-flex justify-content-center"
 >
   @if (configurationWindow) {
-  <div class="blur"></div>
   <app-create-visualization-mode
-    class="section col-3"
+    class="col-3"
     (roomGeneratedEvent)="getUserVisualizationMode()"
     (roomGeneratedEvent)="users()"
     (roomGeneratedEvent)="configurationWindow = !configurationWindow"
