@@ -9,6 +9,7 @@ import { TableComponent } from '../../molecules/table/table.component';
 import { CardComponent } from '../../atoms/card/card.component';
 import { ClassroomInterface } from '../../../interfaces/classroom-interface';
 import { ScoringModeInterface } from '../../../interfaces/scoring-mode-interface';
+import { CardMenuComponent } from '../../organisms/card-menu/card-menu.component';
 
 @Component({
   selector: 'app-classroom',
@@ -17,7 +18,7 @@ import { ScoringModeInterface } from '../../../interfaces/scoring-mode-interface
     CommonModule,
     FormsModule,
     CreateVisualizationModeComponent,
-    CardComponent,
+    CardMenuComponent,
     UserCardComponent,
     TableComponent,
     RouterLink,
@@ -54,6 +55,7 @@ export class ClassroomComponent {
 
   selectCard(value: string): void {
     this.selectedCard = value;
+    
     setTimeout(() => {
       this.classrooms.selectCardForMockUpUsers(
         this.scoringMode,

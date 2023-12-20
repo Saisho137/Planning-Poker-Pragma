@@ -91,21 +91,12 @@
     />
     } }
   </section>
-  <section class="row mt-4 d-flex justify-content-center">
-    @if (visualization === 'player') {
-    <h3 class="col-12 d-flex justify-content-center">👇 Elige una carta 👇</h3>
-    <article class="col-8 d-flex justify-content-center">
-      @for (item of scoringMode; track item.id) {
-      <app-card
-        class="col-1 mt-4"
-        [cardValue]="item.value"
-        (clickEvent)="selectCard(item.value)"
-        [selectedCard]="selectedCard"
-      />
-      }
-    </article>
-    }
-  </section>
+  <app-card-menu
+    (clickEvent)="selectCard($event)"
+    [visualization]="visualization"
+    [selectedCard]="selectedCard"
+    [scoringMode]="scoringMode"
+  />
   <section class="row mt-5 d-flex justify-content-center">
     <a class="col-2 d-flex justify-content-center" routerLink="/"
       >Abandonar la Sala</a

@@ -1,1 +1,15 @@
-<p>card-menu works!</p>
+<section class="row mt-4 d-flex justify-content-center">
+  @if (visualization === 'player') {
+  <h3 class="col-12 d-flex justify-content-center">👇 Elige una carta 👇</h3>
+  <article class="col-8 d-flex justify-content-center">
+    @for (item of scoringMode; track item.id) {
+    <app-card
+      class="col-1 mt-4"
+      [cardValue]="item.value"
+      (clickEvent)="onButtonClick(item.value)"
+      [selectedCard]="selectedCard"
+    />
+    }
+  </article>
+  }
+</section>
