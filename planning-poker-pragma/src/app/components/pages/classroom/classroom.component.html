@@ -15,59 +15,69 @@
   }
   <h1 class="col-12 d-flex justify-content-center">{{ roomId }}</h1>
   <section class="col-12 mt-5 d-flex justify-content-center">
-    @for (item of room?.users?.slice(3, 6); track item.id) {
-    <app-user-card
-      class="col-1 d-flex justify-content-center"
-      [cardValue]="item.username"
-      [selectedCard]="item.cardSelected"
-      [visualization]="item.rol"
-    />
-    }
+    @if (room && room.users && room.users.length === 8) {
+      <app-user-card
+        class="col-1 d-flex justify-content-center"
+        [cardValue]="room.users[5].username"
+        [selectedCard]="room.users[5].cardSelected"
+        [visualization]="room.users[5].rol"
+      />
+      <app-user-card
+        class="col-1 d-flex justify-content-center"
+        [cardValue]="room.users[1].username"
+        [selectedCard]="room.users[1].cardSelected"
+        [visualization]="room.users[1].rol"
+      />
+      <app-user-card
+        class="col-1 d-flex justify-content-center"
+        [cardValue]="room.users[6].username"
+        [selectedCard]="room.users[6].cardSelected"
+        [visualization]="room.users[6].rol"
+      />
+      }
   </section>
   <section class="col-3 d-flex justify-content-end align-items-center">
-    @for (item of room?.users?.slice(6, 7); track item.id) {
-    <app-user-card
-      class="col-1 d-flex justify-content-center"
-      [cardValue]="item.username"
-      [selectedCard]="item.cardSelected"
-      [visualization]="item.rol"
-    />
-    }
+    @if (room && room.users && room.users.length === 8) {
+      <app-user-card
+        class="col-1 d-flex justify-content-center"
+        [cardValue]="room.users[2].username"
+        [selectedCard]="room.users[2].cardSelected"
+        [visualization]="room.users[2].rol"
+      />
+      }
   </section>
 
   <app-table class="col-6 d-flex justify-content-center" />
 
   <section class="col-3 d-flex justify-content-start align-items-center">
-    @for (item of room?.users?.slice(7, 8); track item.id) {
-    <app-user-card
-      class="col-1 d-flex justify-content-center"
-      [cardValue]="item.username"
-      [selectedCard]="item.cardSelected"
-      [visualization]="item.rol"
-    />
-    }
+    @if (room && room.users && room.users.length === 8) {
+      <app-user-card
+        class="col-1 d-flex justify-content-center"
+        [cardValue]="room.users[3].username"
+        [selectedCard]="room.users[3].cardSelected"
+        [visualization]="room.users[3].rol"
+      />
+      }
   </section>
   <section class="col-12 mt-3 d-flex justify-content-center">
-    @for (item of room?.users?.slice(1, 3); track item.id) {
+    @if (room && room.users && room.users.length === 8) {
     <app-user-card
       class="col-1 d-flex justify-content-center"
-      [cardValue]="item.username"
-      [selectedCard]="item.cardSelected"
-      [visualization]="item.rol"
+      [cardValue]="room.users[4].username"
+      [selectedCard]="room.users[4].cardSelected"
+      [visualization]="room.users[4].rol"
     />
-    } @if (room) {
     <app-user-card
       class="col-1 d-flex justify-content-center"
       [cardValue]="room!.users[0]!.username!"
       [selectedCard]="selectedCard"
       [visualization]="room!.users[0]!.rol!"
     />
-    } @else {
-      <app-user-card
+    <app-user-card
       class="col-1 d-flex justify-content-center"
-      [cardValue]="'default'"
-      [selectedCard]="'default'"
-      [visualization]="'default'"
+      [cardValue]="room.users[7].username"
+      [selectedCard]="room.users[7].cardSelected"
+      [visualization]="room.users[7].rol"
     />
     }
   </section>
