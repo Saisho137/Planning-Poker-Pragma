@@ -32,7 +32,8 @@ export class ClassroomComponent {
   selectedCard: string = '';
   username: string;
   room: ClassroomInterface | undefined = this.classrooms.getRoom(this.roomId);
-  scoringMode: ScoringModeInterface[] = this.classrooms.createScoringMode('fibonacci');
+  scoringMode: ScoringModeInterface[] =
+    this.classrooms.createScoringMode('fibonacci');
 
   constructor(
     private route: ActivatedRoute,
@@ -53,13 +54,14 @@ export class ClassroomComponent {
 
   selectCard(value: string): void {
     this.selectedCard = value;
-    setTimeout(()=>{}, 3000)
-    this.classrooms.selectCardForMockUpUsers(this.scoringMode)
+    setTimeout(() => {
+      this.classrooms.selectCardForMockUpUsers(this.scoringMode, this.roomId, sessionStorage.getItem('user_id')!, this.selectedCard);
+    }, 3000);
   }
 
-  users():void {
-    this.classrooms.addMockUpUsers(this.roomId)
-    this.room = this.classrooms.getRoom(this.roomId)
+  users(): void {
+    this.classrooms.addMockUpUsers(this.roomId);
+    this.room = this.classrooms.getRoom(this.roomId);
   }
 
   getUserVisualizationMode(): void {
@@ -73,10 +75,7 @@ export class ClassroomComponent {
   }
 
   validateAdminUser(): boolean {
-    if (
-      sessionStorage.getItem('user_id') ===
-      this.classrooms.getRoom(this.roomId)?.admin
-    ) {
+    if (sessionStorage.getItem('user_id') === this.room?.admin) {
       return true;
     }
     return false;

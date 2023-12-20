@@ -106,6 +106,24 @@ export class ClassroomsService {
     }
   }
 
+  public selectCardForMockUpUsers(
+    mode: ScoringModeInterface[],
+    classroomId: string,
+    userId: string,
+    hostValue: string
+  ): void {
+    const selectedRoom: ClassroomInterface | undefined =
+      this.getRoom(classroomId);
+    if (selectedRoom) {
+      selectedRoom.users.map((user) => {
+        user.id === userId
+          ? (user.cardSelected = hostValue)
+          : (user.cardSelected =
+              mode[Math.floor(Math.random() * mode.length)].value);
+      });
+    }
+  }
+
   public async addMockUpUsers(classroomId: string): Promise<void> {
     const mockUpUsers: UserInterface[] = await this.usersService.getAllUsers();
 
@@ -123,10 +141,6 @@ export class ClassroomsService {
       .filter((user) => user.id !== sessionStorage.getItem('user_id')); //Filtra el usuario host de la sala
 
     this.addUsersToRoom(classroomId, usersToAdd);
-  }
-
-  public selectCardForMockUpUsers(mode: ScoringModeInterface[]): void {
-    
   }
 
   public userIsPlayer(classroomId: string, userId: string): boolean {

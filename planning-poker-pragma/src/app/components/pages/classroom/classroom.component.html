@@ -1,6 +1,19 @@
 <section
   class="classroom-container row py-5 px-1 d-flex justify-content-center"
 >
+  @if (configurationWindow) {
+  <section class="row d-flex justify-content-center">
+    <div class="blur"></div>
+    <app-create-visualization-mode
+      class="section col-3"
+      (roomGeneratedEvent)="users()"
+      (roomGeneratedEvent)="validateAdminUser()"
+      (roomGeneratedEvent)="getUserVisualizationMode()"
+      (roomGeneratedEvent)="configurationWindow = !configurationWindow"
+      [classroomId]="roomId"
+    />
+  </section>
+  }
   <h1 class="col-12 d-flex justify-content-center">{{ roomId }}</h1>
   <section class="col-12 mt-5 d-flex justify-content-center">
     @for (item of room?.users?.slice(3, 6); track item.id) {
@@ -17,7 +30,7 @@
     <app-user-card
       class="col-1 d-flex justify-content-center"
       [cardValue]="item.username"
-      [selectedCard]="selectedCard"
+      [selectedCard]="item.cardSelected"
       [visualization]="item.rol"
     />
     }
@@ -30,35 +43,35 @@
     <app-user-card
       class="col-1 d-flex justify-content-center"
       [cardValue]="item.username"
-      [selectedCard]="selectedCard"
+      [selectedCard]="item.cardSelected"
       [visualization]="item.rol"
     />
     }
   </section>
   <section class="col-12 mt-3 d-flex justify-content-center">
-    @for (item of room?.users?.slice(0, 3); track item.id) {
+    @for (item of room?.users?.slice(1, 3); track item.id) {
     <app-user-card
       class="col-1 d-flex justify-content-center"
       [cardValue]="item.username"
-      [selectedCard]="selectedCard"
+      [selectedCard]="item.cardSelected"
       [visualization]="item.rol"
+    />
+    } @if (room) {
+    <app-user-card
+      class="col-1 d-flex justify-content-center"
+      [cardValue]="room!.users[0]!.username!"
+      [selectedCard]="selectedCard"
+      [visualization]="room!.users[0]!.rol!"
+    />
+    } @else {
+      <app-user-card
+      class="col-1 d-flex justify-content-center"
+      [cardValue]="'default'"
+      [selectedCard]="'default'"
+      [visualization]="'default'"
     />
     }
   </section>
-
-  @if (configurationWindow) {
-  <section class="row d-flex justify-content-center">
-    <div class="blur"></div>
-    <app-create-visualization-mode
-      class="section col-3"
-      (roomGeneratedEvent)="users()"
-      (roomGeneratedEvent)="validateAdminUser()"
-      (roomGeneratedEvent)="getUserVisualizationMode()"
-      (roomGeneratedEvent)="configurationWindow = !configurationWindow"
-      [classroomId]="roomId"
-    />
-  </section>
-  }
   <section class="row mt-4 d-flex justify-content-center">
     @if (visualization === 'player') {
     <h3 class="col-12 d-flex justify-content-center">👇 Elige una carta 👇</h3>
