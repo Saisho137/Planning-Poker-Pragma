@@ -4,7 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClassroomsService } from '../../../services/classrooms.service';
 import { FormsModule } from '@angular/forms';
 import { CreateVisualizationModeComponent } from '../../molecules/create-visualization-mode/create-visualization-mode.component';
-import { UserCardComponent } from '../../atoms/user-card/user-card.component';
+import { UserCardComponent } from '../../molecules/user-card/user-card.component';
 import { TableComponent } from '../../molecules/table/table.component';
 import { CardComponent } from '../../atoms/card/card.component';
 import { ClassroomInterface } from '../../../interfaces/classroom-interface';
