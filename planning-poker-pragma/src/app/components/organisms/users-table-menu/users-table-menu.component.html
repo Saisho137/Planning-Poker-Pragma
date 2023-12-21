@@ -1,77 +1,17 @@
-<section class="col-12 mt-4 d-flex justify-content-center">
-  @if (room && room.users && room.users.length >= 2) { @if (room.users.length >=
-  6) {
-  <app-user-card
-    class="col-1 d-flex justify-content-center"
-    [cardValue]="room.users[5].username"
-    [selectedCard]="room.users[5].cardSelected"
-    [visualization]="room.users[5].rol"
-  />
-  }
+<app-top-module [room]="room" [selectedCard]="selectedCard" />
 
-  <app-user-card
-    class="col-1 d-flex justify-content-center"
-    [cardValue]="room.users[1].username"
-    [selectedCard]="room.users[1].cardSelected"
-    [visualization]="room.users[1].rol"
-  />
-
-  @if (room.users.length >= 7) {
-  <app-user-card
-    class="col-1 d-flex justify-content-center"
-    [cardValue]="room.users[6].username"
-    [selectedCard]="room.users[6].cardSelected"
-    [visualization]="room.users[6].rol"
-  />
-  } }
-</section>
-<section class="col-3 d-flex justify-content-end align-items-center">
-  @if (room && room.users && room.users.length >= 3) {
-  <app-user-card
-    class="col-1 d-flex justify-content-center"
-    [cardValue]="room.users[2].username"
-    [selectedCard]="room.users[2].cardSelected"
-    [visualization]="room.users[2].rol"
-  />
-  }
-</section>
+<app-left-module
+  class="col-3 d-flex justify-content-end align-items-center"
+  [room]="room"
+  [selectedCard]="selectedCard"
+/>
 
 <app-table class="col-6 d-flex justify-content-center" />
 
-<section class="col-3 d-flex justify-content-start align-items-center">
-  @if (room && room.users && room.users.length >= 4) {
-  <app-user-card
-    class="col-1 d-flex justify-content-center"
-    [cardValue]="room.users[3].username"
-    [selectedCard]="room.users[3].cardSelected"
-    [visualization]="room.users[3].rol"
-  />
-  }
-</section>
-<section class="col-12 mt-3 d-flex justify-content-center">
-  @if (room && room.users && room.users.length >= 1) { @if (room.users.length >=
-  5) {
-  <app-user-card
-    class="col-1 d-flex justify-content-center"
-    [cardValue]="room.users[4].username"
-    [selectedCard]="room.users[4].cardSelected"
-    [visualization]="room.users[4].rol"
-  />
-  }
+<app-right-module
+  class="col-3 d-flex justify-content-start align-items-center"
+  [room]="room"
+  [selectedCard]="selectedCard"
+/>
 
-  <app-user-card
-    class="col-1 d-flex justify-content-center"
-    [cardValue]="room!.users[0]!.username!"
-    [selectedCard]="selectedCard"
-    [visualization]="room!.users[0]!.rol!"
-  />
-
-  @if (room.users.length >= 8) {
-  <app-user-card
-    class="col-1 d-flex justify-content-center"
-    [cardValue]="room.users[7].username"
-    [selectedCard]="room.users[7].cardSelected"
-    [visualization]="room.users[7].rol"
-  />
-  } }
-</section>
+<app-bottom-module [room]="room" [selectedCard]="selectedCard" />

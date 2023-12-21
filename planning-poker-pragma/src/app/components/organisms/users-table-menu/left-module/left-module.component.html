@@ -1,0 +1,10 @@
+<section class="col-3 d-flex justify-content-end align-items-center">
+  @if (room && room.users && room.users.length >= 3) {
+  <app-user-card
+    class="col-1 d-flex justify-content-center"
+    [cardValue]="room.users[2].username"
+    [selectedCard]="room.users[2].cardSelected"
+    [visualization]="room.users[2].rol"
+  />
+  }
+</section>
