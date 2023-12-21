@@ -5,18 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { ClassroomsService } from '../../../services/classrooms.service';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
 import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
-import { RadioInputComponent } from '../../atoms/radio-input/radio-input.component';
 import { UserInRoomInterface } from '../../../interfaces/user-in-room-interface';
+import { RadioButtonsMenuComponent } from './radio-buttons-menu/radio-buttons-menu.component';
 
 @Component({
   selector: 'app-create-visualization-mode',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
     GenericButtonComponent,
     GenericInputComponent,
-    RadioInputComponent,
+    RadioButtonsMenuComponent,
   ],
   templateUrl: './create-visualization-mode.component.html',
   styleUrl: './create-visualization-mode.component.css',
@@ -40,6 +39,7 @@ export class CreateVisualizationModeComponent {
   switchRadio(radio: 'player' | 'spectator'): void {
     this.selectedMode = radio;
   }
+
   continueToRoom(): void {
     if (this.validator.validateString(this.username)) {
       sessionStorage.setItem('user_username', this.username);
