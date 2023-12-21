@@ -8,6 +8,8 @@
     (roomGeneratedEvent)="configurationWindow = !configurationWindow"
     [classroomId]="roomId"
   />
+  } @if (averageScore) {
+  <div class="col-12 d-flex justify-content-center">{{ averageScore }}</div>
   }
   <h1 class="col-12 d-flex justify-content-center">{{ roomId }}</h1>
   <app-users-table-menu

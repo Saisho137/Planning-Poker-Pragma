@@ -29,6 +29,7 @@ export class ClassroomComponent {
   configurationWindow: boolean = true;
   allPlayersSelected: boolean = false;
   selectedCard: string = '';
+  averageScore: number | undefined = undefined;
   visualization: 'player' | 'spectator' | '' = '';
   scoringMode: ScoringModeInterface[] =
     this.classrooms.createScoringMode('fibonacci');
@@ -69,6 +70,8 @@ export class ClassroomComponent {
         this.selectedCard
       );
       this.updateRoom();
+      this.averageScore = this.classrooms.averageScore(this.roomId);
+      console.log(this.classrooms.averageScore(this.roomId));
     }, 3000);
   }
 

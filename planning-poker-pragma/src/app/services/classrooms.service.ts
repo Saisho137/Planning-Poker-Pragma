@@ -111,7 +111,27 @@ export class ClassroomsService {
     }
   }
 
-  allPlayersSelectedCard(): Observable<boolean> {
+  public averageScore(classroomId: string): number {
+    const selectedRoom: ClassroomInterface | undefined =
+      this.getRoom(classroomId);
+    if (selectedRoom) {
+      const players = selectedRoom.users.filter(
+        (user) => user.rol === 'player'
+      );
+      console.log(players);
+
+      return (
+        players.reduce(
+          (accumulator, current) =>
+            accumulator + parseFloat(current.cardSelected),
+          0
+        ) / players.length
+      );
+    }
+    return 0;
+  }
+
+  public allPlayersSelectedCard(): Observable<boolean> {
     return this.userList$.pipe(
       map((users) => {
         if (users!.length === 0) {
@@ -138,7 +158,7 @@ export class ClassroomsService {
           user.cardSelected = hostValue;
         } else if (user.rol === 'player') {
           user.cardSelected =
-            mode[Math.floor(Math.random() * mode.length)].value;
+            mode[Math.floor(Math.random() * mode.length - 2)].value;
         }
       });
       this.userListSubject.next(selectedRoom!.users);
