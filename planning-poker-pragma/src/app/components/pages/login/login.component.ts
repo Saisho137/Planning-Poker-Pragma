@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../../services/users.service';
-import { NavbarComponent } from '../../molecules/navbar/home-navbar.component';
+import { NavbarComponent } from '../../molecules/navbar/navbar.component';
 import { LoginFormComponent } from '../../templates/login-form/login-form.component';
 
 @Component({

@@ -7,8 +7,8 @@ import { GenericImageComponent } from '../../atoms/generic-image/generic-image.c
   selector: 'app-navbar',
   standalone: true,
   imports: [CommonModule, GenericButtonComponent, GenericImageComponent],
-  templateUrl: './home-navbar.component.html',
-  styleUrl: './home-navbar.component.css',
+  templateUrl: './navbar.component.html',
+  styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
   @Input() buttonText: string = '';

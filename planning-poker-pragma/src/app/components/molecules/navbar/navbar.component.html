@@ -1,0 +1,26 @@
+<section class="row d-flex justify-content-center align-items-center">
+  @if (buttonText) {
+  <app-generic-image
+    class="col-1 d-flex justify-content-end"
+    [imgUrl]="imgUrl"
+    [imgAlt]="''"
+    [imgWidth]="'120'"
+    [imgHeight]="'100'"
+  />
+  <h2 class="col-5 my-1 d-flex justify-content-start">{{ tittle }}</h2>
+  <app-generic-button
+    class="col-6 my-1 d-flex justify-content-end"
+    (clickEvent)="onButtonClick()"
+    [buttonText]="buttonText"
+  />
+  } @else {
+  <app-generic-image
+    class="col-2 d-flex justify-content-end"
+    [imgUrl]="imgUrl"
+    [imgAlt]="''"
+    [imgWidth]="'120'"
+    [imgHeight]="'100'"
+  />
+  <h1 class="col-3 my-1 d-flex justify-content-start">{{ tittle }}</h1>
+  }
+</section>
