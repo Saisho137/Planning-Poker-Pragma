@@ -47,6 +47,12 @@ export class ClassroomComponent {
   }
 
   selectCard(value: string): void {
+    if (this.selectedCard === value) {
+      this.classrooms.clearSelectedCard(this.roomId, this.userId);
+      this.selectedCard = '';
+      this.updateRoom();
+      return;
+    }
     this.selectedCard = value;
 
     setTimeout(() => {
@@ -56,6 +62,7 @@ export class ClassroomComponent {
         this.userId,
         this.selectedCard
       );
+      this.updateRoom();
     }, 3000);
   }
 
@@ -73,6 +80,7 @@ export class ClassroomComponent {
   }
   updateRoom(): void {
     this.room = this.classrooms.getRoom(this.roomId);
+    console.log(this.room);
   }
   setVisualization(): void {
     this.visualization = this.classrooms.userIsPlayer(this.roomId, this.userId)

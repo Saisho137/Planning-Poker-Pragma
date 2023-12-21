@@ -126,6 +126,16 @@ export class ClassroomsService {
     }
   }
 
+  public clearSelectedCard(classroomId: string, userId: string): void {
+    const selectedRoom: ClassroomInterface | undefined =
+      this.getRoom(classroomId);
+    if (selectedRoom) {
+      selectedRoom.users.map((user) => {
+        user.id === userId ? (user.cardSelected = '') : null;
+      });
+    }
+  }
+
   public async addMockUpUsers(classroomId: string): Promise<void> {
     const mockUpUsers: UserInterface[] = await this.usersService.getAllUsers();
 
