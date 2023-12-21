@@ -7,6 +7,7 @@ import { ClassroomInterface } from '../../../interfaces/classroom-interface';
 import { ScoringModeInterface } from '../../../interfaces/scoring-mode-interface';
 import { CardMenuComponent } from '../../organisms/card-menu/card-menu.component';
 import { UsersTableMenuComponent } from '../../organisms/users-table-menu/users-table-menu.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-classroom',
@@ -22,6 +23,7 @@ import { UsersTableMenuComponent } from '../../organisms/users-table-menu/users-
   styleUrl: './classroom.component.css',
 })
 export class ClassroomComponent {
+  private subscription: Subscription | undefined;
   roomId: string = '';
   room: ClassroomInterface | undefined = this.classrooms.getRoom(this.roomId);
   configurationWindow: boolean = true;
@@ -44,6 +46,9 @@ export class ClassroomComponent {
   }
 
   ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
     this.classrooms.deleteRoom(this.roomId);
   }
 
@@ -71,9 +76,11 @@ export class ClassroomComponent {
     this.addUsers();
     this.setVisualization();
     this.updateRoom();
-    this.classrooms.allPlayersSelectedCard().subscribe((result: boolean) => {
-      this.allPlayersSelected = result;
-    });
+    this.subscription = this.classrooms
+      .allPlayersSelectedCard()
+      .subscribe((result: boolean) => {
+        this.allPlayersSelected = result;
+      });
   }
 
   isAdminUser(): boolean {
