@@ -129,18 +129,18 @@ export class ClassroomsService {
   public async addMockUpUsers(classroomId: string): Promise<void> {
     const mockUpUsers: UserInterface[] = await this.usersService.getAllUsers();
 
-    function convertToUserInRoom(user: UserInterface): UserInRoomInterface {
+    const convertToUserInRoom = (user: UserInterface): UserInRoomInterface => {
       return {
         id: user._id,
         username: user.username,
         rol: Math.random() <= 0.7 ? 'player' : 'spectator',
         cardSelected: '',
       };
-    }
+    };
 
     const usersToAdd: UserInRoomInterface[] = mockUpUsers
       .map(convertToUserInRoom)
-      .filter((user) => user.id !== sessionStorage.getItem('user_id')); //Filtra el usuario host de la sala
+      .filter((user) => user.id !== sessionStorage.getItem('user_id')); //Filer host user from room
 
     this.addUsersToRoom(classroomId, usersToAdd);
   }
