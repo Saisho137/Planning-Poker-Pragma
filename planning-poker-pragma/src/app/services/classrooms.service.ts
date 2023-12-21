@@ -4,11 +4,16 @@ import { UserInRoomInterface } from '../interfaces/user-in-room-interface';
 import { ScoringModeInterface } from '../interfaces/scoring-mode-interface';
 import { UsersService } from './users.service';
 import { UserInterface } from '../interfaces/user-interface';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClassroomsService {
+  private userListSubject: BehaviorSubject<UserInRoomInterface[] | undefined> =
+    new BehaviorSubject<UserInRoomInterface[] | undefined>([]);
+  private userList$: Observable<UserInRoomInterface[] | undefined> =
+    this.userListSubject.asObservable();
   private rooms: ClassroomInterface[] = [];
   private users: UserInRoomInterface[] = [];
   private scoringMode = [
@@ -106,6 +111,18 @@ export class ClassroomsService {
     }
   }
 
+  allPlayersSelectedCard(): Observable<boolean> {
+    return this.userList$.pipe(
+      map((users) => {
+        if (users!.length === 0) {
+          return false;
+        }
+        const players = users!.filter((user) => user.rol === 'player');
+        return players.every((player) => player.cardSelected !== '');
+      })
+    );
+  }
+
   public selectCardForMockUpUsers(
     mode: ScoringModeInterface[],
     classroomId: string,
@@ -114,6 +131,7 @@ export class ClassroomsService {
   ): void {
     const selectedRoom: ClassroomInterface | undefined =
       this.getRoom(classroomId);
+
     if (selectedRoom) {
       selectedRoom.users.map((user) => {
         if (user.id === userId && user.rol === 'player') {
@@ -123,6 +141,7 @@ export class ClassroomsService {
             mode[Math.floor(Math.random() * mode.length)].value;
         }
       });
+      this.userListSubject.next(selectedRoom!.users);
     }
   }
 
@@ -133,6 +152,7 @@ export class ClassroomsService {
       selectedRoom.users.map((user) => {
         user.id === userId ? (user.cardSelected = '') : null;
       });
+      this.userListSubject.next(selectedRoom!.users);
     }
   }
 

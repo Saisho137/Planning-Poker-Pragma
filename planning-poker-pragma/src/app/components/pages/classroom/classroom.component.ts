@@ -25,6 +25,7 @@ export class ClassroomComponent {
   roomId: string = '';
   room: ClassroomInterface | undefined = this.classrooms.getRoom(this.roomId);
   configurationWindow: boolean = true;
+  allPlayersSelected: boolean = false;
   selectedCard: string = '';
   visualization: 'player' | 'spectator' | '' = '';
   scoringMode: ScoringModeInterface[] =
@@ -70,6 +71,9 @@ export class ClassroomComponent {
     this.addUsers();
     this.setVisualization();
     this.updateRoom();
+    this.classrooms.allPlayersSelectedCard().subscribe((result: boolean) => {
+      this.allPlayersSelected = result;
+    });
   }
 
   isAdminUser(): boolean {
@@ -80,7 +84,6 @@ export class ClassroomComponent {
   }
   updateRoom(): void {
     this.room = this.classrooms.getRoom(this.roomId);
-    console.log(this.room);
   }
   setVisualization(): void {
     this.visualization = this.classrooms.userIsPlayer(this.roomId, this.userId)

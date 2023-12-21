@@ -25,6 +25,7 @@ import { BottomModuleComponent } from './bottom-module/bottom-module.component';
 })
 export class UsersTableMenuComponent {
   @Input() selectedCard: string = '';
+  @Input() allPlayersSelected: boolean = false;
   @Input() room: ClassroomInterface | undefined = {
     id: '',
     admin: '',

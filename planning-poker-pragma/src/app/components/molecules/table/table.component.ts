@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
 
@@ -7,8 +7,8 @@ import { GenericButtonComponent } from '../../atoms/generic-button/generic-butto
   standalone: true,
   imports: [CommonModule, GenericButtonComponent],
   templateUrl: './table.component.html',
-  styleUrl: './table.component.css'
+  styleUrl: './table.component.css',
 })
 export class TableComponent {
-
+  @Input() allPlayersSelected: boolean = false;
 }
