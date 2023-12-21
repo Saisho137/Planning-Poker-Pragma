@@ -1,4 +1,10 @@
-<section class="voting-table row col-12">
+<section class="voting-table row col-12 d-flex justify-content-center align-items-center">
+  <app-generic-button
+    class="button-reveal"
+    [buttonText]="'Revelar cartas'"
+    [disabledState]="false"
+    (clickEvent)="(null)"
+  />
   <article class="table first"></article>
   <article class="table second"></article>
   <article class="table third"></article>

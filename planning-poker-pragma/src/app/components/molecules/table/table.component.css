@@ -12,6 +12,14 @@
   transform: translate(-50%, -50%);
 }
 
+.button-reveal {
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  left: 50%;
+  transform: translate(-15%, -50%);
+}
+
 .first {
   height: 30vh;
   width: 30vw;
