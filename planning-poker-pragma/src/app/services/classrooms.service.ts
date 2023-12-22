@@ -151,6 +151,7 @@ export class ClassroomsService {
   ): void {
     const selectedRoom: ClassroomInterface | undefined =
       this.getRoom(classroomId);
+    const numericMode = mode.slice(0, mode.length - 2);
 
     if (selectedRoom) {
       selectedRoom.users.forEach((user) => {
@@ -158,7 +159,7 @@ export class ClassroomsService {
           user.cardSelected = hostValue;
         } else if (user.rol === 'player') {
           user.cardSelected =
-            mode[Math.floor(Math.random() * mode.length - 2)].value;
+            mode[Math.floor(Math.random() * numericMode.length)].value;
         }
       });
       this.userListSubject.next(selectedRoom.users);
