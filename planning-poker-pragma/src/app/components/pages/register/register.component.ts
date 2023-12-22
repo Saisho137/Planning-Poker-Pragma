@@ -38,8 +38,7 @@ export class RegisterComponent {
       window.alert('You should fill all the fields.');
       return;
     }
-    this.validator.validateString(this.username)
-      ? this.userService.createUSer(this.username, this.email, this.password)
-      : null;
+    if (this.validator.validateString(this.username))
+      this.userService.createUSer(this.username, this.email, this.password);
   }
 }

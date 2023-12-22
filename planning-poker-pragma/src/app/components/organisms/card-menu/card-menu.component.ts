@@ -8,12 +8,12 @@ import { CardComponent } from '../../atoms/card/card.component';
   standalone: true,
   imports: [CommonModule, CardComponent],
   templateUrl: './card-menu.component.html',
-  styleUrl: './card-menu.component.css'
+  styleUrl: './card-menu.component.css',
 })
 export class CardMenuComponent {
   @Input() visualization: 'player' | 'spectator' | '' = '';
   @Input() selectedCard: string = '';
-  @Input() scoringMode: ScoringModeInterface[] = []
+  @Input() scoringMode: ScoringModeInterface[] = [];
   @Output() clickEvent: EventEmitter<string> = new EventEmitter<string>();
 
   onButtonClick(value: string) {

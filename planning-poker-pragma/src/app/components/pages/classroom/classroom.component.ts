@@ -41,9 +41,7 @@ export class ClassroomComponent {
   ) {}
 
   ngOnInit(): void {
-    this.route.snapshot.paramMap.get('id')
-      ? (this.roomId = this.route.snapshot.paramMap.get('id')!)
-      : (this.roomId = '0'); //Get Classroom Id from URL
+    this.roomId = this.route.snapshot.paramMap.get('id')!;
   }
 
   ngOnDestroy(): void {

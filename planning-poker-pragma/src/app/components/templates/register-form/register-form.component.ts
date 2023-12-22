@@ -8,7 +8,7 @@ import { GenericInputComponent } from '../../atoms/generic-input/generic-input.c
   standalone: true,
   imports: [CommonModule, GenericButtonComponent, GenericInputComponent],
   templateUrl: './register-form.component.html',
-  styleUrl: './register-form.component.css'
+  styleUrl: './register-form.component.css',
 })
 export class RegisterFormComponent {
   email: string = '';
@@ -21,9 +21,9 @@ export class RegisterFormComponent {
   @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
 
   onButtonClick() {
-    this.clickEvent.emit()
+    this.clickEvent.emit();
   }
-  onInputChange(){
+  onInputChange() {
     this.sendEmail.emit(this.email);
     this.sendPassword.emit(this.password);
     this.sendUsername.emit(this.username);

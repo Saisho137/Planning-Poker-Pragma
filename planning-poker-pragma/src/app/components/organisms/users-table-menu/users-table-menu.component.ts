@@ -18,7 +18,7 @@ import { BottomModuleComponent } from './bottom-module/bottom-module.component';
     TopModuleComponent,
     LeftModuleComponent,
     RightModuleComponent,
-    BottomModuleComponent
+    BottomModuleComponent,
   ],
   templateUrl: './users-table-menu.component.html',
   styleUrl: './users-table-menu.component.css',

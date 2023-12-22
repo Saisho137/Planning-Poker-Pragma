@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ValidatorService } from '../../../services/validator.service';
-import { FormsModule } from '@angular/forms';
 import { ClassroomsService } from '../../../services/classrooms.service';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
 import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
@@ -44,7 +43,7 @@ export class CreateVisualizationModeComponent {
     if (this.validator.validateString(this.username)) {
       sessionStorage.setItem('user_username', this.username);
       if (this.selectedMode.length > 0) {
-        this.selectedMode === '' ? (this.selectedMode = 'player') : null; //Si rol está vacío se asigna player automáticamente
+        if (this.selectedMode === '') this.selectedMode = 'player';
 
         const user: UserInRoomInterface = {
           id: sessionStorage.getItem('user_id')!,

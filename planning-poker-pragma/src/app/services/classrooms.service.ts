@@ -153,7 +153,7 @@ export class ClassroomsService {
       this.getRoom(classroomId);
 
     if (selectedRoom) {
-      selectedRoom.users.map((user) => {
+      selectedRoom.users.forEach((user) => {
         if (user.id === userId && user.rol === 'player') {
           user.cardSelected = hostValue;
         } else if (user.rol === 'player') {
@@ -161,7 +161,7 @@ export class ClassroomsService {
             mode[Math.floor(Math.random() * mode.length - 2)].value;
         }
       });
-      this.userListSubject.next(selectedRoom!.users);
+      this.userListSubject.next(selectedRoom.users);
     }
   }
 
@@ -169,10 +169,10 @@ export class ClassroomsService {
     const selectedRoom: ClassroomInterface | undefined =
       this.getRoom(classroomId);
     if (selectedRoom) {
-      selectedRoom.users.map((user) => {
-        user.id === userId ? (user.cardSelected = '') : null;
+      selectedRoom.users.forEach((user) => {
+        if (user.id === userId) user.cardSelected = '';
       });
-      this.userListSubject.next(selectedRoom!.users);
+      this.userListSubject.next(selectedRoom.users);
     }
   }
 

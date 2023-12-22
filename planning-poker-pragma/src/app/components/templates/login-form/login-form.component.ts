@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
@@ -19,9 +19,9 @@ export class LoginFormComponent {
   @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
 
   onButtonClick() {
-    this.clickEvent.emit()
+    this.clickEvent.emit();
   }
-  onInputChange(){
+  onInputChange() {
     this.sendEmail.emit(this.email);
     this.sendPassword.emit(this.password);
   }

@@ -12,7 +12,7 @@ import { NavbarComponent } from '../../molecules/navbar/navbar.component';
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
-  pragmaIconUrl: string = '../../../../assets/images/pragma.png'
+  pragmaIconUrl: string = '../../../../assets/images/pragma.png';
   constructor(private router: Router) {}
 
   ngOnInit() {

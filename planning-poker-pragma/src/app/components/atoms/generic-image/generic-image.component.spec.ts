@@ -8,10 +8,9 @@ describe('GenericImageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GenericImageComponent]
-    })
-    .compileComponents();
-    
+      imports: [GenericImageComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(GenericImageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
