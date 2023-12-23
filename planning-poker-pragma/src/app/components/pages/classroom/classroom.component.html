@@ -25,12 +25,17 @@
     [scoringMode]="scoringMode"
   />
   } @else {
-  <div class="row">
-    <p class="tittle col-12 d-flex justify-content-end">Promedio:</p>
-    <p class="average-number col-12 d-flex justify-content-end">
-      {{ averageScore }}
-    </p>
-  </div>
+  <section class="row">
+    <div class="col-8">Futuras cartas</div>
+    <div class="col-2">
+      <p class="average-tittle col-7 d-flex justify-content-center">
+        Promedio:
+      </p>
+      <p class="average-number col-7 d-flex justify-content-center">
+        <b>{{ averageScore }}</b>
+      </p>
+    </div>
+  </section>
   }
   <section class="row mt-5 d-flex justify-content-center">
     <a class="col-2 d-flex justify-content-center" routerLink="/"

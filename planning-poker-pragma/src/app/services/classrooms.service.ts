@@ -111,24 +111,36 @@ export class ClassroomsService {
     }
   }
 
-  public averageScore(classroomId: string): number {
+  public averageScore(classroomId: string): string {
     const selectedRoom: ClassroomInterface | undefined =
       this.getRoom(classroomId);
     if (selectedRoom) {
       const players = selectedRoom.users.filter(
         (user) => user.rol === 'player'
       );
-      console.log(players);
-
-      return (
-        players.reduce(
-          (accumulator, current) =>
-            accumulator + parseFloat(current.cardSelected),
-          0
-        ) / players.length
-      );
+      //Split number into Integer and Decimal Part.
+      let averageArray: string[] = (
+        Math.round(
+          (players.reduce(
+            (accumulator, current) =>
+              accumulator + parseFloat(current.cardSelected),
+            0
+          ) /
+            players.length) *
+            10
+        ) / 10
+      )
+        .toString()
+        .split('.');
+      //If number has Decimal part, replace '.' with ','.
+      if (averageArray[1]) {
+        const average = averageArray[0] + ',' + averageArray[1];
+        return average;
+      }
+      //If not, return number.
+      return averageArray[0];
     }
-    return 0;
+    return '0';
   }
 
   public allPlayersSelectedCard(): Observable<boolean> {

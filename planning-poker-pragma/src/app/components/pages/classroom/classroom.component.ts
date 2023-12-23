@@ -30,7 +30,7 @@ export class ClassroomComponent {
   allPlayersSelected: boolean = false;
   cardResultsRevealed: boolean = false;
   selectedCard: string = '';
-  averageScore: number | undefined = undefined;
+  averageScore: string | undefined = undefined;
   visualization: 'player' | 'spectator' | '' = '';
   scoringMode: ScoringModeInterface[] =
     this.classrooms.createScoringMode('fibonacci');
