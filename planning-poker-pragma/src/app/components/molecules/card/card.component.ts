@@ -11,6 +11,8 @@ import { CommonModule } from '@angular/common';
 export class CardComponent {
   @Input() cardValue: string = '';
   @Input() selectedCard: string = '';
+  @Input() mode: 'pool' | 'average' = 'pool';
+  @Input() votes: string = '99 votos';
   @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
   isSelected: boolean = false;
 

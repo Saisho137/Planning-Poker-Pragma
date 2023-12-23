@@ -4,11 +4,16 @@ import { UserInRoomInterface } from '../interfaces/user-in-room-interface';
 import { ScoringModeInterface } from '../interfaces/scoring-mode-interface';
 import { UsersService } from './users.service';
 import { UserInterface } from '../interfaces/user-interface';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClassroomsService {
+  private userListSubject: BehaviorSubject<UserInRoomInterface[] | undefined> =
+    new BehaviorSubject<UserInRoomInterface[] | undefined>([]);
+  private userList$: Observable<UserInRoomInterface[] | undefined> =
+    this.userListSubject.asObservable();
   private rooms: ClassroomInterface[] = [];
   private users: UserInRoomInterface[] = [];
   private scoringMode = [
@@ -106,6 +111,72 @@ export class ClassroomsService {
     }
   }
 
+  public votesCount(classroomId: string): Record<string, number> {
+    const selectedRoom: ClassroomInterface | undefined =
+      this.getRoom(classroomId);
+
+    if (selectedRoom?.users) {
+      const players = selectedRoom.users.filter(
+        (user) => user.rol === 'player'
+      );
+      //Creates a key-value pair object that counts the number of votes of each selected card
+      const numberDictionary: Record<string, number> = players.reduce(
+        (accumulator: Record<string, number>, object: UserInRoomInterface) => {
+          const value: string = object.cardSelected;
+          accumulator[value] = (accumulator[value] || 0) + 1;
+          return accumulator;
+        },
+        {}
+      );
+      return numberDictionary;
+    }
+    return { '0': 0 };
+  }
+
+  public averageScore(classroomId: string): string {
+    const selectedRoom: ClassroomInterface | undefined =
+      this.getRoom(classroomId);
+    if (selectedRoom) {
+      const players = selectedRoom.users.filter(
+        (user) => user.rol === 'player'
+      );
+      //Split number into Integer and Decimal Part.
+      let averageArray: string[] = (
+        Math.round(
+          (players.reduce(
+            (accumulator, current) =>
+              accumulator + parseFloat(current.cardSelected),
+            0
+          ) /
+            players.length) *
+            10
+        ) / 10
+      )
+        .toString()
+        .split('.');
+      //If number has Decimal part, replace '.' with ','.
+      if (averageArray[1]) {
+        const average = averageArray[0] + ',' + averageArray[1];
+        return average;
+      }
+      //If not, return number.
+      return averageArray[0];
+    }
+    return '0';
+  }
+
+  public allPlayersSelectedCard(): Observable<boolean> {
+    return this.userList$.pipe(
+      map((users) => {
+        if (users!.length === 0) {
+          return false;
+        }
+        const players = users!.filter((user) => user.rol === 'player');
+        return players.every((player) => player.cardSelected !== '');
+      })
+    );
+  }
+
   public selectCardForMockUpUsers(
     mode: ScoringModeInterface[],
     classroomId: string,
@@ -114,15 +185,18 @@ export class ClassroomsService {
   ): void {
     const selectedRoom: ClassroomInterface | undefined =
       this.getRoom(classroomId);
+    const numericMode = mode.slice(0, mode.length - 2);
+
     if (selectedRoom) {
-      selectedRoom.users.map((user) => {
+      selectedRoom.users.forEach((user) => {
         if (user.id === userId && user.rol === 'player') {
           user.cardSelected = hostValue;
         } else if (user.rol === 'player') {
           user.cardSelected =
-            mode[Math.floor(Math.random() * mode.length)].value;
+            mode[Math.floor(Math.random() * numericMode.length)].value;
         }
       });
+      this.userListSubject.next(selectedRoom.users);
     }
   }
 
@@ -130,9 +204,10 @@ export class ClassroomsService {
     const selectedRoom: ClassroomInterface | undefined =
       this.getRoom(classroomId);
     if (selectedRoom) {
-      selectedRoom.users.map((user) => {
-        user.id === userId ? (user.cardSelected = '') : null;
+      selectedRoom.users.forEach((user) => {
+        if (user.id === userId) user.cardSelected = '';
       });
+      this.userListSubject.next(selectedRoom.users);
     }
   }
 

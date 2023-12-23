@@ -8,10 +8,9 @@ describe('CardMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CardMenuComponent]
-    })
-    .compileComponents();
-    
+      imports: [CardMenuComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(CardMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

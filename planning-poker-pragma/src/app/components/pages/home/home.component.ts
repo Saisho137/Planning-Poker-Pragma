@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { CreateClassroomComponent } from '../../molecules/create-classroom/create-classroom.component';
+import { CreateClassroomComponent } from './create-classroom/create-classroom.component';
 import { NavbarComponent } from '../../molecules/navbar/navbar.component';
 
 @Component({
@@ -12,7 +12,7 @@ import { NavbarComponent } from '../../molecules/navbar/navbar.component';
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
-  pragmaIconUrl: string = '../../../../assets/images/pragma.png'
+  pragmaIconUrl: string = '../../../../assets/images/pragma.png';
   constructor(private router: Router) {}
 
   ngOnInit() {

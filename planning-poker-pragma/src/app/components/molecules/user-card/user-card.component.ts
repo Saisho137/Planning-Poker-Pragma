@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,6 +12,7 @@ export class UserCardComponent {
   @Input() cardValue: string = '';
   @Input() selectedCard: string = '';
   @Input() visualization: string = '';
+  @Input() votationFinished: boolean = false;
   defaultUser: string = '';
 
   ngOnInit() {

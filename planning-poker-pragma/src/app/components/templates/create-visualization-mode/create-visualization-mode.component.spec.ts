@@ -8,10 +8,9 @@ describe('CreateVisualizationModeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreateVisualizationModeComponent]
-    })
-    .compileComponents();
-    
+      imports: [CreateVisualizationModeComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(CreateVisualizationModeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

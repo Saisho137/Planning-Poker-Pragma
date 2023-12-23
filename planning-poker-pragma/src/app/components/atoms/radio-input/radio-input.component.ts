@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './radio-input.component.html',
-  styleUrl: './radio-input.component.css'
+  styleUrl: './radio-input.component.css',
 })
 export class RadioInputComponent {
   @Input() id: string = '';
@@ -18,5 +18,4 @@ export class RadioInputComponent {
   onInputChange() {
     this.switchEvent.emit();
   }
-
 }

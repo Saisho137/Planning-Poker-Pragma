@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserCardComponent } from '../../molecules/user-card/user-card.component';
 import { ClassroomInterface } from '../../../interfaces/classroom-interface';
@@ -18,16 +18,23 @@ import { BottomModuleComponent } from './bottom-module/bottom-module.component';
     TopModuleComponent,
     LeftModuleComponent,
     RightModuleComponent,
-    BottomModuleComponent
+    BottomModuleComponent,
   ],
   templateUrl: './users-table-menu.component.html',
   styleUrl: './users-table-menu.component.css',
 })
 export class UsersTableMenuComponent {
   @Input() selectedCard: string = '';
+  @Input() allPlayersSelected: boolean = false;
+  @Input() votationFinished: boolean = false;
   @Input() room: ClassroomInterface | undefined = {
     id: '',
     admin: '',
     users: [],
   };
+  @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
+
+  onButtonClick() {
+    this.clickEvent.emit();
+  }
 }

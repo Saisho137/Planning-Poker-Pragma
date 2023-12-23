@@ -1,17 +1,31 @@
-<app-top-module [room]="room" [selectedCard]="selectedCard" />
+<app-top-module
+  [room]="room"
+  [selectedCard]="selectedCard"
+  [votationFinished]="votationFinished"
+/>
 
 <app-left-module
   class="col-3 d-flex justify-content-end align-items-center"
   [room]="room"
   [selectedCard]="selectedCard"
+  [votationFinished]="votationFinished"
 />
 
-<app-table class="col-6 d-flex justify-content-center" />
+<app-table
+  class="col-6 d-flex justify-content-center"
+  [allPlayersSelected]="allPlayersSelected"
+  (clickEvent)="onButtonClick()"
+/>
 
 <app-right-module
   class="col-3 d-flex justify-content-start align-items-center"
   [room]="room"
   [selectedCard]="selectedCard"
+  [votationFinished]="votationFinished"
 />
 
-<app-bottom-module [room]="room" [selectedCard]="selectedCard" />
+<app-bottom-module
+  [room]="room"
+  [selectedCard]="selectedCard"
+  [votationFinished]="votationFinished"
+/>

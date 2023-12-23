@@ -8,10 +8,9 @@ describe('GenericButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GenericButtonComponent]
-    })
-    .compileComponents();
-    
+      imports: [GenericButtonComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(GenericButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

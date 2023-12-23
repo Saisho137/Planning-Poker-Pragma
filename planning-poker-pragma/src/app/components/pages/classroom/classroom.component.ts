@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClassroomsService } from '../../../services/classrooms.service';
-import { CreateVisualizationModeComponent } from '../../molecules/create-visualization-mode/create-visualization-mode.component';
+import { CreateVisualizationModeComponent } from '../../templates/create-visualization-mode/create-visualization-mode.component';
 import { ClassroomInterface } from '../../../interfaces/classroom-interface';
 import { ScoringModeInterface } from '../../../interfaces/scoring-mode-interface';
 import { CardMenuComponent } from '../../organisms/card-menu/card-menu.component';
 import { UsersTableMenuComponent } from '../../organisms/users-table-menu/users-table-menu.component';
+import { Subscription } from 'rxjs';
+import { CardComponent } from '../../molecules/card/card.component';
 
 @Component({
   selector: 'app-classroom',
@@ -15,6 +17,7 @@ import { UsersTableMenuComponent } from '../../organisms/users-table-menu/users-
     CommonModule,
     CreateVisualizationModeComponent,
     CardMenuComponent,
+    CardComponent,
     UsersTableMenuComponent,
     RouterLink,
   ],
@@ -22,10 +25,15 @@ import { UsersTableMenuComponent } from '../../organisms/users-table-menu/users-
   styleUrl: './classroom.component.css',
 })
 export class ClassroomComponent {
+  private subscription: Subscription | undefined;
+  numberDictionary: Record<string, number> = { '0': 0 };
   roomId: string = '';
   room: ClassroomInterface | undefined = this.classrooms.getRoom(this.roomId);
   configurationWindow: boolean = true;
+  allPlayersSelected: boolean = false;
+  cardResultsRevealed: boolean = false;
   selectedCard: string = '';
+  averageScore: string | undefined = undefined;
   visualization: 'player' | 'spectator' | '' = '';
   scoringMode: ScoringModeInterface[] =
     this.classrooms.createScoringMode('fibonacci');
@@ -37,13 +45,24 @@ export class ClassroomComponent {
   ) {}
 
   ngOnInit(): void {
-    this.route.snapshot.paramMap.get('id')
-      ? (this.roomId = this.route.snapshot.paramMap.get('id')!)
-      : (this.roomId = '0'); //Get Classroom Id from URL
+    this.roomId = this.route.snapshot.paramMap.get('id')!;
   }
 
   ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
     this.classrooms.deleteRoom(this.roomId);
+  }
+
+  revealCards(): void {
+    if (this.isAdminUser()) {
+      this.averageScore = this.classrooms.averageScore(this.roomId);
+      this.numberDictionary = this.classrooms.votesCount(this.roomId);
+      this.cardResultsRevealed = true;
+    } else {
+      alert('Debes ser administrador para presionar este botón!');
+    }
   }
 
   selectCard(value: string): void {
@@ -70,6 +89,11 @@ export class ClassroomComponent {
     this.addUsers();
     this.setVisualization();
     this.updateRoom();
+    this.subscription = this.classrooms
+      .allPlayersSelectedCard()
+      .subscribe((result: boolean) => {
+        this.allPlayersSelected = result;
+      });
   }
 
   isAdminUser(): boolean {
@@ -80,7 +104,6 @@ export class ClassroomComponent {
   }
   updateRoom(): void {
     this.room = this.classrooms.getRoom(this.roomId);
-    console.log(this.room);
   }
   setVisualization(): void {
     this.visualization = this.classrooms.userIsPlayer(this.roomId, this.userId)

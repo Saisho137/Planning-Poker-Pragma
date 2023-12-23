@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CreateVisualizationModeComponent } from '../create-visualization-mode/create-visualization-mode.component';
-import { ValidatorService } from '../../../services/validator.service';
-import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
-import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
+import { CreateVisualizationModeComponent } from '../../../templates/create-visualization-mode/create-visualization-mode.component';
+import { ValidatorService } from '../../../../services/validator.service';
+import { GenericButtonComponent } from '../../../atoms/generic-button/generic-button.component';
+import { GenericInputComponent } from '../../../atoms/generic-input/generic-input.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,10 +23,10 @@ import { Router } from '@angular/router';
 export class CreateClassroomComponent {
   partyName: string = '';
 
-  constructor(private validator: ValidatorService, private router:Router) {}
+  constructor(private validator: ValidatorService, private router: Router) {}
 
   validateName(): void {
-    this.validator.validateString(this.partyName) ? this.createPary() : null;
+    if (this.validator.validateString(this.partyName)) this.createPary();
   }
 
   createPary(): void {

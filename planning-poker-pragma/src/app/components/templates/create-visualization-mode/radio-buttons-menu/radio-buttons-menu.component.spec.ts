@@ -8,10 +8,9 @@ describe('RadioButtonsMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RadioButtonsMenuComponent]
-    })
-    .compileComponents();
-    
+      imports: [RadioButtonsMenuComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(RadioButtonsMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

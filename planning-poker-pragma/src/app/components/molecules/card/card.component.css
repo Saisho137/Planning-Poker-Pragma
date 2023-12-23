@@ -10,6 +10,17 @@
   transition: transform 0.3s, background-color 0.3s, color 0.3s;
 }
 
+.card-average {
+  width: 4rem;
+  height: 6rem;
+  font-size: 20px;
+  display: inline;
+  background-color: transparent;
+  border: 1px solid #ba64fd;
+  border-radius: 10px;
+  color: white;
+}
+
 .card-pool.selected {
   background-color: #e3a4ff;
   color: #531d8c;
