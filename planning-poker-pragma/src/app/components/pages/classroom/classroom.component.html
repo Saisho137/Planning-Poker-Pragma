@@ -8,8 +8,6 @@
     (roomGeneratedEvent)="configurationWindow = !configurationWindow"
     [classroomId]="roomId"
   />
-  } @if (averageScore) {
-  <div class="col-12 d-flex justify-content-center">{{ averageScore }}</div>
   }
   <h1 class="col-12 d-flex justify-content-center">{{ roomId }}</h1>
   <app-users-table-menu
@@ -17,13 +15,23 @@
     [room]="room"
     [selectedCard]="selectedCard"
     [allPlayersSelected]="allPlayersSelected"
+    (clickEvent)="revealCards()"
   />
+  @if (!cardResultsRevealed) {
   <app-card-menu
     (clickEvent)="selectCard($event)"
     [visualization]="visualization"
     [selectedCard]="selectedCard"
     [scoringMode]="scoringMode"
   />
+  } @else {
+  <div class="row">
+    <p class="tittle col-12 d-flex justify-content-end">Promedio:</p>
+    <p class="average-number col-12 d-flex justify-content-end">
+      {{ averageScore }}
+    </p>
+  </div>
+  }
   <section class="row mt-5 d-flex justify-content-center">
     <a class="col-2 d-flex justify-content-center" routerLink="/"
       >Abandonar la Sala</a

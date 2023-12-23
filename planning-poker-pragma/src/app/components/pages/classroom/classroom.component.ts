@@ -28,6 +28,7 @@ export class ClassroomComponent {
   room: ClassroomInterface | undefined = this.classrooms.getRoom(this.roomId);
   configurationWindow: boolean = true;
   allPlayersSelected: boolean = false;
+  cardResultsRevealed: boolean = false;
   selectedCard: string = '';
   averageScore: number | undefined = undefined;
   visualization: 'player' | 'spectator' | '' = '';
@@ -51,6 +52,15 @@ export class ClassroomComponent {
     this.classrooms.deleteRoom(this.roomId);
   }
 
+  revealCards(): void {
+    if (this.isAdminUser()) {
+      this.averageScore = this.classrooms.averageScore(this.roomId);
+      this.cardResultsRevealed = true;
+    } else {
+      alert('Debes ser administrador para presionar este botón!');
+    }
+  }
+
   selectCard(value: string): void {
     if (this.selectedCard === value) {
       this.classrooms.clearSelectedCard(this.roomId, this.userId);
@@ -68,8 +78,6 @@ export class ClassroomComponent {
         this.selectedCard
       );
       this.updateRoom();
-      this.averageScore = this.classrooms.averageScore(this.roomId);
-      console.log(this.classrooms.averageScore(this.roomId));
     }, 3000);
   }
 

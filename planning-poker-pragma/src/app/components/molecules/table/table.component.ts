@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
 
@@ -11,4 +11,9 @@ import { GenericButtonComponent } from '../../atoms/generic-button/generic-butto
 })
 export class TableComponent {
   @Input() allPlayersSelected: boolean = false;
+  @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
+
+  onButtonClick() {
+    this.clickEvent.emit();
+  }
 }

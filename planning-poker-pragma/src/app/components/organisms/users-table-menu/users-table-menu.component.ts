@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserCardComponent } from '../../molecules/user-card/user-card.component';
 import { ClassroomInterface } from '../../../interfaces/classroom-interface';
@@ -31,4 +31,9 @@ export class UsersTableMenuComponent {
     admin: '',
     users: [],
   };
+  @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
+
+  onButtonClick() {
+    this.clickEvent.emit();
+  }
 }
