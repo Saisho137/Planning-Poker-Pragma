@@ -12,6 +12,7 @@ import { UserCardComponent } from '../../../molecules/user-card/user-card.compon
 })
 export class TopModuleComponent {
   @Input() selectedCard: string = '';
+  @Input() votationFinished: boolean = false;
   @Input() room: ClassroomInterface | undefined = {
     id: '',
     admin: '',

@@ -12,6 +12,7 @@ export class UserCardComponent {
   @Input() cardValue: string = '';
   @Input() selectedCard: string = '';
   @Input() visualization: string = '';
+  @Input() votationFinished: boolean = false;
   defaultUser: string = '';
 
   ngOnInit() {

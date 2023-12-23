@@ -5,6 +5,8 @@
   background-color: transparent;
   border: 1px solid #ba64fd;
   border-radius: 10px;
+  font-size: 18px;
+  color: white;
   transition: transform 0.3s, background-color 0.3s, color 0.3s;
 }
 
@@ -21,9 +23,4 @@
   font-size: 20px;
   color: #330072;
   transition: transform 0.3s, background-color 0.3s, color 0.3s;
-}
-
-.name-user {
-  font-size: 16px;
-  color: white;
 }

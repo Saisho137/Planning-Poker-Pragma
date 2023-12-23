@@ -8,7 +8,7 @@ import { ScoringModeInterface } from '../../../interfaces/scoring-mode-interface
 import { CardMenuComponent } from '../../organisms/card-menu/card-menu.component';
 import { UsersTableMenuComponent } from '../../organisms/users-table-menu/users-table-menu.component';
 import { Subscription } from 'rxjs';
-import { CardComponent } from '../../atoms/card/card.component';
+import { CardComponent } from '../../molecules/card/card.component';
 
 @Component({
   selector: 'app-classroom',

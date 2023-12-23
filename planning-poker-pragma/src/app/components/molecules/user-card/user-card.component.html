@@ -1,7 +1,14 @@
 @if (visualization === 'player') {
 <article class="row d-flex justify-content-center">
-  <div class="card-user-player col-12" [class.selected]="selectedCard"></div>
-  <p class="name-user col-12 d-flex justify-content-center">
+  <div
+    class="card-user-player d-flex justify-content-center align-items-center"
+    [class.selected]="selectedCard && !votationFinished"
+  >
+    @if (votationFinished) {
+    <b>{{ selectedCard }}</b>
+    }
+  </div>
+  <p class="col-12 d-flex justify-content-center">
     {{ cardValue }}
   </p>
 </article>

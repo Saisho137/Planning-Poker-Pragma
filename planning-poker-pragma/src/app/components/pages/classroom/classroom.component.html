@@ -15,6 +15,7 @@
     [room]="room"
     [selectedCard]="selectedCard"
     [allPlayersSelected]="allPlayersSelected"
+    [votationFinished]="cardResultsRevealed"
     (clickEvent)="revealCards()"
   />
   @if (!cardResultsRevealed) {

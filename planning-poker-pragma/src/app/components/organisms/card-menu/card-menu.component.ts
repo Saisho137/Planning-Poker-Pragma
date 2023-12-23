@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScoringModeInterface } from '../../../interfaces/scoring-mode-interface';
-import { CardComponent } from '../../atoms/card/card.component';
+import { CardComponent } from '../../molecules/card/card.component';
 
 @Component({
   selector: 'app-card-menu',
