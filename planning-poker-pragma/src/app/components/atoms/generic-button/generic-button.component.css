@@ -13,6 +13,12 @@ button {
   cursor: pointer;
   transition: 0.4s ease;
 }
+
+.button2 {
+  background-color: #6429cd;
+  color: #f6f7fc;
+}
+
 button:disabled {
   background-color: #44375c;
   color: #807393;
