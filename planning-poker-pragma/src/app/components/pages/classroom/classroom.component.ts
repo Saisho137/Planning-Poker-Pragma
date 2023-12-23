@@ -55,6 +55,7 @@ export class ClassroomComponent {
   revealCards(): void {
     if (this.isAdminUser()) {
       this.averageScore = this.classrooms.averageScore(this.roomId);
+      this.classrooms.votesCount(this.roomId);
       this.cardResultsRevealed = true;
     } else {
       alert('Debes ser administrador para presionar este botón!');

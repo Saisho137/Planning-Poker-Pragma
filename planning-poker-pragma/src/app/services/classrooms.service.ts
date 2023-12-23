@@ -111,6 +111,29 @@ export class ClassroomsService {
     }
   }
 
+  public votesCount(classroomId: string): Record<string, number> {
+    const selectedRoom: ClassroomInterface | undefined =
+      this.getRoom(classroomId);
+
+    if (selectedRoom?.users) {
+      const players = selectedRoom.users.filter(
+        (user) => user.rol === 'player'
+      );
+      //Creates a key-value pair object that counts the number of votes of each selected card
+      const numberDictionary: Record<string, number> = players.reduce(
+        (accumulator: Record<string, number>, object: UserInRoomInterface) => {
+          const value: string = object.cardSelected;
+          accumulator[value] = (accumulator[value] || 0) + 1;
+          return accumulator;
+        },
+        {}
+      );
+      console.log(numberDictionary);
+      return numberDictionary;
+    }
+    return { '0': 0 };
+  }
+
   public averageScore(classroomId: string): string {
     const selectedRoom: ClassroomInterface | undefined =
       this.getRoom(classroomId);
