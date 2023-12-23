@@ -4,7 +4,7 @@
   <article class="col-8 d-flex justify-content-center">
     @for (item of scoringMode; track item.id) {
     <app-card
-      class="col-1 mt-4"
+      class="col-1 mt-4 d-flex justify-content-center"
       [cardValue]="item.value"
       (clickEvent)="onButtonClick(item.value)"
       [selectedCard]="selectedCard"
