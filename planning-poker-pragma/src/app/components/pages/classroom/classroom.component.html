@@ -13,6 +13,7 @@
   <app-users-table-menu
     class="row"
     [room]="room"
+    [buttonText]="'Revelar cartas'"
     [selectedCard]="selectedCard"
     [allPlayersSelected]="allPlayersSelected"
     [votationFinished]="cardResultsRevealed"
@@ -25,8 +26,8 @@
     [selectedCard]="selectedCard"
     [scoringMode]="scoringMode"
   />
-  } @else {
-  <section class="row mt-4">
+  } @else { @defer {
+  <section class="row mt-5">
     <div class="col-4"></div>
     <div class="col-4 d-flex justify-content-center">
       @for (item of numberDictionary | keyvalue; track item.key) {
@@ -47,7 +48,9 @@
       </p>
     </div>
   </section>
-  }
+  } @placeholder (minimum 2s) {
+  <div></div>
+  } }
   <section class="row mt-5 d-flex justify-content-center">
     <a class="col-2 d-flex justify-content-center" routerLink="/"
       >Abandonar la Sala</a

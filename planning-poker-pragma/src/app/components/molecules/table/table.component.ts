@@ -11,6 +11,9 @@ import { GenericButtonComponent } from '../../atoms/generic-button/generic-butto
 })
 export class TableComponent {
   @Input() allPlayersSelected: boolean = false;
+  @Input() votationFinished: boolean = false;
+  @Input() buttonText: string =''
+
   @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
 
   onButtonClick() {
