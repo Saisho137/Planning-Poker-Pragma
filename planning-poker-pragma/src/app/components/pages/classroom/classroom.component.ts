@@ -8,6 +8,7 @@ import { ScoringModeInterface } from '../../../interfaces/scoring-mode-interface
 import { CardMenuComponent } from '../../organisms/card-menu/card-menu.component';
 import { UsersTableMenuComponent } from '../../organisms/users-table-menu/users-table-menu.component';
 import { Subscription } from 'rxjs';
+import { CardComponent } from '../../atoms/card/card.component';
 
 @Component({
   selector: 'app-classroom',
@@ -16,6 +17,7 @@ import { Subscription } from 'rxjs';
     CommonModule,
     CreateVisualizationModeComponent,
     CardMenuComponent,
+    CardComponent,
     UsersTableMenuComponent,
     RouterLink,
   ],
@@ -24,6 +26,7 @@ import { Subscription } from 'rxjs';
 })
 export class ClassroomComponent {
   private subscription: Subscription | undefined;
+  numberDictionary: Record<string, number> = { '0': 0 };
   roomId: string = '';
   room: ClassroomInterface | undefined = this.classrooms.getRoom(this.roomId);
   configurationWindow: boolean = true;
@@ -55,7 +58,7 @@ export class ClassroomComponent {
   revealCards(): void {
     if (this.isAdminUser()) {
       this.averageScore = this.classrooms.averageScore(this.roomId);
-      this.classrooms.votesCount(this.roomId);
+      this.numberDictionary = this.classrooms.votesCount(this.roomId);
       this.cardResultsRevealed = true;
     } else {
       alert('Debes ser administrador para presionar este botón!');

@@ -128,7 +128,6 @@ export class ClassroomsService {
         },
         {}
       );
-      console.log(numberDictionary);
       return numberDictionary;
     }
     return { '0': 0 };
