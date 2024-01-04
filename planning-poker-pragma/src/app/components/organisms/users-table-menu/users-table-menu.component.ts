@@ -40,6 +40,6 @@ export class UsersTableMenuComponent {
     this.clickEventReveal.emit();
   }
   restartClick() {
-    this.clickEventReveal.emit();
+    this.clickEventRestart.emit();
   }
 }

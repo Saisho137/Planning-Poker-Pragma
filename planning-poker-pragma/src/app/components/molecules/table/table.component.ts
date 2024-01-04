@@ -21,6 +21,6 @@ export class TableComponent {
     this.clickEventReveal.emit();
   }
   restartClick() {
-    this.clickEventReveal.emit();
+    this.clickEventRestart.emit();
   }
 }

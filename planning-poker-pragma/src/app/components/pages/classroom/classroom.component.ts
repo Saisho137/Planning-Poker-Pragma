@@ -64,7 +64,17 @@ export class ClassroomComponent {
       alert('Debes ser administrador para presionar este botón!');
     }
   }
-  restartGame(): void {}
+  restartGame(): void {
+    if (this.isAdminUser()) {
+      this.cardResultsRevealed = false;
+      this.classrooms.resetGame(this.roomId);
+      this.selectedCard = '';
+      this.averageScore = undefined;
+      this.numberDictionary = { '0': 0 };
+    } else {
+      alert('Debes ser administrador para presionar este botón!');
+    }
+  }
 
   selectCard(value: string): void {
     if (this.selectedCard === value) {
