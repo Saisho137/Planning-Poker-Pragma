@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
 import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
@@ -10,4 +10,6 @@ import { GenericInputComponent } from '../../atoms/generic-input/generic-input.c
   templateUrl: './invitation-link.component.html',
   styleUrl: './invitation-link.component.css',
 })
-export class InvitationLinkComponent {}
+export class InvitationLinkComponent {
+  @Input() link: string = '';
+}

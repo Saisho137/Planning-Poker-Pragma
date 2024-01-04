@@ -1,5 +1,25 @@
-<section class="row">
-  <div>Invitar jugadores</div>
-  <app-generic-input />
-  <app-generic-button [buttonText]="'Copiar link'" />
+<section>
+  <div class="blur"></div>
+  <section class="row modal-section d-flex justify-content-center">
+    <header class="row align-items-center align-items-center">
+      <p class="col-6 d-flex justify-content-start align-items-center">
+        <b>Invitar jugadores</b>
+      </p>
+      <p class="close-btn col-6 d-flex justify-content-end align-items-center">
+        ✖
+      </p>
+    </header>
+    <main class="col-11 my-5">
+      <app-generic-input
+        [string]="link"
+        [id]="'readUrl'"
+        [type]="'text'"
+        [readOnly]="true"
+      />
+      <app-generic-button
+        class="mt-4 d-flex justify-content-center"
+        [buttonText]="'Copiar link'"
+      />
+    </main>
+  </section>
 </section>

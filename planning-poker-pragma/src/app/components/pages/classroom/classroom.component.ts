@@ -9,6 +9,7 @@ import { CardMenuComponent } from '../../organisms/card-menu/card-menu.component
 import { UsersTableMenuComponent } from '../../organisms/users-table-menu/users-table-menu.component';
 import { Subscription } from 'rxjs';
 import { CardComponent } from '../../molecules/card/card.component';
+import { InvitationLinkComponent } from '../../molecules/invitation-link/invitation-link.component';
 
 @Component({
   selector: 'app-classroom',
@@ -19,6 +20,7 @@ import { CardComponent } from '../../molecules/card/card.component';
     CardMenuComponent,
     CardComponent,
     UsersTableMenuComponent,
+    InvitationLinkComponent,
     RouterLink,
   ],
   templateUrl: './classroom.component.html',
