@@ -12,11 +12,15 @@ import { GenericButtonComponent } from '../../atoms/generic-button/generic-butto
 export class TableComponent {
   @Input() allPlayersSelected: boolean = false;
   @Input() votationFinished: boolean = false;
-  @Input() buttonText: string =''
+  @Input() buttonText: string = '';
 
-  @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() clickEventReveal: EventEmitter<void> = new EventEmitter<void>();
+  @Output() clickEventRestart: EventEmitter<void> = new EventEmitter<void>();
 
-  onButtonClick() {
-    this.clickEvent.emit();
+  revealClick() {
+    this.clickEventReveal.emit();
+  }
+  restartClick() {
+    this.clickEventReveal.emit();
   }
 }

@@ -64,6 +64,7 @@ export class ClassroomComponent {
       alert('Debes ser administrador para presionar este botón!');
     }
   }
+  restartGame(): void {}
 
   selectCard(value: string): void {
     if (this.selectedCard === value) {
