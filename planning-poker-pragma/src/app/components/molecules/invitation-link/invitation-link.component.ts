@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
 import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
 import { Clipboard } from '@angular/cdk/clipboard';
@@ -15,11 +15,15 @@ export class InvitationLinkComponent {
   @Input() link: string = '';
   @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private clipboard: Clipboard) {}
+  constructor(private clipboard: Clipboard, private location: Location) {}
+
+  ngOnInit() {
+    this.link = window.location.origin + this.location.path();
+  }
 
   copyUrl(): void {
     this.clipboard.copy(this.link);
-    alert('Copiado con éxito')
+    alert('Copiado con éxito');
   }
 
   onButtonClick() {
