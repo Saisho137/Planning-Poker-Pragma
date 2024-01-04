@@ -133,6 +133,19 @@ export class ClassroomsService {
     return { '0': 0 };
   }
 
+  public resetGame(classroomId: string): void {
+    const selectedRoom: ClassroomInterface | undefined =
+      this.getRoom(classroomId);
+    if (selectedRoom) {
+      selectedRoom.users.forEach((user) => {
+        if (user.rol === 'player') {
+          user.cardSelected = '';
+        }
+      });
+      this.userListSubject.next(selectedRoom.users);
+    }
+  }
+
   public averageScore(classroomId: string): string {
     const selectedRoom: ClassroomInterface | undefined =
       this.getRoom(classroomId);

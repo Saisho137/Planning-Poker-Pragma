@@ -16,7 +16,8 @@
   [allPlayersSelected]="allPlayersSelected"
   [votationFinished]="votationFinished"
   [buttonText]="buttonText"
-  (clickEvent)="onButtonClick()"
+  (clickEventReveal)="revealClick()"
+  (clickEventRestart)="restartClick()"
 />
 
 <app-right-module

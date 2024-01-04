@@ -33,9 +33,13 @@ export class UsersTableMenuComponent {
     admin: '',
     users: [],
   };
-  @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() clickEventReveal: EventEmitter<void> = new EventEmitter<void>();
+  @Output() clickEventRestart: EventEmitter<void> = new EventEmitter<void>();
 
-  onButtonClick() {
-    this.clickEvent.emit();
+  revealClick() {
+    this.clickEventReveal.emit();
+  }
+  restartClick() {
+    this.clickEventRestart.emit();
   }
 }

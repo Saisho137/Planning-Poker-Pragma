@@ -17,7 +17,8 @@
     [selectedCard]="selectedCard"
     [allPlayersSelected]="allPlayersSelected"
     [votationFinished]="cardResultsRevealed"
-    (clickEvent)="revealCards()"
+    (clickEventReveal)="revealCards()"
+    (clickEventRestart)="restartGame()"
   />
   @if (!cardResultsRevealed) {
   <app-card-menu
