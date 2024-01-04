@@ -32,6 +32,7 @@ export class ClassroomComponent {
   roomId: string = '';
   room: ClassroomInterface | undefined = this.classrooms.getRoom(this.roomId);
   configurationWindow: boolean = true;
+  invitationWindow: boolean = false;
   allPlayersSelected: boolean = false;
   cardResultsRevealed: boolean = false;
   selectedCard: string = '';
@@ -55,6 +56,10 @@ export class ClassroomComponent {
       this.subscription.unsubscribe();
     }
     this.classrooms.deleteRoom(this.roomId);
+  }
+
+  switchInvitationWindow(): void {
+    this.invitationWindow = !this.invitationWindow;
   }
 
   revealCards(): void {

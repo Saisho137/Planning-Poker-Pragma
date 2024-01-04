@@ -8,9 +8,21 @@
     (roomGeneratedEvent)="configurationWindow = !configurationWindow"
     [classroomId]="roomId"
   />
+  } @if (invitationWindow) {
+  <app-invitation-link
+    class="d-flex justify-content-center"
+    [link]="roomId"
+    (clickEvent)="switchInvitationWindow()"
+  />
   }
-  <app-invitation-link class="d-flex justify-content-center" [link]="roomId" />
-  <h1 class="col-12 d-flex justify-content-center">{{ roomId }}</h1>
+  <div class="col-2">Icon</div>
+  <h1 class="col-8 d-flex justify-content-center">{{ roomId }}</h1>
+  <h6
+    class="col-2 d-flex justify-content-center"
+    (click)="switchInvitationWindow()"
+  >
+    Invitar jugadores
+  </h6>
   <app-users-table-menu
     class="row"
     [room]="room"
