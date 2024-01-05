@@ -4,9 +4,11 @@
     class="card-user-player d-flex justify-content-center align-items-center"
     [class.selected]="selectedCard && !votationFinished"
   >
-    @if (votationFinished) {
+    @if (votationFinished) { @defer {
     <b>{{ selectedCard }}</b>
-    }
+    } @placeholder (minimum 2s) {
+    <div class="loader"></div>
+    } }
   </div>
   <p class="col-12 d-flex justify-content-center">
     {{ cardValue }}
