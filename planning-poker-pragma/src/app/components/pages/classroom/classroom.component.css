@@ -10,3 +10,19 @@
 .average-tittle {
   font-size: 1.25rem;
 }
+
+.Invitarin-button {
+  padding: 5px 15px;
+  border-radius: 100px;
+  height: 3rem;
+  min-height: fit-content;
+  min-width: fit-content;
+  width: 8rem;
+  border: 2px solid white;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s ease;
+}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClassroomsService } from '../../../services/classrooms.service';
 import { CreateVisualizationModeComponent } from '../../templates/create-visualization-mode/create-visualization-mode.component';
@@ -10,6 +10,7 @@ import { UsersTableMenuComponent } from '../../organisms/users-table-menu/users-
 import { Subscription } from 'rxjs';
 import { CardComponent } from '../../molecules/card/card.component';
 import { InvitationLinkComponent } from '../../molecules/invitation-link/invitation-link.component';
+import { UserCardComponent } from '../../molecules/user-card/user-card.component';
 
 @Component({
   selector: 'app-classroom',
@@ -21,13 +22,16 @@ import { InvitationLinkComponent } from '../../molecules/invitation-link/invitat
     CardComponent,
     UsersTableMenuComponent,
     InvitationLinkComponent,
+    UserCardComponent,
     RouterLink,
+    NgOptimizedImage,
   ],
   templateUrl: './classroom.component.html',
   styleUrl: './classroom.component.css',
 })
 export class ClassroomComponent {
   private subscription: Subscription | undefined;
+  pragmaIcon: string = '../../../../assets/images/pragma.png';
   numberDictionary: Record<string, number> = { '0': 0 };
   roomId: string = '';
   room: ClassroomInterface | undefined = this.classrooms.getRoom(this.roomId);
@@ -45,9 +49,7 @@ export class ClassroomComponent {
   constructor(
     private route: ActivatedRoute,
     private classrooms: ClassroomsService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.roomId = this.route.snapshot.paramMap.get('id')!;
   }
 
