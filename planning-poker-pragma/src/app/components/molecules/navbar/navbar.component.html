@@ -1,12 +1,15 @@
 <section class="row d-flex align-items-center">
-  @if (roomId && buttonText) {
   <app-generic-image
-    class="col-2 d-flex justify-content-end"
+    [ngClass]="[
+      'd-flex justify-content-end',
+      buttonText && !roomId ? 'col-1' : 'col-2'
+    ]"
     [imgUrl]="imgUrl"
-    [imgAlt]="''"
+    [imgAlt]="'Pragma Icon'"
     [imgWidth]="'120'"
     [imgHeight]="'100'"
   />
+  @if (roomId && buttonText) {
   <div class="col-2"></div>
   <h2 class="col-4 d-flex justify-content-center">{{ roomId }}</h2>
   <div class="col-4 row d-flex justify-content-end align-items-center">
@@ -21,28 +24,13 @@
     />
   </div>
 
-  } @else if (buttonText && !roomId) {
-  <app-generic-image
-    class="col-1 d-flex justify-content-end"
-    [imgUrl]="imgUrl"
-    [imgAlt]="''"
-    [imgWidth]="'120'"
-    [imgHeight]="'100'"
-  />
-  <h2 class="col-5 my-1 d-flex justify-content-start">{{ tittle }}</h2>
+  } @else if (!roomId) {
+  <h2 class="col-4 my-1 d-flex justify-content-start">{{ tittle }}</h2>
+  @if (buttonText) {
   <app-generic-button
     class="col-6 my-1 d-flex justify-content-end"
     (clickEvent)="onButtonClick()"
     [buttonText]="buttonText"
   />
-  } @else {
-  <app-generic-image
-    class="col-2 d-flex justify-content-end"
-    [imgUrl]="imgUrl"
-    [imgAlt]="''"
-    [imgWidth]="'120'"
-    [imgHeight]="'100'"
-  />
-  <h1 class="col-3 my-1 d-flex justify-content-start">{{ tittle }}</h1>
-  }
+  } }
 </section>
