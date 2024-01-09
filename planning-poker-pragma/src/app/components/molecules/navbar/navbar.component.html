@@ -25,7 +25,11 @@
   </div>
 
   } @else if (!roomId) {
-  <h2 class="col-4 my-1 d-flex justify-content-start">{{ tittle }}</h2>
+  <h2
+    [ngClass]="['d-flex justify-content-start', buttonText ? 'col-5' : 'col-4']"
+  >
+    {{ tittle }}
+  </h2>
   @if (buttonText) {
   <app-generic-button
     class="col-6 my-1 d-flex justify-content-end"

@@ -38,5 +38,6 @@ header {
 
 p {
   height: 50px;
+  font-weight: bold;
   display: inline;
 }

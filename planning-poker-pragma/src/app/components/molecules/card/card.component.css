@@ -1,6 +1,7 @@
 .card-pool {
   width: 4rem;
   height: 6rem;
+  font-weight: bold;
   font-size: 20px;
   display: inline;
   background-color: transparent;
@@ -13,6 +14,7 @@
 .card-average {
   width: 4rem;
   height: 6rem;
+  font-weight: bold;
   font-size: 20px;
   display: inline;
   background-color: transparent;

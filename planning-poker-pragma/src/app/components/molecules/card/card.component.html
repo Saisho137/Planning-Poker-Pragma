@@ -4,12 +4,12 @@
   [class.selected]="cardValue === selectedCard"
   (click)="onCardClick()"
 >
-  <b>{{ cardValue }}</b>
+  {{ cardValue }}
 </article>
 } @else {
 <article class="row d-flex justify-content-center">
   <div class="card-average d-flex justify-content-center align-items-center">
-    <b>{{ cardValue }}</b>
+    {{ cardValue }}
   </div>
   <p class="col-12 d-flex justify-content-center">
     {{ votes }}
