@@ -6,11 +6,11 @@
     >
     <app-generic-input
       class="col-6"
-      [string]="username"
+      [contentText]="username"
       [id]="'tbUsername'"
       [type]="'text'"
-      (message)="username = $event"
-      (message)="onInputChange()"
+      (InputChange)="username = $event"
+      (InputChange)="onInputChange()"
     />
   </div>
   <div class="row my-1 col-7">
@@ -19,11 +19,11 @@
     >
     <app-generic-input
       class="col-6"
-      [string]="email"
+      [contentText]="email"
       [id]="'tbEmail'"
       [type]="'email'"
-      (message)="email = $event"
-      (message)="onInputChange()"
+      (InputChange)="email = $event"
+      (InputChange)="onInputChange()"
     />
   </div>
   <div class="row my-1 col-7">
@@ -32,11 +32,11 @@
     >
     <app-generic-input
       class="col-6"
-      [string]="password"
+      [contentText]="password"
       [id]="'tbPassword'"
       [type]="'password'"
-      (message)="password = $event"
-      (message)="onInputChange()"
+      (InputChange)="password = $event"
+      (InputChange)="onInputChange()"
     />
   </div>
   <div class="my-1 col-7 d-flex justify-content-center">

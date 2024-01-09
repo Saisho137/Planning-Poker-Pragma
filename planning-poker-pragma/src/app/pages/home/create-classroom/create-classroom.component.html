@@ -4,10 +4,10 @@
   >
   <app-generic-input
     class="col-12"
-    [string]="partyName"
+    [contentText]="partyName"
     [id]="'partyName'"
     [type]="'text'"
-    (message)="partyName = $event"
+    (InputChange)="partyName = $event"
   />
   <app-generic-button
     class="col-8 mt-4 d-flex justify-content-center"

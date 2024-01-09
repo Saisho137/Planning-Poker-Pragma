@@ -9,10 +9,10 @@
       >
       <app-generic-input
         class="col-12"
-        [string]="username"
+        [contentText]="username"
         [id]="'name'"
         [type]="'text'"
-        (message)="username = $event"
+        (InputChange)="username = $event"
       />
     </div>
     <app-radio-buttons-menu (changeEvent)="switchRadio($event)" />
