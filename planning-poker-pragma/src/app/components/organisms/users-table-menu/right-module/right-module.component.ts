@@ -8,7 +8,7 @@ import { UserCardComponent } from '../../../molecules/user-card/user-card.compon
   standalone: true,
   imports: [CommonModule, UserCardComponent],
   templateUrl: './right-module.component.html',
-  styleUrl: './right-module.component.css',
+  styleUrl: './right-module.component.scss',
 })
 export class RightModuleComponent {
   @Input() selectedCard: string = '';

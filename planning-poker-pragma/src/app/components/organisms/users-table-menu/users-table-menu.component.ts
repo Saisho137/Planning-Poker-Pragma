@@ -21,7 +21,7 @@ import { BottomModuleComponent } from './bottom-module/bottom-module.component';
     BottomModuleComponent,
   ],
   templateUrl: './users-table-menu.component.html',
-  styleUrl: './users-table-menu.component.css',
+  styleUrl: './users-table-menu.component.scss',
 })
 export class UsersTableMenuComponent {
   @Input() selectedCard: string = '';

@@ -8,7 +8,7 @@ import { GenericImageComponent } from '../../atoms/generic-image/generic-image.c
   standalone: true,
   imports: [CommonModule, GenericButtonComponent, GenericImageComponent],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css',
+  styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
   @Input() buttonText: string = '';

@@ -26,7 +26,7 @@ import { NavbarComponent } from '../../components/molecules/navbar/navbar.compon
     RouterLink,
   ],
   templateUrl: './classroom.component.html',
-  styleUrl: './classroom.component.css',
+  styleUrl: './classroom.component.scss',
 })
 export class ClassroomComponent {
   private subscription: Subscription | undefined;

@@ -11,7 +11,7 @@ import { NavbarComponent } from '../../components/molecules/navbar/navbar.compon
   standalone: true,
   imports: [CommonModule, RegisterFormComponent, NavbarComponent, RouterLink],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
+  styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
   pragmaIconUrl: string = '../../../../assets/images/pragma.png';

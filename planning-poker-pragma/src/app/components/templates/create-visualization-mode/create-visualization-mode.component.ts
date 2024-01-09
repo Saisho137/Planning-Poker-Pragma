@@ -17,7 +17,7 @@ import { RadioButtonsMenuComponent } from './radio-buttons-menu/radio-buttons-me
     RadioButtonsMenuComponent,
   ],
   templateUrl: './create-visualization-mode.component.html',
-  styleUrl: './create-visualization-mode.component.css',
+  styleUrl: './create-visualization-mode.component.scss',
 })
 export class CreateVisualizationModeComponent {
   @Input() classroomId: string = '';

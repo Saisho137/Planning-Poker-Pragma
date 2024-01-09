@@ -6,7 +6,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
   standalone: true,
   imports: [CommonModule, NgOptimizedImage],
   templateUrl: './generic-image.component.html',
-  styleUrl: './generic-image.component.css',
+  styleUrl: './generic-image.component.scss',
 })
 export class GenericImageComponent {
   @Input() imgUrl: string = '';

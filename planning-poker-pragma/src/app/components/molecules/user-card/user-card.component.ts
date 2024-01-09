@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './user-card.component.html',
-  styleUrl: './user-card.component.css',
+  styleUrl: './user-card.component.scss',
 })
 export class UserCardComponent {
   @Input() cardValue: string = '';

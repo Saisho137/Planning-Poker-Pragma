@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './generic-input.component.html',
-  styleUrl: './generic-input.component.css',
+  styleUrl: './generic-input.component.scss',
 })
 export class GenericInputComponent {
   @Input() type: string = 'text';

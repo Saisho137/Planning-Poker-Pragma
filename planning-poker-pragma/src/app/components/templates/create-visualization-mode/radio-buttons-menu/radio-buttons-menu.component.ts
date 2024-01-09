@@ -7,7 +7,7 @@ import { RadioInputComponent } from '../../../atoms/radio-input/radio-input.comp
   standalone: true,
   imports: [CommonModule, RadioInputComponent],
   templateUrl: './radio-buttons-menu.component.html',
-  styleUrl: './radio-buttons-menu.component.css',
+  styleUrl: './radio-buttons-menu.component.scss',
 })
 export class RadioButtonsMenuComponent {
   @Output() changeEvent: EventEmitter<'player' | 'spectator'> =

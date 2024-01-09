@@ -8,7 +8,7 @@ import { GenericInputComponent } from '../../atoms/generic-input/generic-input.c
   standalone: true,
   imports: [CommonModule, GenericButtonComponent, GenericInputComponent],
   templateUrl: './register-form.component.html',
-  styleUrl: './register-form.component.css',
+  styleUrl: './register-form.component.scss',
 })
 export class RegisterFormComponent {
   email: string = '';

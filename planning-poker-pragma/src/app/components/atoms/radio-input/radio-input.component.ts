@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './radio-input.component.html',
-  styleUrl: './radio-input.component.css',
+  styleUrl: './radio-input.component.scss',
 })
 export class RadioInputComponent {
   @Input() id: string = '';

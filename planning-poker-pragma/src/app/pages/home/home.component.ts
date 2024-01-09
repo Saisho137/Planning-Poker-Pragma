@@ -9,7 +9,7 @@ import { NavbarComponent } from '../../components/molecules/navbar/navbar.compon
   standalone: true,
   imports: [CommonModule, CreateClassroomComponent, NavbarComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
   pragmaIconUrl: string = '../../../../assets/images/pragma.png';

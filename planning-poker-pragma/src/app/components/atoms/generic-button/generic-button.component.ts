@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './generic-button.component.html',
-  styleUrl: './generic-button.component.css',
+  styleUrl: './generic-button.component.scss',
 })
 export class GenericButtonComponent {
   @Input() buttonText: string = '';

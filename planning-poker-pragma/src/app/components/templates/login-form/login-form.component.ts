@@ -8,7 +8,7 @@ import { GenericButtonComponent } from '../../atoms/generic-button/generic-butto
   standalone: true,
   imports: [CommonModule, GenericInputComponent, GenericButtonComponent],
   templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.css',
+  styleUrl: './login-form.component.scss',
 })
 export class LoginFormComponent {
   email: string = '';

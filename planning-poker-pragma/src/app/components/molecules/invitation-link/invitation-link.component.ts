@@ -9,7 +9,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
   standalone: true,
   imports: [CommonModule, GenericButtonComponent, GenericInputComponent],
   templateUrl: './invitation-link.component.html',
-  styleUrl: './invitation-link.component.css',
+  styleUrl: './invitation-link.component.scss',
 })
 export class InvitationLinkComponent {
   @Input() link: string = '';

@@ -10,7 +10,7 @@ import { LoginFormComponent } from '../../components/templates/login-form/login-
   standalone: true,
   imports: [CommonModule, NavbarComponent, LoginFormComponent, RouterLink],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   pragmaIconUrl: string = '../../../../assets/images/pragma.png';

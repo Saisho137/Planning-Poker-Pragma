@@ -7,7 +7,7 @@ import { GenericButtonComponent } from '../../atoms/generic-button/generic-butto
   standalone: true,
   imports: [CommonModule, GenericButtonComponent],
   templateUrl: './table.component.html',
-  styleUrl: './table.component.css',
+  styleUrl: './table.component.scss',
 })
 export class TableComponent {
   @Input() allPlayersSelected: boolean = false;

@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
     GenericInputComponent,
   ],
   templateUrl: './create-classroom.component.html',
-  styleUrl: './create-classroom.component.css',
+  styleUrl: './create-classroom.component.scss',
 })
 export class CreateClassroomComponent {
   partyName: string = '';

@@ -8,7 +8,7 @@ import { CardComponent } from '../../molecules/card/card.component';
   standalone: true,
   imports: [CommonModule, CardComponent],
   templateUrl: './card-menu.component.html',
-  styleUrl: './card-menu.component.css',
+  styleUrl: './card-menu.component.scss',
 })
 export class CardMenuComponent {
   @Input() visualization: 'player' | 'spectator' | '' = '';
