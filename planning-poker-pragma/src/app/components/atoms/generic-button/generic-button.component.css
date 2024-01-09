@@ -19,6 +19,12 @@ button {
   color: #f6f7fc;
 }
 
+.button3 {
+  border: 2px solid white;
+  background-color: transparent;
+  color: white;
+}
+
 button:disabled {
   background-color: #44375c;
   color: #807393;

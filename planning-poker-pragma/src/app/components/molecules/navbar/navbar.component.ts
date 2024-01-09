@@ -14,7 +14,20 @@ export class NavbarComponent {
   @Input() buttonText: string = '';
   @Input() tittle: string = '';
   @Input() imgUrl: string = '';
+  @Input() roomId: string = '';
+
   @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
+
+  username: string = '';
+
+  constructor() {
+    if (sessionStorage.getItem('user_username')) {
+      this.username = sessionStorage
+        .getItem('user_username')!
+        .substring(0, 2)
+        .toUpperCase();
+    }
+  }
 
   onButtonClick() {
     this.clickEvent.emit();

@@ -1,6 +1,4 @@
-<section
-  class="classroom-container row py-5 px-1 d-flex justify-content-center"
->
+<section class="classroom-container mt-1 row px-1">
   @if (configurationWindow) {
   <app-create-visualization-mode
     class="col-3"
@@ -8,8 +6,19 @@
     (roomGeneratedEvent)="configurationWindow = !configurationWindow"
     [classroomId]="roomId"
   />
+  } @if (invitationWindow) {
+  <app-invitation-link
+    class="d-flex justify-content-center"
+    [link]="roomId"
+    (clickEvent)="switchInvitationWindow()"
+  />
   }
-  <h1 class="col-12 d-flex justify-content-center">{{ roomId }}</h1>
+  <app-navbar
+    [buttonText]="'Invitar jugadores'"
+    [imgUrl]="pragmaIcon"
+    [roomId]="roomId"
+    (clickEvent)="switchInvitationWindow()"
+  />
   <app-users-table-menu
     class="row"
     [room]="room"

@@ -9,6 +9,8 @@ import { CardMenuComponent } from '../../organisms/card-menu/card-menu.component
 import { UsersTableMenuComponent } from '../../organisms/users-table-menu/users-table-menu.component';
 import { Subscription } from 'rxjs';
 import { CardComponent } from '../../molecules/card/card.component';
+import { InvitationLinkComponent } from '../../molecules/invitation-link/invitation-link.component';
+import { NavbarComponent } from '../../molecules/navbar/navbar.component';
 
 @Component({
   selector: 'app-classroom',
@@ -19,6 +21,8 @@ import { CardComponent } from '../../molecules/card/card.component';
     CardMenuComponent,
     CardComponent,
     UsersTableMenuComponent,
+    InvitationLinkComponent,
+    NavbarComponent,
     RouterLink,
   ],
   templateUrl: './classroom.component.html',
@@ -26,10 +30,12 @@ import { CardComponent } from '../../molecules/card/card.component';
 })
 export class ClassroomComponent {
   private subscription: Subscription | undefined;
+  pragmaIcon: string = '../../../../assets/images/pragma.png';
   numberDictionary: Record<string, number> = { '0': 0 };
   roomId: string = '';
   room: ClassroomInterface | undefined = this.classrooms.getRoom(this.roomId);
   configurationWindow: boolean = true;
+  invitationWindow: boolean = false;
   allPlayersSelected: boolean = false;
   cardResultsRevealed: boolean = false;
   selectedCard: string = '';
@@ -42,9 +48,7 @@ export class ClassroomComponent {
   constructor(
     private route: ActivatedRoute,
     private classrooms: ClassroomsService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.roomId = this.route.snapshot.paramMap.get('id')!;
   }
 
@@ -53,6 +57,10 @@ export class ClassroomComponent {
       this.subscription.unsubscribe();
     }
     this.classrooms.deleteRoom(this.roomId);
+  }
+
+  switchInvitationWindow(): void {
+    this.invitationWindow = !this.invitationWindow;
   }
 
   revealCards(): void {
