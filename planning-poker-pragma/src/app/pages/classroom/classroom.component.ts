@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { ClassroomsService } from '../../../services/classrooms.service';
-import { CreateVisualizationModeComponent } from '../../templates/create-visualization-mode/create-visualization-mode.component';
-import { ClassroomInterface } from '../../../interfaces/classroom-interface';
-import { ScoringModeInterface } from '../../../interfaces/scoring-mode-interface';
-import { CardMenuComponent } from '../../organisms/card-menu/card-menu.component';
-import { UsersTableMenuComponent } from '../../organisms/users-table-menu/users-table-menu.component';
+import { ClassroomsService } from '../../services/classrooms.service';
+import { CreateVisualizationModeComponent } from '../../components/templates/create-visualization-mode/create-visualization-mode.component';
+import { ClassroomInterface } from '../../interfaces/classroom-interface';
+import { ScoringModeInterface } from '../../interfaces/scoring-mode-interface';
+import { CardMenuComponent } from '../../components/organisms/card-menu/card-menu.component';
+import { UsersTableMenuComponent } from '../../components/organisms/users-table-menu/users-table-menu.component';
 import { Subscription } from 'rxjs';
-import { CardComponent } from '../../molecules/card/card.component';
-import { InvitationLinkComponent } from '../../molecules/invitation-link/invitation-link.component';
-import { NavbarComponent } from '../../molecules/navbar/navbar.component';
+import { CardComponent } from '../../components/molecules/card/card.component';
+import { InvitationLinkComponent } from '../../components/molecules/invitation-link/invitation-link.component';
+import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 
 @Component({
   selector: 'app-classroom',

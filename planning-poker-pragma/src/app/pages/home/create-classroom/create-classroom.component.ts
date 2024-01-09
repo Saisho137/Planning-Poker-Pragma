@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CreateVisualizationModeComponent } from '../../../templates/create-visualization-mode/create-visualization-mode.component';
-import { ValidatorService } from '../../../../services/validator.service';
-import { GenericButtonComponent } from '../../../atoms/generic-button/generic-button.component';
-import { GenericInputComponent } from '../../../atoms/generic-input/generic-input.component';
+import { CreateVisualizationModeComponent } from '../../../components/templates/create-visualization-mode/create-visualization-mode.component';
+import { ValidatorService } from '../../../services/validator.service';
+import { GenericButtonComponent } from '../../../components/atoms/generic-button/generic-button.component';
+import { GenericInputComponent } from '../../../components/atoms/generic-input/generic-input.component';
 import { Router } from '@angular/router';
 
 @Component({

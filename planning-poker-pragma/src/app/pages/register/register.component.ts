@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { UsersService } from '../../../services/users.service';
-import { ValidatorService } from '../../../services/validator.service';
-import { RegisterFormComponent } from '../../templates/register-form/register-form.component';
-import { NavbarComponent } from '../../molecules/navbar/navbar.component';
+import { UsersService } from '../../services/users.service';
+import { ValidatorService } from '../../services/validator.service';
+import { RegisterFormComponent } from '../../components/templates/register-form/register-form.component';
+import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 
 @Component({
   selector: 'app-register',

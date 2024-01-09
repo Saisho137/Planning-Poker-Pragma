@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CreateClassroomComponent } from './create-classroom/create-classroom.component';
-import { NavbarComponent } from '../../molecules/navbar/navbar.component';
+import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 
 @Component({
   selector: 'app-home',
