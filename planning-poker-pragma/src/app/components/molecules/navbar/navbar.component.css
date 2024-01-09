@@ -1,0 +1,15 @@
+.card-user {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: inline-block;
+  background-color: #bdbdff;
+  border-radius: 100%;
+}
+
+p {
+  margin: auto;
+  padding: 0;
+  font-weight: bold;
+  font-size: 16px;
+  color: #330072;
+}

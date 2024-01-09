@@ -1,4 +1,4 @@
-<section class="classroom-container row py-5 px-1">
+<section class="classroom-container mt-1 row px-1">
   @if (configurationWindow) {
   <app-create-visualization-mode
     class="col-3"
@@ -13,34 +13,12 @@
     (clickEvent)="switchInvitationWindow()"
   />
   }
-  <section class="row d-flex align-items-center">
-    <img
-      class="col-1 d-flex align-items-center"
-      [ngSrc]="pragmaIcon"
-      alt="Pragma Icon"
-      width="130"
-      height="113"
-      priority=""
-    />
-    <div class="col-2"></div>
-    <h1 class="col-6 d-flex justify-content-center align-items-center">
-      {{ roomId }}
-    </h1>
-    @if (room) {
-    <app-user-card
-      class="col-1 d-flex justify-content-center align-items-center"
-      [visualization]="'spectator'"
-      [cardValue]="room!.users[0]!.username!"
-    />
-
-    }
-    <button
-      class="col-2 Invitarin-button d-flex justify-content-center align-items-center"
-      (click)="switchInvitationWindow()"
-    >
-      Invitar jugadores
-    </button>
-  </section>
+  <app-navbar
+    [buttonText]="'Invitar jugadores'"
+    [imgUrl]="pragmaIcon"
+    [roomId]="roomId"
+    (clickEvent)="switchInvitationWindow()"
+  />
   <app-users-table-menu
     class="row"
     [room]="room"

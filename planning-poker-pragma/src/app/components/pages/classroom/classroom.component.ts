@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClassroomsService } from '../../../services/classrooms.service';
 import { CreateVisualizationModeComponent } from '../../templates/create-visualization-mode/create-visualization-mode.component';
@@ -10,7 +10,7 @@ import { UsersTableMenuComponent } from '../../organisms/users-table-menu/users-
 import { Subscription } from 'rxjs';
 import { CardComponent } from '../../molecules/card/card.component';
 import { InvitationLinkComponent } from '../../molecules/invitation-link/invitation-link.component';
-import { UserCardComponent } from '../../molecules/user-card/user-card.component';
+import { NavbarComponent } from '../../molecules/navbar/navbar.component';
 
 @Component({
   selector: 'app-classroom',
@@ -22,9 +22,8 @@ import { UserCardComponent } from '../../molecules/user-card/user-card.component
     CardComponent,
     UsersTableMenuComponent,
     InvitationLinkComponent,
-    UserCardComponent,
+    NavbarComponent,
     RouterLink,
-    NgOptimizedImage,
   ],
   templateUrl: './classroom.component.html',
   styleUrl: './classroom.component.css',

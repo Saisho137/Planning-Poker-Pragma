@@ -13,11 +13,13 @@ export class AppComponent {
   title: string = 'planning-poker-pragma';
 
   constructor() {
-    console.log('Token: ', sessionStorage.getItem('session_token'));
-    console.log(
-      'User: ',
-      sessionStorage.getItem('user_id'),
-      sessionStorage.getItem('user_username')
-    );
+    if (sessionStorage.getItem('session_token')) {
+      console.log('Token: ', sessionStorage.getItem('session_token'));
+      console.log(
+        'User: ',
+        sessionStorage.getItem('user_id'),
+        sessionStorage.getItem('user_username')
+      );
+    }
   }
 }
