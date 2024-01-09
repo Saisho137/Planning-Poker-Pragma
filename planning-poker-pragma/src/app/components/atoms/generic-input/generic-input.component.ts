@@ -12,12 +12,12 @@ import { FormsModule } from '@angular/forms';
 export class GenericInputComponent {
   @Input() type: string = 'text';
   @Input() id: string = '';
-  @Input() string: string = '';
+  @Input() contentText: string = '';
   @Input() required: boolean = true;
   @Input() readOnly: boolean = false;
   @Output() message: EventEmitter<string> = new EventEmitter<string>();
 
   onInputChange() {
-    this.message.emit(this.string);
+    this.message.emit(this.contentText);
   }
 }
