@@ -1,18 +1,1 @@
-<section class="row px-2 d-flex justify-content-center">
-  <label class="col-12 mt-2 d-flex justify-content-start" for="partyName"
-    ><h6 style="font-weight: bold">Nombra la partida</h6></label
-  >
-  <app-generic-input
-    class="col-12"
-    [contentText]="partyName"
-    [id]="'partyName'"
-    [type]="'text'"
-    (InputChange)="partyName = $event"
-  />
-  <app-generic-button
-    class="col-8 mt-4 d-flex justify-content-center"
-    (clickEvent)="validateName()"
-    [buttonText]="'Crear partida'"
-    [disabledState]="!partyName"
-  />
-</section>
+

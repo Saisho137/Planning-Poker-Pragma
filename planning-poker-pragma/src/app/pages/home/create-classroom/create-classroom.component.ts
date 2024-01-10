@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CreateVisualizationModeComponent } from '../../../components/templates/create-visualization-mode/create-visualization-mode.component';
-import { ValidatorService } from '../../../services/validator.service';
 import { GenericButtonComponent } from '../../../components/atoms/generic-button/generic-button.component';
 import { GenericInputComponent } from '../../../components/atoms/generic-input/generic-input.component';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-classroom',
@@ -21,15 +19,5 @@ import { Router } from '@angular/router';
   styleUrl: './create-classroom.component.scss',
 })
 export class CreateClassroomComponent {
-  partyName: string = '';
-
-  constructor(private validator: ValidatorService, private router: Router) {}
-
-  validateName(): void {
-    if (this.validator.validateString(this.partyName)) this.createPary();
-  }
-
-  createPary(): void {
-    this.router.navigate(['classroom/' + this.partyName]);
-  }
+  
 }
