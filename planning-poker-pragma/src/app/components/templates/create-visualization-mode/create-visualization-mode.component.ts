@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ValidatorService } from '../../../services/validator.service';
-import { ClassroomsService } from '../../../services/classrooms.service';
+import { nameValidator } from '../../../shared/validators';
+import { ClassroomsService } from '../../../shared/services/classrooms-service/classrooms.service';
 import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
 import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
 import { UserInRoomInterface } from '../../../interfaces/user-in-room-interface';
@@ -30,17 +30,14 @@ export class CreateVisualizationModeComponent {
 
   selectedMode: 'player' | 'spectator' | '' = '';
 
-  constructor(
-    private validator: ValidatorService,
-    private classrooms: ClassroomsService
-  ) {}
+  constructor(private classrooms: ClassroomsService) {}
 
   switchRadio(radio: 'player' | 'spectator'): void {
     this.selectedMode = radio;
   }
 
   continueToRoom(): void {
-    if (this.validator.validateString(this.username)) {
+    if (nameValidator(this.username)) {
       sessionStorage.setItem('user_username', this.username);
       if (this.selectedMode.length > 0) {
         if (this.selectedMode === '') this.selectedMode = 'player';

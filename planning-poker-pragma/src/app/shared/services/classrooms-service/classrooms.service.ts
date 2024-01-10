@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ClassroomInterface } from '../interfaces/classroom-interface';
-import { UserInRoomInterface } from '../interfaces/user-in-room-interface';
-import { ScoringModeInterface } from '../interfaces/scoring-mode-interface';
-import { UsersService } from './users.service';
-import { UserInterface } from '../interfaces/user-interface';
+import { ClassroomInterface } from '../../../interfaces/classroom-interface';
+import { UserInRoomInterface } from '../../../interfaces/user-in-room-interface';
+import { ScoringModeInterface } from '../../../interfaces/scoring-mode-interface';
+import { UsersService } from '../users-service/users.service';
+import { UserInterface } from '../../../interfaces/user-interface';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 
 @Injectable({

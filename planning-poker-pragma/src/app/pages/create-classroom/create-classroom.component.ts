@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
-import { ValidatorService } from '../../services/validator.service';
+import { nameValidator } from '../../shared/validators';
 import { GenericButtonComponent } from '../../components/atoms/generic-button/generic-button.component';
 import { GenericInputComponent } from '../../components/atoms/generic-input/generic-input.component';
 @Component({
@@ -19,16 +19,17 @@ import { GenericInputComponent } from '../../components/atoms/generic-input/gene
 })
 export class CreateClassroomComponent {
   public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
+
   public classroomName: string = '';
 
-  constructor(private router: Router, private validator: ValidatorService) {
+  constructor(private router: Router) {
     if (sessionStorage.getItem('session_token') === null) {
       this.router.navigate(['login']);
     }
   }
 
   validateName(): void {
-    if (this.validator.validateString(this.classroomName)) this.goToClassroom();
+    if (nameValidator(this.classroomName)) this.goToClassroom();
   }
 
   goToClassroom(): void {

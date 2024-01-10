@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { UsersService } from '../../services/users.service';
+import { UsersService } from '../../shared/services/users-service/users.service';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import { LoginFormComponent } from '../../components/templates/login-form/login-form.component';
 

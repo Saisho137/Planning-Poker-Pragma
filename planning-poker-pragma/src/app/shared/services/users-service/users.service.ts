@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { UserResponseInterface } from '../interfaces/user-response-interface';
-import { RegisterInterface } from '../interfaces/register-interface';
-import { AllUsersInterface } from '../interfaces/all-users-interface';
-import { UserInterface } from '../interfaces/user-interface';
+import { UserResponseInterface } from '../../../interfaces/user-response-interface';
+import { RegisterInterface } from '../../../interfaces/register-interface';
+import { AllUsersInterface } from '../../../interfaces/all-users-interface';
+import { UserInterface } from '../../../interfaces/user-interface';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { UsersService } from '../../services/users.service';
-import { ValidatorService } from '../../services/validator.service';
+import { UsersService } from '../../shared/services/users-service/users.service';
+import { nameValidator } from '../../shared/validators';
 import { RegisterFormComponent } from '../../components/templates/register-form/register-form.component';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 
@@ -19,11 +19,7 @@ export class RegisterComponent {
   email: string = '';
   password: string = '';
 
-  constructor(
-    private userService: UsersService,
-    private validator: ValidatorService,
-    private router: Router
-  ) {}
+  constructor(private userService: UsersService, private router: Router) {}
 
   ngOnInit() {
     const token: string | null | undefined =
@@ -38,7 +34,7 @@ export class RegisterComponent {
       window.alert('You should fill all the fields.');
       return;
     }
-    if (this.validator.validateString(this.username))
+    if (nameValidator(this.username))
       this.userService.createUSer(this.username, this.email, this.password);
   }
 }

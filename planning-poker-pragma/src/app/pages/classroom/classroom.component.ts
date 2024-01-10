@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { ClassroomsService } from '../../services/classrooms.service';
+import { ClassroomsService } from '../../shared/services/classrooms-service/classrooms.service';
 import { CreateVisualizationModeComponent } from '../../components/templates/create-visualization-mode/create-visualization-mode.component';
 import { ClassroomInterface } from '../../interfaces/classroom-interface';
 import { ScoringModeInterface } from '../../interfaces/scoring-mode-interface';
