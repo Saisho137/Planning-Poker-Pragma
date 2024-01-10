@@ -29,64 +29,74 @@ import { NavbarComponent } from '../../components/molecules/navbar/navbar.compon
   styleUrl: './classroom.component.scss',
 })
 export class ClassroomComponent {
+  public roomId: string;
+  public room: ClassroomInterface | undefined;
+
+  public pragmaIcon: string = '../../../../assets/images/pragma.png';
+
+  public configurationWindow: boolean = true;
+  public invitationWindow: boolean = false;
+
+  public allPlayersSelected: boolean = false;
+  public cardResultsRevealed: boolean = false;
+  public scoringMode: ScoringModeInterface[];
+
+  public selectedCard: string = '';
+  public averageScore: string | undefined = undefined;
+  public visualization: 'player' | 'spectator' | '' = '';
+  public numberDictionary: Record<string, number> = { '0': 0 };
+
+  private userId: string = sessionStorage.getItem('user_id')!;
   private subscription: Subscription | undefined;
-  pragmaIcon: string = '../../../../assets/images/pragma.png';
-  numberDictionary: Record<string, number> = { '0': 0 };
-  roomId: string = '';
-  room: ClassroomInterface | undefined = this.classrooms.getRoom(this.roomId);
-  configurationWindow: boolean = true;
-  invitationWindow: boolean = false;
-  allPlayersSelected: boolean = false;
-  cardResultsRevealed: boolean = false;
-  selectedCard: string = '';
-  averageScore: string | undefined = undefined;
-  visualization: 'player' | 'spectator' | '' = '';
-  scoringMode: ScoringModeInterface[] =
-    this.classrooms.createScoringMode('fibonacci');
-  userId: string = sessionStorage.getItem('user_id')!;
 
   constructor(
-    private route: ActivatedRoute,
-    private classrooms: ClassroomsService
+    private routeService: ActivatedRoute,
+    private classroomService: ClassroomsService
   ) {
-    this.roomId = this.route.snapshot.paramMap.get('id')!;
+    this.roomId = this.routeService.snapshot.paramMap.get('id')!;
+    this.room = this.classroomService.getRoom(this.roomId);
+    this.scoringMode = this.classroomService.createScoringMode('fibonacci');
   }
 
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-    this.classrooms.deleteRoom(this.roomId);
+  initializeRoom(): void {
+    this.addUsers();
+    this.setVisualization();
+    this.updateRoom();
+    this.subscription = this.classroomService
+      .allPlayersSelectedCard()
+      .subscribe((result: boolean) => {
+        this.allPlayersSelected = result;
+      });
+  }
+
+  setVisualization(): void {
+    this.visualization = this.classroomService.userIsPlayer(
+      this.roomId,
+      this.userId
+    )
+      ? 'player'
+      : 'spectator';
+  }
+
+  addUsers(): void {
+    this.classroomService.addMockUpUsers(this.roomId);
+  }
+
+  isAdminUser(): boolean {
+    return this.userId === this.room?.admin;
+  }
+
+  updateRoom(): void {
+    this.room = this.classroomService.getRoom(this.roomId);
   }
 
   switchInvitationWindow(): void {
     this.invitationWindow = !this.invitationWindow;
   }
 
-  revealCards(): void {
-    if (this.isAdminUser()) {
-      this.averageScore = this.classrooms.averageScore(this.roomId);
-      this.numberDictionary = this.classrooms.votesCount(this.roomId);
-      this.cardResultsRevealed = true;
-    } else {
-      alert('Debes ser administrador para presionar este botón!');
-    }
-  }
-  restartGame(): void {
-    if (this.isAdminUser()) {
-      this.cardResultsRevealed = false;
-      this.classrooms.resetGame(this.roomId);
-      this.selectedCard = '';
-      this.averageScore = undefined;
-      this.numberDictionary = { '0': 0 };
-    } else {
-      alert('Debes ser administrador para presionar este botón!');
-    }
-  }
-
   selectCard(value: string): void {
     if (this.selectedCard === value) {
-      this.classrooms.clearSelectedCard(this.roomId, this.userId);
+      this.classroomService.clearSelectedCard(this.roomId, this.userId);
       this.selectedCard = '';
       this.updateRoom();
       return;
@@ -94,7 +104,7 @@ export class ClassroomComponent {
     this.selectedCard = value;
 
     setTimeout(() => {
-      this.classrooms.selectCardForMockUpUsers(
+      this.classroomService.selectCardForMockUpUsers(
         this.scoringMode,
         this.roomId,
         this.userId,
@@ -104,29 +114,32 @@ export class ClassroomComponent {
     }, 3000);
   }
 
-  initializeRoom(): void {
-    this.addUsers();
-    this.setVisualization();
-    this.updateRoom();
-    this.subscription = this.classrooms
-      .allPlayersSelectedCard()
-      .subscribe((result: boolean) => {
-        this.allPlayersSelected = result;
-      });
+  revealCards(): void {
+    if (this.isAdminUser()) {
+      this.averageScore = this.classroomService.averageScore(this.roomId);
+      this.numberDictionary = this.classroomService.votesCount(this.roomId);
+      this.cardResultsRevealed = true;
+    } else {
+      alert('Debes ser administrador para presionar este botón!');
+    }
   }
 
-  isAdminUser(): boolean {
-    return this.userId === this.room?.admin;
+  restartGame(): void {
+    if (this.isAdminUser()) {
+      this.cardResultsRevealed = false;
+      this.classroomService.resetGame(this.roomId);
+      this.selectedCard = '';
+      this.averageScore = undefined;
+      this.numberDictionary = { '0': 0 };
+    } else {
+      alert('Debes ser administrador para presionar este botón!');
+    }
   }
-  addUsers(): void {
-    this.classrooms.addMockUpUsers(this.roomId);
-  }
-  updateRoom(): void {
-    this.room = this.classrooms.getRoom(this.roomId);
-  }
-  setVisualization(): void {
-    this.visualization = this.classrooms.userIsPlayer(this.roomId, this.userId)
-      ? 'player'
-      : 'spectator';
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+    this.classroomService.deleteRoom(this.roomId);
   }
 }

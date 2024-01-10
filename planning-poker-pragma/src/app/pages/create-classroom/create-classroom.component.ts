@@ -18,10 +18,14 @@ import { GenericInputComponent } from '../../components/atoms/generic-input/gene
   styleUrl: './create-classroom.component.scss',
 })
 export class CreateClassroomComponent {
-  pragmaIconUrl: string = '../../../../assets/images/pragma.png';
-  classroomName: string = '';
+  public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
+  public classroomName: string = '';
 
-  constructor(private router: Router, private validator: ValidatorService) {}
+  constructor(private router: Router, private validator: ValidatorService) {
+    if (sessionStorage.getItem('session_token') === null) {
+      this.router.navigate(['login']);
+    }
+  }
 
   validateName(): void {
     if (this.validator.validateString(this.classroomName)) this.goToClassroom();
@@ -29,12 +33,6 @@ export class CreateClassroomComponent {
 
   goToClassroom(): void {
     this.router.navigate(['classroom/' + this.classroomName]);
-  }
-
-  ngOnInit() {
-    if (sessionStorage.getItem('session_token') === null) {
-      this.router.navigate(['login']);
-    }
   }
 
   logOut() {
