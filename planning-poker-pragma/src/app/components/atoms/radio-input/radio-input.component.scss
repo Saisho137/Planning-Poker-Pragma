@@ -9,16 +9,16 @@ input[type="radio"] {
   cursor: pointer;
   transition: border-color 0.3s ease;
   position: relative;
-}
 
-input[type="radio"]:checked:before {
-  content: "";
-  width: 65%;
-  height: 65%;
-  background-color: #ba64fd;
-  border-radius: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
+  &:checked:before {
+    content: "";
+    width: 65%;
+    height: 65%;
+    background-color: #ba64fd;
+    border-radius: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
 }

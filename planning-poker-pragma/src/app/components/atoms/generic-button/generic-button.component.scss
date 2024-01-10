@@ -12,20 +12,20 @@ button {
   font-weight: bold;
   cursor: pointer;
   transition: 0.4s ease;
-}
 
-.button2 {
-  background-color: #6429cd;
-  color: #f6f7fc;
-}
+  &.button2 {
+    background-color: #6429cd;
+    color: #f6f7fc;
+  }
 
-.button3 {
-  border: 2px solid white;
-  background-color: transparent;
-  color: white;
-}
+  &.button3 {
+    border: 2px solid white;
+    background-color: transparent;
+    color: white;
+  }
 
-button:disabled {
-  background-color: #44375c;
-  color: #807393;
+  &:disabled {
+    background-color: #44375c;
+    color: #807393;
+  }
 }

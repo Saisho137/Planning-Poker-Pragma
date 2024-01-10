@@ -1,34 +1,29 @@
-.card-pool {
-  width: 4rem;
-  height: 6rem;
-  font-weight: bold;
-  font-size: 20px;
-  display: inline;
-  background-color: transparent;
-  border: 1px solid #ba64fd;
-  border-radius: 10px;
-  color: white;
-  transition: transform 0.3s, background-color 0.3s, color 0.3s;
-}
+$card-pool-border-color: #ba64fd;
+$card-pool-bg-color: transparent;
+$card-pool-color: white;
+$card-pool-hover-bg-color: #e3a4ff;
+$card-pool-hover-color: #531d8c;
 
+.card-pool,
 .card-average {
   width: 4rem;
   height: 6rem;
   font-weight: bold;
   font-size: 20px;
   display: inline;
-  background-color: transparent;
-  border: 1px solid #ba64fd;
+  background-color: $card-pool-bg-color;
+  border: 1px solid $card-pool-border-color;
   border-radius: 10px;
-  color: white;
-}
+  color: $card-pool-color;
+  transition: transform 0.3s, background-color 0.3s, color 0.3s;
 
-.card-pool.selected {
-  background-color: #e3a4ff;
-  color: #531d8c;
-  transform: translateY(-10px);
-}
+  &.selected {
+    background-color: $card-pool-hover-bg-color;
+    color: $card-pool-hover-color;
+    transform: translateY(-10px);
+  }
 
-.card-pool:hover {
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+  }
 }
