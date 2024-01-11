@@ -1,5 +1,5 @@
 <section
-  class="default-container row py-4 px-1 d-flex justify-content-center align-items-start"
+  class="default-container py-3 px-3 row d-flex justify-content-center align-items-start"
 >
   <app-navbar
     class="col-12"
@@ -8,22 +8,32 @@
     [imgUrl]="pragmaIconUrl"
     (clickEvent)="logOut()"
   />
-  <section class="row col-3 px-2 d-flex justify-content-center">
-    <label class="col-12 mt-2 d-flex justify-content-start" for="partyName"
+  <form
+    class="row col-3 px-2 d-flex justify-content-center"
+    [formGroup]="classroomForm"
+    (ngSubmit)="validateName()"
+  >
+    <label class="col-12 mt-2 d-flex justify-content-start" for="classroomName"
       ><h6 style="font-weight: bold">Nombra la partida</h6></label
     >
-    <app-generic-input
+    <input
       class="col-12"
-      [contentText]="classroomName"
-      [id]="'partyName'"
-      [type]="'text'"
-      (InputChange)="classroomName = $event"
+      formControlName="classroomName"
+      type="text"
+      id="classroomName"
+      required="true"
+      (input)="onInputChange()"
     />
+    <p class="col-12 mt-2 d-flex justify-content-center">{{ regexMessage }}</p>
     <app-generic-button
-      class="col-8 mt-4 d-flex justify-content-center"
-      (clickEvent)="validateName()"
+      [ngClass]="
+        !regexMessage
+          ? 'col-8 mt-3 d-flex justify-content-center'
+          : 'col-8 mt-1 d-flex justify-content-center'
+      "
+      [isSubmitType]="true"
+      [disabledState]="!classroomForm.valid"
       [buttonText]="'Crear partida'"
-      [disabledState]="!classroomName"
     />
-  </section>
+  </form>
 </section>

@@ -2,9 +2,17 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
-import { nameValidator } from '../../shared/validators';
+import { validateRegex } from '../../shared/validators';
 import { GenericButtonComponent } from '../../components/atoms/generic-button/generic-button.component';
 import { GenericInputComponent } from '../../components/atoms/generic-input/generic-input.component';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+
 @Component({
   selector: 'app-create-classroom',
   standalone: true,
@@ -13,14 +21,19 @@ import { GenericInputComponent } from '../../components/atoms/generic-input/gene
     NavbarComponent,
     GenericButtonComponent,
     GenericInputComponent,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './create-classroom.component.html',
   styleUrl: './create-classroom.component.scss',
 })
 export class CreateClassroomComponent {
   public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
+  public regexMessage: string = '';
 
-  public classroomName: string = '';
+  classroomForm = new FormGroup({
+    classroomName: new FormControl('', [Validators.required, validateRegex()]),
+  });
 
   constructor(private router: Router) {
     if (sessionStorage.getItem('session_token') === null) {
@@ -28,12 +41,37 @@ export class CreateClassroomComponent {
     }
   }
 
+  onInputChange(): void {
+    const classroomNameControl = this.classroomForm.get('classroomName');
+
+    if (classroomNameControl?.errors) {
+      switch (classroomNameControl.errors['pattern']) {
+        case 'regex':
+          this.regexMessage = 'Solo se permiten carácteres alfanuméricos!';
+          break;
+        case 'lenght':
+          this.regexMessage = 'El nombre debe tener entre 5 y 20 carácteres!';
+          break;
+        case 'numbers':
+          this.regexMessage = 'No debe haber más de 3 números en el nombre!';
+          break;
+        default:
+          this.regexMessage = '';
+          break;
+      }
+    } else {
+      this.regexMessage = '';
+    }
+  }
+
   validateName(): void {
-    if (nameValidator(this.classroomName)) this.goToClassroom();
+    if (this.classroomForm.valid) this.goToClassroom();
   }
 
   goToClassroom(): void {
-    this.router.navigate(['classroom/' + this.classroomName]);
+    this.router.navigate([
+      'classroom/' + this.classroomForm.value.classroomName,
+    ]);
   }
 
   logOut() {

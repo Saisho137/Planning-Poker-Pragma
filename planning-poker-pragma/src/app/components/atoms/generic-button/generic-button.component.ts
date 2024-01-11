@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 export class GenericButtonComponent {
   @Input() buttonText: string = '';
   @Input() type: 'variation' | 'invitation' | '' = '';
+  @Input() isSubmitType: boolean = false;
   @Input() disabledState: boolean = false;
   @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
 

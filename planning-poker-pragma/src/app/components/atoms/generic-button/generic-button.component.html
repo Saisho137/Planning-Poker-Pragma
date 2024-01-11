@@ -1,5 +1,6 @@
 <button
   class="col-12"
+  [type]="isSubmitType ? 'submit' : 'button'"
   [class.button2]="type === 'variation'"
   [class.button3]="type === 'invitation'"
   (click)="onButtonClick()"
