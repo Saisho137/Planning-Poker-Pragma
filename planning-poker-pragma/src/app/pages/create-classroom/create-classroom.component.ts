@@ -31,7 +31,7 @@ export class CreateClassroomComponent {
   public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
   public regexMessage: string = '';
 
-  classroomForm = new FormGroup({
+  public classroomForm = new FormGroup({
     classroomName: new FormControl('', [Validators.required, validateRegex()]),
   });
 
@@ -41,7 +41,9 @@ export class CreateClassroomComponent {
     }
   }
 
-  onInputChange(): void {
+  onInputChange(value: string): void {
+    this.classroomForm.patchValue({ classroomName: value }); //Assign atom-input value to reactive form field
+
     const classroomNameControl = this.classroomForm.get('classroomName');
 
     if (classroomNameControl?.errors) {

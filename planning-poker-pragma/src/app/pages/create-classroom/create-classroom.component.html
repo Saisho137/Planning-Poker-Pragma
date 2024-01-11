@@ -16,13 +16,12 @@
     <label class="col-12 mt-2 d-flex justify-content-start" for="classroomName"
       ><h6 style="font-weight: bold">Nombra la partida</h6></label
     >
-    <input
-      class="col-12"
-      formControlName="classroomName"
-      type="text"
-      id="classroomName"
-      required="true"
-      (input)="onInputChange()"
+    <app-generic-input
+      [contentText]="''"
+      [id]="'classroomName'"
+      [type]="'text'"
+      [required]="true"
+      (InputChange)="onInputChange($event)"
     />
     <p class="col-12 mt-2 d-flex justify-content-center">{{ regexMessage }}</p>
     <app-generic-button
