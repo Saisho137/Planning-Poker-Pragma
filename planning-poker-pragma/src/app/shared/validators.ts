@@ -12,13 +12,14 @@ export function validateRegex(): ValidatorFn {
 
     if (!regexValid) {
       return { pattern: 'regex' };
-    } else if (!lengthValid) {
-      return { pattern: 'lenght' };
-    } else if (numbers.length > 3) {
-      return { pattern: 'numbers' };
-    } else {
-      return null; //successful
     }
+    if (!lengthValid) {
+      return { pattern: 'lenght' };
+    }
+    if (numbers.length > 3) {
+      return { pattern: 'numbers' };
+    }
+    return null; //successful
   };
 }
 
