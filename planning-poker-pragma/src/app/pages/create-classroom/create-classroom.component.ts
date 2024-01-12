@@ -50,20 +50,19 @@ export class CreateClassroomComponent {
       switch (classroomNameControl.errors['pattern']) {
         case 'regex':
           this.regexMessage = 'Solo se permiten carácteres alfanuméricos!';
-          break;
+          return;
         case 'lenght':
           this.regexMessage = 'El nombre debe tener entre 5 y 20 carácteres!';
-          break;
+          return;
         case 'numbers':
           this.regexMessage = 'No debe haber más de 3 números en el nombre!';
-          break;
+          return;
         default:
           this.regexMessage = '';
-          break;
+          return;
       }
-    } else {
-      this.regexMessage = '';
     }
+    this.regexMessage = '';
   }
 
   validateName(): void {

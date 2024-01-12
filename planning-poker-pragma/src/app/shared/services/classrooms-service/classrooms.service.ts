@@ -66,8 +66,9 @@ export class ClassroomsService {
         return this.scoringMode[1];
       case 'oneHundred':
         return this.scoringMode[2];
+      default:
+        return this.scoringMode[0];
     }
-    return [{ id: 0, value: 'null' }];
   }
 
   public getRoom(classroomId: string): ClassroomInterface | undefined {
@@ -202,9 +203,11 @@ export class ClassroomsService {
 
     if (selectedRoom) {
       selectedRoom.users.forEach((user) => {
-        if (user.id === userId && user.rol === 'player') {
-          user.cardSelected = hostValue;
-        } else if (user.rol === 'player') {
+        if (user.rol === 'player') {
+          if (user.id === userId) {
+            user.cardSelected = hostValue;
+            return;
+          }
           user.cardSelected =
             mode[Math.floor(Math.random() * numericMode.length)].value;
         }

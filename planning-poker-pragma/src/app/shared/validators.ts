@@ -32,10 +32,12 @@ export function nameValidator(value: string): boolean {
   if (!matchResult) {
     window.alert('El nombre debe tener entre 5-20 carácteres.');
     return false;
-  } else if (numbers.length > 3) {
+  }
+  if (numbers.length > 3) {
     window.alert('El nombre debe tener máximo 3 números!');
     return false;
-  } else if (numbers.length === value.length) {
+  }
+  if (numbers.length === value.length) {
     window.alert('El nombre no puede estar compuesto únicamente de números!');
     return false;
   }
