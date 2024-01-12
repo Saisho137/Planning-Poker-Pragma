@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserCardComponent } from '../../molecules/user-card/user-card.component';
 import { ClassroomInterface } from '../../../interfaces/classroom-interface';
-import { TableComponent } from '../../molecules/table/table.component';
+import { TableComponent } from '../../../pages/classroom/table/table.component';
 import { TopModuleComponent } from './top-module/top-module.component';
 import { LeftModuleComponent } from './left-module/left-module.component';
 import { RightModuleComponent } from './right-module/right-module.component';

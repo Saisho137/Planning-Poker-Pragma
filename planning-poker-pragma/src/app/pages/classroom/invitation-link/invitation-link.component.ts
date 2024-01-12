@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
-import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
+import { GenericButtonComponent } from '../../../components/atoms/generic-button/generic-button.component';
+import { GenericInputComponent } from '../../../components/atoms/generic-input/generic-input.component';
 import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({

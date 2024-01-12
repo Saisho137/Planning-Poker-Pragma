@@ -8,8 +8,8 @@ import { ScoringModeInterface } from '../../interfaces/scoring-mode-interface';
 import { CardMenuComponent } from '../../components/organisms/card-menu/card-menu.component';
 import { UsersTableMenuComponent } from '../../components/organisms/users-table-menu/users-table-menu.component';
 import { Subscription } from 'rxjs';
-import { CardComponent } from '../../components/molecules/card/card.component';
-import { InvitationLinkComponent } from '../../components/molecules/invitation-link/invitation-link.component';
+import { CardComponent } from '../../components/atoms/card/card.component';
+import { InvitationLinkComponent } from './invitation-link/invitation-link.component';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 
 @Component({
