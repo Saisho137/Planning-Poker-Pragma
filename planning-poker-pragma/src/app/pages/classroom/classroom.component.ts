@@ -119,9 +119,9 @@ export class ClassroomComponent {
       this.averageScore = this.classroomService.averageScore(this.roomId);
       this.numberDictionary = this.classroomService.votesCount(this.roomId);
       this.cardResultsRevealed = true;
-    } else {
-      alert('Debes ser administrador para presionar este botón!');
+      return;
     }
+    alert('Debes ser administrador para presionar este botón!');
   }
 
   restartGame(): void {

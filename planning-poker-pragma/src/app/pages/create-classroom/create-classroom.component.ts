@@ -42,7 +42,7 @@ export class CreateClassroomComponent {
   }
 
   onInputChange(value: string): void {
-    this.classroomForm.reset({ classroomName: value }); //Assign atom-input value to reactive form field
+    this.classroomForm.patchValue({ classroomName: value }); //.reset() method will reload the form.
 
     const classroomNameControl = this.classroomForm.get('classroomName');
 
