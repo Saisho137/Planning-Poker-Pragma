@@ -20,17 +20,16 @@ import { RadioButtonsMenuComponent } from './radio-buttons-menu/radio-buttons-me
   styleUrl: './create-visualization-mode.component.scss',
 })
 export class CreateVisualizationModeComponent {
+  public username: string;
+  public selectedMode: 'player' | 'spectator' | '' = '';
+
   @Input() classroomId: string = '';
+
   @Output() roomGeneratedEvent: EventEmitter<void> = new EventEmitter<void>();
 
-  username: string =
-    sessionStorage.getItem('user_username') !== null
-      ? sessionStorage.getItem('user_username')!
-      : '';
-
-  selectedMode: 'player' | 'spectator' | '' = '';
-
-  constructor(private classrooms: ClassroomsService) {}
+  constructor(private classroomService: ClassroomsService) {
+    this.username = sessionStorage.getItem('user_username')!;
+  }
 
   switchRadio(radio: 'player' | 'spectator'): void {
     this.selectedMode = radio;
@@ -38,22 +37,19 @@ export class CreateVisualizationModeComponent {
 
   continueToRoom(): void {
     if (nameValidator(this.username)) {
-      sessionStorage.setItem('user_username', this.username);
-      if (this.selectedMode.length > 0) {
-        if (this.selectedMode === '') this.selectedMode = 'player';
+      if (this.username !== sessionStorage.getItem('user_username')!)
+        sessionStorage.setItem('user_username', this.username);
+      if (!this.selectedMode) this.selectedMode = 'player';
 
-        const user: UserInRoomInterface = {
-          id: sessionStorage.getItem('user_id')!,
-          username: sessionStorage.getItem('user_username')!,
-          rol: this.selectedMode,
-          cardSelected: '',
-        };
+      const user: UserInRoomInterface = {
+        id: sessionStorage.getItem('user_id')!,
+        username: sessionStorage.getItem('user_username')!,
+        rol: this.selectedMode,
+        cardSelected: '',
+      };
 
-        this.classrooms.createRoom(this.classroomId, user);
-        this.roomGeneratedEvent.emit();
-      } else {
-        window.alert('Debes seleccionar un modo de visualización!');
-      }
+      this.classroomService.createRoom(this.classroomId, user);
+      this.roomGeneratedEvent.emit();
     }
   }
 }
