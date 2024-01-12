@@ -14,7 +14,7 @@ export class UserCardComponent {
   @Input() visualization: string = '';
   @Input() votationFinished: boolean = false;
   defaultUser: string = '';
-
+  
   ngOnInit() {
     if (this.cardValue) {
       this.defaultUser = this.cardValue.substring(0, 2).toUpperCase();

@@ -17,12 +17,9 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private userService: UsersService, private router: Router) {}
-
-  ngOnInit() {
-    const token: string | null | undefined =
-      sessionStorage.getItem('session_token');
-    if (token !== null && token !== undefined) {
+  constructor(private userService: UsersService, private router: Router) {
+    const token = sessionStorage.getItem('session_token')!;
+    if (token) {
       this.router.navigate(['']);
     }
   }
