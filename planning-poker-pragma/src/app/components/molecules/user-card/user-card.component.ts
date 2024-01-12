@@ -9,12 +9,13 @@ import { CommonModule } from '@angular/common';
   styleUrl: './user-card.component.scss',
 })
 export class UserCardComponent {
+  public defaultUser: string = '';
+
   @Input() cardValue: string = '';
   @Input() selectedCard: string = '';
   @Input() visualization: string = '';
   @Input() votationFinished: boolean = false;
-  defaultUser: string = '';
-  
+
   ngOnInit() {
     if (this.cardValue) {
       this.defaultUser = this.cardValue.substring(0, 2).toUpperCase();

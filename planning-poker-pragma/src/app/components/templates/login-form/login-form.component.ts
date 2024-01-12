@@ -11,8 +11,8 @@ import { GenericButtonComponent } from '../../atoms/generic-button/generic-butto
   styleUrl: './login-form.component.scss',
 })
 export class LoginFormComponent {
-  email: string = '';
-  password: string = '';
+  public email: string = '';
+  public password: string = '';
 
   @Output() sendEmail: EventEmitter<string> = new EventEmitter<string>();
   @Output() sendPassword: EventEmitter<string> = new EventEmitter<string>();
@@ -21,6 +21,7 @@ export class LoginFormComponent {
   onButtonClick() {
     this.clickEvent.emit();
   }
+  
   onInputChange() {
     this.sendEmail.emit(this.email);
     this.sendPassword.emit(this.password);

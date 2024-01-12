@@ -13,16 +13,29 @@ import { firstValueFrom } from 'rxjs';
 export class UsersService {
   constructor(private http: HttpClient, private router: Router) {}
 
-  public async getAllUsers(): Promise<UserInterface[]> {
-    const url: string = 'http://localhost:8080/get_users';
+  public createUSer(username: string, email: string, password: string): void {
+    const url: string = 'http://localhost:8080/register_user';
+    const headers: HttpHeaders = new HttpHeaders().set(
+      'Content-Type',
+      'application/json'
+    );
+    const body = {
+      username: username,
+      email: email,
+      password: password,
+    };
 
-    try {
-      const response = await firstValueFrom(this.http.get<AllUsersInterface>(url));
-      return response.users;
-    } catch (err) {
-      window.alert('Something went wrong!' + err);
-      return [];
-    }
+    this.http.post<RegisterInterface>(url, body, { headers }).subscribe({
+      next: (res: RegisterInterface) => {
+        res.userCreated === true
+          ? this.validateUser(email, password)
+          : window.alert('Something Went Wrong! Try again!');
+      },
+      error: (err) => {
+        window.alert('Something Went Wrong! Try again!' + err);
+        this.router.navigate(['register']);
+      },
+    });
   }
 
   public validateUser(email: string, password: string): void {
@@ -53,28 +66,17 @@ export class UsersService {
     });
   }
 
-  public createUSer(username: string, email: string, password: string): void {
-    const url: string = 'http://localhost:8080/register_user';
-    const headers: HttpHeaders = new HttpHeaders().set(
-      'Content-Type',
-      'application/json'
-    );
-    const body = {
-      username: username,
-      email: email,
-      password: password,
-    };
+  public async getAllUsers(): Promise<UserInterface[]> {
+    const url: string = 'http://localhost:8080/get_users';
 
-    this.http.post<RegisterInterface>(url, body, { headers }).subscribe({
-      next: (res: RegisterInterface) => {
-        res.userCreated === true
-          ? this.validateUser(email, password)
-          : window.alert('Something Went Wrong! Try again!');
-      },
-      error: (err) => {
-        window.alert('Something Went Wrong! Try again!' + err);
-        this.router.navigate(['register']);
-      },
-    });
+    try {
+      const response = await firstValueFrom(
+        this.http.get<AllUsersInterface>(url)
+      );
+      return response.users;
+    } catch (err) {
+      window.alert('Something went wrong!' + err);
+      return [];
+    }
   }
 }

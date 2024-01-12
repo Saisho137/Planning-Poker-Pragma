@@ -13,6 +13,7 @@ export class GenericButtonComponent {
   @Input() type: 'variation' | 'invitation' | '' = '';
   @Input() isSubmitType: boolean = false;
   @Input() disabledState: boolean = false;
+
   @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
 
   onButtonClick() {

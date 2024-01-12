@@ -14,6 +14,7 @@ export class CardMenuComponent {
   @Input() visualization: 'player' | 'spectator' | '' = '';
   @Input() selectedCard: string = '';
   @Input() scoringMode: ScoringModeInterface[] = [];
+
   @Output() clickEvent: EventEmitter<string> = new EventEmitter<string>();
 
   onButtonClick(value: string) {

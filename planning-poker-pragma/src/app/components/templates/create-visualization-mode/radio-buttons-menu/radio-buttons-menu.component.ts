@@ -10,9 +10,10 @@ import { RadioInputComponent } from '../../../atoms/radio-input/radio-input.comp
   styleUrl: './radio-buttons-menu.component.scss',
 })
 export class RadioButtonsMenuComponent {
+  public selectedMode: 'player' | 'spectator' | '' = '';
+  
   @Output() changeEvent: EventEmitter<'player' | 'spectator'> =
     new EventEmitter<'player' | 'spectator'>();
-  selectedMode: 'player' | 'spectator' | '' = '';
 
   switchRadio(radio: 'player' | 'spectator'): void {
     this.selectedMode = radio;

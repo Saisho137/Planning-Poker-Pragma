@@ -11,14 +11,14 @@ import { GenericImageComponent } from '../../atoms/generic-image/generic-image.c
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
+  public username: string = '';
+
   @Input() buttonText: string = '';
   @Input() tittle: string = '';
   @Input() imgUrl: string = '';
   @Input() roomId: string = '';
 
   @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
-
-  username: string = '';
 
   constructor() {
     if (sessionStorage.getItem('user_username')) {

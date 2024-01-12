@@ -50,10 +50,10 @@ export class ClassroomComponent {
   private subscription: Subscription | undefined;
 
   constructor(
-    private routeService: ActivatedRoute,
+    private route: ActivatedRoute,
     private classroomService: ClassroomsService
   ) {
-    this.roomId = this.routeService.snapshot.paramMap.get('id')!;
+    this.roomId = this.route.snapshot.paramMap.get('id')!;
     this.room = this.classroomService.getRoom(this.roomId);
     this.scoringMode = this.classroomService.createScoringMode('fibonacci');
   }

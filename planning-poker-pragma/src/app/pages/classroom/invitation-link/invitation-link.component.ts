@@ -13,6 +13,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 })
 export class InvitationLinkComponent {
   @Input() link: string = '';
+  
   @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private clipboard: Clipboard, private location: Location) {}

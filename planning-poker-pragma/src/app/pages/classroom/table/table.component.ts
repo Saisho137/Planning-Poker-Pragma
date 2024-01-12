@@ -20,6 +20,7 @@ export class TableComponent {
   revealClick() {
     this.clickEventReveal.emit();
   }
+  
   restartClick() {
     this.clickEventRestart.emit();
   }

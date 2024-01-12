@@ -13,6 +13,7 @@ export class RadioInputComponent {
   @Input() id: string = '';
   @Input() selectedMode: 'player' | 'spectator' | '' = '';
   @Input() condition: 'player' | 'spectator' | '' = '';
+
   @Output() switchEvent: EventEmitter<void> = new EventEmitter<void>();
 
   onInputChange() {

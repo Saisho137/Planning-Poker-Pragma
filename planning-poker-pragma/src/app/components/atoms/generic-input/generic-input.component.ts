@@ -15,6 +15,7 @@ export class GenericInputComponent {
   @Input() contentText: string = '';
   @Input() required: boolean = true;
   @Input() readOnly: boolean = false;
+
   @Output() InputChange: EventEmitter<string> = new EventEmitter<string>();
 
   onInputChange() {

@@ -14,10 +14,11 @@ import { NavbarComponent } from '../../components/molecules/navbar/navbar.compon
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-  pragmaIconUrl: string = '../../../../assets/images/pragma.png';
-  username: string = '';
-  email: string = '';
-  password: string = '';
+  public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
+  
+  public username: string = '';
+  public email: string = '';
+  public password: string = '';
 
   constructor(private userService: UsersService, private router: Router) {
     const token = sessionStorage.getItem('session_token')!;

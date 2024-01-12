@@ -13,9 +13,10 @@ import { LoginFormComponent } from '../../components/templates/login-form/login-
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  pragmaIconUrl: string = '../../../../assets/images/pragma.png';
-  email: string = '';
-  password: string = '';
+  public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
+  
+  public email: string = '';
+  public password: string = '';
 
   constructor(private userService: UsersService, private router: Router) {
     const token = sessionStorage.getItem('session_token')!;
