@@ -160,6 +160,17 @@ export class ClassroomsService {
     }
   }
 
+  public clearSelectedCard(classroomId: string, userId: string): void {
+    const selectedRoom: ClassroomInterface | undefined =
+      this.getRoom(classroomId);
+    if (selectedRoom) {
+      selectedRoom.users.forEach((user) => {
+        if (user.id === userId) user.cardSelected = '';
+      });
+      this.userListSubject.next(selectedRoom.users);
+    }
+  }
+
   public allPlayersSelectedCard(): Observable<boolean> {
     return this.userList$.pipe(
       map((users) => {
@@ -243,16 +254,5 @@ export class ClassroomsService {
     const index = this.rooms.findIndex((room) => room.id === classroomId);
     this.rooms.splice(index, 1);
     this.users.length = 0;
-  }
-
-  public clearSelectedCard(classroomId: string, userId: string): void {
-    const selectedRoom: ClassroomInterface | undefined =
-      this.getRoom(classroomId);
-    if (selectedRoom) {
-      selectedRoom.users.forEach((user) => {
-        if (user.id === userId) user.cardSelected = '';
-      });
-      this.userListSubject.next(selectedRoom.users);
-    }
   }
 }
