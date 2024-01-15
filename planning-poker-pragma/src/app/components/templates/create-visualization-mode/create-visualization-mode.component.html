@@ -9,18 +9,18 @@
       >
       <app-generic-input
         class="col-12"
-        [contentText]="username"
         [id]="'name'"
         [type]="'text'"
+        [contentText]="username"
         (InputChange)="username = $event"
       />
     </div>
     <app-radio-buttons-menu (changeEvent)="switchRadio($event)" />
     <app-generic-button
       class="col-6 mb-4 d-flex justify-content-center"
-      (clickEvent)="continueToRoom()"
       [buttonText]="'Continuar'"
       [disabledState]="!selectedMode"
+      (clickEvent)="continueToRoom()"
     />
   </section>
 </section>

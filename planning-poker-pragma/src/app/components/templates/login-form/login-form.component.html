@@ -27,9 +27,9 @@
   <div class="my-1 col-7 d-flex justify-content-center">
     <app-generic-button
       class="col-6 my-2 d-flex justify-content-center"
-      (clickEvent)="onButtonClick()"
       [buttonText]="'Login'"
       [disabledState]="!email || !password"
+      (clickEvent)="onButtonClick()"
     />
   </div>
 </section>

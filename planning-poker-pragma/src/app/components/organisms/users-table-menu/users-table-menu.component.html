@@ -13,9 +13,9 @@
 
 <app-table
   class="col-6 d-flex justify-content-center"
+  [buttonText]="buttonText"
   [allPlayersSelected]="allPlayersSelected"
   [votationFinished]="votationFinished"
-  [buttonText]="buttonText"
   (clickEventReveal)="revealClick()"
   (clickEventRestart)="restartClick()"
 />

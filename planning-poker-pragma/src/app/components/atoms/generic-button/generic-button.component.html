@@ -1,10 +1,10 @@
 <button
   class="col-12"
+  [disabled]="disabledState"
   [type]="isSubmitType ? 'submit' : 'button'"
   [class.button2]="type === 'variation'"
   [class.button3]="type === 'invitation'"
   (click)="onButtonClick()"
-  [disabled]="disabledState"
 >
   {{ buttonText }}
 </button>

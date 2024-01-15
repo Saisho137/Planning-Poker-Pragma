@@ -4,15 +4,15 @@
   @if (allPlayersSelected && !votationFinished) {
   <app-generic-button
     class="button-reveal col-4 d-flex justify-content-center"
-    [buttonText]="buttonText"
     [type]="'variation'"
+    [buttonText]="buttonText"
     (clickEvent)="revealClick()"
   />
   } @else if (votationFinished) { @defer {
   <app-generic-button
     class="button-reveal col-4 d-flex justify-content-center"
-    [buttonText]="'Nueva votación'"
     [type]="'variation'"
+    [buttonText]="'Nueva votación'"
     (clickEvent)="restartClick()"
   />
   } @placeholder (minimum 2s) {

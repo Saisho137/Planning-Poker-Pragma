@@ -6,9 +6,9 @@
     >
     <app-generic-input
       class="col-6"
-      [contentText]="username"
       [id]="'tbUsername'"
       [type]="'text'"
+      [contentText]="username"
       (InputChange)="username = $event"
       (InputChange)="onInputChange()"
     />
@@ -17,9 +17,9 @@
     <label class="col-3 d-flex justify-content-end" for="tbEmail">Email</label>
     <app-generic-input
       class="col-6"
-      [contentText]="email"
       [id]="'tbEmail'"
       [type]="'email'"
+      [contentText]="email"
       (InputChange)="email = $event"
       (InputChange)="onInputChange()"
     />
@@ -30,9 +30,9 @@
     >
     <app-generic-input
       class="col-6"
-      [contentText]="password"
       [id]="'tbPassword'"
       [type]="'password'"
+      [contentText]="password"
       (InputChange)="password = $event"
       (InputChange)="onInputChange()"
     />
@@ -40,9 +40,9 @@
   <div class="my-1 col-7 d-flex justify-content-center">
     <app-generic-button
       class="col-6 my-2 d-flex justify-content-center"
-      (clickEvent)="onButtonClick()"
       [buttonText]="'Register'"
       [disabledState]="!email || !password || !username"
+      (clickEvent)="onButtonClick()"
     />
   </div>
 </section>

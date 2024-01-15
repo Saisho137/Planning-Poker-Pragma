@@ -2,9 +2,9 @@
   @if (configurationWindow) {
   <app-create-visualization-mode
     class="col-3"
+    [classroomId]="roomId"
     (roomGeneratedEvent)="initializeRoom()"
     (roomGeneratedEvent)="configurationWindow = !configurationWindow"
-    [classroomId]="roomId"
   />
   } @if (invitationWindow) {
   <app-invitation-link
@@ -15,26 +15,26 @@
   }
   <app-navbar
     [buttonText]="'Invitar jugadores'"
-    [imgUrl]="pragmaIcon"
     [roomId]="roomId"
+    [imgUrl]="pragmaIcon"
     (clickEvent)="switchInvitationWindow()"
   />
   <app-users-table-menu
     class="row"
     [room]="room"
-    [buttonText]="'Revelar cartas'"
     [selectedCard]="selectedCard"
-    [allPlayersSelected]="allPlayersSelected"
+    [buttonText]="'Revelar cartas'"
     [votationFinished]="cardResultsRevealed"
+    [allPlayersSelected]="allPlayersSelected"
     (clickEventReveal)="revealCards()"
     (clickEventRestart)="restartGame()"
   />
   @if (!cardResultsRevealed) {
   <app-card-menu
-    (clickEvent)="selectCard($event)"
     [visualization]="visualization"
     [selectedCard]="selectedCard"
     [scoringMode]="scoringMode"
+    (clickEvent)="selectCard($event)"
   />
   } @else { @defer {
   <section class="row mt-5">
@@ -43,8 +43,8 @@
       @for (item of numberDictionary | keyvalue; track item.key) {
       <app-card
         class="col-2 d-flex justify-content-center"
-        [cardValue]="item.key"
         [mode]="'average'"
+        [cardValue]="item.key"
         [votes]="item.value + ' votos'"
       />
       }
