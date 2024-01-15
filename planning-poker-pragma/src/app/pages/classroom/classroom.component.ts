@@ -82,10 +82,6 @@ export class ClassroomComponent {
     this.classroomService.addMockUpUsers(this.roomId);
   }
 
-  isAdminUser(): boolean {
-    return this.userId === this.room?.admin;
-  }
-
   updateRoom(): void {
     this.room = this.classroomService.getRoom(this.roomId);
   }
@@ -115,7 +111,7 @@ export class ClassroomComponent {
   }
 
   revealCards(): void {
-    if (this.isAdminUser()) {
+    if (this.userId === this.room?.admin) {
       this.averageScore = this.classroomService.averageScore(this.roomId);
       this.numberDictionary = this.classroomService.votesCount(this.roomId);
       this.cardResultsRevealed = true;
@@ -125,7 +121,7 @@ export class ClassroomComponent {
   }
 
   restartGame(): void {
-    if (this.isAdminUser()) {
+    if (this.userId === this.room?.admin) {
       this.cardResultsRevealed = false;
       this.classroomService.resetGame(this.roomId);
       this.selectedCard = '';
