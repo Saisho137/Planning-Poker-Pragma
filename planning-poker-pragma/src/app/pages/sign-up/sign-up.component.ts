@@ -11,10 +11,10 @@ import { ButtonComponent } from '../../components/atoms/button/button.component'
   selector: 'app-register',
   standalone: true,
   imports: [CommonModule, NavbarComponent, RouterLink, InputComponent, ButtonComponent],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
+  templateUrl: './sign-up.component.html',
+  styleUrl: './sign-up.component.scss',
 })
-export class RegisterComponent {
+export class SignUpComponent {
   public isLogin: boolean = false;
   public tittle: 'Sing up' | 'Register' = 'Register';
 

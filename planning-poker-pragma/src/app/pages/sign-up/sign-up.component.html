@@ -5,19 +5,7 @@
     [imgUrl]="pragmaIconUrl"
   />
   <section class="row d-flex justify-content-center">
-    <h2 class="col-12 my-3 d-flex justify-content-center">{{ tittle }}</h2>
-    <div class="row my-1 col-7 align-items-center justify-content-center">
-      <label class="col-1 d-flex justify-content-end" for="tbEmail"
-        >Email</label
-      >
-      <input-atom
-        class="col-6"
-        [id]="'tbEmail'"
-        [type]="'email'"
-        [contentText]="email"
-        (InputChange)="email = $event"
-      />
-    </div>
+    <h1 class="col-12 my-3 d-flex justify-content-center">{{ tittle }}</h1>
     @if (!isLogin) {
     <div class="row my-1 col-7 align-items-center justify-content-center">
       <label class="col-1 d-flex justify-content-end" for="tbUsername"
@@ -32,6 +20,18 @@
       />
     </div>
     }
+    <div class="row my-1 col-7 align-items-center justify-content-center">
+      <label class="col-1 d-flex justify-content-end" for="tbEmail"
+        >Email</label
+      >
+      <input-atom
+        class="col-6"
+        [id]="'tbEmail'"
+        [type]="'email'"
+        [contentText]="email"
+        (InputChange)="email = $event"
+      />
+    </div>
     <div class="row my-1 col-7 align-items-center justify-content-center">
       <label class="col-1 d-flex justify-content-end" for="tbPassword"
         >Password</label
@@ -48,7 +48,9 @@
       <button-atom
         class="col-6 my-2 d-flex justify-content-center"
         [buttonText]="isLogin ? 'Login' : 'Register'"
-        [disabledState]="isLogin ? !email || !password : !email || !password || !username"
+        [disabledState]="
+          isLogin ? !email || !password : !email || !password || !username
+        "
         (clickEvent)="isLogin ? validateUser() : createUser()"
       />
     </div>
