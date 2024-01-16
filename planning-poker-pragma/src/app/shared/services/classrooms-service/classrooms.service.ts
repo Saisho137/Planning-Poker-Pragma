@@ -58,7 +58,7 @@ export class ClassroomsService {
     ],
   ];
 
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService) { }
 
   public userIsPlayer(classroomId: string, userId: string): boolean {
     const room: ClassroomInterface | undefined = this.getRoom(classroomId);
@@ -181,60 +181,6 @@ export class ClassroomsService {
         return players.every((player) => player.cardSelected !== '');
       })
     );
-  }
-
-  public votesCount(classroomId: string): Record<string, number> {
-    const selectedRoom: ClassroomInterface | undefined =
-      this.getRoom(classroomId);
-
-    if (selectedRoom?.users) {
-      const players = selectedRoom.users.filter(
-        (user) => user.rol === 'player'
-      );
-      //Creates a key-value pair object that counts the number of votes of each selected card
-      const numberDictionary: Record<string, number> = players.reduce(
-        (accumulator: Record<string, number>, object: UserInRoomInterface) => {
-          const value: string = object.cardSelected;
-          accumulator[value] = (accumulator[value] || 0) + 1;
-          return accumulator;
-        },
-        {}
-      );
-      return numberDictionary;
-    }
-    return { '0': 0 };
-  }
-
-  public averageScore(classroomId: string): string {
-    const selectedRoom: ClassroomInterface | undefined =
-      this.getRoom(classroomId);
-    if (selectedRoom) {
-      const players = selectedRoom.users.filter(
-        (user) => user.rol === 'player'
-      );
-      //Split number into Integer and Decimal Part.
-      let averageArray: string[] = (
-        Math.round(
-          (players.reduce(
-            (accumulator, current) =>
-              accumulator + parseFloat(current.cardSelected),
-            0
-          ) /
-            players.length) *
-            10
-        ) / 10
-      )
-        .toString()
-        .split('.');
-      //If number has Decimal part, replace '.' with ','.
-      if (averageArray[1]) {
-        const average = averageArray[0] + ',' + averageArray[1];
-        return average;
-      }
-      //If not, return number.
-      return averageArray[0];
-    }
-    return '0';
   }
 
   public resetGame(classroomId: string): void {

@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 import { CardComponent } from '../../components/atoms/card/card.component';
 import { InvitationLinkComponent } from './invitation-link/invitation-link.component';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
+import { UserInRoomInterface } from '../../interfaces/user-in-room-interface';
 
 @Component({
   selector: 'app-classroom',
@@ -110,10 +111,54 @@ export class ClassroomComponent {
     }, 3000);
   }
 
+  public votesCount(): void {
+    if (this.room?.users) {
+      const players = this.room.users.filter(
+        (user) => user.rol === 'player'
+      );
+      //Creates a key-value pair object that counts the number of votes of each selected card
+      this.numberDictionary = players.reduce(
+        (accumulator: Record<string, number>, object: UserInRoomInterface) => {
+          const value: string = object.cardSelected;
+          accumulator[value] = (accumulator[value] || 0) + 1;
+          return accumulator;
+        },
+        {}
+      );
+    }
+  }
+
+  public makeAverageScore(): void {
+    if (this.room) {
+      const players = this.room.users.filter(
+        (user) => user.rol === 'player'
+      );
+      //Split number into Integer and Decimal Part.
+      let averageArray: string[] = (
+        Math.round(
+          (players.reduce(
+            (accumulator, current) =>
+              accumulator + parseFloat(current.cardSelected),
+            0
+          ) /
+            players.length) *
+          10
+        ) / 10
+      ).toString().split('.');
+      //If number has Decimal part, replace '.' with ','.
+      if (averageArray[1]) {
+        const average = averageArray[0] + ',' + averageArray[1];
+        this.averageScore = average;
+      }
+      //If not, return number.
+      this.averageScore = averageArray[0];
+    }
+  }
+
   revealCards(): void {
     if (this.userId === this.room?.admin) {
-      this.averageScore = this.classroomService.averageScore(this.roomId);
-      this.numberDictionary = this.classroomService.votesCount(this.roomId);
+      this.makeAverageScore();
+      this.votesCount();
       this.cardResultsRevealed = true;
       return;
     }
@@ -127,9 +172,10 @@ export class ClassroomComponent {
       this.selectedCard = '';
       this.averageScore = undefined;
       this.numberDictionary = { '0': 0 };
-    } else {
-      alert('Debes ser administrador para presionar este botón!');
+      return
     }
+    alert('Debes ser administrador para presionar este botón!');
+
   }
 
   ngOnDestroy(): void {
