@@ -4,7 +4,6 @@
     class="col-3"
     [classroomId]="roomId"
     (roomGeneratedEvent)="initializeRoom()"
-    (roomGeneratedEvent)="configurationWindow = !configurationWindow"
   />
   } @if (invitationWindow) {
   <app-invitation-link

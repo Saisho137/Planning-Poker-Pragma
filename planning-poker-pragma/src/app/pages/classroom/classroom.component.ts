@@ -60,6 +60,7 @@ export class ClassroomComponent {
   }
 
   initializeRoom(): void {
+    this.configurationWindow = !this.configurationWindow
     this.addUsers();
     this.setVisualization();
     this.updateRoom();
