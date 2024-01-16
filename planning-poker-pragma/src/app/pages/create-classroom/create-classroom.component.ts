@@ -28,12 +28,11 @@ import {
   styleUrl: './create-classroom.component.scss',
 })
 export class CreateClassroomComponent {
-  public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
-  public regexMessage: string = '';
+  public classroomName = new FormControl('', [Validators.required, validateRegex()]);
 
-  public classroomForm = new FormGroup({
-    classroomName: new FormControl('', [Validators.required, validateRegex()]),
-  });
+  public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
+
+  public regexMessage: string = '';
 
   constructor(private router: Router) {
     if (sessionStorage.getItem('session_token') === null) {
@@ -42,12 +41,10 @@ export class CreateClassroomComponent {
   }
 
   onInputChange(value: string): void {
-    this.classroomForm.patchValue({ classroomName: value }); //.reset() method will reload the form.
+    this.classroomName.patchValue(value); //.reset() method will reload the form.
 
-    const classroomNameControl = this.classroomForm.get('classroomName');
-
-    if (classroomNameControl?.errors) {
-      switch (classroomNameControl.errors['pattern']) {
+    if (this.classroomName?.errors) {
+      switch (this.classroomName?.errors['pattern']) {
         case 'regex':
           this.regexMessage = 'Solo se permiten carácteres alfanuméricos!';
           return;
@@ -66,12 +63,12 @@ export class CreateClassroomComponent {
   }
 
   validateName(): void {
-    if (this.classroomForm.valid) this.goToClassroom();
+    if (this.classroomName.valid) this.goToClassroom();
   }
 
   goToClassroom(): void {
     this.router.navigate([
-      'classroom/' + this.classroomForm.value.classroomName,
+      'classroom/' + this.classroomName.value,
     ]);
   }
 

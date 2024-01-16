@@ -10,7 +10,6 @@
   />
   <form
     class="row col-3 px-2 d-flex justify-content-center"
-    [formGroup]="classroomForm"
     (ngSubmit)="validateName()"
   >
     <label class="col-12 mt-2 d-flex justify-content-start" for="classroomName"
@@ -31,7 +30,7 @@
           : 'col-8 mt-1 d-flex justify-content-center'
       "
       [isSubmitType]="true"
-      [disabledState]="!classroomForm.valid"
+      [disabledState]="!classroomName.valid"
       [buttonText]="'Crear partida'"
     />
   </form>
