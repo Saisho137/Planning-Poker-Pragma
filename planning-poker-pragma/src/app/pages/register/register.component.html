@@ -4,14 +4,65 @@
     [tittle]="'Pragma'"
     [imgUrl]="pragmaIconUrl"
   />
-  <app-register-form
-    class="row d-flex justify-content-center"
-    (sendEmail)="email = $event"
-    (sendPassword)="password = $event"
-    (sendUsername)="username = $event"
-    (clickEvent)="createUser()"
-  />
-  <a class="col-1 mt-3 d-flex justify-content-center" routerLink="/login"
+  <section class="row d-flex justify-content-center">
+    <h2 class="col-12 my-3 d-flex justify-content-center">{{ tittle }}</h2>
+    <div class="row my-1 col-7 align-items-center justify-content-center">
+      <label class="col-1 d-flex justify-content-end" for="tbEmail"
+        >Email</label
+      >
+      <input-atom
+        class="col-6"
+        [id]="'tbEmail'"
+        [type]="'email'"
+        [contentText]="email"
+        (InputChange)="email = $event"
+      />
+    </div>
+    @if (!isLogin) {
+    <div class="row my-1 col-7 align-items-center justify-content-center">
+      <label class="col-1 d-flex justify-content-end" for="tbUsername"
+        >Username</label
+      >
+      <input-atom
+        class="col-6"
+        [id]="'tbUsername'"
+        [type]="'text'"
+        [contentText]="username"
+        (InputChange)="username = $event"
+      />
+    </div>
+    }
+    <div class="row my-1 col-7 align-items-center justify-content-center">
+      <label class="col-1 d-flex justify-content-end" for="tbPassword"
+        >Password</label
+      >
+      <input-atom
+        class="col-6"
+        [id]="'tbPassword'"
+        [type]="'password'"
+        [contentText]="password"
+        (InputChange)="password = $event"
+      />
+    </div>
+    <div class="my-1 col-7 d-flex justify-content-center">
+      <button-atom
+        class="col-6 my-2 d-flex justify-content-center"
+        [buttonText]="isLogin ? 'Login' : 'Register'"
+        [disabledState]="isLogin ? !email || !password : !email || !password || !username"
+        (clickEvent)="isLogin ? validateUser() : createUser()"
+      />
+    </div>
+  </section>
+  <a
+    *ngIf="!isLogin"
+    class="col-1 mt-3 d-flex justify-content-center"
+    routerLink="/login"
     >Login</a
+  >
+  <a
+    *ngIf="isLogin"
+    class="col-1 mt-3 d-flex justify-content-center"
+    routerLink="/register"
+    >Register</a
   >
 </section>
