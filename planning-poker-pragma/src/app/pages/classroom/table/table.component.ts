@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GenericButtonComponent } from '../../../components/atoms/generic-button/generic-button.component';
+import { ButtonComponent } from '../../../components/atoms/button/button.component';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [CommonModule, GenericButtonComponent],
+  imports: [CommonModule, ButtonComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })

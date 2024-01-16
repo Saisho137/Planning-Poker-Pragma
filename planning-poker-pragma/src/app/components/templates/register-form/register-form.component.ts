@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
-import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
+import { ButtonComponent } from '../../atoms/button/button.component';
+import { InputComponent } from '../../atoms/input/input.component';
 
 @Component({
   selector: 'app-register-form',
   standalone: true,
-  imports: [CommonModule, GenericButtonComponent, GenericInputComponent],
+  imports: [CommonModule, ButtonComponent, InputComponent],
   templateUrl: './register-form.component.html',
   styleUrl: './register-form.component.scss',
 })

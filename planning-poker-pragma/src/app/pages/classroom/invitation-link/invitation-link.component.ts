@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { GenericButtonComponent } from '../../../components/atoms/generic-button/generic-button.component';
-import { GenericInputComponent } from '../../../components/atoms/generic-input/generic-input.component';
+import { ButtonComponent } from '../../../components/atoms/button/button.component';
+import { InputComponent } from '../../../components/atoms/input/input.component';
 import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-invitation-link',
   standalone: true,
-  imports: [CommonModule, GenericButtonComponent, GenericInputComponent],
+  imports: [CommonModule, ButtonComponent, InputComponent],
   templateUrl: './invitation-link.component.html',
   styleUrl: './invitation-link.component.scss',
 })

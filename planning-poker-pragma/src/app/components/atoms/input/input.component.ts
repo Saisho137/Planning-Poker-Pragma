@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-generic-input',
+  selector: 'input-atom',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './generic-input.component.html',
-  styleUrl: './generic-input.component.scss',
+  templateUrl: './input.component.html',
+  styleUrl: './input.component.scss',
 })
-export class GenericInputComponent {
+export class InputComponent {
   @Input() type: string = 'text';
   @Input() id: string = '';
   @Input() contentText: string = '';

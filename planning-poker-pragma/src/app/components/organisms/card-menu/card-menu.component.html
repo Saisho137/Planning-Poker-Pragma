@@ -3,7 +3,7 @@
   <h3 class="col-12 d-flex justify-content-center">👇 Elige una carta 👇</h3>
   <article class="col-8 d-flex justify-content-center">
     @for (item of scoringMode; track item.id) {
-    <app-card
+    <card-atom
       class="col-1 mt-4 d-flex justify-content-center"
       [cardValue]="item.value"
       [selectedCard]="selectedCard"

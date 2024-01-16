@@ -7,7 +7,7 @@
       <label class="col-12 mt-1 d-flex justify-content-start" for="name">
         <h6>Tu nombre:</h6></label
       >
-      <app-generic-input
+      <input-atom
         class="col-12"
         [id]="'name'"
         [type]="'text'"
@@ -15,8 +15,8 @@
         (InputChange)="username = $event"
       />
     </div>
-    <app-radio-buttons-menu (changeEvent)="switchRadio($event)" />
-    <app-generic-button
+    <radio-buttons-menu (changeEvent)="switchRadio($event)" />
+    <button-atom
       class="col-6 mb-4 d-flex justify-content-center"
       [buttonText]="'Continuar'"
       [disabledState]="!selectedMode"

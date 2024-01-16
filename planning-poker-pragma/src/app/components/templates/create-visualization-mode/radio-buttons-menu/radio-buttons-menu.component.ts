@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RadioInputComponent } from '../../../atoms/radio-input/radio-input.component';
+import { RadioButtonComponent } from '../../../atoms/radio-button/radio-button.component';
 
 @Component({
-  selector: 'app-radio-buttons-menu',
+  selector: 'radio-buttons-menu',
   standalone: true,
-  imports: [CommonModule, RadioInputComponent],
+  imports: [CommonModule, RadioButtonComponent],
   templateUrl: './radio-buttons-menu.component.html',
   styleUrl: './radio-buttons-menu.component.scss',
 })

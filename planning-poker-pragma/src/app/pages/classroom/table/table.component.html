@@ -2,14 +2,14 @@
   class="voting-table row col-12 d-flex justify-content-center align-items-center"
 >
   @if (allPlayersSelected && !votationFinished) {
-  <app-generic-button
+  <button-atom
     class="button-reveal col-4 d-flex justify-content-center"
     [type]="'variation'"
     [buttonText]="buttonText"
     (clickEvent)="revealClick()"
   />
   } @else if (votationFinished) { @defer {
-  <app-generic-button
+  <button-atom
     class="button-reveal col-4 d-flex justify-content-center"
     [type]="'variation'"
     [buttonText]="'Nueva votación'"

@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-radio-input',
+  selector: 'radio-atom',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './radio-input.component.html',
-  styleUrl: './radio-input.component.scss',
+  templateUrl: './radio-button.component.html',
+  styleUrl: './radio-button.component.scss',
 })
-export class RadioInputComponent {
+export class RadioButtonComponent {
   @Input() id: string = '';
   @Input() selectedMode: 'player' | 'spectator' | '' = '';
   @Input() condition: 'player' | 'spectator' | '' = '';

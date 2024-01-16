@@ -1,12 +1,12 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
-import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
+import { InputComponent } from '../../atoms/input/input.component';
+import { ButtonComponent } from '../../atoms/button/button.component';
 
 @Component({
   selector: 'app-login-form',
   standalone: true,
-  imports: [CommonModule, GenericInputComponent, GenericButtonComponent],
+  imports: [CommonModule, InputComponent, ButtonComponent],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
 })

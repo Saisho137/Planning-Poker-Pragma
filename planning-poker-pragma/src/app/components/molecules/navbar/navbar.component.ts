@@ -1,12 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
-import { GenericImageComponent } from '../../atoms/generic-image/generic-image.component';
+import { ButtonComponent } from '../../atoms/button/button.component';
+import { GenericImageComponent } from '../../atoms/image/generic-image.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, GenericButtonComponent, GenericImageComponent],
+  imports: [CommonModule, ButtonComponent, GenericImageComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })

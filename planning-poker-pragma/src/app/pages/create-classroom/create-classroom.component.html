@@ -15,7 +15,7 @@
     <label class="col-12 mt-2 d-flex justify-content-start" for="classroomName"
       ><h6 style="font-weight: bold">Nombra la partida</h6></label
     >
-    <app-generic-input
+    <input-atom
       [contentText]="''"
       [id]="'classroomName'"
       [type]="'text'"
@@ -23,7 +23,7 @@
       (InputChange)="onInputChange($event)"
     />
     <p class="col-12 mt-2 d-flex justify-content-center">{{ regexMessage }}</p>
-    <app-generic-button
+    <button-atom
       [ngClass]="
         !regexMessage
           ? 'col-8 mt-3 d-flex justify-content-center'

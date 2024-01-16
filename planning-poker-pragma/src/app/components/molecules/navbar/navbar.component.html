@@ -1,5 +1,5 @@
 <section class="row d-flex align-items-center">
-  <app-generic-image
+  <image-atom
     [ngClass]="[
       'd-flex justify-content-end',
       buttonText && !roomId ? 'col-1' : 'col-2'
@@ -16,7 +16,7 @@
     <div class="col-6 card-user d-flex justify-content-end align-items-center">
       <p>{{ username }}</p>
     </div>
-    <app-generic-button
+    <button-atom
       class="col-6 d-flex justify-content-start"
       [type]="'invitation'"
       [buttonText]="buttonText"
@@ -31,7 +31,7 @@
     {{ tittle }}
   </h2>
   @if (buttonText) {
-  <app-generic-button
+  <button-atom
     class="col-6 my-1 d-flex justify-content-end"
     [buttonText]="buttonText"
     (clickEvent)="onButtonClick()"

@@ -2,13 +2,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-generic-button',
+  selector: 'button-atom',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './generic-button.component.html',
-  styleUrl: './generic-button.component.scss',
+  templateUrl: './button.component.html',
+  styleUrl: './button.component.scss',
 })
-export class GenericButtonComponent {
+export class ButtonComponent {
   @Input() buttonText: string = '';
   @Input() type: 'variation' | 'invitation' | '' = '';
   @Input() isSubmitType: boolean = false;

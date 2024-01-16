@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GenericInputComponent } from './generic-input.component';
+import { RadioButtonComponent } from './radio-button.component';
 
-describe('GenericInputComponent', () => {
-  let component: GenericInputComponent;
-  let fixture: ComponentFixture<GenericInputComponent>;
+describe('RadioButtonComponent', () => {
+  let component: RadioButtonComponent;
+  let fixture: ComponentFixture<RadioButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GenericInputComponent],
+      imports: [RadioButtonComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GenericInputComponent);
+    fixture = TestBed.createComponent(RadioButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -13,13 +13,13 @@
       </p>
     </header>
     <main class="col-11 my-5">
-      <app-generic-input
+      <input-atom
         [contentText]="link"
         [id]="'readUrl'"
         [type]="'text'"
         [readOnly]="true"
       />
-      <app-generic-button
+      <button-atom
         class="mt-4 d-flex justify-content-center"
         [buttonText]="'Copiar link'"
         (clickEvent)="copyUrl()"

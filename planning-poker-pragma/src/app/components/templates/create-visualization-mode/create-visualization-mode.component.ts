@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { nameValidator } from '../../../shared/validators';
 import { ClassroomsService } from '../../../shared/services/classrooms-service/classrooms.service';
-import { GenericButtonComponent } from '../../atoms/generic-button/generic-button.component';
-import { GenericInputComponent } from '../../atoms/generic-input/generic-input.component';
+import { ButtonComponent } from '../../atoms/button/button.component';
+import { InputComponent } from '../../atoms/input/input.component';
 import { UserInRoomInterface } from '../../../interfaces/user-in-room-interface';
 import { RadioButtonsMenuComponent } from './radio-buttons-menu/radio-buttons-menu.component';
 
@@ -12,8 +12,8 @@ import { RadioButtonsMenuComponent } from './radio-buttons-menu/radio-buttons-me
   standalone: true,
   imports: [
     CommonModule,
-    GenericButtonComponent,
-    GenericInputComponent,
+    ButtonComponent,
+    InputComponent,
     RadioButtonsMenuComponent,
   ],
   templateUrl: './create-visualization-mode.component.html',

@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import { validateRegex } from '../../shared/validators';
-import { GenericButtonComponent } from '../../components/atoms/generic-button/generic-button.component';
-import { GenericInputComponent } from '../../components/atoms/generic-input/generic-input.component';
+import { ButtonComponent } from '../../components/atoms/button/button.component';
+import { InputComponent } from '../../components/atoms/input/input.component';
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -19,8 +19,8 @@ import {
   imports: [
     CommonModule,
     NavbarComponent,
-    GenericButtonComponent,
-    GenericInputComponent,
+    ButtonComponent,
+    InputComponent,
     FormsModule,
     ReactiveFormsModule,
   ],
