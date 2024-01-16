@@ -60,7 +60,7 @@ export class UsersService {
         this.router.navigate(['create-classroom']);
       },
       error: (err) => {
-        window.alert('Wrong User!, try Again!' + err);
+        window.alert('Wrong User!, try Again!');
         this.router.navigate(['login']);
       },
     });

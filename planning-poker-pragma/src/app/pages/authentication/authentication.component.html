@@ -4,8 +4,15 @@
     [tittle]="'Pragma'"
     [imgUrl]="pragmaIconUrl"
   />
-  <section class="row d-flex justify-content-center">
+  <form
+    [formGroup]="userForm"
+    (ngSubmit)="isLogin ? validateUser() : createUser()"
+    class="row d-flex justify-content-center"
+  >
     <h1 class="col-12 my-3 d-flex justify-content-center">{{ tittle }}</h1>
+    <p *ngIf="regexMessage" class="col-12 d-flex justify-content-center">
+      {{ regexMessage }}
+    </p>
     @if (!isLogin) {
     <div class="row my-1 col-7 align-items-center justify-content-center">
       <label class="col-1 d-flex justify-content-end" for="tbUsername"
@@ -15,8 +22,7 @@
         class="col-6"
         [id]="'tbUsername'"
         [type]="'text'"
-        [contentText]="username"
-        (InputChange)="username = $event"
+        (InputChange)="onUsernameChange($event)"
       />
     </div>
     }
@@ -28,8 +34,7 @@
         class="col-6"
         [id]="'tbEmail'"
         [type]="'email'"
-        [contentText]="email"
-        (InputChange)="email = $event"
+        (InputChange)="onEmailChange($event)"
       />
     </div>
     <div class="row my-1 col-7 align-items-center justify-content-center">
@@ -40,21 +45,18 @@
         class="col-6"
         [id]="'tbPassword'"
         [type]="'password'"
-        [contentText]="password"
-        (InputChange)="password = $event"
+        (InputChange)="onPasswordChange($event)"
       />
     </div>
     <div class="my-1 col-7 d-flex justify-content-center">
       <button-atom
         class="col-6 my-2 d-flex justify-content-center"
+        [isSubmitType]="true"
+        [disabledState]="!userForm.valid"
         [buttonText]="isLogin ? 'Login' : 'Register'"
-        [disabledState]="
-          isLogin ? !email || !password : !email || !password || !username
-        "
-        (clickEvent)="isLogin ? validateUser() : createUser()"
       />
     </div>
-  </section>
+  </form>
   <a
     *ngIf="!isLogin"
     class="col-1 mt-3 d-flex justify-content-center"
