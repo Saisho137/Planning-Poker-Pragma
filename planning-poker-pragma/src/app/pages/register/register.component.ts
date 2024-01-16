@@ -27,7 +27,7 @@ export class RegisterComponent {
   constructor(private userService: UsersService, private router: Router, private location: Location) {
     const token = sessionStorage.getItem('session_token')!;
     if (token) {
-      this.router.navigate(['']);
+      this.router.navigate(['create-classroom']);
     }
     if (this.location.path() === '/login') {
       this.isLogin = true

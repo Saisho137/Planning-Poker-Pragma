@@ -57,7 +57,7 @@ export class UsersService {
         const user = res.user;
         sessionStorage.setItem('user_id', user._id);
         sessionStorage.setItem('user_username', user.username);
-        this.router.navigate(['']);
+        this.router.navigate(['create-classroom']);
       },
       error: (err) => {
         window.alert('Wrong User!, try Again!' + err);
