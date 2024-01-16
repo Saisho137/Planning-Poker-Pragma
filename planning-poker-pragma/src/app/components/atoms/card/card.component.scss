@@ -22,8 +22,8 @@ $card-pool-hover-color: #531d8c;
     color: $card-pool-hover-color;
     transform: translateY(-10px);
   }
+}
 
-  &:hover {
-    cursor: pointer;
-  }
+.card-pool:hover {
+  cursor: pointer;
 }
