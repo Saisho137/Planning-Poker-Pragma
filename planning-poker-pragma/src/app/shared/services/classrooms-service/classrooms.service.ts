@@ -58,7 +58,7 @@ export class ClassroomsService {
     ],
   ];
 
-  constructor(private usersService: UsersService) { }
+  constructor(private usersService: UsersService) {}
 
   public userIsPlayer(classroomId: string, userId: string): boolean {
     const room: ClassroomInterface | undefined = this.getRoom(classroomId);
@@ -116,23 +116,32 @@ export class ClassroomsService {
     }
   }
 
-  public async addMockUpUsers(classroomId: string): Promise<void> {
-    const mockUpUsers: UserInterface[] = await this.usersService.getAllUsers();
+  public addMockUpUsers(classroomId: string): void {
+    this.usersService.getAllUsers().subscribe({
+      next: (users) => {
+        const mockUpUsers: UserInterface[] = users;
 
-    const convertToUserInRoom = (user: UserInterface): UserInRoomInterface => {
-      return {
-        id: user._id,
-        username: user.username,
-        rol: Math.random() <= 0.7 ? 'player' : 'spectator',
-        cardSelected: '',
-      };
-    };
+        const convertToUserInRoom = (
+          user: UserInterface
+        ): UserInRoomInterface => {
+          return {
+            id: user._id,
+            username: user.username,
+            rol: Math.random() <= 0.7 ? 'player' : 'spectator',
+            cardSelected: '',
+          };
+        };
 
-    const usersToAdd: UserInRoomInterface[] = mockUpUsers
-      .map(convertToUserInRoom)
-      .filter((user) => user.id !== sessionStorage.getItem('user_id')); //Filer host user from room
+        const usersToAdd: UserInRoomInterface[] = mockUpUsers
+          .map(convertToUserInRoom)
+          .filter((user) => user.id !== sessionStorage.getItem('user_id')); //Filter host user from the room
 
-    this.addUsersToRoom(classroomId, usersToAdd);
+        this.addUsersToRoom(classroomId, usersToAdd);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 
   public selectCardForMockUpUsers(

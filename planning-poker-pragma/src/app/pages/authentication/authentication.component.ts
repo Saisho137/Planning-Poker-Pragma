@@ -13,6 +13,8 @@ import {
   Validators,
   FormGroup,
 } from '@angular/forms';
+import { RegisterInterface } from '../../interfaces/register-interface';
+import { UserResponseInterface } from '../../interfaces/user-response-interface';
 
 @Component({
   selector: 'app-register',
@@ -121,18 +123,48 @@ export class AuthenticationComponent {
 
   public createUser(): void {
     const { userEmail, userPassword, userUsername } = this.userForm.value;
+
     if (
       userUsername &&
       userEmail &&
       userPassword &&
       nameValidator(userUsername)
-    )
-      this.userService.createUSer(userUsername, userEmail, userPassword);
+    ) {
+      this.userService
+        .createUSer(userUsername, userEmail, userPassword)
+        .subscribe({
+          next: (res: RegisterInterface) => {
+            res.userCreated === true
+              ? this.validateUser()
+              : window.alert('Something Went Wrong! Try again!');
+          },
+          error: (err) => {
+            window.alert('Something Went Wrong! Try again!' + err);
+            this.router.navigate(['register']);
+          },
+        });
+    }
   }
 
   public validateUser(): void {
     const { userEmail, userPassword } = this.userForm.value;
-    if (userEmail && userPassword)
-      this.userService.validateUser(userEmail, userPassword);
+
+    if (userEmail && userPassword) {
+      this.userService.validateUser(userEmail, userPassword).subscribe({
+        next: (res: UserResponseInterface) => {
+          const token = res.token;
+          sessionStorage.setItem('session_token', token);
+
+          const user = res.user;
+          sessionStorage.setItem('user_id', user._id);
+          sessionStorage.setItem('user_username', user.username);
+          this.router.navigate(['create-classroom']);
+        },
+        error: () => {
+          window.alert('Wrong User!, try Again!');
+          this.router.navigate(['login']);
+        },
+      });
+    }
   }
 }
