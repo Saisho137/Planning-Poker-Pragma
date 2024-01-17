@@ -22,7 +22,9 @@
       [required]="true"
       (InputChange)="onInputChange($event)"
     />
-    <p class="col-12 mt-2 d-flex justify-content-center">{{ regexMessage }}</p>
+    <p *ngIf="regexMessage" class="col-12 mt-2 d-flex justify-content-center">
+      {{ regexMessage }}
+    </p>
     <button-atom
       [ngClass]="
         !regexMessage

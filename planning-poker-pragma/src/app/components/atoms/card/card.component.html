@@ -1,18 +1,18 @@
 @if (mode === 'pool') {
-<article
+<div
   class="card-pool d-flex justify-content-center align-items-center"
   [class.selected]="cardValue === selectedCard"
   (click)="onCardClick()"
 >
   {{ cardValue }}
-</article>
+</div>
 } @else {
-<article class="row d-flex justify-content-center">
+<div class="row d-flex justify-content-center">
   <div class="card-average d-flex justify-content-center align-items-center">
     {{ cardValue }}
   </div>
   <p class="col-12 d-flex justify-content-center">
     {{ votes }}
   </p>
-</article>
+</div>
 }

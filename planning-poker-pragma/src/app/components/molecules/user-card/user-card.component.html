@@ -1,5 +1,5 @@
 @if (visualization === 'player') {
-<article class="row d-flex justify-content-center">
+<div class="row d-flex justify-content-center">
   <div
     class="card-user-player d-flex justify-content-center align-items-center"
     [class.selected]="selectedCard && !votationFinished"
@@ -13,9 +13,9 @@
   <p class="col-12 d-flex justify-content-center">
     {{ cardValue }}
   </p>
-</article>
+</div>
 } @else if (visualization === 'spectator') {
-<article class="row d-flex justify-content-center">
+<div class="row d-flex justify-content-center">
   <div
     class="card-user-spectator d-flex justify-content-center align-items-center"
   >
@@ -24,7 +24,7 @@
   <p class="col-12 d-flex justify-content-center">
     {{ cardValue }}
   </p>
-</article>
+</div>
 } @else {
 <div></div>
 }
