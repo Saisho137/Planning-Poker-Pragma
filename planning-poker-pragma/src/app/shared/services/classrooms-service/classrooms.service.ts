@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ClassroomInterface } from '../../../interfaces/classroom-interface';
 import { UserInRoomInterface } from '../../../interfaces/user-in-room-interface';
-import { ScoringModeInterface } from '../../../interfaces/scoring-mode-interface';
+import {
+  ScoringModeI,
+  ScoringModeItemI,
+} from '../../../interfaces/scoring-mode-interface';
 import { UsersService } from '../users-service/users.service';
 import { UserInterface } from '../../../interfaces/user-interface';
 import { BehaviorSubject, Observable, map } from 'rxjs';
@@ -18,8 +21,8 @@ export class ClassroomsService {
   private rooms: ClassroomInterface[] = [];
   private users: UserInRoomInterface[] = [];
 
-  private scoringMode = [
-    [
+  private scoringMode: ScoringModeI = {
+    'fibonacci': [
       { id: 1, value: '1' },
       { id: 2, value: '2' },
       { id: 3, value: '3' },
@@ -33,7 +36,7 @@ export class ClassroomsService {
       { id: 11, value: '?' },
       { id: 12, value: '☕' },
     ],
-    [
+    'oneToFive': [
       { id: 1, value: '1' },
       { id: 2, value: '2' },
       { id: 3, value: '3' },
@@ -42,7 +45,7 @@ export class ClassroomsService {
       { id: 6, value: '?' },
       { id: 7, value: '☕' },
     ],
-    [
+    'oneHundred': [
       { id: 1, value: '10' },
       { id: 2, value: '20' },
       { id: 3, value: '30' },
@@ -56,7 +59,7 @@ export class ClassroomsService {
       { id: 11, value: '?' },
       { id: 12, value: '☕' },
     ],
-  ];
+  };
 
   constructor(private usersService: UsersService) {}
 
@@ -68,17 +71,10 @@ export class ClassroomsService {
     return user ? user.rol === 'player' : false;
   }
 
-  public createScoringMode(mode: string): ScoringModeInterface[] {
-    switch (mode) {
-      case 'fibonacci':
-        return this.scoringMode[0];
-      case 'oneToFive':
-        return this.scoringMode[1];
-      case 'oneHundred':
-        return this.scoringMode[2];
-      default:
-        return this.scoringMode[0];
-    }
+  public createScoringMode(
+    mode: 'fibonacci' | 'oneToFive' | 'oneHundred'
+  ): ScoringModeItemI[] {
+    return this.scoringMode[mode];
   }
 
   public createRoom(
@@ -145,7 +141,7 @@ export class ClassroomsService {
   }
 
   public selectCardForMockUpUsers(
-    mode: ScoringModeInterface[],
+    mode: ScoringModeItemI[],
     classroomId: string,
     userId: string,
     hostValue: string

@@ -4,7 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClassroomsService } from '../../shared/services/classrooms-service/classrooms.service';
 import { CreateVisualizationModeComponent } from '../../components/organisms/create-visualization-mode/create-visualization-mode.component';
 import { ClassroomInterface } from '../../interfaces/classroom-interface';
-import { ScoringModeInterface } from '../../interfaces/scoring-mode-interface';
+import { ScoringModeItemI } from '../../interfaces/scoring-mode-interface';
 import { CardMenuComponent } from '../../components/organisms/card-menu/card-menu.component';
 import { UsersTableMenuComponent } from '../../components/organisms/users-table-menu/users-table-menu.component';
 import { Subscription } from 'rxjs';
@@ -40,7 +40,7 @@ export class ClassroomComponent {
 
   public allPlayersSelected: boolean = false;
   public cardResultsRevealed: boolean = false;
-  public scoringMode: ScoringModeInterface[];
+  public scoringMode: ScoringModeItemI[];
 
   public selectedCard: string = '';
   public averageScore: string | undefined = undefined;
@@ -57,10 +57,11 @@ export class ClassroomComponent {
     this.roomId = this.route.snapshot.paramMap.get('id')!;
     this.room = this.classroomService.getRoom(this.roomId);
     this.scoringMode = this.classroomService.createScoringMode('fibonacci');
+    console.log(this.scoringMode);
   }
 
   initializeRoom(): void {
-    this.configurationWindow = !this.configurationWindow
+    this.configurationWindow = !this.configurationWindow;
     this.addUsers();
     this.setVisualization();
     this.updateRoom();
@@ -114,9 +115,7 @@ export class ClassroomComponent {
 
   public votesCount(): void {
     if (this.room?.users) {
-      const players = this.room.users.filter(
-        (user) => user.rol === 'player'
-      );
+      const players = this.room.users.filter((user) => user.rol === 'player');
       //Creates a key-value pair object that counts the number of votes of each selected card
       this.numberDictionary = players.reduce(
         (accumulator: Record<string, number>, object: UserInRoomInterface) => {
@@ -131,9 +130,7 @@ export class ClassroomComponent {
 
   public makeAverageScore(): void {
     if (this.room) {
-      const players = this.room.users.filter(
-        (user) => user.rol === 'player'
-      );
+      const players = this.room.users.filter((user) => user.rol === 'player');
       //Split number into Integer and Decimal Part.
       let averageArray: string[] = (
         Math.round(
@@ -143,9 +140,11 @@ export class ClassroomComponent {
             0
           ) /
             players.length) *
-          10
+            10
         ) / 10
-      ).toString().split('.');
+      )
+        .toString()
+        .split('.');
       //If number has Decimal part, replace '.' with ','.
       if (averageArray[1]) {
         const average = averageArray[0] + ',' + averageArray[1];
@@ -173,10 +172,9 @@ export class ClassroomComponent {
       this.selectedCard = '';
       this.averageScore = undefined;
       this.numberDictionary = { '0': 0 };
-      return
+      return;
     }
     alert('Debes ser administrador para presionar este botón!');
-
   }
 
   ngOnDestroy(): void {

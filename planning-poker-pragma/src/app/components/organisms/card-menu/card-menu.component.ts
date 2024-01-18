@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ScoringModeInterface } from '../../../interfaces/scoring-mode-interface';
+import { ScoringModeItemI } from '../../../interfaces/scoring-mode-interface';
 import { CardComponent } from '../../atoms/card/card.component';
 
 @Component({
@@ -13,7 +13,7 @@ import { CardComponent } from '../../atoms/card/card.component';
 export class CardMenuComponent {
   @Input() visualization: 'player' | 'spectator' | '' = '';
   @Input() selectedCard: string = '';
-  @Input() scoringMode: ScoringModeInterface[] = [];
+  @Input() scoringMode: ScoringModeItemI[] = [];
 
   @Output() clickEvent: EventEmitter<string> = new EventEmitter<string>();
 
