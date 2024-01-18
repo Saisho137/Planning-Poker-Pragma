@@ -17,13 +17,14 @@ import { Subscription } from 'rxjs';
 })
 export class CardMenuComponent {
   public scoringModeOptions: ('fibonacci' | 'oneToFive' | 'oneHundred')[] = ['fibonacci', 'oneToFive', 'oneHundred']
+  public scoringSelection: 'fibonacci' | 'oneToFive' | 'oneHundred' = 'fibonacci'
   public scoringModeWindow: boolean = false;
   public scoringMode: ScoringModeItemI[] = [];
 
   private userIdSubscription: Subscription | undefined;
+  private userId: string = '';
 
   @Input() room: ClassroomI | undefined;
-  @Input() userId: string = '';
 
   @Input() selectedCard: string = '';
   @Input() visualization: 'player' | 'spectator' | '' = '';
@@ -32,7 +33,7 @@ export class CardMenuComponent {
   @Output() scoringModeSelection: EventEmitter<'fibonacci' | 'oneToFive' | 'oneHundred'> = new EventEmitter<'fibonacci' | 'oneToFive' | 'oneHundred'>();
 
   constructor(private classroomService: ClassroomsService, private userService: UsersService) {
-    this.scoringMode = this.classroomService.createScoringMode('fibonacci');
+    this.scoringMode = this.classroomService.createScoringMode(this.scoringSelection);
   }
 
   ngOnInit() {
@@ -44,7 +45,8 @@ export class CardMenuComponent {
   
   getScoringMode(value: 'fibonacci' | 'oneToFive' | 'oneHundred'){
     if (this.room?.admin.includes(this.userId)) {
-      this.scoringMode = this.classroomService.createScoringMode(value);
+      this.scoringSelection = value;
+      this.scoringMode = this.classroomService.createScoringMode(this.scoringSelection);
       this.scoringModeSelection.emit(value)
       return
     }
