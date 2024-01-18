@@ -1,9 +1,10 @@
 @if (visualization === 'player') {
 <div class="row d-flex justify-content-center">
   <div
-    (click)="onClick()"
     class="card-user-player d-flex justify-content-center align-items-center"
+    title="Make this User an Admin"
     [class.selected]="selectedCard && !votationFinished"
+    (click)="onClick()"
   >
     @if (votationFinished) { @defer {
     {{ selectedCard }}
@@ -18,8 +19,9 @@
 } @else if (visualization === 'spectator') {
 <div class="row d-flex justify-content-center">
   <div
-    (click)="onClick()"
     class="card-user-spectator d-flex justify-content-center align-items-center"
+    title="Click to Make this User an Admin"
+    (click)="onClick()"
   >
     {{ defaultUser }}
   </div>
