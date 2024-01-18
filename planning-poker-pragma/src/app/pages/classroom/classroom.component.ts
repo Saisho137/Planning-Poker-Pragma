@@ -45,6 +45,7 @@ export class ClassroomComponent {
   public scoringMode: ScoringModeItemI[];
 
   public selectedCard: string = '';
+  public usersSelectedCard: boolean = false;
   public averageScore: string | undefined = undefined;
   public visualization: 'player' | 'spectator' | '' = '';
   public numberDictionary: Record<string, number> = { '0': 0 };
@@ -55,12 +56,11 @@ export class ClassroomComponent {
   constructor(
     private route: ActivatedRoute,
     private classroomService: ClassroomsService,
-    private usersService: UsersService
+    private userService: UsersService
   ) {
     this.roomId = this.route.snapshot.paramMap.get('id')!;
     this.room = this.classroomService.getRoom(this.roomId);
     this.scoringMode = this.classroomService.createScoringMode('fibonacci');
-    console.log(this.scoringMode);
   }
 
   initializeRoom(): void {
@@ -85,7 +85,7 @@ export class ClassroomComponent {
   }
 
   public addMockUpUsers(): void {
-    this.usersService.getAllUsers().subscribe({
+    this.userService.getAllUsers().subscribe({
       next: (users) => {
         const mockUpUsers: UserI[] = users;
 
@@ -125,17 +125,26 @@ export class ClassroomComponent {
       this.updateRoom();
       return;
     }
-    this.selectedCard = value;
 
-    setTimeout(() => {
-      this.classroomService.selectCardForMockUpUsers(
-        this.scoringMode,
-        this.roomId,
-        this.userId,
-        this.selectedCard
-      );
-      this.updateRoom();
-    }, 3000);
+    this.selectedCard = value;
+    this.classroomService.selectCardForHost(
+      this.roomId,
+      this.userId,
+      this.selectedCard
+    );
+
+    if (!this.usersSelectedCard) {
+      setTimeout(() => {
+        this.classroomService.selectCardForMockUpUsers(
+          this.scoringMode,
+          this.roomId,
+          this.userId
+        );
+        this.usersSelectedCard = true;
+        this.updateRoom();
+      }, 2000);
+      return;
+    }
   }
 
   public votesCount(): void {
@@ -192,10 +201,11 @@ export class ClassroomComponent {
 
   restartGame(): void {
     if (this.userId === this.room?.admin) {
-      this.cardResultsRevealed = false;
       this.classroomService.resetGame(this.roomId);
-      this.selectedCard = '';
+      this.usersSelectedCard = false;
+      this.cardResultsRevealed = false;
       this.averageScore = undefined;
+      this.selectedCard = '';
       this.numberDictionary = { '0': 0 };
       return;
     }
