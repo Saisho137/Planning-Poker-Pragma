@@ -91,6 +91,7 @@ export class ClassroomsService {
     );
     if (selectedRoom) {
       selectedRoom.admin.push(newAdminUser);
+      console.log(selectedRoom.admin);
     }
   }
 
