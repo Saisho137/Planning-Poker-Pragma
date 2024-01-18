@@ -1,0 +1,29 @@
+$card-pool-border-color: #ba64fd;
+$card-pool-bg-color: transparent;
+$card-pool-color: white;
+$card-pool-hover-bg-color: #e3a4ff;
+$card-pool-hover-color: #531d8c;
+
+.card-pool,
+.card-average {
+  width: 4rem;
+  height: 6rem;
+  font-weight: bold;
+  font-size: 20px;
+  display: inline;
+  background-color: $card-pool-bg-color;
+  border: 1px solid $card-pool-border-color;
+  border-radius: 10px;
+  color: $card-pool-color;
+  transition: transform 0.3s, background-color 0.3s, color 0.3s;
+
+  &.selected {
+    background-color: $card-pool-hover-bg-color;
+    color: $card-pool-hover-color;
+    transform: translateY(-10px);
+  }
+}
+
+.card-pool:hover {
+  cursor: pointer;
+}

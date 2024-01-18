@@ -1,0 +1,68 @@
+<section class="classroom-container mt-1 row d-flex justify-content-center">
+  @if (configurationWindow) {
+  <app-create-visualization-mode
+    class="col-3"
+    [classroomId]="roomId"
+    (roomGeneratedEvent)="initializeRoom()"
+  />
+  } @if (invitationWindow) {
+  <app-invitation-link
+    class="d-flex justify-content-center"
+    [link]="roomId"
+    (clickEvent)="switchInvitationWindow()"
+  />
+  }
+  <app-navbar
+    [buttonText]="'Invitar jugadores'"
+    [roomId]="roomId"
+    [imgUrl]="pragmaIcon"
+    (clickEvent)="switchInvitationWindow()"
+  />
+  <app-users-table-menu
+    class="row"
+    [room]="room"
+    [selectedCard]="selectedCard"
+    [buttonText]="'Revelar cartas'"
+    [votationFinished]="cardResultsRevealed"
+    [allPlayersSelected]="allPlayersSelected"
+    (clickEventReveal)="revealCards()"
+    (clickEventRestart)="restartGame()"
+  />
+  @if (!cardResultsRevealed) {
+  <app-card-menu
+    [visualization]="visualization"
+    [selectedCard]="selectedCard"
+    [scoringMode]="scoringMode"
+    (clickEvent)="selectCard($event)"
+  />
+  } @else { @defer {
+  <section class="row mt-5">
+    <div class="col-4"></div>
+    <div class="col-4 d-flex justify-content-center">
+      @for (item of numberDictionary | keyvalue; track item.key) {
+      <card-atom
+        class="col-2 d-flex justify-content-center"
+        [mode]="'average'"
+        [cardValue]="item.key"
+        [votes]="item.value + ' votos'"
+      />
+      }
+    </div>
+    <div class="col-2">
+      <p class="average-tittle col-12 d-flex justify-content-center">
+        Promedio:
+      </p>
+      <p class="average-number col-12 d-flex justify-content-center">
+        {{ averageScore }}
+      </p>
+    </div>
+  </section>
+  } @placeholder (minimum 2s) {
+  <div></div>
+  } }
+  <section class="row mt-5 d-flex justify-content-center">
+    <a class="col-2 d-flex justify-content-center" routerLink="/"
+      >Abandonar la Sala</a
+    >
+  </section>
+</section>

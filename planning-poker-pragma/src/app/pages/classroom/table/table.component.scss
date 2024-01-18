@@ -1,0 +1,65 @@
+.voting-table {
+  position: relative;
+  height: 40vh;
+  width: 36vw;
+
+  .table {
+    position: absolute;
+    border-radius: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .button-reveal {
+    position: absolute;
+    z-index: 5;
+  }
+
+  .first {
+    height: 30vh;
+    width: 30vw;
+    background-color: #270953;
+    border: 1px solid #6328cb;
+    z-index: 4;
+  }
+
+  .second {
+    height: 35vh;
+    width: 33vw;
+    background-color: transparent;
+    border: 2px solid #9175e4;
+    z-index: 3;
+  }
+
+  .third {
+    height: 40vh;
+    width: 36vw;
+    background-color: transparent;
+    border: 2px solid #7242d3;
+    z-index: 2;
+  }
+
+  .loader {
+    width: 60px;
+    aspect-ratio: 4;
+    --_g: no-repeat radial-gradient(circle closest-side, white 90%, #0000);
+    background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+    background-size: calc(100% / 3) 100%;
+    animation: l7 1s infinite linear;
+
+    @keyframes l7 {
+      33% {
+        background-size: calc(100% / 3) 0%, calc(100% / 3) 100%, calc(100% / 3) 100%;
+      }
+
+      50% {
+        background-size: calc(100% / 3) 100%, calc(100% / 3) 0%, calc(100% / 3) 100%;
+      }
+
+      66% {
+        background-size: calc(100% / 3) 100%, calc(100% / 3) 100%, calc(100% / 3) 0%;
+      }
+    }
+  }
+}

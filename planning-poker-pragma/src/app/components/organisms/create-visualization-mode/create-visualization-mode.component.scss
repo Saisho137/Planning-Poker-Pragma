@@ -1,0 +1,25 @@
+.visualization-mode-section {
+  border-radius: 15px;
+  border: 1px solid #ba64fd;
+  background-color: #1f0d3f;
+}
+
+.section {
+  position: absolute;
+  z-index: 6;
+  top: 50%;
+  left: 50%;
+  transform: translate(-48%, -58%);
+  min-height: 30vh;
+  width: 30vw;
+}
+
+.blur {
+  position: absolute;
+  z-index: 6;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+}

@@ -1,0 +1,26 @@
+<section>
+  <div class="blur"></div>
+  <section
+    class="section visualization-mode-section row d-flex justify-content-center"
+  >
+    <div class="row col-9 mt-5 d-flex justify-content-center">
+      <label class="col-12 mt-1 d-flex justify-content-start" for="name">
+        <h6>Tu nombre:</h6></label
+      >
+      <input-atom
+        class="col-12"
+        [id]="'name'"
+        [type]="'text'"
+        [contentText]="username"
+        (InputChange)="username = $event"
+      />
+    </div>
+    <radio-buttons-menu (changeEvent)="switchRadio($event)" />
+    <button-atom
+      class="col-6 mb-4 d-flex justify-content-center"
+      [buttonText]="'Continuar'"
+      [disabledState]="!selectedMode"
+      (clickEvent)="continueToRoom()"
+    />
+  </section>
+</section>

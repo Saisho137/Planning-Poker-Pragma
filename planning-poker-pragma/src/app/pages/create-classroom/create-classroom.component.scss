@@ -1,0 +1,24 @@
+.default-container {
+  height: 95vh;
+  margin: 0;
+}
+
+input {
+  padding: 5px 15px;
+  height: 3rem;
+  min-height: fit-content;
+  min-width: fit-content;
+  border-radius: 100px;
+  border: 1px solid #ba64fd;
+  background-color: transparent;
+  color: white;
+  font-size: 16px;
+  outline: none;
+
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #370578 inset;
+    -webkit-text-fill-color: white;
+    font-family: inherit !important;
+    font-size: inherit !important;
+  }
+}

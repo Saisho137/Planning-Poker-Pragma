@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { RegisterComponent } from './components/pages/register/register.component';
-import { ClassroomComponent } from './components/pages/classroom/classroom.component';
-import { HomeComponent } from './components/pages/home/home.component';
-import { LoginComponent } from './components/pages/login/login.component';
+import { AuthenticationComponent } from './pages/authentication/authentication.component';
+import { ClassroomComponent } from './pages/classroom/classroom.component';
+import { CreateClassroomComponent } from './pages/create-classroom/create-classroom.component';
 
 export const routes: Routes = [
-  { path: '', title: 'Home', component: HomeComponent },
-  { path: 'login', title: 'Login', component: LoginComponent },
-  { path: 'register', title: 'Register', component: RegisterComponent },
+  { path: '', redirectTo: '/create-classroom', pathMatch: 'full' },
+  { path: 'create-classroom', title: 'Create-Classroom', component: CreateClassroomComponent },
+  { path: 'login', title: 'Login', component: AuthenticationComponent },
+  { path: 'register', title: 'Register', component: AuthenticationComponent },
   { path: 'classroom/:id', title: 'Classroom', component: ClassroomComponent },
 ];

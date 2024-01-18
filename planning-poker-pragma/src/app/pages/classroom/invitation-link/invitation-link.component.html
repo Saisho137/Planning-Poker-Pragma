@@ -1,0 +1,29 @@
+<section>
+  <div class="blur"></div>
+  <section class="row modal-section d-flex justify-content-center">
+    <header class="row align-items-center align-items-center">
+      <p class="col-11 d-flex justify-content-start align-items-center">
+        Invitar jugadores
+      </p>
+      <p
+        class="close-btn col-1 d-flex justify-content-end align-items-center"
+        (click)="onButtonClick()"
+      >
+        ✖
+      </p>
+    </header>
+    <main class="col-11 my-5">
+      <input-atom
+        [contentText]="link"
+        [id]="'readUrl'"
+        [type]="'text'"
+        [readOnly]="true"
+      />
+      <button-atom
+        class="mt-4 d-flex justify-content-center"
+        [buttonText]="'Copiar link'"
+        (clickEvent)="copyUrl()"
+      />
+    </main>
+  </section>
+</section>

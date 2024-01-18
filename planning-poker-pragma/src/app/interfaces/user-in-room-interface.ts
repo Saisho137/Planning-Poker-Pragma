@@ -1,4 +1,4 @@
-export interface UserInRoomInterface {
+export interface UserInRoomI {
   id: string;
   username: string;
   rol: 'player' | 'spectator';

@@ -1,0 +1,39 @@
+<section
+  class="default-container py-3 px-3 row d-flex justify-content-center align-items-start"
+>
+  <app-navbar
+    class="col-12"
+    [buttonText]="'Logout'"
+    [tittle]="'Crear Partida'"
+    [imgUrl]="pragmaIconUrl"
+    (clickEvent)="logOut()"
+  />
+  <form
+    class="row col-3 px-2 d-flex justify-content-center"
+    (ngSubmit)="validateName()"
+  >
+    <label class="col-12 mt-2 d-flex justify-content-start" for="classroomName"
+      ><h6 style="font-weight: bold">Nombra la partida</h6></label
+    >
+    <input-atom
+      [contentText]="''"
+      [id]="'classroomName'"
+      [type]="'text'"
+      [required]="true"
+      (InputChange)="onInputChange($event)"
+    />
+    <p *ngIf="regexMessage" class="col-12 mt-2 d-flex justify-content-center">
+      {{ regexMessage }}
+    </p>
+    <button-atom
+      [ngClass]="
+        !regexMessage
+          ? 'col-8 mt-3 d-flex justify-content-center'
+          : 'col-8 mt-1 d-flex justify-content-center'
+      "
+      [isSubmitType]="true"
+      [disabledState]="!classroomName.valid"
+      [buttonText]="'Crear partida'"
+    />
+  </form>
+</section>
