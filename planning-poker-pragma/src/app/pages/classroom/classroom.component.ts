@@ -51,8 +51,10 @@ export class ClassroomComponent {
   public numberDictionary: Record<string, number> = { '0': 0 };
 
   private userId: string = '';
+  private username: string = '';
 
   private userIdSubscription: Subscription | undefined;
+  private usernameSubscription: Subscription | undefined;
   private getAllUsersSubscription: Subscription | undefined;
   private allPlayerSelectedSubscription: Subscription | undefined;
 
@@ -71,6 +73,21 @@ export class ClassroomComponent {
       if (userId) this.userId = userId;
       else this.userId = '0000';
     });
+    this.usernameSubscription = this.userService.username$.subscribe(
+      (username) => {
+        if (username) this.username = username;
+        else this.username = 'ERR';
+      }
+    );
+
+    const user: UserInRoomI = {
+      id: this.userId,
+      username: this.username,
+      rol: 'spectator',
+      cardSelected: '',
+    };
+
+    this.classroomService.createRoom(this.roomId, user);
   }
 
   initializeRoom(): void {
@@ -153,7 +170,6 @@ export class ClassroomComponent {
         this.usersSelectedCard = true;
         this.updateRoom();
       }, 2000);
-      return;
     }
   }
 
@@ -217,21 +233,28 @@ export class ClassroomComponent {
       this.averageScore = undefined;
       this.selectedCard = '';
       this.numberDictionary = { '0': 0 };
+      this.configurationWindow = true;
       return;
     }
     alert('Debes ser administrador para presionar este botón!');
   }
 
   ngOnDestroy(): void {
+    this.restartGame()
+
     if (this.allPlayerSelectedSubscription) {
       this.allPlayerSelectedSubscription.unsubscribe();
     }
     if (this.userIdSubscription) {
       this.userIdSubscription.unsubscribe();
     }
+    if (this.usernameSubscription) {
+      this.usernameSubscription.unsubscribe();
+    }
     if (this.getAllUsersSubscription) {
       this.getAllUsersSubscription.unsubscribe();
     }
+
     this.classroomService.deleteRoom(this.roomId);
   }
 }
