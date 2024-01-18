@@ -21,6 +21,7 @@ export class CardMenuComponent {
   @Input() visualization: 'player' | 'spectator' | '' = '';
 
   @Output() clickEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() scoringModeSelection: EventEmitter<'fibonacci' | 'oneToFive' | 'oneHundred'> = new EventEmitter<'fibonacci' | 'oneToFive' | 'oneHundred'>();
 
   constructor(private classroomService: ClassroomsService) {
     this.scoringMode = this.classroomService.createScoringMode('fibonacci');
@@ -28,6 +29,7 @@ export class CardMenuComponent {
   
   getScoringMode(value: 'fibonacci' | 'oneToFive' | 'oneHundred'){
     this.scoringMode = this.classroomService.createScoringMode(value);
+    this.scoringModeSelection.emit(value)
   }
 
   switchDisplayModes() {

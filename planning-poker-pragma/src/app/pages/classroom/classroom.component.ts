@@ -143,6 +143,10 @@ export class ClassroomComponent {
     });
   }
 
+  updateScoringMode(value: 'fibonacci' | 'oneToFive' | 'oneHundred') {
+    this.scoringMode = this.classroomService.createScoringMode(value);
+  }
+
   updateRoom(): void {
     this.room = this.classroomService.getRoom(this.roomId);
   }
