@@ -24,6 +24,7 @@ export class CardMenuComponent {
   private userIdSubscription: Subscription | undefined;
   private userId: string = '';
 
+  @Input() roomId: string = ''
   @Input() room: ClassroomI | undefined;
 
   @Input() selectedCard: string = '';
@@ -48,6 +49,8 @@ export class CardMenuComponent {
       this.scoringSelection = value;
       this.scoringMode = this.classroomService.createScoringMode(this.scoringSelection);
       this.scoringModeSelection.emit(value)
+      this.classroomService.clearSelectedCard(this.roomId, this.userId)
+      this.classroomService.clearSelectedCardForMockUpUsers(this.roomId)
       return
     }
     alert('Necesitas ser administrador para cambiar el modo de cartas!')

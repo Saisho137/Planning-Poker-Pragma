@@ -144,6 +144,8 @@ export class ClassroomComponent {
   }
 
   updateScoringMode(value: 'fibonacci' | 'oneToFive' | 'oneHundred') {
+    this.selectedCard = '';
+    this.usersAlreadySelectedCard = false;
     this.scoringMode = this.classroomService.createScoringMode(value);
   }
 

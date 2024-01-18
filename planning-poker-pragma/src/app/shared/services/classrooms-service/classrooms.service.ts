@@ -173,6 +173,17 @@ export class ClassroomsService {
     }
   }
 
+  public clearSelectedCardForMockUpUsers(classroomId: string): void {
+    const selectedRoom: ClassroomI | undefined = this.getRoom(classroomId);
+
+    if (selectedRoom) {
+      selectedRoom.users.forEach((user) => {
+        user.cardSelected = '';
+      });
+      this.userListSubject.next(selectedRoom.users);
+    }
+  }
+
   public allPlayersSelectedCard(): Observable<boolean> {
     return this.userList$.pipe(
       map((users) => {

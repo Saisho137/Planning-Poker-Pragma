@@ -31,6 +31,7 @@
   @if (!cardResultsRevealed) {
   <app-card-menu
     [room]="room"
+    [roomId]="roomId"
     [selectedCard]="selectedCard"
     [visualization]="visualization"
     (scoringModeSelection)="updateScoringMode($event)"
