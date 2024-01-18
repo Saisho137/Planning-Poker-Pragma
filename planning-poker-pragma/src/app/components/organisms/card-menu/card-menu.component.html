@@ -1,6 +1,18 @@
+@if (visualization === 'player') {
 <section class="row mt-4 d-flex justify-content-center">
-  @if (visualization === 'player') {
-  <h3 class="col-12 d-flex justify-content-center">👇 Elige una carta 👇</h3>
+  <h3
+    (click)="switchDisplayModes()"
+    class="col-12 d-flex justify-content-center"
+  >
+    👇 Elige una carta 👇
+  </h3>
+  @if (scoringModeWindow) {
+  <div class="row col-6 justify-content-center">
+    @for (item of scoringModeOptions; track item) {
+    <button-atom class="col-2" [buttonText]="item" (clickEvent)="getScoringMode(item)" />
+    }
+  </div>
+  }
   <div class="col-8 d-flex justify-content-center">
     @for (item of scoringMode; track item.id) {
     <card-atom
@@ -11,5 +23,5 @@
     />
     }
   </div>
-  }
 </section>
+}
