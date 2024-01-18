@@ -30,9 +30,11 @@
   />
   @if (!cardResultsRevealed) {
   <app-card-menu
-    [visualization]="visualization"
+    [room]="room"
+    [roomId]="roomId"
     [selectedCard]="selectedCard"
-    [scoringMode]="scoringMode"
+    [visualization]="visualization"
+    (scoringModeSelection)="updateScoringMode($event)"
     (clickEvent)="selectCard($event)"
   />
   } @else { @defer {
