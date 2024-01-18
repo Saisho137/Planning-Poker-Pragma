@@ -4,6 +4,9 @@ import { ScoringModeItemI } from '../../../interfaces/scoring-mode-interface';
 import { CardComponent } from '../../atoms/card/card.component';
 import { ClassroomsService } from '../../../shared/services/classrooms-service/classrooms.service';
 import { ButtonComponent } from '../../atoms/button/button.component';
+import { ClassroomI } from '../../../interfaces/classroom-interface';
+import { UsersService } from '../../../shared/services/users-service/users.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-card-menu',
@@ -17,19 +20,35 @@ export class CardMenuComponent {
   public scoringModeWindow: boolean = false;
   public scoringMode: ScoringModeItemI[] = [];
 
+  private userIdSubscription: Subscription | undefined;
+
+  @Input() room: ClassroomI | undefined;
+  @Input() userId: string = '';
+
   @Input() selectedCard: string = '';
   @Input() visualization: 'player' | 'spectator' | '' = '';
 
   @Output() clickEvent: EventEmitter<string> = new EventEmitter<string>();
   @Output() scoringModeSelection: EventEmitter<'fibonacci' | 'oneToFive' | 'oneHundred'> = new EventEmitter<'fibonacci' | 'oneToFive' | 'oneHundred'>();
 
-  constructor(private classroomService: ClassroomsService) {
+  constructor(private classroomService: ClassroomsService, private userService: UsersService) {
     this.scoringMode = this.classroomService.createScoringMode('fibonacci');
+  }
+
+  ngOnInit() {
+    this.userIdSubscription = this.userService.userId$.subscribe((userId) => {
+      if (userId) this.userId = userId;
+      else this.userId = '0000';
+    });
   }
   
   getScoringMode(value: 'fibonacci' | 'oneToFive' | 'oneHundred'){
-    this.scoringMode = this.classroomService.createScoringMode(value);
-    this.scoringModeSelection.emit(value)
+    if (this.room?.admin.includes(this.userId)) {
+      this.scoringMode = this.classroomService.createScoringMode(value);
+      this.scoringModeSelection.emit(value)
+      return
+    }
+    alert('Necesitas ser administrador para cambiar el modo de cartas!')
   }
 
   switchDisplayModes() {
@@ -38,5 +57,11 @@ export class CardMenuComponent {
 
   onButtonClick(value: string) {
     this.clickEvent.emit(value);
+  }
+
+  ngOnDestroy() {
+    if (this.userIdSubscription) {
+      this.userIdSubscription.unsubscribe();
+    }
   }
 }
