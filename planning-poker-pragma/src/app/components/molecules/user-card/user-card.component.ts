@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,9 +16,10 @@ export class UserCardComponent {
   @Input() visualization: string = '';
   @Input() votationFinished: boolean = false;
 
-  ngOnInit() {
-    if (this.cardValue) {
-      this.defaultUser = this.cardValue.substring(0, 2).toUpperCase();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['cardValue']) {
+      const newCardValue = changes['cardValue'].currentValue;
+      this.defaultUser = newCardValue.substring(0, 2).toUpperCase();
     }
   }
 }

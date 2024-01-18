@@ -25,11 +25,7 @@ import { ClassroomsService } from '../../../shared/services/classrooms-service/c
   styleUrl: './users-table-menu.component.scss',
 })
 export class UsersTableMenuComponent {
-  public room: ClassroomI | undefined = {
-    id: '',
-    admin: '',
-    users: [{ id: '', username: '', rol: 'spectator', cardSelected: '' }],
-  };
+  public room: ClassroomI | undefined;
 
   @Input({ required: true }) roomId: string = '';
   @Input() selectedCard: string = '';
@@ -44,7 +40,6 @@ export class UsersTableMenuComponent {
 
   ngOnInit() {
     this.room = this.classroomService.getRoom(this.roomId);
-    console.log(this.room);
   }
 
   revealClick() {
