@@ -1,15 +1,22 @@
 @if (visualization === 'player') {
 <section class="row mt-4 d-flex justify-content-center">
-  <h3
-    (click)="switchDisplayModes()"
-    class="col-12 d-flex justify-content-center"
-  >
-    👇 Elige una carta 👇
-  </h3>
+  <div class="col-12 d-flex justify-content-center">
+    <h3
+      class="col-3 d-flex justify-content-center"
+      style="cursor: pointer"
+      (click)="switchDisplayModes()"
+    >
+      👇 Elige una carta 👇
+    </h3>
+  </div>
   @if (scoringModeWindow) {
   <div class="row col-6 justify-content-center">
     @for (item of scoringModeOptions; track item) {
-    <button-atom class="col-2" [buttonText]="item" (clickEvent)="getScoringMode(item)" />
+    <button-atom
+      class="col-2"
+      [buttonText]="item"
+      (clickEvent)="getScoringMode(item)"
+    />
     }
   </div>
   }
