@@ -43,6 +43,7 @@ export class ClassroomComponent {
   public allPlayersSelected: boolean = false;
   public cardResultsRevealed: boolean = false;
   public usersAlreadySelectedCard: boolean = false;
+  public alreadyInitialized: boolean = false;
 
   public scoringMode: ScoringModeItemI[];
   public averageScore: string | undefined = undefined;
@@ -95,11 +96,13 @@ export class ClassroomComponent {
       cardSelected: '',
     };
     this.classroomService.createRoom(this.roomId, user);
-
-    this.addMockUpUsers();
   }
 
   initializeRoom(): void {
+    if (!this.alreadyInitialized){
+      this.addMockUpUsers();
+      this.alreadyInitialized = true;
+    }
     this.configurationWindow = !this.configurationWindow;
     this.setVisualization();
     this.updateRoom();
@@ -244,7 +247,6 @@ export class ClassroomComponent {
 
   ngOnDestroy(): void {
     this.restartGame();
-
     if (this.allPlayerSelectedSubscription) {
       this.allPlayerSelectedSubscription.unsubscribe();
     }
