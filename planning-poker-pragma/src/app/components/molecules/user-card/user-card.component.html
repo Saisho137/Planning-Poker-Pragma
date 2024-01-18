@@ -1,6 +1,7 @@
 @if (visualization === 'player') {
 <div class="row d-flex justify-content-center">
   <div
+    (click)="onClick()"
     class="card-user-player d-flex justify-content-center align-items-center"
     [class.selected]="selectedCard && !votationFinished"
   >
@@ -17,6 +18,7 @@
 } @else if (visualization === 'spectator') {
 <div class="row d-flex justify-content-center">
   <div
+    (click)="onClick()"
     class="card-user-spectator d-flex justify-content-center align-items-center"
   >
     {{ defaultUser }}

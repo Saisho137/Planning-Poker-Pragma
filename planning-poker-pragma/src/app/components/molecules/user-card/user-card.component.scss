@@ -16,6 +16,10 @@ $transition-speed: 0.3s;
   &.selected {
     background-color: #bb65ff;
   }
+  
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .card-user-spectator {
@@ -28,6 +32,10 @@ $transition-speed: 0.3s;
   font-size: 20px;
   color: #330072;
   transition: transform $transition-speed, background-color $transition-speed, color $transition-speed;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .loader {
