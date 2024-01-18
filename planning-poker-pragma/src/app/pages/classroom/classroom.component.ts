@@ -50,8 +50,11 @@ export class ClassroomComponent {
   public visualization: 'player' | 'spectator' | '' = '';
   public numberDictionary: Record<string, number> = { '0': 0 };
 
-  private userId: string = sessionStorage.getItem('user_id')!;
-  private subscription: Subscription | undefined;
+  private userId: string = '';
+
+  private userIdSubscription: Subscription | undefined;
+  private getAllUsersSubscription: Subscription | undefined;
+  private allPlayerSelectedSubscription: Subscription | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -63,12 +66,19 @@ export class ClassroomComponent {
     this.scoringMode = this.classroomService.createScoringMode('fibonacci');
   }
 
+  ngOnInit() {
+    this.userIdSubscription = this.userService.userId$.subscribe((userId) => {
+      if (userId) this.userId = userId;
+      else this.userId = '0000';
+    });
+  }
+
   initializeRoom(): void {
     this.configurationWindow = !this.configurationWindow;
     this.addMockUpUsers();
     this.setVisualization();
     this.updateRoom();
-    this.subscription = this.classroomService
+    this.allPlayerSelectedSubscription = this.classroomService
       .allPlayersSelectedCard()
       .subscribe((result: boolean) => {
         this.allPlayersSelected = result;
@@ -85,7 +95,7 @@ export class ClassroomComponent {
   }
 
   public addMockUpUsers(): void {
-    this.userService.getAllUsers().subscribe({
+    this.getAllUsersSubscription = this.userService.getAllUsers().subscribe({
       next: (users) => {
         const mockUpUsers: UserI[] = users;
 
@@ -100,7 +110,7 @@ export class ClassroomComponent {
 
         const usersToAdd: UserInRoomI[] = mockUpUsers
           .map(convertToUserInRoom)
-          .filter((user) => user.id !== sessionStorage.getItem('user_id')); //Filter host user from the room
+          .filter((user) => user.id !== this.userId); //Filter host user from the room
 
         this.classroomService.addUsersToRoom(this.roomId, usersToAdd);
       },
@@ -213,8 +223,14 @@ export class ClassroomComponent {
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    if (this.allPlayerSelectedSubscription) {
+      this.allPlayerSelectedSubscription.unsubscribe();
+    }
+    if (this.userIdSubscription) {
+      this.userIdSubscription.unsubscribe();
+    }
+    if (this.getAllUsersSubscription) {
+      this.getAllUsersSubscription.unsubscribe();
     }
     this.classroomService.deleteRoom(this.roomId);
   }

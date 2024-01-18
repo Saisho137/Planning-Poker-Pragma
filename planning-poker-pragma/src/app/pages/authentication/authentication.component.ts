@@ -15,6 +15,7 @@ import {
   Validators,
   FormGroup,
 } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -46,6 +47,9 @@ export class AuthenticationComponent {
   public tittle: 'Sing up' | 'Register' = 'Register';
 
   public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
+
+  private createUserSubscription: Subscription | undefined;
+  private validateUserSubscription: Subscription | undefined;
 
   constructor(
     private userService: UsersService,
@@ -130,7 +134,7 @@ export class AuthenticationComponent {
       userPassword &&
       nameValidator(userUsername)
     ) {
-      this.userService
+      this.createUserSubscription = this.userService
         .createUSer(userUsername, userEmail, userPassword)
         .subscribe({
           next: (res: RegisterI) => {
@@ -150,21 +154,37 @@ export class AuthenticationComponent {
     const { userEmail, userPassword } = this.userForm.value;
 
     if (userEmail && userPassword) {
-      this.userService.validateUser(userEmail, userPassword).subscribe({
-        next: (res: UserResponseI) => {
-          const token = res.token;
-          sessionStorage.setItem('session_token', token);
+      this.validateUserSubscription = this.userService
+        .validateUser(userEmail, userPassword)
+        .subscribe({
+          next: (res: UserResponseI) => {
+            const token = res.token;
+            sessionStorage.setItem('session_token', token);
 
-          const user = res.user;
-          sessionStorage.setItem('user_id', user._id);
-          sessionStorage.setItem('user_username', user.username);
-          this.router.navigate(['create-classroom']);
-        },
-        error: () => {
-          window.alert('Wrong User!, try Again!');
-          this.router.navigate(['login']);
-        },
-      });
+            const user = res.user;
+
+            this.userService.setUserId(user._id);
+            sessionStorage.setItem('user_id', user._id);
+
+            this.userService.setUsername(user.username);
+            sessionStorage.setItem('user_username', user.username);
+
+            this.router.navigate(['create-classroom']);
+          },
+          error: () => {
+            window.alert('Wrong User!, try Again!');
+            this.router.navigate(['login']);
+          },
+        });
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.createUserSubscription) {
+      this.createUserSubscription.unsubscribe();
+    }
+    if (this.validateUserSubscription) {
+      this.validateUserSubscription.unsubscribe();
     }
   }
 }

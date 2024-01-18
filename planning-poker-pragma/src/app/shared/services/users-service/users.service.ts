@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { UserResponseI } from '../../../interfaces/user-response-interface';
 import { AllUsersI } from '../../../interfaces/all-users-interface';
@@ -12,7 +11,28 @@ import { UserI } from '../../../interfaces/user-interface';
   providedIn: 'root',
 })
 export class UsersService {
-  constructor(private http: HttpClient, private router: Router) {}
+  private userIdSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+  private usernameSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+
+  public userId$: Observable<string | null> = this.userIdSubject.asObservable();
+  public username$: Observable<string | null> = this.usernameSubject.asObservable();
+
+  constructor(private http: HttpClient) {
+    this.userId$.subscribe((userId) => {
+      if (userId) console.log(userId);
+    });
+    this.username$.subscribe((username) => {
+      if (username) console.log(username);
+    });
+  }
+
+  public setUserId(userId: string): void {
+    this.userIdSubject.next(userId);
+  }
+
+  public setUsername(username: string): void {
+    this.usernameSubject.next(username);
+  }
 
   public createUSer(
     username: string,
