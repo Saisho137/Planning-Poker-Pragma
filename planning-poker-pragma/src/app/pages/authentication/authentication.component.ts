@@ -6,6 +6,8 @@ import { nameValidator, validateRegex } from '../../shared/validators';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import { InputComponent } from '../../components/atoms/input/input.component';
 import { ButtonComponent } from '../../components/atoms/button/button.component';
+import { RegisterI } from '../../interfaces/register-interface';
+import { UserResponseI } from '../../interfaces/user-response-interface';
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -13,8 +15,6 @@ import {
   Validators,
   FormGroup,
 } from '@angular/forms';
-import { RegisterInterface } from '../../interfaces/register-interface';
-import { UserResponseInterface } from '../../interfaces/user-response-interface';
 
 @Component({
   selector: 'app-register',
@@ -133,7 +133,7 @@ export class AuthenticationComponent {
       this.userService
         .createUSer(userUsername, userEmail, userPassword)
         .subscribe({
-          next: (res: RegisterInterface) => {
+          next: (res: RegisterI) => {
             res.userCreated === true
               ? this.validateUser()
               : window.alert('Something Went Wrong! Try again!');
@@ -151,7 +151,7 @@ export class AuthenticationComponent {
 
     if (userEmail && userPassword) {
       this.userService.validateUser(userEmail, userPassword).subscribe({
-        next: (res: UserResponseInterface) => {
+        next: (res: UserResponseI) => {
           const token = res.token;
           sessionStorage.setItem('session_token', token);
 

@@ -1,7 +1,7 @@
-import { UserInRoomInterface } from './user-in-room-interface';
+import { UserInRoomI } from './user-in-room-interface';
 
-export interface ClassroomInterface {
+export interface ClassroomI {
   id: string;
   admin: string;
-  users: UserInRoomInterface[];
+  users: UserInRoomI[];
 }

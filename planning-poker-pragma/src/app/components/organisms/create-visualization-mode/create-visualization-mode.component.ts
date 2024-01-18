@@ -4,7 +4,7 @@ import { nameValidator } from '../../../shared/validators';
 import { ClassroomsService } from '../../../shared/services/classrooms-service/classrooms.service';
 import { ButtonComponent } from '../../atoms/button/button.component';
 import { InputComponent } from '../../atoms/input/input.component';
-import { UserInRoomInterface } from '../../../interfaces/user-in-room-interface';
+import { UserInRoomI } from '../../../interfaces/user-in-room-interface';
 import { RadioButtonsMenuComponent } from './radio-buttons-menu/radio-buttons-menu.component';
 
 @Component({
@@ -41,7 +41,7 @@ export class CreateVisualizationModeComponent {
         sessionStorage.setItem('user_username', this.username);
       if (!this.selectedMode) this.selectedMode = 'player';
 
-      const user: UserInRoomInterface = {
+      const user: UserInRoomI = {
         id: sessionStorage.getItem('user_id')!,
         username: sessionStorage.getItem('user_username')!,
         rol: this.selectedMode,

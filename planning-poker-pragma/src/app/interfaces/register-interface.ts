@@ -1,3 +1,3 @@
-export interface RegisterInterface {
+export interface RegisterI {
   userCreated: boolean;
 }

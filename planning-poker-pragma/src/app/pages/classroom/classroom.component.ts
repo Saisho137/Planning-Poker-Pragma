@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClassroomsService } from '../../shared/services/classrooms-service/classrooms.service';
 import { CreateVisualizationModeComponent } from '../../components/organisms/create-visualization-mode/create-visualization-mode.component';
-import { ClassroomInterface } from '../../interfaces/classroom-interface';
+import { ClassroomI } from '../../interfaces/classroom-interface';
 import { ScoringModeItemI } from '../../interfaces/scoring-mode-interface';
 import { CardMenuComponent } from '../../components/organisms/card-menu/card-menu.component';
 import { UsersTableMenuComponent } from '../../components/organisms/users-table-menu/users-table-menu.component';
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 import { CardComponent } from '../../components/atoms/card/card.component';
 import { InvitationLinkComponent } from './invitation-link/invitation-link.component';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
-import { UserInRoomInterface } from '../../interfaces/user-in-room-interface';
+import { UserInRoomI } from '../../interfaces/user-in-room-interface';
 
 @Component({
   selector: 'app-classroom',
@@ -31,7 +31,7 @@ import { UserInRoomInterface } from '../../interfaces/user-in-room-interface';
 })
 export class ClassroomComponent {
   public roomId: string;
-  public room: ClassroomInterface | undefined;
+  public room: ClassroomI | undefined;
 
   public pragmaIcon: string = '../../../../assets/images/pragma.png';
 
@@ -118,7 +118,7 @@ export class ClassroomComponent {
       const players = this.room.users.filter((user) => user.rol === 'player');
       //Creates a key-value pair object that counts the number of votes of each selected card
       this.numberDictionary = players.reduce(
-        (accumulator: Record<string, number>, object: UserInRoomInterface) => {
+        (accumulator: Record<string, number>, object: UserInRoomI) => {
           const value: string = object.cardSelected;
           accumulator[value] = (accumulator[value] || 0) + 1;
           return accumulator;

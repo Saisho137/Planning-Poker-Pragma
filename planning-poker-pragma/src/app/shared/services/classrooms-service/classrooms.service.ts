@@ -1,28 +1,25 @@
 import { Injectable } from '@angular/core';
-import { ClassroomInterface } from '../../../interfaces/classroom-interface';
-import { UserInRoomInterface } from '../../../interfaces/user-in-room-interface';
-import {
-  ScoringModeI,
-  ScoringModeItemI,
-} from '../../../interfaces/scoring-mode-interface';
+import { UserI } from '../../../interfaces/user-interface';
 import { UsersService } from '../users-service/users.service';
-import { UserInterface } from '../../../interfaces/user-interface';
+import { UserInRoomI } from '../../../interfaces/user-in-room-interface';
+import { ClassroomI } from '../../../interfaces/classroom-interface';
+import {ScoringModeI, ScoringModeItemI} from '../../../interfaces/scoring-mode-interface';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClassroomsService {
-  private userListSubject: BehaviorSubject<UserInRoomInterface[] | undefined> =
-    new BehaviorSubject<UserInRoomInterface[] | undefined>([]);
-  private userList$: Observable<UserInRoomInterface[] | undefined> =
+  private userListSubject: BehaviorSubject<UserInRoomI[] | undefined> =
+    new BehaviorSubject<UserInRoomI[] | undefined>([]);
+  private userList$: Observable<UserInRoomI[] | undefined> =
     this.userListSubject.asObservable();
 
-  private rooms: ClassroomInterface[] = [];
-  private users: UserInRoomInterface[] = [];
+  private rooms: ClassroomI[] = [];
+  private users: UserInRoomI[] = [];
 
   private scoringMode: ScoringModeI = {
-    'fibonacci': [
+    "fibonacci": [
       { id: 1, value: '1' },
       { id: 2, value: '2' },
       { id: 3, value: '3' },
@@ -64,26 +61,24 @@ export class ClassroomsService {
   constructor(private usersService: UsersService) {}
 
   public userIsPlayer(classroomId: string, userId: string): boolean {
-    const room: ClassroomInterface | undefined = this.getRoom(classroomId);
-    const user: UserInRoomInterface | undefined = room?.users.find(
+    const room: ClassroomI | undefined = this.getRoom(classroomId);
+    const user: UserInRoomI | undefined = room?.users.find(
       (user) => user.id === userId
     );
     return user ? user.rol === 'player' : false;
   }
 
-  public createScoringMode(
-    mode: 'fibonacci' | 'oneToFive' | 'oneHundred'
-  ): ScoringModeItemI[] {
+  public createScoringMode(mode: 'fibonacci' | 'oneToFive' | 'oneHundred'): ScoringModeItemI[] {
     return this.scoringMode[mode];
   }
 
   public createRoom(
     classroomId: string,
-    user: UserInRoomInterface
-  ): ClassroomInterface {
+    user: UserInRoomI
+  ): ClassroomI {
     this.users.push(user);
 
-    const newRoom: ClassroomInterface = {
+    const newRoom: ClassroomI = {
       id: classroomId,
       admin: user.id,
       users: this.users,
@@ -93,8 +88,8 @@ export class ClassroomsService {
     return newRoom;
   }
 
-  public getRoom(classroomId: string): ClassroomInterface | undefined {
-    const selectedRoom: ClassroomInterface | undefined = this.rooms.find(
+  public getRoom(classroomId: string): ClassroomI | undefined {
+    const selectedRoom: ClassroomI | undefined = this.rooms.find(
       (room) => room.id === classroomId
     );
     return selectedRoom;
@@ -102,9 +97,9 @@ export class ClassroomsService {
 
   public addUsersToRoom(
     classroomId: string,
-    newUsers: UserInRoomInterface[]
+    newUsers: UserInRoomI[]
   ): void {
-    const selectedRoom: ClassroomInterface | undefined =
+    const selectedRoom: ClassroomI | undefined =
       this.getRoom(classroomId);
 
     if (selectedRoom) {
@@ -115,11 +110,11 @@ export class ClassroomsService {
   public addMockUpUsers(classroomId: string): void {
     this.usersService.getAllUsers().subscribe({
       next: (users) => {
-        const mockUpUsers: UserInterface[] = users;
+        const mockUpUsers: UserI[] = users;
 
         const convertToUserInRoom = (
-          user: UserInterface
-        ): UserInRoomInterface => {
+          user: UserI
+        ): UserInRoomI => {
           return {
             id: user._id,
             username: user.username,
@@ -128,7 +123,7 @@ export class ClassroomsService {
           };
         };
 
-        const usersToAdd: UserInRoomInterface[] = mockUpUsers
+        const usersToAdd: UserInRoomI[] = mockUpUsers
           .map(convertToUserInRoom)
           .filter((user) => user.id !== sessionStorage.getItem('user_id')); //Filter host user from the room
 
@@ -146,7 +141,7 @@ export class ClassroomsService {
     userId: string,
     hostValue: string
   ): void {
-    const selectedRoom: ClassroomInterface | undefined =
+    const selectedRoom: ClassroomI | undefined =
       this.getRoom(classroomId);
     const numericMode = mode.slice(0, mode.length - 2);
 
@@ -166,7 +161,7 @@ export class ClassroomsService {
   }
 
   public clearSelectedCard(classroomId: string, userId: string): void {
-    const selectedRoom: ClassroomInterface | undefined =
+    const selectedRoom: ClassroomI | undefined =
       this.getRoom(classroomId);
     if (selectedRoom) {
       selectedRoom.users.forEach((user) => {
@@ -189,7 +184,7 @@ export class ClassroomsService {
   }
 
   public resetGame(classroomId: string): void {
-    const selectedRoom: ClassroomInterface | undefined =
+    const selectedRoom: ClassroomI | undefined =
       this.getRoom(classroomId);
     if (selectedRoom) {
       selectedRoom.users.forEach((user) => {

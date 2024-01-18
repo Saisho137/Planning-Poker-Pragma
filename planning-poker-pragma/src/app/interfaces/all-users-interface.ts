@@ -1,5 +1,5 @@
-import { UserInterface } from "./user-interface";
+import { UserI } from "./user-interface";
 
-export interface AllUsersInterface {
-    users: UserInterface[]
+export interface AllUsersI {
+    users: UserI[]
 }

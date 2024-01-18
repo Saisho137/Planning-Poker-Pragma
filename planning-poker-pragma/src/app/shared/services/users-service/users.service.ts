@@ -3,10 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { UserResponseInterface } from '../../../interfaces/user-response-interface';
-import { RegisterInterface } from '../../../interfaces/register-interface';
-import { AllUsersInterface } from '../../../interfaces/all-users-interface';
-import { UserInterface } from '../../../interfaces/user-interface';
+import { UserResponseI } from '../../../interfaces/user-response-interface';
+import { AllUsersI } from '../../../interfaces/all-users-interface';
+import { RegisterI } from '../../../interfaces/register-interface';
+import { UserI } from '../../../interfaces/user-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class UsersService {
     username: string,
     email: string,
     password: string
-  ): Observable<RegisterInterface> {
+  ): Observable<RegisterI> {
     const url: string = 'http://localhost:8080/register_user';
 
     const headers: HttpHeaders = new HttpHeaders().set(
@@ -32,13 +32,13 @@ export class UsersService {
       password: password,
     };
 
-    return this.http.post<RegisterInterface>(url, body, { headers });
+    return this.http.post<RegisterI>(url, body, { headers });
   }
 
   public validateUser(
     email: string,
     password: string
-  ): Observable<UserResponseInterface> {
+  ): Observable<UserResponseI> {
     const url: string = 'http://localhost:8080/sign_in_user';
 
     const headers: HttpHeaders = new HttpHeaders().set(
@@ -51,13 +51,13 @@ export class UsersService {
       password: password,
     };
 
-    return this.http.post<UserResponseInterface>(url, body, { headers });
+    return this.http.post<UserResponseI>(url, body, { headers });
   }
 
-  public getAllUsers(): Observable<UserInterface[]> {
+  public getAllUsers(): Observable<UserI[]> {
     const url: string = 'http://localhost:8080/get_users';
 
-    return this.http.get<AllUsersInterface>(url).pipe(
+    return this.http.get<AllUsersI>(url).pipe(
       map((response) => response.users),
       catchError((error) => {
         console.error(error);

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserCardComponent } from '../../molecules/user-card/user-card.component';
-import { ClassroomInterface } from '../../../interfaces/classroom-interface';
+import { ClassroomI } from '../../../interfaces/classroom-interface';
 import { TableComponent } from '../../../pages/classroom/table/table.component';
 import { TopModuleComponent } from './top-module/top-module.component';
 import { LeftModuleComponent } from './left-module/left-module.component';
@@ -28,7 +28,7 @@ export class UsersTableMenuComponent {
   @Input() buttonText: string = '';
   @Input() allPlayersSelected: boolean = false;
   @Input() votationFinished: boolean = false;
-  @Input() room: ClassroomInterface | undefined = {
+  @Input() room: ClassroomI | undefined = {
     id: '',
     admin: '',
     users: [],
