@@ -99,7 +99,7 @@ export class ClassroomComponent {
   }
 
   initializeRoom(): void {
-    if (!this.alreadyInitialized){
+    if (!this.alreadyInitialized) {
       this.addMockUpUsers();
       this.alreadyInitialized = true;
     }
@@ -222,7 +222,7 @@ export class ClassroomComponent {
   }
 
   revealCards(): void {
-    if (this.userId === this.room?.admin) {
+    if (this.room?.admin.includes(this.userId)) {
       this.makeAverageScore();
       this.votesCount();
       this.cardResultsRevealed = true;
@@ -232,7 +232,7 @@ export class ClassroomComponent {
   }
 
   restartGame(): void {
-    if (this.userId === this.room?.admin) {
+    if (this.room?.admin.includes(this.userId)) {
       this.classroomService.resetGame(this.roomId);
       this.usersAlreadySelectedCard = false;
       this.cardResultsRevealed = false;
