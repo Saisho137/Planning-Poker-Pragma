@@ -12,6 +12,8 @@ import { CardComponent } from '../../components/atoms/card/card.component';
 import { InvitationLinkComponent } from './invitation-link/invitation-link.component';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import { UserInRoomI } from '../../interfaces/user-in-room-interface';
+import { UsersService } from '../../shared/services/users-service/users.service';
+import { UserI } from '../../interfaces/user-interface';
 
 @Component({
   selector: 'app-classroom',
@@ -52,7 +54,8 @@ export class ClassroomComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private classroomService: ClassroomsService
+    private classroomService: ClassroomsService,
+    private usersService: UsersService
   ) {
     this.roomId = this.route.snapshot.paramMap.get('id')!;
     this.room = this.classroomService.getRoom(this.roomId);
@@ -62,7 +65,7 @@ export class ClassroomComponent {
 
   initializeRoom(): void {
     this.configurationWindow = !this.configurationWindow;
-    this.addUsers();
+    this.addMockUpUsers();
     this.setVisualization();
     this.updateRoom();
     this.subscription = this.classroomService
@@ -81,8 +84,30 @@ export class ClassroomComponent {
       : 'spectator';
   }
 
-  addUsers(): void {
-    this.classroomService.addMockUpUsers(this.roomId);
+  public addMockUpUsers(): void {
+    this.usersService.getAllUsers().subscribe({
+      next: (users) => {
+        const mockUpUsers: UserI[] = users;
+
+        const convertToUserInRoom = (user: UserI): UserInRoomI => {
+          return {
+            id: user._id,
+            username: user.username,
+            rol: Math.random() <= 0.7 ? 'player' : 'spectator',
+            cardSelected: '',
+          };
+        };
+
+        const usersToAdd: UserInRoomI[] = mockUpUsers
+          .map(convertToUserInRoom)
+          .filter((user) => user.id !== sessionStorage.getItem('user_id')); //Filter host user from the room
+
+        this.classroomService.addUsersToRoom(this.roomId, usersToAdd);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 
   updateRoom(): void {

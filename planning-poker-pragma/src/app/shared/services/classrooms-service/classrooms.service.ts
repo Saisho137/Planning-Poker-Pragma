@@ -58,7 +58,7 @@ export class ClassroomsService {
     ],
   };
 
-  constructor(private usersService: UsersService) {}
+  constructor() {}
 
   public userIsPlayer(classroomId: string, userId: string): boolean {
     const room: ClassroomI | undefined = this.getRoom(classroomId);
@@ -105,34 +105,6 @@ export class ClassroomsService {
     if (selectedRoom) {
       selectedRoom.users = [...selectedRoom.users, ...newUsers];
     }
-  }
-
-  public addMockUpUsers(classroomId: string): void {
-    this.usersService.getAllUsers().subscribe({
-      next: (users) => {
-        const mockUpUsers: UserI[] = users;
-
-        const convertToUserInRoom = (
-          user: UserI
-        ): UserInRoomI => {
-          return {
-            id: user._id,
-            username: user.username,
-            rol: Math.random() <= 0.7 ? 'player' : 'spectator',
-            cardSelected: '',
-          };
-        };
-
-        const usersToAdd: UserInRoomI[] = mockUpUsers
-          .map(convertToUserInRoom)
-          .filter((user) => user.id !== sessionStorage.getItem('user_id')); //Filter host user from the room
-
-        this.addUsersToRoom(classroomId, usersToAdd);
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    });
   }
 
   public selectCardForMockUpUsers(
