@@ -42,26 +42,28 @@ export class ClassroomComponent {
 
   public allPlayersSelected: boolean = false;
   public cardResultsRevealed: boolean = false;
+  public usersAlreadySelectedCard: boolean = false;
+
   public scoringMode: ScoringModeItemI[];
+  public averageScore: string | undefined = undefined;
+  public numberDictionary: Record<string, number> = { '0': 0 };
 
   public selectedCard: string = '';
-  public usersSelectedCard: boolean = false;
-  public averageScore: string | undefined = undefined;
   public visualization: 'player' | 'spectator' | '' = '';
-  public numberDictionary: Record<string, number> = { '0': 0 };
 
   private userId: string = '';
   private username: string = '';
 
   private userIdSubscription: Subscription | undefined;
   private usernameSubscription: Subscription | undefined;
+
   private getAllUsersSubscription: Subscription | undefined;
   private allPlayerSelectedSubscription: Subscription | undefined;
 
   constructor(
     private route: ActivatedRoute,
-    private classroomService: ClassroomsService,
-    private userService: UsersService
+    private userService: UsersService,
+    private classroomService: ClassroomsService
   ) {
     this.roomId = this.route.snapshot.paramMap.get('id')!;
     this.room = this.classroomService.getRoom(this.roomId);
@@ -80,26 +82,27 @@ export class ClassroomComponent {
       }
     );
 
+    this.allPlayerSelectedSubscription = this.classroomService
+      .allPlayersSelectedCard()
+      .subscribe((result: boolean) => {
+        this.allPlayersSelected = result;
+      });
+
     const user: UserInRoomI = {
       id: this.userId,
       username: this.username,
       rol: 'spectator',
       cardSelected: '',
     };
-
     this.classroomService.createRoom(this.roomId, user);
+
+    this.addMockUpUsers();
   }
 
   initializeRoom(): void {
     this.configurationWindow = !this.configurationWindow;
-    this.addMockUpUsers();
     this.setVisualization();
     this.updateRoom();
-    this.allPlayerSelectedSubscription = this.classroomService
-      .allPlayersSelectedCard()
-      .subscribe((result: boolean) => {
-        this.allPlayersSelected = result;
-      });
   }
 
   setVisualization(): void {
@@ -160,14 +163,14 @@ export class ClassroomComponent {
       this.selectedCard
     );
 
-    if (!this.usersSelectedCard) {
+    if (!this.usersAlreadySelectedCard) {
       setTimeout(() => {
         this.classroomService.selectCardForMockUpUsers(
           this.scoringMode,
           this.roomId,
           this.userId
         );
-        this.usersSelectedCard = true;
+        this.usersAlreadySelectedCard = true;
         this.updateRoom();
       }, 2000);
     }
@@ -228,7 +231,7 @@ export class ClassroomComponent {
   restartGame(): void {
     if (this.userId === this.room?.admin) {
       this.classroomService.resetGame(this.roomId);
-      this.usersSelectedCard = false;
+      this.usersAlreadySelectedCard = false;
       this.cardResultsRevealed = false;
       this.averageScore = undefined;
       this.selectedCard = '';
@@ -240,7 +243,7 @@ export class ClassroomComponent {
   }
 
   ngOnDestroy(): void {
-    this.restartGame()
+    this.restartGame();
 
     if (this.allPlayerSelectedSubscription) {
       this.allPlayerSelectedSubscription.unsubscribe();
