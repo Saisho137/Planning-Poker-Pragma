@@ -18,6 +18,10 @@ export class UsersService {
   public username$: Observable<string | null> = this.usernameSubject.asObservable();
 
   constructor(private http: HttpClient) {
+    if (sessionStorage.getItem('user_id') && sessionStorage.getItem('user_username')) {
+      this.setUserId(sessionStorage.getItem('user_id')!)
+      this.setUsername(sessionStorage.getItem('user_username')!)
+    }
     this.userId$.subscribe((userId) => {
       if (userId) console.log(userId);
     });
