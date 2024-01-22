@@ -85,14 +85,17 @@ export class ClassroomsService {
     return this.scoringMode[mode];
   }
 
-  public makeUserAdmin(classroomId: string, newAdminUser: string) {
+  public makeUserAdmin(classroomId: string, newAdminUser: string): boolean {
     const selectedRoom: ClassroomI | undefined = this.rooms.find(
       (room) => room.id === classroomId
     );
     if (selectedRoom) {
-      selectedRoom.admin.push(newAdminUser);
-      console.log(selectedRoom.admin);
+      if (!selectedRoom.admin.includes(newAdminUser)) {
+        selectedRoom.admin.push(newAdminUser);
+        return true;
+      }
     }
+    return false;
   }
 
   public updateUserState(

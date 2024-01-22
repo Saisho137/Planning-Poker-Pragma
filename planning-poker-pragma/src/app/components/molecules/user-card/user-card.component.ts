@@ -24,12 +24,16 @@ export class UserCardComponent {
   @Input() visualization: string = '';
   @Input() votationFinished: boolean = false;
 
-  constructor(private classroomService: ClassroomsService, private userService: UsersService) {}
+  constructor(
+    private classroomService: ClassroomsService,
+    private userService: UsersService
+  ) {}
 
   ngOnInit() {
     this.getAllUsersSubscription = this.userService.getAllUsers().subscribe({
       next: (users: UserI[]) => {
-        const { _id: userId } = users.find((user) => user.username === this.cardValue) || {}
+        const { _id: userId } =
+          users.find((user) => user.username === this.cardValue) || {};
         this.userId = userId || '0000';
       },
       error: (error) => {
@@ -39,7 +43,9 @@ export class UserCardComponent {
   }
 
   onClick() {
-    this.classroomService.makeUserAdmin(this.roomId, this.userId);
+    this.classroomService.makeUserAdmin(this.roomId, this.userId)
+      ? alert('Has hecho a ' + this.cardValue + ' administrador!')
+      : alert('El usuario ya es administrador!');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
