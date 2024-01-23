@@ -323,6 +323,7 @@ describe('ClassroomsService', () => {
     expect(room?.users.length).toBe(undefined);
   });
 
+  //clearSelectedCard()
   it('should clear the selected card for the specified player in the room', () => {
     const roomId = 'room1';
     const userId = '1';
@@ -353,5 +354,78 @@ describe('ClassroomsService', () => {
     // Check if no user is added to the non-existent user
     const room = service.getRoom(roomId);
     expect(room?.users.length).toBe(undefined);
+  });
+  
+  //selectCardForMockUpUsers()
+  it('should select a card from fibonacci for mock-up users in the room', () => {
+    const roomId = 'room1';
+    const userId = '1';
+    const mode = service.createScoringMode('fibonacci');
+
+    const user1: UserInRoomI = { id: userId, username: 'user1', rol: 'player', cardSelected: '' };
+    const user2: UserInRoomI = { id: '2', username: 'user2', rol: 'player', cardSelected: '' };
+
+    const room = service.createRoom(roomId, user1);
+    room.users.push(user2);
+
+    // Set up a spy on Math.random to control its return value
+    const randomSpy = jest.spyOn(globalThis.Math, 'random');
+    randomSpy.mockReturnValue(0.4);
+
+    service.selectCardForMockUpUsers(mode, roomId, userId);
+
+    // Check if the mock-up user's card is selected based on Math.random()
+    expect(user2.cardSelected).toBe('8');
+
+    // Restore the original Math.random function
+    randomSpy.mockRestore();
+  });
+
+  it('should select a card from oneToFive for mock-up users in the room', () => {
+    const roomId = 'room1';
+    const userId = '1';
+    const mode = service.createScoringMode('oneToFive');
+
+    const user1: UserInRoomI = { id: userId, username: 'user1', rol: 'player', cardSelected: '' };
+    const user2: UserInRoomI = { id: '2', username: 'user2', rol: 'player', cardSelected: '' };
+
+    const room = service.createRoom(roomId, user1);
+    room.users.push(user2);
+
+    // Set up a spy on Math.random to control its return value
+    const randomSpy = jest.spyOn(globalThis.Math, 'random');
+    randomSpy.mockReturnValue(0.4);
+
+    service.selectCardForMockUpUsers(mode, roomId, userId);
+
+    // Check if the mock-up user's card is selected based on Math.random()
+    expect(user2.cardSelected).toBe('3');
+
+    // Restore the original Math.random function
+    randomSpy.mockRestore();
+  });
+
+  it('should select a card from oneHundred for mock-up users in the room', () => {
+    const roomId = 'room1';
+    const userId = '1';
+    const mode = service.createScoringMode('oneHundred');
+
+    const user1: UserInRoomI = { id: userId, username: 'user1', rol: 'player', cardSelected: '' };
+    const user2: UserInRoomI = { id: '2', username: 'user2', rol: 'player', cardSelected: '' };
+
+    const room = service.createRoom(roomId, user1);
+    room.users.push(user2);
+
+    // Set up a spy on Math.random to control its return value
+    const randomSpy = jest.spyOn(globalThis.Math, 'random');
+    randomSpy.mockReturnValue(0.4);
+
+    service.selectCardForMockUpUsers(mode, roomId, userId);
+
+    // Check if the mock-up user's card is selected based on Math.random()
+    expect(user2.cardSelected).toBe('50');
+
+    // Restore the original Math.random function
+    randomSpy.mockRestore();
   });
 });
