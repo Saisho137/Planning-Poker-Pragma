@@ -84,6 +84,9 @@ export class AuthenticationComponent {
         case 'numbers':
           this.regexMessage = 'No debe haber más de 3 números en el nombre!';
           return;
+        case 'spaces':
+          this.regexMessage = 'Solo un espacio es permitido!';
+          return;
         case 'required':
           this.regexMessage = 'No debes dejar ningún campo vacío!';
           return;

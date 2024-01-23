@@ -27,7 +27,10 @@ import {
   styleUrl: './create-classroom.component.scss',
 })
 export class CreateClassroomComponent {
-  public classroomName = new FormControl('', [Validators.required, validateRegex()]);
+  public classroomName = new FormControl('', [
+    Validators.required,
+    validateRegex(),
+  ]);
 
   public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
 
@@ -53,6 +56,9 @@ export class CreateClassroomComponent {
         case 'numbers':
           this.regexMessage = 'No debe haber más de 3 números en el nombre!';
           return;
+        case 'spaces':
+          this.regexMessage = 'Solo un espacio es permitido!';
+          return;
         default:
           this.regexMessage = '';
           return;
@@ -66,9 +72,7 @@ export class CreateClassroomComponent {
   }
 
   goToClassroom(): void {
-    this.router.navigate([
-      'classroom/' + this.classroomName.value,
-    ]);
+    this.router.navigate(['classroom/' + this.classroomName.value]);
   }
 
   logOut() {
