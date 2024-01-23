@@ -17,6 +17,34 @@ describe('UsersService', () => {
     expect(service).toBeTruthy();
   });
 
+  //userIdSubject
+  it('should set and retrieve userId correctly', () => {
+    // Arrange
+    const userId = '123';
+
+    // Act
+    service.setUserId(userId);
+
+    // Assert
+    service.userId$.subscribe((value) => {
+      expect(value).toEqual(userId);
+    });
+  });
+
+  //usernameSubject
+  it('should set and retrieve username correctly', () => {
+    // Arrange
+    const username = 'testUser';
+
+    // Act
+    service.setUsername(username);
+
+    // Assert
+    service.username$.subscribe((value) => {
+      expect(value).toEqual(username);
+    });
+  });
+
   //CreateUser()
   it('should send a POST request to register a user', () => {
     // Arrange
@@ -31,7 +59,7 @@ describe('UsersService', () => {
     };
 
     // Act
-    httpMock.post.mockReturnValueOnce(of(expectedResponse));
+    httpMock.post.mockReturnValueOnce(of(expectedResponse)); //Mocking the http.post method to return an observable
 
     // Assert
     service
@@ -72,8 +100,7 @@ describe('UsersService', () => {
     };
 
     // Act
-    //Mocking the http.post method to return an observable
-    httpMock.post.mockReturnValueOnce(of(mockResponse));
+    httpMock.post.mockReturnValueOnce(of(mockResponse)); //Mocking the http.post method to return an observable
 
     // Assert
     service
@@ -110,7 +137,7 @@ describe('UsersService', () => {
     ];
 
     // Act
-    httpMock.get.mockReturnValueOnce(of({ users: expectedUsers }));
+    httpMock.get.mockReturnValueOnce(of({ users: expectedUsers })); //Mocking the http.get method to return an observable
 
     // Assert
     service.getAllUsers().subscribe((users) => {
@@ -125,10 +152,10 @@ describe('UsersService', () => {
     // Arrange
     const errorMessage = 'Error fetching users';
     const errorResponse = new Error(errorMessage);
-  
+
     // Act
-    httpMock.get.mockReturnValueOnce(throwError(() => errorResponse));
-  
+    httpMock.get.mockReturnValueOnce(throwError(() => errorResponse)); //Mocking the http.get method to return an observable
+
     // Assert
     await expect(firstValueFrom(service.getAllUsers())).rejects.toThrow(
       'Algo salió mal al obtener usuarios.'
