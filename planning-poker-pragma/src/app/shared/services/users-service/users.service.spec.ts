@@ -1,16 +1,76 @@
-import { TestBed } from '@angular/core/testing';
-
 import { UsersService } from './users.service';
+import { of } from 'rxjs';
 
 describe('UsersService', () => {
   let service: UsersService;
+  let httpMock: any;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(UsersService);
+    httpMock = {
+      post: jest.fn(),
+    };
+    service = new UsersService(httpMock);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('should send a POST request to register a user', () => {
+    const mockUser = {
+      username: 'testUser',
+      email: 'test@example.com',
+      password: 'testPassword',
+    };
+
+    // Mocking the http.post method to return an observable
+    httpMock.post.mockReturnValueOnce(of({}));
+
+    service
+      .createUSer(mockUser.username, mockUser.email, mockUser.password)
+      .subscribe(() => {
+        expect(httpMock.post).toHaveBeenCalledWith(
+          'http://localhost:8080/register_user',
+          {
+            username: mockUser.username,
+            email: mockUser.email,
+            password: mockUser.password,
+          },
+          { headers: expect.anything() }
+        );
+      });
+  });
+
+  it('should send a POST request to validate a user', () => {
+    const mockUser = {
+      email: 'test@example.com',
+      password: 'testPassword',
+    };
+
+    const mockResponse = {
+      user: {
+        _id: 'xyz',
+        username: 'test',
+        email: 'test@example.com',
+        password: 'testPassword',
+        __v: 0,
+      },
+      token: 'xyz',
+    };
+
+    // Mocking the http.post method to return an observable
+    httpMock.post.mockReturnValueOnce(of(mockResponse));
+
+    service
+      .validateUser(mockUser.email, mockUser.password)
+      .subscribe((response) => {
+        expect(httpMock.post).toHaveBeenCalledWith(
+          'http://localhost:8080/sign_in_user',
+          { email: mockUser.email, password: mockUser.password },
+          { headers: expect.anything() }
+        );
+        expect(response.user).toEqual(mockResponse.user);
+        expect(response.token).toEqual(mockResponse.token);
+      });
   });
 });
