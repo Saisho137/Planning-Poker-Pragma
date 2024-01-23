@@ -550,4 +550,22 @@ describe('ClassroomsService', () => {
     const result = firstValueFrom(service.allPlayersSelectedCard());
     expect(await result).toEqual(false);
   });
+
+  //resetGame()
+  it('should reset the game for players in the room', () => {
+    const roomId = 'room1';
+    const user1: UserInRoomI = { id: '1', username: 'user1', rol: 'player', cardSelected: '3' };
+    const user2: UserInRoomI = { id: '2', username: 'user2', rol: 'player', cardSelected: '5' };
+    const userListSubject = new BehaviorSubject<UserInRoomI[] | undefined>([user1, user2]);
+
+    // Mock userList$ observable
+    service['userListSubject'] = userListSubject;
+    service['userList$'] = userListSubject.asObservable();
+
+    const room = service.createRoom(roomId, user1);
+    room.users.push(user2);
+    service.resetGame(roomId);
+
+    room.users.forEach((user) => expect(user.cardSelected).toBe(''));
+  });
 });
