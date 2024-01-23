@@ -105,12 +105,14 @@ export class ClassroomsService {
     rol: 'spectator' | 'player'
   ): void {
     const room: ClassroomI | undefined = this.getRoom(classroomId);
-    const user: UserInRoomI | undefined = room?.users.find(
-      (user) => user.id === userId
-    );
-    if (user) {
-      user.username = username;
-      user.rol = rol;
+    if (room) {
+      const user: UserInRoomI | undefined = room?.users.find(
+        (user) => user.id === userId
+      );
+      if (user) {
+        user.username = username;
+        user.rol = rol;
+      }
     }
   }
 

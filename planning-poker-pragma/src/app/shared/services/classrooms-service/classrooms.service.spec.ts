@@ -137,4 +137,42 @@ describe('ClassroomsService', () => {
     // Check if the method returns false indicating no change
     expect(result).toBe(false);
   });
+
+  //updateUserState()
+  it('should update user state in the specified room', () => {
+    const roomId = 'room1';
+    const userId = '1';
+    const username = 'newUsername';
+    const rol = 'spectator';
+
+    const user: UserInRoomI = {
+      id: '1',
+      username: 'user1',
+      rol: 'player',
+      cardSelected: '',
+    };
+
+    const room = service.createRoom(roomId, user);
+
+    service.updateUserState(roomId, userId, username, rol);
+
+    // Check if the user state is updated correctly
+    const updatedUser = room.users.find((user) => user.id === userId);
+    expect(updatedUser?.username).toEqual(username);
+    expect(updatedUser?.rol).toEqual(rol);
+  });
+
+  it('should not update user state if user is not in the specified room', () => {
+    const roomId = 'room1';
+    const userId = '1';
+    const username = 'newUsername';
+    const rol = 'spectator';
+
+    // No room created
+    service.updateUserState(roomId, userId, username, rol);
+
+    // Check if no user is added to unexisting room
+    const room = service.getRoom(roomId);
+    expect(room?.users.length).toBe(undefined);
+  });
 });
