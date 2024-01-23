@@ -554,9 +554,22 @@ describe('ClassroomsService', () => {
   //resetGame()
   it('should reset the game for players in the room', () => {
     const roomId = 'room1';
-    const user1: UserInRoomI = { id: '1', username: 'user1', rol: 'player', cardSelected: '3' };
-    const user2: UserInRoomI = { id: '2', username: 'user2', rol: 'player', cardSelected: '5' };
-    const userListSubject = new BehaviorSubject<UserInRoomI[] | undefined>([user1, user2]);
+    const user1: UserInRoomI = {
+      id: '1',
+      username: 'user1',
+      rol: 'player',
+      cardSelected: '3',
+    };
+    const user2: UserInRoomI = {
+      id: '2',
+      username: 'user2',
+      rol: 'player',
+      cardSelected: '5',
+    };
+    const userListSubject = new BehaviorSubject<UserInRoomI[] | undefined>([
+      user1,
+      user2,
+    ]);
 
     // Mock userList$ observable
     service['userListSubject'] = userListSubject;
@@ -567,5 +580,34 @@ describe('ClassroomsService', () => {
     service.resetGame(roomId);
 
     room.users.forEach((user) => expect(user.cardSelected).toBe(''));
+  });
+
+  it('should delete the room and remove all users', () => {
+    const roomId = 'room1';
+    const user1: UserInRoomI = {
+      id: '1',
+      username: 'user1',
+      rol: 'player',
+      cardSelected: '3',
+    };
+    const user2: UserInRoomI = {
+      id: '2',
+      username: 'user2',
+      rol: 'player',
+      cardSelected: '5',
+    };
+
+    // Create a room
+    const room = service.createRoom(roomId, user1);
+    room.users.push(user2);
+    // Delete the room
+    service.deleteRoom(roomId);
+
+    // Check if the room is deleted
+    const selectedRoom = service.getRoom(roomId);
+    expect(selectedRoom).toBeUndefined();
+
+    // Check if all users are removed
+    expect(service['users'].length).toBe(0);
   });
 });
