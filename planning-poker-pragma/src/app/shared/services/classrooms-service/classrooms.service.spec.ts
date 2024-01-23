@@ -174,7 +174,7 @@ describe('ClassroomsService', () => {
 
     // Check if no user is added to unexisting room
     const room = service.getRoom(roomId);
-    expect(room?.users.length).toBe(undefined);
+    expect(room?.users.length).toBeUndefined();
   });
 
   //userIsPlayer()
@@ -265,7 +265,7 @@ describe('ClassroomsService', () => {
 
     // Check if no users are added to the non-existent room
     const room = service.getRoom(roomId);
-    expect(room?.users.length).toBe(undefined);
+    expect(room?.users.length).toBeUndefined();
   });
 
   //selectCard()
@@ -321,7 +321,7 @@ describe('ClassroomsService', () => {
 
     // Check if no user is added to the non-existent user
     const room = service.getRoom(roomId);
-    expect(room?.users.length).toBe(undefined);
+    expect(room?.users.length).toBeUndefined();
   });
 
   //clearSelectedCard()
@@ -354,7 +354,7 @@ describe('ClassroomsService', () => {
 
     // Check if no user is added to the non-existent user
     const room = service.getRoom(roomId);
-    expect(room?.users.length).toBe(undefined);
+    expect(room?.users.length).toBeUndefined();
   });
 
   //selectCardForMockUpUsers()
@@ -495,7 +495,7 @@ describe('ClassroomsService', () => {
 
     // Check if no users are added to the non-existent room
     const room = service.getRoom(roomId);
-    expect(room?.users.length).toBe(undefined);
+    expect(room?.users.length).toBeUndefined();
   });
 
   //allPlayersSelectedCard()
