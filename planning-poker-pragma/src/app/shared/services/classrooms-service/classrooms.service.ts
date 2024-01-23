@@ -135,7 +135,7 @@ export class ClassroomsService {
     }
   }
 
-  public selectCardForHost(
+  public selectCard(
     classroomId: string,
     userId: string,
     hostValue: string

@@ -266,4 +266,92 @@ describe('ClassroomsService', () => {
     const room = service.getRoom(roomId);
     expect(room?.users.length).toBe(undefined);
   });
+
+  //selectCard()
+  it('should select a card for the specified player in the room', () => {
+    const roomId = 'room1';
+    const userId = '1';
+    const hostValue = '5';
+
+    const user: UserInRoomI = {
+      id: userId,
+      username: 'user1',
+      rol: 'player',
+      cardSelected: '',
+    };
+
+    const room = service.createRoom(roomId, user);
+
+    service.selectCard(roomId, userId, hostValue);
+
+    // Check if the user's card is selected
+    const selectedUser = room.users.find((user) => user.id === userId);
+    expect(selectedUser?.cardSelected).toBe(hostValue);
+  });
+
+  it('should not select a card for a non-player player in the room', () => {
+    const roomId = 'room1';
+    const userId = '1';
+    const hostValue = '5';
+
+    const user: UserInRoomI = {
+      id: userId,
+      username: 'user1',
+      rol: 'spectator',
+      cardSelected: '',
+    };
+
+    const room = service.createRoom(roomId, user);
+
+    service.selectCard(roomId, userId, hostValue);
+
+    // Check if the user's card is selected
+    const selectedUser = room.users.find((user) => user.id === userId);
+    expect(selectedUser?.cardSelected).toBe('');
+  });
+
+  it('should not select a card for a non-existent player in the room', () => {
+    const roomId = 'room1';
+    const userId = 'nonExistentUser';
+    const hostValue = '5';
+
+    // No room created
+    service.selectCard(roomId, userId, hostValue);
+
+    // Check if no user is added to the non-existent user
+    const room = service.getRoom(roomId);
+    expect(room?.users.length).toBe(undefined);
+  });
+
+  it('should clear the selected card for the specified player in the room', () => {
+    const roomId = 'room1';
+    const userId = '1';
+
+    const user: UserInRoomI = {
+      id: userId,
+      username: 'user1',
+      rol: 'player',
+      cardSelected: '8',
+    };
+
+    const room = service.createRoom(roomId, user);
+
+    service.clearSelectedCard(roomId, userId);
+
+    // Check if the user's card is cleared
+    const clearedUser = room.users.find((user) => user.id === userId);
+    expect(clearedUser?.cardSelected).toBe('');
+  });
+
+  it('should not clear the selected card for a non-existent player in the room', () => {
+    const roomId = 'room1';
+    const userId = 'nonExistentUser';
+
+    // No room created
+    service.clearSelectedCard(roomId, userId);
+
+    // Check if no user is added to the non-existent user
+    const room = service.getRoom(roomId);
+    expect(room?.users.length).toBe(undefined);
+  });
 });
