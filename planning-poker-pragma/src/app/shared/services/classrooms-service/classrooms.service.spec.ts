@@ -175,4 +175,55 @@ describe('ClassroomsService', () => {
     const room = service.getRoom(roomId);
     expect(room?.users.length).toBe(undefined);
   });
+
+  //userIsPlayer()
+  it('should return true if the user is a player in the specified room', () => {
+    const roomId = 'room1';
+    const userId = '1';
+
+    const user: UserInRoomI = {
+      id: '1',
+      username: 'user1',
+      rol: 'player',
+      cardSelected: '',
+    };
+
+    service.createRoom(roomId, user);
+
+    const isPlayer = service.userIsPlayer(roomId, userId);
+
+    // Check if the method correctly identifies the user as a player
+    expect(isPlayer).toBe(true);
+  });
+
+  it('should return false if the user is not a player in the specified room', () => {
+    const roomId = 'room1';
+    const userId = '1';
+
+    const user: UserInRoomI = {
+      id: '1',
+      username: 'user1',
+      rol: 'spectator',
+      cardSelected: '',
+    };
+
+    service.createRoom(roomId, user);
+
+    const isPlayer = service.userIsPlayer(roomId, userId);
+
+    // Check if the method correctly identifies the user as not a player
+    expect(isPlayer).toBe(false);
+  });
+
+  it('should return false if the user is not in the specified room', () => {
+    const roomId = 'room1';
+    const userId = '1';
+
+    // No user added to the room
+
+    const isPlayer = service.userIsPlayer(roomId, userId);
+
+    // Check if the method correctly returns false for a non-existent user
+    expect(isPlayer).toBe(false);
+  });
 });
