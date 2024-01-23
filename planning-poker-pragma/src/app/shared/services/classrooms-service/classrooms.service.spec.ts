@@ -1,3 +1,4 @@
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { UserInRoomI } from '../../../interfaces/user-in-room-interface';
 import { ClassroomsService } from './classrooms.service';
 
@@ -495,5 +496,58 @@ describe('ClassroomsService', () => {
     // Check if no users are added to the non-existent room
     const room = service.getRoom(roomId);
     expect(room?.users.length).toBe(undefined);
+  });
+
+  //allPlayersSelectedCard()
+  it('should return true when all players have selected a card', async () => {
+    const user1: UserInRoomI = {
+      id: '1',
+      username: 'user1',
+      rol: 'player',
+      cardSelected: '3',
+    };
+    const user2: UserInRoomI = {
+      id: '2',
+      username: 'user2',
+      rol: 'player',
+      cardSelected: '5',
+    };
+    const userListSubject = new BehaviorSubject<UserInRoomI[] | undefined>([
+      user1,
+      user2,
+    ]);
+
+    // Mock userList$ observable
+    service['userListSubject'] = userListSubject;
+    service['userList$'] = userListSubject.asObservable();
+
+    const result = firstValueFrom(service.allPlayersSelectedCard());
+    expect(await result).toEqual(true);
+  });
+
+  it('should return false when at least one player has not selected a card', async () => {
+    const user1: UserInRoomI = {
+      id: '1',
+      username: 'user1',
+      rol: 'player',
+      cardSelected: '3',
+    };
+    const user2: UserInRoomI = {
+      id: '2',
+      username: 'user2',
+      rol: 'player',
+      cardSelected: '',
+    };
+    const userListSubject = new BehaviorSubject<UserInRoomI[] | undefined>([
+      user1,
+      user2,
+    ]);
+
+    // Mock userList$ observable
+    service['userListSubject'] = userListSubject;
+    service['userList$'] = userListSubject.asObservable();
+
+    const result = firstValueFrom(service.allPlayersSelectedCard());
+    expect(await result).toEqual(false);
   });
 });
