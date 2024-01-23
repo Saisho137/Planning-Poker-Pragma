@@ -52,8 +52,8 @@ export class AuthenticationComponent {
   private validateUserSubscription: Subscription | undefined;
 
   constructor(
-    private userService: UsersService,
     private router: Router,
+    private userService: UsersService,
     private location: Location
   ) {
     const token = sessionStorage.getItem('session_token')!;

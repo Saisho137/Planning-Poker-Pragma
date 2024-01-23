@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CreateClassroomComponent } from './create-classroom.component';
 
 describe('CreateClassroomComponent', () => {
@@ -8,7 +8,7 @@ describe('CreateClassroomComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreateClassroomComponent],
+      imports: [CreateClassroomComponent, HttpClientTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CreateClassroomComponent);

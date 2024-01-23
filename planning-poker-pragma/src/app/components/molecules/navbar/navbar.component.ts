@@ -19,7 +19,7 @@ export class NavbarComponent {
 
   @Input() buttonText: string = '';
   @Input() tittle: string = '';
-  @Input() imgUrl: string = '';
+  @Input() imgUrl: string = '/';
   @Input() roomId: string = '';
 
   @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CardMenuComponent } from './card-menu.component';
 
 describe('CardMenuComponent', () => {
@@ -8,7 +8,7 @@ describe('CardMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CardMenuComponent],
+      imports: [CardMenuComponent, HttpClientTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CardMenuComponent);
