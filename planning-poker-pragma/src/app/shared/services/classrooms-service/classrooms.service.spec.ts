@@ -355,15 +355,25 @@ describe('ClassroomsService', () => {
     const room = service.getRoom(roomId);
     expect(room?.users.length).toBe(undefined);
   });
-  
+
   //selectCardForMockUpUsers()
   it('should select a card from fibonacci for mock-up users in the room', () => {
     const roomId = 'room1';
     const userId = '1';
     const mode = service.createScoringMode('fibonacci');
 
-    const user1: UserInRoomI = { id: userId, username: 'user1', rol: 'player', cardSelected: '' };
-    const user2: UserInRoomI = { id: '2', username: 'user2', rol: 'player', cardSelected: '' };
+    const user1: UserInRoomI = {
+      id: userId,
+      username: 'user1',
+      rol: 'player',
+      cardSelected: '',
+    };
+    const user2: UserInRoomI = {
+      id: '2',
+      username: 'user2',
+      rol: 'player',
+      cardSelected: '',
+    };
 
     const room = service.createRoom(roomId, user1);
     room.users.push(user2);
@@ -386,8 +396,18 @@ describe('ClassroomsService', () => {
     const userId = '1';
     const mode = service.createScoringMode('oneToFive');
 
-    const user1: UserInRoomI = { id: userId, username: 'user1', rol: 'player', cardSelected: '' };
-    const user2: UserInRoomI = { id: '2', username: 'user2', rol: 'player', cardSelected: '' };
+    const user1: UserInRoomI = {
+      id: userId,
+      username: 'user1',
+      rol: 'player',
+      cardSelected: '',
+    };
+    const user2: UserInRoomI = {
+      id: '2',
+      username: 'user2',
+      rol: 'player',
+      cardSelected: '',
+    };
 
     const room = service.createRoom(roomId, user1);
     room.users.push(user2);
@@ -410,8 +430,18 @@ describe('ClassroomsService', () => {
     const userId = '1';
     const mode = service.createScoringMode('oneHundred');
 
-    const user1: UserInRoomI = { id: userId, username: 'user1', rol: 'player', cardSelected: '' };
-    const user2: UserInRoomI = { id: '2', username: 'user2', rol: 'player', cardSelected: '' };
+    const user1: UserInRoomI = {
+      id: userId,
+      username: 'user1',
+      rol: 'player',
+      cardSelected: '',
+    };
+    const user2: UserInRoomI = {
+      id: '2',
+      username: 'user2',
+      rol: 'player',
+      cardSelected: '',
+    };
 
     const room = service.createRoom(roomId, user1);
     room.users.push(user2);
@@ -427,5 +457,43 @@ describe('ClassroomsService', () => {
 
     // Restore the original Math.random function
     randomSpy.mockRestore();
+  });
+
+  //clearSelectedCardForMockUpUsers()
+  it('should clear selected cards for mock-up users in the room', () => {
+    const roomId = 'room1';
+    const userId = '1';
+
+    const user1: UserInRoomI = {
+      id: userId,
+      username: 'user1',
+      rol: 'player',
+      cardSelected: '3',
+    };
+    const user2: UserInRoomI = {
+      id: '2',
+      username: 'user2',
+      rol: 'player',
+      cardSelected: '1',
+    };
+
+    const room = service.createRoom(roomId, user1);
+    room.users.push(user2);
+
+    service.clearSelectedCardForMockUpUsers(roomId);
+
+    // Check if the selected cards for mock-up users are cleared
+    room.users.forEach((user) => expect(user.cardSelected).toBe(''));
+  });
+
+  it('should not clear selected cards for mock-up users if the room does not exist', () => {
+    const roomId = 'nonExistentRoom';
+
+    // No room created
+    service.clearSelectedCardForMockUpUsers(roomId);
+
+    // Check if no users are added to the non-existent room
+    const room = service.getRoom(roomId);
+    expect(room?.users.length).toBe(undefined);
   });
 });
