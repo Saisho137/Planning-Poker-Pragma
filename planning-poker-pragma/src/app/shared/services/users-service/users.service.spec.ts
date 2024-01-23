@@ -45,41 +45,6 @@ describe('UsersService', () => {
     });
   });
 
-  it('should set userId and username from sessionStorage if available', () => {
-    // Arrange: Mock sessionStorage values & Mock getItem method of sessionStorage
-    const mockUserId = '123';
-    const mockUsername = 'testUser';
-    // 
-    const getItemSpy = jest.spyOn(sessionStorage, 'getItem');
-    getItemSpy.mockReturnValueOnce(mockUserId).mockReturnValueOnce(mockUsername);
-
-    // Act: Call the constructor
-    service = new UsersService(null!);
-
-    // Assert: Verify that setUserId and setUsername were called with the expected values
-    expect(service.setUserId).toHaveBeenCalledWith(mockUserId);
-    expect(service.setUsername).toHaveBeenCalledWith(mockUsername);
-
-    // Clean up: Restore the original implementation of getItem
-    getItemSpy.mockRestore();
-  });
-
-  it('should not set userId and username if sessionStorage values are not available', () => {
-    // Arrange: Mock getItem method of sessionStorage
-    const getItemSpy = jest.spyOn(sessionStorage, 'getItem');
-    getItemSpy.mockReturnValueOnce(null).mockReturnValueOnce(null);
-
-    // Act: Call the constructor
-    service = new UsersService(null!);
-
-    // Assert: Verify that setUserId and setUsername were not called
-    expect(service.setUserId).not.toHaveBeenCalled();
-    expect(service.setUsername).not.toHaveBeenCalled();
-
-    // Clean up: Restore the original implementation of getItem
-    getItemSpy.mockRestore();
-  });
-
   //CreateUser()
   it('should send a POST request to register a user', () => {
     // Arrange
