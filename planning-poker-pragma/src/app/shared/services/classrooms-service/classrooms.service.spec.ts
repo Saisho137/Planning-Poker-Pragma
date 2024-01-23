@@ -90,4 +90,51 @@ describe('ClassroomsService', () => {
     // Check if the returned scoring mode matches the expected mode
     expect(scoringMode).toEqual(service['scoringMode'][mode]);
   });
+
+  //makeUserAdmin()
+  it('should make a user admin in the specified room', () => {
+    const roomId = 'room1';
+    const user: UserInRoomI = {
+      id: '1',
+      username: 'user1',
+      rol: 'player',
+      cardSelected: '',
+    };
+    const newAdminUser = 'adminUser';
+
+    const room = service.createRoom(roomId, user);
+    const isAdminBefore = room.admin.includes(newAdminUser);
+
+    const result = service.makeUserAdmin(roomId, newAdminUser);
+
+    const isAdminAfter = room.admin.includes(newAdminUser);
+
+    // Check if the user is not admin before and becomes admin after
+    expect(isAdminBefore).toBe(false);
+    expect(isAdminAfter).toBe(true);
+
+    // Check if the method returns true indicating successful admin change
+    expect(result).toBe(true);
+  });
+
+  it('should not make a user admin if already admin in the specified room', () => {
+    const roomId = 'room1';
+    const user: UserInRoomI = {
+      id: '1',
+      username: 'user1',
+      rol: 'player',
+      cardSelected: '',
+    };
+    const adminUser = '1';
+
+    const room = service.createRoom(roomId, user);
+
+    const result = service.makeUserAdmin(roomId, adminUser);
+
+    // Check if the user remains admin
+    expect(room.admin).toContain(adminUser);
+
+    // Check if the method returns false indicating no change
+    expect(result).toBe(false);
+  });
 });
