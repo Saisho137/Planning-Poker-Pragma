@@ -139,6 +139,21 @@ describe('ClassroomsService', () => {
     expect(result).toBe(false);
   });
 
+  it('should not make a user admin in non-exist room', () => {
+    const roomId = 'room1';
+    const user: UserInRoomI = {
+      id: '1',
+      username: 'user1',
+      rol: 'player',
+      cardSelected: '',
+    };
+    
+    const result = service.makeUserAdmin(roomId, user.id);
+
+    // Check if the method returns false indicating user is not admin
+    expect(result).toBe(false);
+  })
+
   //updateUserState()
   it('should update user state in the specified room', () => {
     const roomId = 'room1';
