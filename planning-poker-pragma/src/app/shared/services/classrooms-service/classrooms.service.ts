@@ -20,7 +20,7 @@ export class ClassroomsService {
   private users: UserInRoomI[] = [];
 
   private scoringMode: ScoringModeI = {
-    fibonacci: [
+    'fibonacci': [
       { id: 1, value: '1' },
       { id: 2, value: '2' },
       { id: 3, value: '3' },
@@ -34,7 +34,7 @@ export class ClassroomsService {
       { id: 11, value: '?' },
       { id: 12, value: '☕' },
     ],
-    oneToFive: [
+    'oneToFive': [
       { id: 1, value: '1' },
       { id: 2, value: '2' },
       { id: 3, value: '3' },
@@ -43,7 +43,7 @@ export class ClassroomsService {
       { id: 6, value: '?' },
       { id: 7, value: '☕' },
     ],
-    oneHundred: [
+    'oneHundred': [
       { id: 1, value: '10' },
       { id: 2, value: '20' },
       { id: 3, value: '30' },

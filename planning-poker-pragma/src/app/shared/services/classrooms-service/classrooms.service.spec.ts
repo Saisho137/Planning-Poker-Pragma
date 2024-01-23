@@ -226,4 +226,44 @@ describe('ClassroomsService', () => {
     // Check if the method correctly returns false for a non-existent user
     expect(isPlayer).toBe(false);
   });
+
+  //addUsersToRoom()
+  it('should add new users to the specified room', () => {
+    const roomId = 'room1';
+    const existingUser: UserInRoomI = {
+      id: '3',
+      username: 'user3',
+      rol: 'player',
+      cardSelected: '',
+    };
+    const newUsers: UserInRoomI[] = [
+      { id: '2', username: 'user2', rol: 'spectator', cardSelected: '' },
+      { id: '3', username: 'user3', rol: 'player', cardSelected: '' },
+    ];
+
+    const room = service.createRoom(roomId, existingUser);
+
+    service.addUsersToRoom(roomId, newUsers);
+
+    // Check if the new users are added to the room
+    expect(room.users).toContain(existingUser);
+    newUsers.forEach((newUser) => {
+      expect(room.users).toContain(newUser);
+    });
+  });
+
+  it('should not add new users if the room does not exist', () => {
+    const roomId = 'nonExistentRoom';
+    const newUsers: UserInRoomI[] = [
+      { id: '2', username: 'user2', rol: 'spectator', cardSelected: '' },
+      { id: '3', username: 'user3', rol: 'player', cardSelected: '' },
+    ];
+
+    // No room created
+    service.addUsersToRoom(roomId, newUsers);
+
+    // Check if no users are added to the non-existent room
+    const room = service.getRoom(roomId);
+    expect(room?.users.length).toBe(undefined);
+  });
 });
