@@ -1,5 +1,5 @@
 import { UsersService } from './users.service';
-import { of } from 'rxjs';
+import { throwError, of, firstValueFrom } from 'rxjs';
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -7,6 +7,7 @@ describe('UsersService', () => {
 
   beforeEach(() => {
     httpMock = {
+      get: jest.fn(),
       post: jest.fn(),
     };
     service = new UsersService(httpMock);
@@ -16,36 +17,44 @@ describe('UsersService', () => {
     expect(service).toBeTruthy();
   });
 
+  //CreateUser()
   it('should send a POST request to register a user', () => {
+    // Arrange
     const mockUser = {
       username: 'testUser',
       email: 'test@example.com',
       password: 'testPassword',
     };
-  
+
     const expectedResponse = {
       userCreated: true,
     };
-  
+
+    // Act
     httpMock.post.mockReturnValueOnce(of(expectedResponse));
-  
-    service.createUser(mockUser.username, mockUser.email, mockUser.password).subscribe((response) => {
-      // Assert
-      expect(httpMock.post).toHaveBeenCalledWith(
-        'http://localhost:8080/register_user',
-        {
-          username: mockUser.username,
-          email: mockUser.email,
-          password: mockUser.password,
-        },
-        { headers: expect.anything() }
-      );
-  
-      expect(response).toEqual(expectedResponse);
-    });
+
+    // Assert
+    service
+      .createUser(mockUser.username, mockUser.email, mockUser.password)
+      .subscribe((response) => {
+        // Assert
+        expect(httpMock.post).toHaveBeenCalledWith(
+          'http://localhost:8080/register_user',
+          {
+            username: mockUser.username,
+            email: mockUser.email,
+            password: mockUser.password,
+          },
+          { headers: expect.anything() }
+        );
+
+        expect(response).toEqual(expectedResponse);
+      });
   });
 
+  //ValidateUser()
   it('should send a POST request to validate a user', () => {
+    // Arrange
     const mockUser = {
       email: 'test@example.com',
       password: 'testPassword',
@@ -62,9 +71,11 @@ describe('UsersService', () => {
       token: 'xyz',
     };
 
+    // Act
     //Mocking the http.post method to return an observable
     httpMock.post.mockReturnValueOnce(of(mockResponse));
 
+    // Assert
     service
       .validateUser(mockUser.email, mockUser.password)
       .subscribe((response) => {
@@ -76,5 +87,51 @@ describe('UsersService', () => {
         expect(response.user).toEqual(mockResponse.user);
         expect(response.token).toEqual(mockResponse.token);
       });
+  });
+
+  //GetAllUsers()
+  it('should send a GET request to retrieve all users', () => {
+    // Arrange
+    const expectedUsers = [
+      {
+        _id: '1',
+        username: 'user1',
+        email: 'user1@example.com',
+        password: 'password1',
+        __v: 0,
+      },
+      {
+        _id: '2',
+        username: 'user2',
+        email: 'user2@example.com',
+        password: 'password2',
+        __v: 0,
+      },
+    ];
+
+    // Act
+    httpMock.get.mockReturnValueOnce(of({ users: expectedUsers }));
+
+    // Assert
+    service.getAllUsers().subscribe((users) => {
+      expect(httpMock.get).toHaveBeenCalledWith(
+        'http://localhost:8080/get_users'
+      );
+      expect(users).toEqual(expectedUsers);
+    });
+  });
+
+  it('should handle error when GET request fails to retrieve users', async () => {
+    // Arrange
+    const errorMessage = 'Error fetching users';
+    const errorResponse = new Error(errorMessage);
+  
+    // Act
+    httpMock.get.mockReturnValueOnce(throwError(() => errorResponse));
+  
+    // Assert
+    await expect(firstValueFrom(service.getAllUsers())).rejects.toThrow(
+      'Algo salió mal al obtener usuarios.'
+    );
   });
 });
