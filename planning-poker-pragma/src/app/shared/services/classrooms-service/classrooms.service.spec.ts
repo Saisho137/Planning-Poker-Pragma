@@ -62,4 +62,32 @@ describe('ClassroomsService', () => {
     // Check if undefined is returned for non-existent room ID
     expect(retrievedRoom).toBeUndefined();
   });
+
+  //createScoringMode()
+  it('should return the "fibonacci" scoring mode', () => {
+    const mode = 'fibonacci';
+
+    const scoringMode = service.createScoringMode(mode);
+
+    // Check if the returned scoring mode matches the expected mode
+    expect(scoringMode).toEqual(service['scoringMode'][mode]);
+  });
+
+  it('should return the "oneToFive" scoring mode', () => {
+    const mode = 'oneToFive';
+
+    const scoringMode = service.createScoringMode(mode);
+
+    // Check if the returned scoring mode matches the expected mode
+    expect(scoringMode).toEqual(service['scoringMode'][mode]);
+  });
+
+  it('should return the "oneHundred" scoring mode', () => {
+    const mode = 'oneHundred';
+
+    const scoringMode = service.createScoringMode(mode);
+
+    // Check if the returned scoring mode matches the expected mode
+    expect(scoringMode).toEqual(service['scoringMode'][mode]);
+  });
 });
