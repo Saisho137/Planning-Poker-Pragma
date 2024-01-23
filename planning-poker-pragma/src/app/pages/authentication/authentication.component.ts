@@ -135,7 +135,7 @@ export class AuthenticationComponent {
       nameValidator(userUsername)
     ) {
       this.createUserSubscription = this.userService
-        .createUSer(userUsername, userEmail, userPassword)
+        .createUser(userUsername, userEmail, userPassword)
         .subscribe({
           next: (res: RegisterI) => {
             res.userCreated === true

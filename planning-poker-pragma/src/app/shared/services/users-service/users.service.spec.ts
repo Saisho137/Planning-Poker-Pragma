@@ -22,23 +22,27 @@ describe('UsersService', () => {
       email: 'test@example.com',
       password: 'testPassword',
     };
-
-    // Mocking the http.post method to return an observable
-    httpMock.post.mockReturnValueOnce(of({}));
-
-    service
-      .createUSer(mockUser.username, mockUser.email, mockUser.password)
-      .subscribe(() => {
-        expect(httpMock.post).toHaveBeenCalledWith(
-          'http://localhost:8080/register_user',
-          {
-            username: mockUser.username,
-            email: mockUser.email,
-            password: mockUser.password,
-          },
-          { headers: expect.anything() }
-        );
-      });
+  
+    const expectedResponse = {
+      userCreated: true,
+    };
+  
+    httpMock.post.mockReturnValueOnce(of(expectedResponse));
+  
+    service.createUser(mockUser.username, mockUser.email, mockUser.password).subscribe((response) => {
+      // Assert
+      expect(httpMock.post).toHaveBeenCalledWith(
+        'http://localhost:8080/register_user',
+        {
+          username: mockUser.username,
+          email: mockUser.email,
+          password: mockUser.password,
+        },
+        { headers: expect.anything() }
+      );
+  
+      expect(response).toEqual(expectedResponse);
+    });
   });
 
   it('should send a POST request to validate a user', () => {
@@ -58,7 +62,7 @@ describe('UsersService', () => {
       token: 'xyz',
     };
 
-    // Mocking the http.post method to return an observable
+    //Mocking the http.post method to return an observable
     httpMock.post.mockReturnValueOnce(of(mockResponse));
 
     service

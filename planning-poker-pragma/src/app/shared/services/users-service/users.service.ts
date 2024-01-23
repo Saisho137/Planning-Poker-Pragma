@@ -38,7 +38,7 @@ export class UsersService {
     this.usernameSubject.next(username);
   }
 
-  public createUSer(
+  public createUser(
     username: string,
     email: string,
     password: string
