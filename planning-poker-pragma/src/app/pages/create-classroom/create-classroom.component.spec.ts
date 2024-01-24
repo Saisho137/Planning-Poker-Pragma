@@ -32,10 +32,34 @@ describe('CreateClassroomComponent', () => {
     expect(component.regexMessage).toEqual('');
   });
 
-  it('should update regexMessage when onInputChange is called with invalid value', () => {
-    const invalidValue = 'invalid   value  12345';
+  it('should update regexMessage when onInputChange is called with invalid regex', () => {
+    const invalidValue = 'invalid@value!321';
     component.onInputChange(invalidValue);
-    expect(component.regexMessage).not.toEqual('');
+    expect(component.regexMessage).toEqual(
+      'Solo se permiten carácteres alfanuméricos!'
+    );
+  });
+
+  it('should update regexMessage when onInputChange is called with invalid lenght', () => {
+    const invalidValue = 'invalidExtendedRoomName123';
+    component.onInputChange(invalidValue);
+    expect(component.regexMessage).toEqual(
+      'El nombre debe tener entre 5 y 20 carácteres!'
+    );
+  });
+
+  it('should update regexMessage when onInputChange is called with invalid number size', () => {
+    const invalidValue = 'invalidValue12345';
+    component.onInputChange(invalidValue);
+    expect(component.regexMessage).toEqual(
+      'No debe haber más de 3 números en el nombre!'
+    );
+  });
+
+  it('should update regexMessage when onInputChange is called with invalid double space', () => {
+    const invalidValue = 'invalid  value';
+    component.onInputChange(invalidValue);
+    expect(component.regexMessage).toEqual('Solo un espacio es permitido!');
   });
 
   it('should reset regexMessage when onInputChange is called with valid value', () => {
