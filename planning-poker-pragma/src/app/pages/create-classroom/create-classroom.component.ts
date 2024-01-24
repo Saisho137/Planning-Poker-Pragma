@@ -68,11 +68,8 @@ export class CreateClassroomComponent {
   }
 
   validateName(): void {
-    if (this.classroomName.valid) this.goToClassroom();
-  }
-
-  goToClassroom(): void {
-    this.router.navigate(['classroom/' + this.classroomName.value]);
+    if (this.classroomName.valid)
+      this.router.navigate(['classroom/' + this.classroomName.value]);
   }
 
   logOut() {
