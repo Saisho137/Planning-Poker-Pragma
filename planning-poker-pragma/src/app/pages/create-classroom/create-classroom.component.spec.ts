@@ -81,4 +81,18 @@ describe('CreateClassroomComponent', () => {
       'classroom/' + component.classroomName.value,
     ]);
   });
+
+  it('should clear session and navigate to login when logOut is called', () => {
+    sessionStorage.setItem('session_token', 'test')
+    sessionStorage.setItem('user_id', 'test')
+    sessionStorage.setItem('user_username', 'test')
+    
+    component.logOut();
+
+    expect(sessionStorage.getItem('session_token')).toBeNull();
+    expect(sessionStorage.getItem('user_id')).toBeNull();
+    expect(sessionStorage.getItem('user_username')).toBeNull();
+
+    expect(router.navigate).toHaveBeenCalledWith(['login']);
+  });
 });
