@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
-import { validateRegex } from '../../shared/services/validators/regex.validator';
+import { validateRegex } from '../../shared/validators/regex.validator';
 import { ButtonComponent } from '../../components/atoms/button/button.component';
 import { InputComponent } from '../../components/atoms/input/input.component';
 import {

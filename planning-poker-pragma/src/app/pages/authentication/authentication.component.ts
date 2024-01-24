@@ -5,7 +5,7 @@ import { UsersService } from '../../shared/services/users-service/users.service'
 import {
   nameValidator,
   validateRegex,
-} from '../../shared/services/validators/regex.validator';
+} from '../../shared/validators/regex.validator';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import { InputComponent } from '../../components/atoms/input/input.component';
 import { ButtonComponent } from '../../components/atoms/button/button.component';
