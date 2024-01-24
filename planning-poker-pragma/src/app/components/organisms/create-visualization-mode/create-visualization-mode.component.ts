@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { nameValidator } from '../../../shared/validators';
+import { nameValidator } from '../../../shared/services/validators/regex.validator';
 import { ClassroomsService } from '../../../shared/services/classrooms-service/classrooms.service';
 import { ButtonComponent } from '../../atoms/button/button.component';
 import { InputComponent } from '../../atoms/input/input.component';

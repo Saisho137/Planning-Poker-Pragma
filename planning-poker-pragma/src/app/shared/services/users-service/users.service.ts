@@ -83,8 +83,7 @@ export class UsersService {
 
     return this.http.get<AllUsersI>(url).pipe(
       map((response) => response.users),
-      catchError((error) => {
-        console.error(error);
+      catchError(() => {
         return throwError(
           () => new Error('Algo salió mal al obtener usuarios.')
         );

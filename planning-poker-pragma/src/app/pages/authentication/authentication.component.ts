@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../shared/services/users-service/users.service';
-import { nameValidator, validateRegex } from '../../shared/validators';
+import {
+  nameValidator,
+  validateRegex,
+} from '../../shared/services/validators/regex.validator';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import { InputComponent } from '../../components/atoms/input/input.component';
 import { ButtonComponent } from '../../components/atoms/button/button.component';
@@ -143,10 +146,10 @@ export class AuthenticationComponent {
           next: (res: RegisterI) => {
             res.userCreated === true
               ? this.validateUser()
-              : window.alert('Something Went Wrong! Try again!');
+              : alert('Something Went Wrong! Try again!');
           },
           error: (err) => {
-            window.alert('Something Went Wrong! Try again!' + err);
+            alert('Something Went Wrong! Try again!' + err);
             this.router.navigate(['register']);
           },
         });
@@ -175,7 +178,7 @@ export class AuthenticationComponent {
             this.router.navigate(['create-classroom']);
           },
           error: () => {
-            window.alert('Wrong User!, try Again!');
+            alert('Wrong User!, try Again!');
             this.router.navigate(['login']);
           },
         });
