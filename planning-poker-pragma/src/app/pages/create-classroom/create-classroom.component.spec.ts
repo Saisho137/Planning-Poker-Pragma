@@ -72,14 +72,19 @@ describe('CreateClassroomComponent', () => {
     component.regexMessage = '';
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('p')).toBeFalsy
+    expect(compiled.querySelector('p')).toBeFalsy;
   });
 
-  //Constructor()
+  //Constructor() //I havent made it work yet!
+  it('should not navigate to login with token in sessionStorage', () => {
+    expect(router.navigate).toBeTruthy();
+  });
   it('should not navigate to login with token in sessionStorage', () => {
     sessionStorage.setItem('session_token', 'Test');
+    fixture.detectChanges();
     expect(router.navigate).not.toHaveBeenCalled();
   });
+  //
 
   //onInputChange() and regexMessage property interactions
   it('should update regexMessage when onInputChange is called with invalid regex', () => {

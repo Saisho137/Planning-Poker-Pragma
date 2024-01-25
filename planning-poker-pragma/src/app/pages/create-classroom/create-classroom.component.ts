@@ -37,8 +37,10 @@ export class CreateClassroomComponent {
   public regexMessage: string = '';
 
   constructor(private router: Router, private ngZone: NgZone) {
-    if (sessionStorage.getItem('session_token') === null) {
-      this.router.navigate(['login']);
+    if (!sessionStorage.getItem('session_token')) {
+      this.ngZone.run(() => {
+        this.router.navigate(['login']);
+      });
     }
   }
 
@@ -60,7 +62,6 @@ export class CreateClassroomComponent {
           this.regexMessage = 'Solo un espacio es permitido!';
           return;
         default:
-          this.regexMessage = '';
           return;
       }
     }
