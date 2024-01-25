@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
@@ -36,7 +36,7 @@ export class CreateClassroomComponent {
 
   public regexMessage: string = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private ngZone: NgZone) {
     if (sessionStorage.getItem('session_token') === null) {
       this.router.navigate(['login']);
     }
@@ -69,13 +69,17 @@ export class CreateClassroomComponent {
 
   validateName(): void {
     if (this.classroomName.valid)
-      this.router.navigate(['classroom/' + this.classroomName.value]);
+      this.ngZone.run(() => {
+        this.router.navigate(['classroom/' + this.classroomName.value]);
+      });
   }
 
   logOut() {
     sessionStorage.removeItem('session_token');
     sessionStorage.removeItem('user_id');
     sessionStorage.removeItem('user_username');
-    this.router.navigate(['login']);
+    this.ngZone.run(() => {
+      this.router.navigate(['login']);
+    });
   }
 }

@@ -36,12 +36,36 @@ describe('CreateClassroomComponent', () => {
   });
 
   //Html Unit Tests
+  it('should render view', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('form')).toBeTruthy();
+    expect(compiled.querySelector('app-navbar')).toBeTruthy();
+    expect(compiled.querySelector('input-atom')).toBeTruthy();
+    expect(compiled.querySelector('button-atom')).toBeTruthy();
+  });
+
   it('should render title', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('app-navbar')?.textContent).toContain(
       'Crear Partida'
     );
+  });
+
+  it('should render label name', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('label')?.textContent).toContain(
+      'Nombra la partida'
+    );
+  });
+
+  it('should render regex message if exist', () => {
+    component.regexMessage = 'errorTest';
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('p')?.textContent).toContain('errorTest');
   });
 
   //Constructor()

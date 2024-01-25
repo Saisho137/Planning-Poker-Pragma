@@ -22,12 +22,6 @@ export class UsersService {
       this.setUserId(sessionStorage.getItem('user_id')!)
       this.setUsername(sessionStorage.getItem('user_username')!)
     }
-    this.userId$.subscribe((userId) => {
-      if (userId) console.log(userId);
-    });
-    this.username$.subscribe((username) => {
-      if (username) console.log(username);
-    });
   }
 
   public setUserId(userId: string): void {
