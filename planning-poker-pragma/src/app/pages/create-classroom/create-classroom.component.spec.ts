@@ -68,6 +68,13 @@ describe('CreateClassroomComponent', () => {
     expect(compiled.querySelector('p')?.textContent).toContain('errorTest');
   });
 
+  it('should not render regex message if doesnt exist', () => {
+    component.regexMessage = '';
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('p')).toBeFalsy
+  });
+
   //Constructor()
   it('should not navigate to login with token in sessionStorage', () => {
     sessionStorage.setItem('session_token', 'Test');
