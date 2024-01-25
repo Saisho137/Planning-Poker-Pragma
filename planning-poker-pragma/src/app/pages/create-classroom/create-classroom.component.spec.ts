@@ -23,7 +23,7 @@ describe('CreateClassroomComponent', () => {
     router = TestBed.inject(Router);
     jest.spyOn(router, 'navigate');
 
-    sessionStorage.clear()
+    sessionStorage.clear();
   });
 
   it('should create', () => {
@@ -35,16 +35,20 @@ describe('CreateClassroomComponent', () => {
     expect(component.regexMessage).toEqual('');
   });
 
-  //Constructor()
-  it('should not navigate to login with token in sessionStorage', () => {
-    sessionStorage.setItem('session_token', 'Test')
-    expect(router.navigate).not.toHaveBeenCalled();
+  //Html Unit Tests
+  it('should render title', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('app-navbar')?.textContent).toContain(
+      'Crear Partida'
+    );
   });
 
-  /* it('should navigate to login due to null sessionStorage', () => {
-    sessionStorage.removeItem('session_token');
-    expect(router.navigate).toHaveBeenCalledWith(['login']);
-  }); */
+  //Constructor()
+  it('should not navigate to login with token in sessionStorage', () => {
+    sessionStorage.setItem('session_token', 'Test');
+    expect(router.navigate).not.toHaveBeenCalled();
+  });
 
   //onInputChange() and regexMessage property interactions
   it('should update regexMessage when onInputChange is called with invalid regex', () => {
