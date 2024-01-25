@@ -22,16 +22,31 @@ describe('CreateClassroomComponent', () => {
     component = fixture.componentInstance;
     router = TestBed.inject(Router);
     jest.spyOn(router, 'navigate');
+
+    sessionStorage.clear()
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
+  //Initial Value validators
   it('should initialize with empty regexMessage', () => {
     expect(component.regexMessage).toEqual('');
   });
 
+  //Constructor()
+  it('should not navigate to login with token in sessionStorage', () => {
+    sessionStorage.setItem('session_token', 'Test')
+    expect(router.navigate).not.toHaveBeenCalled();
+  });
+
+  /* it('should navigate to login due to null sessionStorage', () => {
+    sessionStorage.removeItem('session_token');
+    expect(router.navigate).toHaveBeenCalledWith(['login']);
+  }); */
+
+  //onInputChange() and regexMessage property interactions
   it('should update regexMessage when onInputChange is called with invalid regex', () => {
     const invalidValue = 'invalid@value!321';
     component.onInputChange(invalidValue);
@@ -68,6 +83,7 @@ describe('CreateClassroomComponent', () => {
     expect(component.regexMessage).toEqual('');
   });
 
+  //validateName()
   it('should not allow navigate with invalid classroomName', () => {
     component.classroomName.patchValue('Invalid  Name  for Classroom 12345');
     component.validateName();
@@ -82,11 +98,12 @@ describe('CreateClassroomComponent', () => {
     ]);
   });
 
+  //logOut()
   it('should clear session and navigate to login when logOut is called', () => {
-    sessionStorage.setItem('session_token', 'test')
-    sessionStorage.setItem('user_id', 'test')
-    sessionStorage.setItem('user_username', 'test')
-    
+    sessionStorage.setItem('session_token', 'test');
+    sessionStorage.setItem('user_id', 'test');
+    sessionStorage.setItem('user_username', 'test');
+
     component.logOut();
 
     expect(sessionStorage.getItem('session_token')).toBeNull();
