@@ -11,6 +11,7 @@ describe('UsersService', () => {
       post: jest.fn(),
     };
     service = new UsersService(httpMock);
+    sessionStorage.clear();
   });
 
   it('should be created', () => {
@@ -40,6 +41,21 @@ describe('UsersService', () => {
     service.setUsername(username);
 
     // Assert
+    service.username$.subscribe((value) => {
+      expect(value).toEqual(username);
+    });
+  });
+
+  it('should assign sessionStorage values to pertinent Subjects', () => {
+    const userId = '1'
+    const username = 'test'
+
+    sessionStorage.setItem('user_id', userId);
+    sessionStorage.setItem('user_username', username);
+
+    service.userId$.subscribe((value) => {
+      expect(value).toEqual(userId);
+    });
     service.username$.subscribe((value) => {
       expect(value).toEqual(username);
     });
