@@ -33,4 +33,23 @@ describe('AuthenticationComponent', () => {
     expect(component.isLogin).toBeFalsy();
     expect(component.title).toEqual('Register');
   });
+
+  //Form tests
+  it('should update form value and regexMessage on username change', () => {
+    const newValue = 'newUsername';
+    component.onUsernameChange(newValue);
+    expect(component.userForm.get('userUsername')?.value).toEqual(newValue);
+  });
+  
+  it('should update form value and regexMessage on email change', () => {
+    const newValue = 'newemail@example.com';
+    component.onEmailChange(newValue);
+    expect(component.userForm.get('userEmail')?.value).toEqual(newValue);
+  });
+  
+  it('should update form value and regexMessage on password change', () => {
+    const newValue = 'newPassword123';
+    component.onPasswordChange(newValue);
+    expect(component.userForm.get('userPassword')?.value).toEqual(newValue);
+  });
 });
