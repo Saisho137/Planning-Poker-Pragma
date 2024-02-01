@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../shared/services/users-service/users.service';
@@ -57,7 +57,8 @@ export class AuthenticationComponent {
   constructor(
     private router: Router,
     private userService: UsersService,
-    private location: Location
+    private location: Location,
+    private ngZone: NgZone
   ) {
     const token = sessionStorage.getItem('session_token')!;
     if (token) {
@@ -150,7 +151,9 @@ export class AuthenticationComponent {
           },
           error: (err) => {
             alert('Something Went Wrong! Try again!' + err);
-            this.router.navigate(['register']);
+            this.ngZone.run(() => {
+              this.router.navigate(['register']);
+            });
           },
         });
     }
@@ -175,11 +178,15 @@ export class AuthenticationComponent {
             this.userService.setUsername(user.username);
             sessionStorage.setItem('user_username', user.username);
 
-            this.router.navigate(['create-classroom']);
+            this.ngZone.run(() => {
+              this.router.navigate(['create-classroom']);
+            });
           },
           error: () => {
             alert('Wrong User!, try Again!');
-            this.router.navigate(['login']);
+            this.ngZone.run(() => {
+              this.router.navigate(['login']);
+            });
           },
         });
     }

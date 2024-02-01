@@ -5,6 +5,7 @@ import { AuthenticationComponent } from './authentication.component';
 import { Router } from '@angular/router';
 import { UsersService } from '../../shared/services/users-service/users.service';
 import { of, throwError } from 'rxjs';
+import { UserResponseI } from '../../interfaces/user-response-interface';
 
 describe('AuthenticationComponent', () => {
   let component: AuthenticationComponent;
@@ -24,7 +25,9 @@ describe('AuthenticationComponent', () => {
 
     fixture = TestBed.createComponent(AuthenticationComponent);
     component = fixture.componentInstance;
-    
+
+    window.alert = jest.fn();
+
     router = TestBed.inject(Router);
     jest.spyOn(router, 'navigate');
 
@@ -132,5 +135,59 @@ describe('AuthenticationComponent', () => {
       userFormValue.userPassword
     );
     expect(router.navigate).toHaveBeenCalledWith(['register']);
+  });
+
+  //ValidateUser()
+  it('should navigate to create-classroom after successful validation', () => {
+    const userFormValue = {
+      userUsername: 'loginDefault',
+      userEmail: 'test@example.com',
+      userPassword: 'testPassword',
+    };
+
+    component.userForm.setValue(userFormValue);
+
+    const mockUserResponse: UserResponseI = {
+      token: '1',
+      user: {
+        _id: '1',
+        username: 'loginDefault',
+        email: 'test@example.com',
+        password: 'testPassword',
+        __v: 0
+      },
+    };
+
+    jest
+      .spyOn(usersService, 'validateUser')
+      .mockReturnValue(of(mockUserResponse));
+
+    component.validateUser();
+
+    expect(sessionStorage.getItem('session_token')).toEqual('1');
+    expect(sessionStorage.getItem('user_id')).toEqual('1');
+    expect(sessionStorage.getItem('user_username')).toEqual('loginDefault');
+    expect(router.navigate).toHaveBeenCalledWith(['create-classroom']);
+  });
+
+  it('should show an alert and navigate to login on validation error', () => {
+    const userFormValue = {
+      userUsername: 'loginDefault',
+      userEmail: 'test@example.com',
+      userPassword: 'testPassword',
+    };
+
+    component.userForm.setValue(userFormValue);
+
+    const errorResponse = 'Validation error';
+    jest
+      .spyOn(usersService, 'validateUser')
+      .mockReturnValue(throwError(() => errorResponse));
+    jest.spyOn(window, 'alert');
+
+    component.validateUser();
+
+    expect(window.alert).toHaveBeenCalledWith('Wrong User!, try Again!');
+    expect(router.navigate).toHaveBeenCalledWith(['login']);
   });
 });
