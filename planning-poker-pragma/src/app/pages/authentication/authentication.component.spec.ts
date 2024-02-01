@@ -1,8 +1,9 @@
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthenticationComponent } from './authentication.component';
-import { Router } from '@angular/router';
 import { UsersService } from '../../shared/services/users-service/users.service';
 import { of, throwError } from 'rxjs';
 import { UserResponseI } from '../../interfaces/user-response-interface';
@@ -12,6 +13,7 @@ describe('AuthenticationComponent', () => {
   let fixture: ComponentFixture<AuthenticationComponent>;
   let usersService: UsersService;
   let router: Router;
+  let location: Location;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -31,6 +33,9 @@ describe('AuthenticationComponent', () => {
     router = TestBed.inject(Router);
     jest.spyOn(router, 'navigate');
 
+    location = TestBed.inject(Location);
+    jest.spyOn(location, 'path').mockReturnValue('/login');
+
     usersService = TestBed.inject(UsersService);
 
     fixture.detectChanges();
@@ -39,6 +44,15 @@ describe('AuthenticationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  //if URL === /login
+  //Still cant made it work!
+  /* it('should set userForm values, isLogin, and title when path is /login', () => {
+    fixture.detectChanges();
+    expect(component.isLogin).toBe(true);
+    expect(component.title).toBe('Sign up');
+    expect(component?.userForm.get('userUsername')?.value).toBe('loginDefault');
+  }); */
 
   //Creation tests
   it('should initialize the userForm', () => {
