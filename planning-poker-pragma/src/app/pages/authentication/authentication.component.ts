@@ -51,8 +51,8 @@ export class AuthenticationComponent {
 
   public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
 
-  private createUserSubscription: Subscription | undefined;
-  private validateUserSubscription: Subscription | undefined;
+  public createUserSubscription: Subscription | undefined;
+  public validateUserSubscription: Subscription | undefined;
 
   constructor(
     private router: Router,
@@ -90,9 +90,6 @@ export class AuthenticationComponent {
           return;
         case 'spaces':
           this.regexMessage = 'Solo un espacio es permitido!';
-          return;
-        case 'required':
-          this.regexMessage = 'No debes dejar ningún campo vacío!';
           return;
         default:
           this.regexMessage = '';

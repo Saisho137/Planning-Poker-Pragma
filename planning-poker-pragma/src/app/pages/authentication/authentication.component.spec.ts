@@ -154,7 +154,7 @@ describe('AuthenticationComponent', () => {
         username: 'loginDefault',
         email: 'test@example.com',
         password: 'testPassword',
-        __v: 0
+        __v: 0,
       },
     };
 
@@ -189,5 +189,65 @@ describe('AuthenticationComponent', () => {
 
     expect(window.alert).toHaveBeenCalledWith('Wrong User!, try Again!');
     expect(router.navigate).toHaveBeenCalledWith(['login']);
+  });
+
+  //onUsername || Email || PasswordChange() Interactions
+  it('should update regexMessage when onUsernameChange is called with invalid regex', () => {
+    const invalidValue = 'invalid@value!321';
+    component.onUsernameChange(invalidValue);
+    expect(component.regexMessage).toEqual(
+      'Solo se permiten carácteres alfanuméricos!'
+    );
+  });
+
+  it('should update regexMessage when onUsernameChange is called with invalid lenght', () => {
+    const invalidValue = 'invalidExtendedRoomName123';
+    component.onUsernameChange(invalidValue);
+    expect(component.regexMessage).toEqual(
+      'El nombre debe tener entre 5 y 20 carácteres!'
+    );
+  });
+
+  it('should update regexMessage when onUsernameChange is called with invalid number size', () => {
+    const invalidValue = 'invalidValue12345';
+    component.onUsernameChange(invalidValue);
+    expect(component.regexMessage).toEqual(
+      'No debe haber más de 3 números en el nombre!'
+    );
+  });
+
+  it('should update regexMessage when onUsernameChange is called with invalid double space', () => {
+    const invalidValue = 'invalid  value';
+    component.onUsernameChange(invalidValue);
+    expect(component.regexMessage).toEqual('Solo un espacio es permitido!');
+  });
+
+  it('should update regexMessage when email or password are blank inputs', () => {
+    const invalidValue = '';
+    component.onEmailChange(invalidValue);
+    component.onPasswordChange(invalidValue);
+    expect(component.regexMessage).toEqual('No debes dejar ningún campo vacío!');
+  });
+
+  it('should update regexMessage when onEmailChange is called with invalid email format input', () => {
+    const invalidValue = 'invalid.hotmail.com';
+    component.onEmailChange(invalidValue);
+    expect(component.regexMessage).toEqual('Debes escribir un email válido!');
+  });
+
+  it('should update regexMessage when onPasswordChange is called with invalid length input', () => {
+    const invalidValue = 'pass';
+    component.onPasswordChange(invalidValue);
+    expect(component.regexMessage).toEqual('La contraseña debe tener al menos 5 carácteres!');
+  });
+
+  it('should reset regexMessage when any field is called with valid value', () => {
+    const validUsername = 'validName123';
+    const validEmail = 'test@hotmail.com'
+    const validPassword = 'pass123'
+    component.onUsernameChange(validUsername);
+    component.onEmailChange(validEmail);
+    component.onPasswordChange(validPassword);
+    expect(component.regexMessage).toEqual('');
   });
 });
