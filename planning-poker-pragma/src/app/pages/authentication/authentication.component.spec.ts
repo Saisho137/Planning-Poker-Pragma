@@ -2,10 +2,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthenticationComponent } from './authentication.component';
+import { Router } from '@angular/router';
 
 describe('AuthenticationComponent', () => {
   let component: AuthenticationComponent;
   let fixture: ComponentFixture<AuthenticationComponent>;
+  let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -14,6 +16,8 @@ describe('AuthenticationComponent', () => {
 
     fixture = TestBed.createComponent(AuthenticationComponent);
     component = fixture.componentInstance;
+    router = TestBed.inject(Router);
+    jest.spyOn(router, 'navigate');
     fixture.detectChanges();
   });
 
@@ -51,5 +55,26 @@ describe('AuthenticationComponent', () => {
     const newValue = 'newPassword123';
     component.onPasswordChange(newValue);
     expect(component.userForm.get('userPassword')?.value).toEqual(newValue);
+  });
+
+  //Method tests
+  it('should call createUser method', () => {
+    const createUserSpy = jest.spyOn(component, 'createUser');
+    component.createUser();
+    expect(createUserSpy).toHaveBeenCalled();
+  });
+  
+  it('should call validateUser method', () => {
+    const validateUserSpy = jest.spyOn(component, 'validateUser');
+    component.validateUser();
+    expect(validateUserSpy).toHaveBeenCalled();
+  });
+
+  it('should navigate to create-classroom after successful registration', () => {
+    component.onUsernameChange('userTest')
+    component.onEmailChange('newemail@example.com')
+    component.onUsernameChange('newPassword123')
+    component.createUser();
+    expect(router.navigate).toHaveBeenCalledWith(['create-classroom']);
   });
 });
