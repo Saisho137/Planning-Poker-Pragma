@@ -47,7 +47,7 @@ export class AuthenticationComponent {
   public regexMessage: string = '';
 
   public isLogin: boolean = false;
-  public tittle: 'Sing up' | 'Register' = 'Register';
+  public title: 'Sing up' | 'Register' = 'Register';
 
   public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
 
@@ -68,7 +68,7 @@ export class AuthenticationComponent {
         userUsername: 'loginDefault',
       });
       this.isLogin = true;
-      this.tittle = 'Sing up';
+      this.title = 'Sing up';
     }
   }
 

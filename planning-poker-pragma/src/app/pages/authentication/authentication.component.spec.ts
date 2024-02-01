@@ -20,4 +20,17 @@ describe('AuthenticationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  //Creation tests
+  it('should initialize the userForm', () => {
+    expect(component.userForm).toBeTruthy();
+    expect(component.userForm.get('userUsername')).toBeDefined();
+    expect(component.userForm.get('userEmail')).toBeDefined();
+    expect(component.userForm.get('userPassword')).toBeDefined();
+  });
+  
+  it('should initialize isLogin and title correctly when url its /register', () => {
+    expect(component.isLogin).toBeFalsy();
+    expect(component.title).toEqual('Register');
+  });
 });
