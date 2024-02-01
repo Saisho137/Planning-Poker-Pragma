@@ -53,6 +53,22 @@ describe('CreateClassroomComponent', () => {
     );
   });
 
+  it('should render Submit button Message', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('button-atom.col-8')?.textContent?.trim()).toContain(
+      'Crear partida'
+    );
+  });
+
+  it('should render LogOut button Message', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('button-atom.col-6')?.textContent?.trim()).toContain(
+      'Logout'
+    );
+  });
+
   it('should render label name', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
