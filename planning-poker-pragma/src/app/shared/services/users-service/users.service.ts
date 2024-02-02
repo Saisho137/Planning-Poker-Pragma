@@ -11,8 +11,8 @@ import { UserI } from '../../../interfaces/user-interface';
   providedIn: 'root',
 })
 export class UsersService {
-  private userIdSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
-  private usernameSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+  public userIdSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+  public usernameSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   public userId$: Observable<string | null> = this.userIdSubject.asObservable();
   public username$: Observable<string | null> = this.usernameSubject.asObservable();

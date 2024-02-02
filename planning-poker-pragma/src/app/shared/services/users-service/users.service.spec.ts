@@ -36,10 +36,26 @@ describe('UsersService', () => {
   });
 
   //userIdSubject
-  it('should set and retrieve userId correctly', () => {});
+  it('should set and retrieve userId correctly', () => {
+    const mockId = '1'
+
+    const spy = jest.spyOn(service.userIdSubject, 'next');
+    service.setUserId(mockId)
+
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spy).toHaveBeenCalledWith(mockId)
+  });
 
   //usernameSubject
-  it('should set and retrieve username correctly', () => {});
+  it('should set and retrieve username correctly', () => {
+    const mockUsername = 'test'
+
+    const spy = jest.spyOn(service.usernameSubject, 'next');
+    service.setUsername(mockUsername)
+
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spy).toHaveBeenCalledWith(mockUsername)
+  });
 
   it('should assign sessionStorage values to pertinent Subjects', () => {
     const userId = '1';
