@@ -7,6 +7,8 @@ import { HttpHeaders } from '@angular/common/http';
 describe('UsersService', () => {
   let service: UsersService;
   let httpMock: HttpTestingController;
+
+
   const headers: HttpHeaders = new HttpHeaders().set(
     'Content-Type',
     'application/json'
@@ -55,7 +57,7 @@ describe('UsersService', () => {
   });
 
   //CreateUser()
-  it('should send a POST request to register a user', () => {
+  it('should send a POST request and return expected Response from CreateUser()', () => {
     let resp = {};
 
     const mockUser = {
@@ -81,7 +83,7 @@ describe('UsersService', () => {
   });
 
   //ValidateUser()
-  it('should send a POST request to validate a user', () => {
+  it('should send a POST request and return expected Response from ValidateUser()', () => {
     let resp = {};
 
     const mockUser = {
@@ -113,7 +115,7 @@ describe('UsersService', () => {
   });
 
   //GetAllUsers()
-  xit('should send a GET request to retrieve all users', () => {
+  it('should send a GET request to retrieve all users', () => {
     let resp = {};
 
     const expectedUsers = [
@@ -133,18 +135,26 @@ describe('UsersService', () => {
       },
     ];
 
-    // Assert
-    service.getAllUsers().subscribe((users) => {});
+    service.getAllUsers().subscribe((users) => (resp = users));
+
+    const req = httpMock.expectOne('http://localhost:8080/get_users');
+    req.flush({ users: expectedUsers });
+
+    expect(req.request.method).toBe('GET');
+    expect(req.request.url).toBe('http://localhost:8080/get_users');
+    expect(resp).toBe(expectedUsers);
   });
 
-  xit('should handle error when GET request fails to retrieve users', async () => {
+  it('should handle error when GET request fails to retrieve users', async () => {
     const errorMessage = 'Error fetching users';
     const errorResponse = new Error(errorMessage);
 
-    throwError(() => errorResponse);
 
-    await expect(firstValueFrom(service.getAllUsers())).rejects.toThrow(
-      'Algo salió mal al obtener usuarios.'
-    );
+    const tempMock: any = {get: jest.fn(), post: jest.fn()}
+    const tempService = new UsersService(tempMock);
+
+    tempMock.get.mockReturnValueOnce(throwError(() => errorResponse));
+
+    await expect(firstValueFrom(tempService.getAllUsers())).rejects.toThrow('Algo salió mal al obtener usuarios.');
   });
 });
