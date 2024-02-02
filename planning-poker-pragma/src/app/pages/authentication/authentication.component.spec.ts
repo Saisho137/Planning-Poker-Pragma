@@ -259,6 +259,7 @@ describe('AuthenticationComponent', () => {
     const validUsername = 'validName123';
     const validEmail = 'test@hotmail.com'
     const validPassword = 'pass123'
+    component.regexMessage = 'test'
     component.onUsernameChange(validUsername);
     component.onEmailChange(validEmail);
     component.onPasswordChange(validPassword);

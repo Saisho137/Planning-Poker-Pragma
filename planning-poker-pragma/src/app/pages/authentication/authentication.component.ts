@@ -84,22 +84,23 @@ export class AuthenticationComponent {
       switch (this.userForm.get('userUsername')!.errors!['pattern']) {
         case 'regex':
           this.regexMessage = 'Solo se permiten carácteres alfanuméricos!';
-          return;
+          break;
         case 'lenght':
           this.regexMessage = 'El nombre debe tener entre 5 y 20 carácteres!';
-          return;
+          break;
         case 'numbers':
           this.regexMessage = 'No debe haber más de 3 números en el nombre!';
-          return;
+          break;
         case 'spaces':
           this.regexMessage = 'Solo un espacio es permitido!';
-          return;
+          break;
         default:
           this.regexMessage = '';
-          return;
+          break;
       }
+    } else {
+      this.regexMessage = '';
     }
-    this.regexMessage = '';
   }
 
   onEmailChange(value: string): void {
