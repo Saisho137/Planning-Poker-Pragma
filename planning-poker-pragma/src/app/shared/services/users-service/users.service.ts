@@ -18,10 +18,7 @@ export class UsersService {
   public username$: Observable<string | null> = this.usernameSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    if (sessionStorage.getItem('user_id') && sessionStorage.getItem('user_username')) {
-      this.setUserId(sessionStorage.getItem('user_id')!)
-      this.setUsername(sessionStorage.getItem('user_username')!)
-    }
+    this.assignObservablesOnInit()
   }
 
   public setUserId(userId: string): void {
@@ -30,6 +27,13 @@ export class UsersService {
 
   public setUsername(username: string): void {
     this.usernameSubject.next(username);
+  }
+
+  public assignObservablesOnInit(): void {
+    if (sessionStorage.getItem('user_id') && sessionStorage.getItem('user_username')) {
+      this.setUserId(sessionStorage.getItem('user_id')!)
+      this.setUsername(sessionStorage.getItem('user_username')!)
+    }
   }
 
   public createUser(
