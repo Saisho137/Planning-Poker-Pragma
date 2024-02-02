@@ -82,9 +82,6 @@ export class AuthenticationComponent {
     });
     if (this.userForm.get('userUsername')?.errors) {
       switch (this.userForm.get('userUsername')!.errors!['pattern']) {
-        case 'regex':
-          this.regexMessage = 'Solo se permiten carácteres alfanuméricos!';
-          break;
         case 'lenght':
           this.regexMessage = 'El nombre debe tener entre 5 y 20 carácteres!';
           break;
@@ -95,7 +92,7 @@ export class AuthenticationComponent {
           this.regexMessage = 'Solo un espacio es permitido!';
           break;
         default:
-          this.regexMessage = '';
+          this.regexMessage = 'Solo se permiten carácteres alfanuméricos!';
           break;
       }
     } else {

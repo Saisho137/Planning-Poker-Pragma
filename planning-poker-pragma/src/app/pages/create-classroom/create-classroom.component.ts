@@ -49,9 +49,6 @@ export class CreateClassroomComponent {
 
     if (this.classroomName?.errors) {
       switch (this.classroomName?.errors['pattern']) {
-        case 'regex':
-          this.regexMessage = 'Solo se permiten carácteres alfanuméricos!';
-          break;
         case 'lenght':
           this.regexMessage = 'El nombre debe tener entre 5 y 20 carácteres!';
           break;
@@ -62,7 +59,7 @@ export class CreateClassroomComponent {
           this.regexMessage = 'Solo un espacio es permitido!';
           break;
         default:
-          this.regexMessage = '';
+          this.regexMessage = 'Solo se permiten carácteres alfanuméricos!';
           break;
       }
     } else {
