@@ -9,8 +9,8 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
   styleUrl: './generic-image.component.scss',
 })
 export class GenericImageComponent {
-  @Input() imgUrl: string = '';
+  @Input() imgUrl: string = '/';
   @Input() imgAlt: string = '';
-  @Input() imgWidth: string = '';
-  @Input() imgHeight: string = '';
+  @Input() imgWidth: string = '1';
+  @Input() imgHeight: string = '1';
 }

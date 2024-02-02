@@ -104,22 +104,27 @@ export class ClassroomsService {
     username: string,
     rol: 'spectator' | 'player'
   ): void {
-    const room: ClassroomI | undefined = this.getRoom(classroomId);
-    const user: UserInRoomI | undefined = room?.users.find(
-      (user) => user.id === userId
-    );
-    if (user) {
-      user.username = username;
-      user.rol = rol;
+    const selectedRoom: ClassroomI | undefined = this.getRoom(classroomId);
+    if (selectedRoom) {
+      const user: UserInRoomI | undefined = selectedRoom?.users.find(
+        (user) => user.id === userId
+      );
+      if (user) {
+        user.username = username;
+        user.rol = rol;
+      }
     }
   }
 
   public userIsPlayer(classroomId: string, userId: string): boolean {
-    const room: ClassroomI | undefined = this.getRoom(classroomId);
-    const user: UserInRoomI | undefined = room?.users.find(
-      (user) => user.id === userId
-    );
-    return user ? user.rol === 'player' : false;
+    const selectedRoom: ClassroomI | undefined = this.getRoom(classroomId);
+    if (selectedRoom) {
+      const user: UserInRoomI | undefined = selectedRoom?.users.find(
+        (user) => user.id === userId
+      );
+      if (user) return user ? user.rol === 'player' : false;
+    }
+    return false;
   }
 
   public addUsersToRoom(classroomId: string, newUsers: UserInRoomI[]): void {
@@ -130,7 +135,7 @@ export class ClassroomsService {
     }
   }
 
-  public selectCardForHost(
+  public selectCard(
     classroomId: string,
     userId: string,
     hostValue: string

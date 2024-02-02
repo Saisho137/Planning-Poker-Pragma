@@ -166,7 +166,7 @@ export class ClassroomComponent {
     }
 
     this.selectedCard = value;
-    this.classroomService.selectCardForHost(
+    this.classroomService.selectCard(
       this.roomId,
       this.userId,
       this.selectedCard

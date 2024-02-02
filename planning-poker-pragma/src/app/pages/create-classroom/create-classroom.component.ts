@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
-import { validateRegex } from '../../shared/validators';
+import { validateRegex } from '../../shared/validators/regex.validator';
 import { ButtonComponent } from '../../components/atoms/button/button.component';
 import { InputComponent } from '../../components/atoms/input/input.component';
 import {
@@ -27,15 +27,20 @@ import {
   styleUrl: './create-classroom.component.scss',
 })
 export class CreateClassroomComponent {
-  public classroomName = new FormControl('', [Validators.required, validateRegex()]);
+  public classroomName = new FormControl('', [
+    Validators.required,
+    validateRegex(),
+  ]);
 
   public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
 
   public regexMessage: string = '';
 
-  constructor(private router: Router) {
-    if (sessionStorage.getItem('session_token') === null) {
-      this.router.navigate(['login']);
+  constructor(private router: Router, private ngZone: NgZone) {
+    if (!sessionStorage.getItem('session_token')) {
+      this.ngZone.run(() => {
+        this.router.navigate(['login']);
+      });
     }
   }
 
@@ -53,8 +58,10 @@ export class CreateClassroomComponent {
         case 'numbers':
           this.regexMessage = 'No debe haber más de 3 números en el nombre!';
           return;
+        case 'spaces':
+          this.regexMessage = 'Solo un espacio es permitido!';
+          return;
         default:
-          this.regexMessage = '';
           return;
       }
     }
@@ -62,19 +69,18 @@ export class CreateClassroomComponent {
   }
 
   validateName(): void {
-    if (this.classroomName.valid) this.goToClassroom();
-  }
-
-  goToClassroom(): void {
-    this.router.navigate([
-      'classroom/' + this.classroomName.value,
-    ]);
+    if (this.classroomName.valid)
+      this.ngZone.run(() => {
+        this.router.navigate(['classroom/' + this.classroomName.value]);
+      });
   }
 
   logOut() {
     sessionStorage.removeItem('session_token');
     sessionStorage.removeItem('user_id');
     sessionStorage.removeItem('user_username');
-    this.router.navigate(['login']);
+    this.ngZone.run(() => {
+      this.router.navigate(['login']);
+    });
   }
 }

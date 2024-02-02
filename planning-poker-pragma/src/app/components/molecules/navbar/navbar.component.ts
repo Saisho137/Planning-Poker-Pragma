@@ -18,8 +18,8 @@ export class NavbarComponent {
   private subscription: Subscription | undefined;
 
   @Input() buttonText: string = '';
-  @Input() tittle: string = '';
-  @Input() imgUrl: string = '';
+  @Input() title: string = '';
+  @Input() imgUrl: string = '/';
   @Input() roomId: string = '';
 
   @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
