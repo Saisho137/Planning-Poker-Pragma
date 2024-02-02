@@ -32,9 +32,7 @@ export class UserCardComponent {
   ngOnInit() {
     this.getAllUsersSubscription = this.userService.getAllUsers().subscribe({
       next: (users: UserI[]) => {
-        const { _id: userId } =
-          users.find((user) => user.username === this.cardValue) || {};
-        this.userId = userId || '0000';
+        users.find((user) => {if(user.username === this.cardValue) this.userId = user._id}) || {};
       },
       error: (error) => {
         console.error(error);
