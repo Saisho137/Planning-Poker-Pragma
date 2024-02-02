@@ -72,11 +72,8 @@ export class ClassroomsService {
     return newRoom;
   }
 
-  public getRoom(classroomId: string): ClassroomI | undefined {
-    const selectedRoom: ClassroomI | undefined = this.rooms.find(
-      (room) => room.id === classroomId
-    );
-    return selectedRoom;
+  public getRoom(classroomId: string): ClassroomI {
+    return this.rooms.find((room) => room.id === classroomId) as any;
   }
 
   public createScoringMode(
