@@ -18,7 +18,7 @@ export class UsersService {
   public username$: Observable<string | null> = this.usernameSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    this.assignObservablesOnInit()
+    this.assignBehaviorSubjectsOnInit()
   }
 
   public setUserId(userId: string): void {
@@ -29,7 +29,7 @@ export class UsersService {
     this.usernameSubject.next(username);
   }
 
-  public assignObservablesOnInit(): void {
+  public assignBehaviorSubjectsOnInit(): void {
     if (sessionStorage.getItem('user_id') && sessionStorage.getItem('user_username')) {
       this.setUserId(sessionStorage.getItem('user_id')!)
       this.setUsername(sessionStorage.getItem('user_username')!)

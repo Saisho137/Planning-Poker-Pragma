@@ -36,7 +36,7 @@ describe('UsersService', () => {
   });
 
   //userIdSubject
-  it('should set and retrieve userId correctly', () => {
+  it('should set userId correctly', () => {
     const mockId = '1'
 
     const spy = jest.spyOn(service.userIdSubject, 'next');
@@ -47,7 +47,7 @@ describe('UsersService', () => {
   });
 
   //usernameSubject
-  it('should set and retrieve username correctly', () => {
+  it('should set username correctly', () => {
     const mockUsername = 'test'
 
     const spy = jest.spyOn(service.usernameSubject, 'next');
@@ -66,7 +66,7 @@ describe('UsersService', () => {
     sessionStorage.setItem('user_id', userId);
     sessionStorage.setItem('user_username', username);
 
-    service.assignObservablesOnInit()
+    service.assignBehaviorSubjectsOnInit()
 
     service.userId$.subscribe((value) => (resp1 = value));
     service.username$.subscribe((value) => (resp2 = value));
