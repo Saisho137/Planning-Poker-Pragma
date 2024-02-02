@@ -34,7 +34,7 @@ export class CardMenuComponent {
   @Output() scoringModeSelection: EventEmitter<'fibonacci' | 'oneToFive' | 'oneHundred'> = new EventEmitter<'fibonacci' | 'oneToFive' | 'oneHundred'>();
 
   constructor(private classroomService: ClassroomsService, private userService: UsersService) {
-    this.scoringMode = this.classroomService.createScoringMode(this.scoringSelection);
+    this.assignScoringModeOnInit()
   }
 
   ngOnInit() {
@@ -44,6 +44,10 @@ export class CardMenuComponent {
     });
   }
   
+  assignScoringModeOnInit(): void {
+    this.scoringMode = this.classroomService.createScoringMode(this.scoringSelection);
+  }
+
   getScoringMode(value: 'fibonacci' | 'oneToFive' | 'oneHundred'){
     if (this.room?.admin.includes(this.userId)) {
       this.scoringSelection = value;

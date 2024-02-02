@@ -18,7 +18,7 @@ export class UsersService {
   public username$: Observable<string | null> = this.usernameSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    this.assignBehaviorSubjectsOnInit()
+    this.assignBehaviorSubjectsOnInit();
   }
 
   public setUserId(userId: string): void {

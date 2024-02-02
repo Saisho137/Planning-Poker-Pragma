@@ -37,11 +37,11 @@ export class CreateClassroomComponent {
   public regexMessage: string = '';
 
   constructor(private router: Router, private ngZone: NgZone) {
-    if (!sessionStorage.getItem('session_token')) {
-      this.ngZone.run(() => {
-        this.router.navigate(['login']);
-      });
-    }
+    this.navigateToLogin();
+  }
+
+  navigateToLogin(): void {
+    if (!sessionStorage.getItem('session_token')) this.ngZone.run(() => {this.router.navigate(['login'])});
   }
 
   onInputChange(value: string): void {

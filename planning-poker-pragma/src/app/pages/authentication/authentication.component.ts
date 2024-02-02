@@ -60,14 +60,17 @@ export class AuthenticationComponent {
     private location: Location,
     private ngZone: NgZone
   ) {
-    const token = sessionStorage.getItem('session_token')!;
-    if (token) {
-      this.router.navigate(['create-classroom']);
-    }
+    this.navigateToCreateClassroom();
+    this.initializeLogin();
+  }
+
+  navigateToCreateClassroom(): void {
+    if (sessionStorage.getItem('session_token')!) this.router.navigate(['create-classroom']);
+  }
+
+  initializeLogin(): void {
     if (this.location.path() === '/login') {
-      this.userForm.patchValue({
-        userUsername: 'loginDefault',
-      });
+      this.userForm.patchValue({ userUsername: 'loginDefault' });
       this.isLogin = true;
       this.title = 'Sing up';
     }

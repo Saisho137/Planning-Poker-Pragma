@@ -32,7 +32,7 @@ import { UserI } from '../../interfaces/user-interface';
   styleUrl: './classroom.component.scss',
 })
 export class ClassroomComponent {
-  public roomId: string;
+  public roomId: string = '';
   public room: ClassroomI | undefined;
 
   public pragmaIcon: string = '../../../../assets/images/pragma.png';
@@ -45,7 +45,7 @@ export class ClassroomComponent {
   public usersAlreadySelectedCard: boolean = false;
   public alreadyInitialized: boolean = false;
 
-  public scoringMode: ScoringModeItemI[];
+  public scoringMode: ScoringModeItemI[] = [];
   public averageScore: string | undefined = undefined;
   public numberDictionary: Record<string, number> = { '0': 0 };
 
@@ -66,9 +66,7 @@ export class ClassroomComponent {
     private userService: UsersService,
     private classroomService: ClassroomsService
   ) {
-    this.roomId = this.route.snapshot.paramMap.get('id')!;
-    this.room = this.classroomService.getRoom(this.roomId);
-    this.scoringMode = this.classroomService.createScoringMode('fibonacci');
+    this.initializeValues();
   }
 
   ngOnInit() {
@@ -96,6 +94,12 @@ export class ClassroomComponent {
       cardSelected: '',
     };
     this.classroomService.createRoom(this.roomId, user);
+  }
+
+  initializeValues(): void {
+    this.roomId = this.route.snapshot.paramMap.get('id')!;
+    this.room = this.classroomService.getRoom(this.roomId);
+    this.scoringMode = this.classroomService.createScoringMode('fibonacci');
   }
 
   initializeRoom(): void {

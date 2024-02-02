@@ -13,6 +13,10 @@ export class AppComponent {
   title: string = 'planning-poker-pragma';
 
   constructor() {
+    this.printSessionStorage();
+  }
+
+  printSessionStorage(): void {
     if (sessionStorage.getItem('session_token')) {
       console.log('Token: ', sessionStorage.getItem('session_token'));
     }
