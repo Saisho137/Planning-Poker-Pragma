@@ -11,11 +11,13 @@ import { UserCardComponent } from '../../../molecules/user-card/user-card.compon
   styleUrl: './bottom-module.component.scss',
 })
 export class BottomModuleComponent {
-  @Input() selectedCard: string = '';
   @Input() votationFinished: boolean = false;
+  @Input() selectedCard: string = '';
+
+  @Input({ required: true }) roomId: string = '';
   @Input() room: ClassroomI| undefined = {
     id: '',
-    admin: '',
+    admin: [],
     users: [],
   };
 }

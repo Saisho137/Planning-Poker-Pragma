@@ -11,11 +11,13 @@ import { UserCardComponent } from '../../../molecules/user-card/user-card.compon
   styleUrl: './right-module.component.scss',
 })
 export class RightModuleComponent {
-  @Input() selectedCard: string = '';
   @Input() votationFinished: boolean = false;
-  @Input() room: ClassroomI | undefined = {
+  @Input() selectedCard: string = '';
+
+  @Input({ required: true }) roomId: string = '';
+  @Input() room: ClassroomI| undefined = {
     id: '',
-    admin: '',
+    admin: [],
     users: [],
   };
 }

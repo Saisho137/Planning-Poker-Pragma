@@ -7,6 +7,7 @@ import { TopModuleComponent } from './top-module/top-module.component';
 import { LeftModuleComponent } from './left-module/left-module.component';
 import { RightModuleComponent } from './right-module/right-module.component';
 import { BottomModuleComponent } from './bottom-module/bottom-module.component';
+import { ClassroomsService } from '../../../shared/services/classrooms-service/classrooms.service';
 
 @Component({
   selector: 'app-users-table-menu',
@@ -24,18 +25,22 @@ import { BottomModuleComponent } from './bottom-module/bottom-module.component';
   styleUrl: './users-table-menu.component.scss',
 })
 export class UsersTableMenuComponent {
+  public room: ClassroomI | undefined;
+
+  @Input({ required: true }) roomId: string = '';
   @Input() selectedCard: string = '';
   @Input() buttonText: string = '';
   @Input() allPlayersSelected: boolean = false;
   @Input() votationFinished: boolean = false;
-  @Input() room: ClassroomI | undefined = {
-    id: '',
-    admin: '',
-    users: [],
-  };
 
   @Output() clickEventReveal: EventEmitter<void> = new EventEmitter<void>();
   @Output() clickEventRestart: EventEmitter<void> = new EventEmitter<void>();
+
+  constructor(private classroomService: ClassroomsService) {}
+
+  ngOnInit() {
+    this.room = this.classroomService.getRoom(this.roomId);
+  }
 
   revealClick() {
     this.clickEventReveal.emit();

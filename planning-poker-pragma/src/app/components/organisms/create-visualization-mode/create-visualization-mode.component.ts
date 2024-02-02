@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { nameValidator } from '../../../shared/validators';
+import { nameValidator } from '../../../shared/validators/regex.validator';
 import { ClassroomsService } from '../../../shared/services/classrooms-service/classrooms.service';
 import { ButtonComponent } from '../../atoms/button/button.component';
 import { InputComponent } from '../../atoms/input/input.component';
-import { UserInRoomI } from '../../../interfaces/user-in-room-interface';
 import { RadioButtonsMenuComponent } from './radio-buttons-menu/radio-buttons-menu.component';
 import { UsersService } from '../../../shared/services/users-service/users.service';
 import { Subscription } from 'rxjs';
@@ -44,10 +43,12 @@ export class CreateVisualizationModeComponent {
       if (userId) this.userId = userId;
       else this.userId = '0000';
     });
-    this.usernameSubscription = this.userService.username$.subscribe((username) => {
-      if (username) this.username = username;
-      else this.username = 'ERR';
-    });
+    this.usernameSubscription = this.userService.username$.subscribe(
+      (username) => {
+        if (username) this.username = username;
+        else this.username = 'ERR';
+      }
+    );
     this.initialUsername = this.username;
   }
 
@@ -63,14 +64,13 @@ export class CreateVisualizationModeComponent {
       }
       if (!this.selectedMode) this.selectedMode = 'player';
 
-      const user: UserInRoomI = {
-        id: this.userId,
-        username: this.username,
-        rol: this.selectedMode,
-        cardSelected: '',
-      };
-
-      this.classroomService.createRoom(this.classroomId, user);
+      this.classroomService.updateUserState(
+        this.classroomId,
+        this.userId,
+        this.username,
+        this.selectedMode
+      );
+      
       this.roomGeneratedEvent.emit();
     }
   }

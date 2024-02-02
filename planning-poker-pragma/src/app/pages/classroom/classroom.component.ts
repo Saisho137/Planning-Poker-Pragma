@@ -42,24 +42,29 @@ export class ClassroomComponent {
 
   public allPlayersSelected: boolean = false;
   public cardResultsRevealed: boolean = false;
-  public scoringMode: ScoringModeItemI[];
+  public usersAlreadySelectedCard: boolean = false;
+  public alreadyInitialized: boolean = false;
 
-  public selectedCard: string = '';
-  public usersSelectedCard: boolean = false;
+  public scoringMode: ScoringModeItemI[];
   public averageScore: string | undefined = undefined;
-  public visualization: 'player' | 'spectator' | '' = '';
   public numberDictionary: Record<string, number> = { '0': 0 };
 
+  public selectedCard: string = '';
+  public visualization: 'player' | 'spectator' | '' = '';
+
   private userId: string = '';
+  private username: string = '';
 
   private userIdSubscription: Subscription | undefined;
+  private usernameSubscription: Subscription | undefined;
+
   private getAllUsersSubscription: Subscription | undefined;
   private allPlayerSelectedSubscription: Subscription | undefined;
 
   constructor(
     private route: ActivatedRoute,
-    private classroomService: ClassroomsService,
-    private userService: UsersService
+    private userService: UsersService,
+    private classroomService: ClassroomsService
   ) {
     this.roomId = this.route.snapshot.paramMap.get('id')!;
     this.room = this.classroomService.getRoom(this.roomId);
@@ -71,18 +76,36 @@ export class ClassroomComponent {
       if (userId) this.userId = userId;
       else this.userId = '0000';
     });
-  }
+    this.usernameSubscription = this.userService.username$.subscribe(
+      (username) => {
+        if (username) this.username = username;
+        else this.username = 'ERR';
+      }
+    );
 
-  initializeRoom(): void {
-    this.configurationWindow = !this.configurationWindow;
-    this.addMockUpUsers();
-    this.setVisualization();
-    this.updateRoom();
     this.allPlayerSelectedSubscription = this.classroomService
       .allPlayersSelectedCard()
       .subscribe((result: boolean) => {
         this.allPlayersSelected = result;
       });
+
+    const user: UserInRoomI = {
+      id: this.userId,
+      username: this.username,
+      rol: 'spectator',
+      cardSelected: '',
+    };
+    this.classroomService.createRoom(this.roomId, user);
+  }
+
+  initializeRoom(): void {
+    if (!this.alreadyInitialized) {
+      this.addMockUpUsers();
+      this.alreadyInitialized = true;
+    }
+    this.configurationWindow = !this.configurationWindow;
+    this.setVisualization();
+    this.updateRoom();
   }
 
   setVisualization(): void {
@@ -120,6 +143,12 @@ export class ClassroomComponent {
     });
   }
 
+  updateScoringMode(value: 'fibonacci' | 'oneToFive' | 'oneHundred') {
+    this.selectedCard = '';
+    this.usersAlreadySelectedCard = false;
+    this.scoringMode = this.classroomService.createScoringMode(value);
+  }
+
   updateRoom(): void {
     this.room = this.classroomService.getRoom(this.roomId);
   }
@@ -137,23 +166,22 @@ export class ClassroomComponent {
     }
 
     this.selectedCard = value;
-    this.classroomService.selectCardForHost(
+    this.classroomService.selectCard(
       this.roomId,
       this.userId,
       this.selectedCard
     );
 
-    if (!this.usersSelectedCard) {
+    if (!this.usersAlreadySelectedCard) {
       setTimeout(() => {
         this.classroomService.selectCardForMockUpUsers(
           this.scoringMode,
           this.roomId,
           this.userId
         );
-        this.usersSelectedCard = true;
+        this.usersAlreadySelectedCard = true;
         this.updateRoom();
       }, 2000);
-      return;
     }
   }
 
@@ -200,7 +228,7 @@ export class ClassroomComponent {
   }
 
   revealCards(): void {
-    if (this.userId === this.room?.admin) {
+    if (this.room?.admin.includes(this.userId)) {
       this.makeAverageScore();
       this.votesCount();
       this.cardResultsRevealed = true;
@@ -210,28 +238,34 @@ export class ClassroomComponent {
   }
 
   restartGame(): void {
-    if (this.userId === this.room?.admin) {
+    if (this.room?.admin.includes(this.userId)) {
       this.classroomService.resetGame(this.roomId);
-      this.usersSelectedCard = false;
+      this.usersAlreadySelectedCard = false;
       this.cardResultsRevealed = false;
       this.averageScore = undefined;
       this.selectedCard = '';
       this.numberDictionary = { '0': 0 };
+      this.configurationWindow = true;
       return;
     }
     alert('Debes ser administrador para presionar este botón!');
   }
 
   ngOnDestroy(): void {
+    this.restartGame();
     if (this.allPlayerSelectedSubscription) {
       this.allPlayerSelectedSubscription.unsubscribe();
     }
     if (this.userIdSubscription) {
       this.userIdSubscription.unsubscribe();
     }
+    if (this.usernameSubscription) {
+      this.usernameSubscription.unsubscribe();
+    }
     if (this.getAllUsersSubscription) {
       this.getAllUsersSubscription.unsubscribe();
     }
+
     this.classroomService.deleteRoom(this.roomId);
   }
 }

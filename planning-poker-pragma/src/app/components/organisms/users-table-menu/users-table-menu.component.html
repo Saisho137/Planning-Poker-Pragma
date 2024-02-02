@@ -1,5 +1,6 @@
 <app-top-module
   [room]="room"
+  [roomId]="roomId"
   [selectedCard]="selectedCard"
   [votationFinished]="votationFinished"
 />
@@ -7,6 +8,7 @@
 <app-left-module
   class="col-3 d-flex justify-content-end align-items-center"
   [room]="room"
+  [roomId]="roomId"
   [selectedCard]="selectedCard"
   [votationFinished]="votationFinished"
 />
@@ -23,12 +25,14 @@
 <app-right-module
   class="col-3 d-flex justify-content-start align-items-center"
   [room]="room"
+  [roomId]="roomId"
   [selectedCard]="selectedCard"
   [votationFinished]="votationFinished"
 />
 
 <app-bottom-module
   [room]="room"
+  [roomId]="roomId"
   [selectedCard]="selectedCard"
   [votationFinished]="votationFinished"
 />

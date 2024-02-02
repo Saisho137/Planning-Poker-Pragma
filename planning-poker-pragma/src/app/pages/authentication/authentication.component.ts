@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../shared/services/users-service/users.service';
-import { nameValidator, validateRegex } from '../../shared/validators';
+import {
+  nameValidator,
+  validateRegex,
+} from '../../shared/validators/regex.validator';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import { InputComponent } from '../../components/atoms/input/input.component';
 import { ButtonComponent } from '../../components/atoms/button/button.component';
@@ -44,17 +47,18 @@ export class AuthenticationComponent {
   public regexMessage: string = '';
 
   public isLogin: boolean = false;
-  public tittle: 'Sing up' | 'Register' = 'Register';
+  public title: 'Sing up' | 'Register' = 'Register';
 
   public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
 
-  private createUserSubscription: Subscription | undefined;
-  private validateUserSubscription: Subscription | undefined;
+  public createUserSubscription: Subscription | undefined;
+  public validateUserSubscription: Subscription | undefined;
 
   constructor(
-    private userService: UsersService,
     private router: Router,
-    private location: Location
+    private userService: UsersService,
+    private location: Location,
+    private ngZone: NgZone
   ) {
     const token = sessionStorage.getItem('session_token')!;
     if (token) {
@@ -65,7 +69,7 @@ export class AuthenticationComponent {
         userUsername: 'loginDefault',
       });
       this.isLogin = true;
-      this.tittle = 'Sing up';
+      this.title = 'Sing up';
     }
   }
 
@@ -84,8 +88,8 @@ export class AuthenticationComponent {
         case 'numbers':
           this.regexMessage = 'No debe haber más de 3 números en el nombre!';
           return;
-        case 'required':
-          this.regexMessage = 'No debes dejar ningún campo vacío!';
+        case 'spaces':
+          this.regexMessage = 'Solo un espacio es permitido!';
           return;
         default:
           this.regexMessage = '';
@@ -135,16 +139,18 @@ export class AuthenticationComponent {
       nameValidator(userUsername)
     ) {
       this.createUserSubscription = this.userService
-        .createUSer(userUsername, userEmail, userPassword)
+        .createUser(userUsername, userEmail, userPassword)
         .subscribe({
           next: (res: RegisterI) => {
             res.userCreated === true
               ? this.validateUser()
-              : window.alert('Something Went Wrong! Try again!');
+              : alert('Something Went Wrong! Try again!');
           },
           error: (err) => {
-            window.alert('Something Went Wrong! Try again!' + err);
-            this.router.navigate(['register']);
+            alert('Something Went Wrong! Try again!' + err);
+            this.ngZone.run(() => {
+              this.router.navigate(['register']);
+            });
           },
         });
     }
@@ -169,11 +175,15 @@ export class AuthenticationComponent {
             this.userService.setUsername(user.username);
             sessionStorage.setItem('user_username', user.username);
 
-            this.router.navigate(['create-classroom']);
+            this.ngZone.run(() => {
+              this.router.navigate(['create-classroom']);
+            });
           },
           error: () => {
-            window.alert('Wrong User!, try Again!');
-            this.router.navigate(['login']);
+            alert('Wrong User!, try Again!');
+            this.ngZone.run(() => {
+              this.router.navigate(['login']);
+            });
           },
         });
     }

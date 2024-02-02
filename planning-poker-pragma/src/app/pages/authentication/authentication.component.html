@@ -1,7 +1,7 @@
 <section class="default-container row py-5 px-1 d-flex justify-content-center">
   <app-navbar
     class="navbar-login"
-    [tittle]="'Pragma'"
+    [title]="'Pragma'"
     [imgUrl]="pragmaIconUrl"
   />
   <form
@@ -9,7 +9,7 @@
     (ngSubmit)="isLogin ? validateUser() : createUser()"
     class="row d-flex justify-content-center"
   >
-    <h1 class="col-12 my-3 d-flex justify-content-center">{{ tittle }}</h1>
+    <h1 class="col-12 my-3 d-flex justify-content-center">{{ title }}</h1>
     <p *ngIf="regexMessage" class="col-12 d-flex justify-content-center">
       {{ regexMessage }}
     </p>

@@ -11,19 +11,17 @@ import { UserI } from '../../../interfaces/user-interface';
   providedIn: 'root',
 })
 export class UsersService {
-  private userIdSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
-  private usernameSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+  public userIdSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+  public usernameSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   public userId$: Observable<string | null> = this.userIdSubject.asObservable();
   public username$: Observable<string | null> = this.usernameSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    this.userId$.subscribe((userId) => {
-      if (userId) console.log(userId);
-    });
-    this.username$.subscribe((username) => {
-      if (username) console.log(username);
-    });
+    if (sessionStorage.getItem('user_id') && sessionStorage.getItem('user_username')) {
+      this.setUserId(sessionStorage.getItem('user_id')!)
+      this.setUsername(sessionStorage.getItem('user_username')!)
+    }
   }
 
   public setUserId(userId: string): void {
@@ -34,7 +32,7 @@ export class UsersService {
     this.usernameSubject.next(username);
   }
 
-  public createUSer(
+  public createUser(
     username: string,
     email: string,
     password: string
@@ -79,8 +77,7 @@ export class UsersService {
 
     return this.http.get<AllUsersI>(url).pipe(
       map((response) => response.users),
-      catchError((error) => {
-        console.error(error);
+      catchError(() => {
         return throwError(
           () => new Error('Algo salió mal al obtener usuarios.')
         );

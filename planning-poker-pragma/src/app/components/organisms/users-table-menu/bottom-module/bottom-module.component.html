@@ -3,6 +3,7 @@
   5) {
   <app-user-card
     class="col-1 d-flex justify-content-center"
+    [roomId]="roomId"
     [cardValue]="room.users[4].username"
     [selectedCard]="room.users[4].cardSelected"
     [visualization]="room.users[4].rol"
@@ -12,6 +13,7 @@
 
   <app-user-card
     class="col-1 d-flex justify-content-center"
+    [roomId]="roomId"
     [cardValue]="room!.users[0]!.username!"
     [selectedCard]="selectedCard"
     [visualization]="room!.users[0]!.rol!"
@@ -21,6 +23,7 @@
   @if (room.users.length >= 8) {
   <app-user-card
     class="col-1 d-flex justify-content-center"
+    [roomId]="roomId"
     [cardValue]="room.users[7].username"
     [selectedCard]="room.users[7].cardSelected"
     [visualization]="room.users[7].rol"

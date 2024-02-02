@@ -2,6 +2,7 @@
   @if (room && room.users && room.users.length >= 4) {
   <app-user-card
     class="col-1 d-flex justify-content-center"
+    [roomId]="roomId"
     [cardValue]="room.users[3].username"
     [selectedCard]="room.users[3].cardSelected"
     [visualization]="room.users[3].rol"
