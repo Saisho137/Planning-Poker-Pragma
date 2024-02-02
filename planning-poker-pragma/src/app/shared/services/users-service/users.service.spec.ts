@@ -81,14 +81,14 @@ describe('UsersService', () => {
   });
 
   //ValidateUser()
-  xit('should send a POST request to validate a user', () => {
+  it('should send a POST request to validate a user', () => {
     let resp = {};
+
     const mockUser = {
       email: 'test@example.com',
       password: 'testPassword',
     };
-
-    const mockResponse = {
+    const expectedResponse = {
       user: {
         _id: 'xyz',
         username: 'test',
@@ -99,9 +99,17 @@ describe('UsersService', () => {
       token: 'xyz',
     };
 
-    service
-      .validateUser(mockUser.email, mockUser.password)
-      .subscribe((response) => {});
+    service.validateUser(mockUser.email, mockUser.password)
+    .subscribe((response) => (resp = response));
+
+    const req = httpMock.expectOne('http://localhost:8080/sign_in_user');
+    req.flush(expectedResponse);
+
+    expect(req.request.method).toBe('POST');
+    expect(req.request.url).toBe('http://localhost:8080/sign_in_user');
+    expect(req.request.headers).toEqual(headers);
+    expect(req.request.body).toEqual(mockUser);
+    expect(resp).toBe(expectedResponse);
   });
 
   //GetAllUsers()
