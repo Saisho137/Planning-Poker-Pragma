@@ -49,9 +49,9 @@ export class UsersService {
     );
 
     const body = {
-      username: username,
-      email: email,
-      password: password,
+      username,
+      email,
+      password,
     };
 
     return this.http.post<RegisterI>(url, body, { headers });
@@ -69,8 +69,8 @@ export class UsersService {
     );
 
     const body = {
-      email: email,
-      password: password,
+      email,
+      password,
     };
 
     return this.http.post<UserResponseI>(url, body, { headers });
