@@ -102,10 +102,9 @@ describe('ClassroomsService', () => {
       users: [user],
     };
     service.rooms.push(newRoom);
+
     const isAdminBefore = newRoom.admin.includes(newAdminUser);
-
     const result = service.makeUserAdmin(roomId, newAdminUser);
-
     const isAdminAfter = newRoom.admin.includes(newAdminUser);
 
     // Check if the user is not admin before and becomes admin after
