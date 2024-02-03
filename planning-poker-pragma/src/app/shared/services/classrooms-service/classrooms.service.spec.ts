@@ -2,12 +2,16 @@ import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { UserInRoomI } from '../../../interfaces/user-in-room-interface';
 import { ClassroomsService } from './classrooms.service';
 import { ClassroomI } from '../../../interfaces/classroom-interface';
+import { TestBed } from '@angular/core/testing';
 
 describe('ClassroomsService', () => {
   let service: ClassroomsService;
 
   beforeEach(() => {
-    service = new ClassroomsService();
+    TestBed.configureTestingModule({
+      providers: [ClassroomsService]
+    });
+    service = TestBed.inject(ClassroomsService);
   });
 
   it('should be created', () => {
@@ -28,12 +32,10 @@ describe('ClassroomsService', () => {
 
     // Check if the room is created correctly
     expect(room.id).toEqual(roomId);
-    expect(room.admin).toContain(user.id);
     expect(room.users).toContain(user);
-
+    expect(room.admin).toContain(user.id);
     // Check if the user is added to the global users list
     expect(service['users']).toContain(user);
-
     // Check if the room is added to the global rooms list
     expect(service['rooms']).toContain(room);
   });
