@@ -20,12 +20,7 @@ describe('ClassroomsService', () => {
 
   //createRoom()
   it('should create a new room with the given user', () => {
-    const user: UserInRoomI = {
-      id: '1',
-      username: 'user1',
-      rol: 'player',
-      cardSelected: '',
-    };
+    const user: UserInRoomI = {id: '1',} as any;
     const roomId = 'room1';
 
     const room = service.createRoom(roomId, user);
@@ -41,12 +36,7 @@ describe('ClassroomsService', () => {
 
   //getRoom()
   it('should return the room with the specified ID', () => {
-    const user: UserInRoomI = {
-      id: '1',
-      username: 'user1',
-      rol: 'player',
-      cardSelected: '',
-    };
+    const user: UserInRoomI = {id: '1',} as any;
     const roomId = 'room1';
 
     const newRoom: ClassroomI = {
@@ -117,12 +107,7 @@ describe('ClassroomsService', () => {
 
   it('should not make a user admin if already admin in the specified room', () => {
     const roomId = 'room1';
-    const user: UserInRoomI = {
-      id: '1',
-      username: 'user1',
-      rol: 'player',
-      cardSelected: '',
-    };
+    const user: UserInRoomI = {id: '1',} as any;
     const adminUser = '1';
 
     const newRoom: ClassroomI = {
@@ -143,12 +128,7 @@ describe('ClassroomsService', () => {
 
   it('should not make a user admin in non-exist room', () => {
     const roomId = 'room1';
-    const user: UserInRoomI = {
-      id: '1',
-      username: 'user1',
-      rol: 'player',
-      cardSelected: '',
-    };
+    const user: UserInRoomI = {id: '1',} as any;
     
     const result = service.makeUserAdmin(roomId, user.id);
 
@@ -163,12 +143,7 @@ describe('ClassroomsService', () => {
     const username = 'newUsername';
     const rol = 'spectator';
 
-    const user: UserInRoomI = {
-      id: '1',
-      username: 'user1',
-      rol: 'player',
-      cardSelected: '',
-    };
+    const user: UserInRoomI = {id: '1',} as any;
 
     const newRoom: ClassroomI = {
       id: roomId,
@@ -206,9 +181,9 @@ describe('ClassroomsService', () => {
 
     const user: UserInRoomI = {
       id: userId,
-      username: 'user1',
+      username: 'user',
       rol: 'player',
-      cardSelected: '',
+      cardSelected: ''
     };
 
     const newRoom: ClassroomI = {
@@ -226,12 +201,7 @@ describe('ClassroomsService', () => {
     const roomId = 'room1';
     const userId = '1';
 
-    const user: UserInRoomI = {
-      id: '1',
-      username: 'user1',
-      rol: 'spectator',
-      cardSelected: '',
-    };
+    const user: UserInRoomI = {id: '1',} as any;
 
     const newRoom: ClassroomI = {
       id: roomId,
@@ -261,16 +231,8 @@ describe('ClassroomsService', () => {
   //addUsersToRoom()
   it('should add new users to the specified room', () => {
     const roomId = 'room1';
-    const existingUser: UserInRoomI = {
-      id: '1',
-      username: 'user1',
-      rol: 'player',
-      cardSelected: '',
-    };
-    const newUsers: UserInRoomI[] = [
-      { id: '2', username: 'user2', rol: 'spectator', cardSelected: '' },
-      { id: '3', username: 'user3', rol: 'player', cardSelected: '' },
-    ];
+    const existingUser: UserInRoomI = {id: '1',} as any;
+    const newUsers: UserInRoomI[] = [{id: '2',} as any, {id: '3',} as any,];
 
     const newRoom: ClassroomI = {
       id: roomId,
@@ -289,10 +251,7 @@ describe('ClassroomsService', () => {
 
   it('should not add new users if the room does not exist', () => {
     const roomId = 'nonExistentRoom';
-    const newUsers: UserInRoomI[] = [
-      { id: '2', username: 'user2', rol: 'spectator', cardSelected: '' },
-      { id: '3', username: 'user3', rol: 'player', cardSelected: '' },
-    ];
+    const newUsers: UserInRoomI[] = [{id: '2',} as any, {id: '3',} as any];
 
     // No room created
     service.addUsersToRoom(roomId, newUsers);
