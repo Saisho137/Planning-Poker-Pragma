@@ -83,8 +83,8 @@ describe('ClassroomsService', () => {
   //makeUserAdmin()
   it('should make a user admin in the specified room', () => {
     const roomId = 'room1';
-    const user: UserInRoomI = {id: '1',} as any;
     const newAdminUser = '2';
+    const user: UserInRoomI = {id: '1',} as any;
 
     const newRoom: ClassroomI = {
       id: roomId,
@@ -93,22 +93,18 @@ describe('ClassroomsService', () => {
     };
     service.rooms.push(newRoom);
 
-    const isAdminBefore = newRoom.admin.includes(newAdminUser);
-    const result = service.makeUserAdmin(roomId, newAdminUser);
-    const isAdminAfter = newRoom.admin.includes(newAdminUser);
-
-    // Check if the user is not admin before and becomes admin after
-    expect(isAdminBefore).toBe(false);
-    expect(isAdminAfter).toBe(true);
-
+    // Check if the user is not admin before called the function
+    expect(newRoom.admin.includes(newAdminUser)).toBe(false);
     // Check if the method returns true indicating successful admin change
-    expect(result).toBe(true);
+    expect(service.makeUserAdmin(roomId, newAdminUser)).toBe(true);
+    //Check if becomes admin after called the function
+    expect(newRoom.admin.includes(newAdminUser)).toBe(true);
   });
 
   it('should not make a user admin if already admin in the specified room', () => {
     const roomId = 'room1';
-    const user: UserInRoomI = {id: '1',} as any;
     const adminUser = '1';
+    const user: UserInRoomI = {id: '1',} as any;
 
     const newRoom: ClassroomI = {
       id: roomId,
@@ -117,13 +113,10 @@ describe('ClassroomsService', () => {
     };
     service.rooms.push(newRoom);
 
-    const result = service.makeUserAdmin(roomId, adminUser);
-
+    // Check if the method returns false indicating no change
+    expect(service.makeUserAdmin(roomId, adminUser)).toBe(false);
     // Check if the user remains admin
     expect(newRoom.admin).toContain(adminUser);
-
-    // Check if the method returns false indicating no change
-    expect(result).toBe(false);
   });
 
   it('should not make a user admin in non-exist room', () => {
