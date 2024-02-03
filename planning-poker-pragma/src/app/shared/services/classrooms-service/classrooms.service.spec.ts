@@ -31,12 +31,11 @@ describe('ClassroomsService', () => {
     const room = service.createRoom(roomId, user);
 
     // Check if the room is created correctly
-    expect(room.id).toEqual(roomId);
+    expect(room.id).toBe(roomId);
     expect(room.users).toContain(user);
     expect(room.admin).toContain(user.id);
-    // Check if the user is added to the global users list
+    // Check if the user & room is added to the global users list
     expect(service['users']).toContain(user);
-    // Check if the room is added to the global rooms list
     expect(service['rooms']).toContain(room);
   });
 
@@ -60,44 +59,35 @@ describe('ClassroomsService', () => {
     const retrievedRoom = service.getRoom(roomId);
 
     // Check if the retrieved room matches the created room
-    expect(retrievedRoom).toEqual(newRoom);
+    expect(retrievedRoom).toBe(newRoom);
+    expect(retrievedRoom?.id).toBe(roomId);
+    expect(retrievedRoom?.users).toContain(user);
+    expect(retrievedRoom?.admin).toContain(user.id);
   });
 
   it('should return undefined for non-existent room ID', () => {
-    const roomId = 'nonExistentRoom';
-
-    const retrievedRoom = service.getRoom(roomId);
-
+    const retrievedRoom = service.getRoom('nonExistentRoom');
     // Check if undefined is returned for non-existent room ID
     expect(retrievedRoom).toBeUndefined();
   });
 
   //createScoringMode()
   it('should return the "fibonacci" scoring mode', () => {
-    const mode = 'fibonacci';
-
-    const scoringMode = service.createScoringMode(mode);
-
+    const scoringMode = service.createScoringMode('fibonacci');
     // Check if the returned scoring mode matches the expected mode
-    expect(scoringMode).toEqual(service['scoringMode'][mode]);
+    expect(scoringMode).toEqual(service['scoringMode']['fibonacci']);
   });
 
   it('should return the "oneToFive" scoring mode', () => {
-    const mode = 'oneToFive';
-
-    const scoringMode = service.createScoringMode(mode);
-
+    const scoringMode = service.createScoringMode('oneToFive');
     // Check if the returned scoring mode matches the expected mode
-    expect(scoringMode).toEqual(service['scoringMode'][mode]);
+    expect(scoringMode).toEqual(service['scoringMode']['oneToFive']);
   });
 
   it('should return the "oneHundred" scoring mode', () => {
-    const mode = 'oneHundred';
-
-    const scoringMode = service.createScoringMode(mode);
-
+    const scoringMode = service.createScoringMode('oneHundred');
     // Check if the returned scoring mode matches the expected mode
-    expect(scoringMode).toEqual(service['scoringMode'][mode]);
+    expect(scoringMode).toEqual(service['scoringMode']['oneHundred']);
   });
 
   //makeUserAdmin()
