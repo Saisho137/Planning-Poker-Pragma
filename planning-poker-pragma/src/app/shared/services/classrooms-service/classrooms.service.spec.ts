@@ -1,6 +1,7 @@
 import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { UserInRoomI } from '../../../interfaces/user-in-room-interface';
 import { ClassroomsService } from './classrooms.service';
+import { ClassroomI } from '../../../interfaces/classroom-interface';
 
 describe('ClassroomsService', () => {
   let service: ClassroomsService;
@@ -47,12 +48,17 @@ describe('ClassroomsService', () => {
     };
     const roomId = 'room1';
 
-    const room = service.createRoom(roomId, user);
+    const newRoom: ClassroomI = {
+      id: roomId,
+      admin: [user.id],
+      users: [user],
+    };
+    service.rooms.push(newRoom);
 
     const retrievedRoom = service.getRoom(roomId);
 
     // Check if the retrieved room matches the created room
-    expect(retrievedRoom).toEqual(room);
+    expect(retrievedRoom).toEqual(newRoom);
   });
 
   it('should return undefined for non-existent room ID', () => {
@@ -95,20 +101,20 @@ describe('ClassroomsService', () => {
   //makeUserAdmin()
   it('should make a user admin in the specified room', () => {
     const roomId = 'room1';
-    const user: UserInRoomI = {
-      id: '1',
-      username: 'user1',
-      rol: 'player',
-      cardSelected: '',
-    };
-    const newAdminUser = 'adminUser';
+    const user: UserInRoomI = {id: '1',} as any;
+    const newAdminUser = '2';
 
-    const room = service.createRoom(roomId, user);
-    const isAdminBefore = room.admin.includes(newAdminUser);
+    const newRoom: ClassroomI = {
+      id: roomId,
+      admin: [user.id],
+      users: [user],
+    };
+    service.rooms.push(newRoom);
+    const isAdminBefore = newRoom.admin.includes(newAdminUser);
 
     const result = service.makeUserAdmin(roomId, newAdminUser);
 
-    const isAdminAfter = room.admin.includes(newAdminUser);
+    const isAdminAfter = newRoom.admin.includes(newAdminUser);
 
     // Check if the user is not admin before and becomes admin after
     expect(isAdminBefore).toBe(false);
@@ -128,12 +134,17 @@ describe('ClassroomsService', () => {
     };
     const adminUser = '1';
 
-    const room = service.createRoom(roomId, user);
+    const newRoom: ClassroomI = {
+      id: roomId,
+      admin: [user.id],
+      users: [user],
+    };
+    service.rooms.push(newRoom);
 
     const result = service.makeUserAdmin(roomId, adminUser);
 
     // Check if the user remains admin
-    expect(room.admin).toContain(adminUser);
+    expect(newRoom.admin).toContain(adminUser);
 
     // Check if the method returns false indicating no change
     expect(result).toBe(false);
@@ -168,12 +179,17 @@ describe('ClassroomsService', () => {
       cardSelected: '',
     };
 
-    const room = service.createRoom(roomId, user);
+    const newRoom: ClassroomI = {
+      id: roomId,
+      admin: [user.id],
+      users: [user],
+    };
+    service.rooms.push(newRoom);
 
     service.updateUserState(roomId, userId, username, rol);
 
     // Check if the user state is updated correctly
-    const updatedUser = room.users.find((user) => user.id === userId);
+    const updatedUser = newRoom.users.find((user) => user.id === userId);
     expect(updatedUser?.username).toEqual(username);
     expect(updatedUser?.rol).toEqual(rol);
   });
@@ -198,18 +214,21 @@ describe('ClassroomsService', () => {
     const userId = '1';
 
     const user: UserInRoomI = {
-      id: '1',
+      id: userId,
       username: 'user1',
       rol: 'player',
       cardSelected: '',
     };
 
-    service.createRoom(roomId, user);
-
-    const isPlayer = service.userIsPlayer(roomId, userId);
+    const newRoom: ClassroomI = {
+      id: roomId,
+      admin: [user.id],
+      users: [user],
+    };
+    service.rooms.push(newRoom);
 
     // Check if the method correctly identifies the user as a player
-    expect(isPlayer).toBe(true);
+    expect(service.userIsPlayer(roomId, userId)).toBe(true);
   });
 
   it('should return false if the user is not a player in the specified room', () => {
@@ -223,7 +242,12 @@ describe('ClassroomsService', () => {
       cardSelected: '',
     };
 
-    service.createRoom(roomId, user);
+    const newRoom: ClassroomI = {
+      id: roomId,
+      admin: [user.id],
+      users: [user],
+    };
+    service.rooms.push(newRoom);
 
     const isPlayer = service.userIsPlayer(roomId, userId);
 
@@ -247,8 +271,8 @@ describe('ClassroomsService', () => {
   it('should add new users to the specified room', () => {
     const roomId = 'room1';
     const existingUser: UserInRoomI = {
-      id: '3',
-      username: 'user3',
+      id: '1',
+      username: 'user1',
       rol: 'player',
       cardSelected: '',
     };
@@ -257,15 +281,19 @@ describe('ClassroomsService', () => {
       { id: '3', username: 'user3', rol: 'player', cardSelected: '' },
     ];
 
-    const room = service.createRoom(roomId, existingUser);
+    const newRoom: ClassroomI = {
+      id: roomId,
+      admin: [existingUser.id],
+      users: [existingUser],
+    };
+    service.rooms.push(newRoom);
 
     service.addUsersToRoom(roomId, newUsers);
 
     // Check if the new users are added to the room
-    expect(room.users).toContain(existingUser);
-    newUsers.forEach((newUser) => {
-      expect(room.users).toContain(newUser);
-    });
+    expect(newRoom.users).toContain(existingUser);
+    expect(newRoom.users).toContain(newUsers[0]);
+    expect(newRoom.users).toContain(newUsers[1]);
   });
 
   it('should not add new users if the room does not exist', () => {
@@ -296,12 +324,17 @@ describe('ClassroomsService', () => {
       cardSelected: '',
     };
 
-    const room = service.createRoom(roomId, user);
+    const newRoom: ClassroomI = {
+      id: roomId,
+      admin: [user.id],
+      users: [user],
+    };
+    service.rooms.push(newRoom);
 
     service.selectCard(roomId, userId, hostValue);
 
     // Check if the user's card is selected
-    const selectedUser = room.users.find((user) => user.id === userId);
+    const selectedUser = newRoom.users.find((user) => user.id === userId);
     expect(selectedUser?.cardSelected).toBe(hostValue);
   });
 
@@ -317,12 +350,17 @@ describe('ClassroomsService', () => {
       cardSelected: '',
     };
 
-    const room = service.createRoom(roomId, user);
+    const newRoom: ClassroomI = {
+      id: roomId,
+      admin: [user.id],
+      users: [user],
+    };
+    service.rooms.push(newRoom);
 
     service.selectCard(roomId, userId, hostValue);
 
     // Check if the user's card is selected
-    const selectedUser = room.users.find((user) => user.id === userId);
+    const selectedUser = newRoom.users.find((user) => user.id === userId);
     expect(selectedUser?.cardSelected).toBe('');
   });
 
@@ -351,12 +389,17 @@ describe('ClassroomsService', () => {
       cardSelected: '8',
     };
 
-    const room = service.createRoom(roomId, user);
+    const newRoom: ClassroomI = {
+      id: roomId,
+      admin: [user.id],
+      users: [user],
+    };
+    service.rooms.push(newRoom);
 
     service.clearSelectedCard(roomId, userId);
 
     // Check if the user's card is cleared
-    const clearedUser = room.users.find((user) => user.id === userId);
+    const clearedUser = newRoom.users.find((user) => user.id === userId);
     expect(clearedUser?.cardSelected).toBe('');
   });
 
@@ -391,8 +434,13 @@ describe('ClassroomsService', () => {
       cardSelected: '',
     };
 
-    const room = service.createRoom(roomId, user1);
-    room.users.push(user2);
+    const newRoom: ClassroomI = {
+      id: roomId,
+      admin: [user1.id],
+      users: [user1],
+    };
+    service.rooms.push(newRoom);
+    newRoom.users.push(user2);
 
     // Set up a spy on Math.random to control its return value
     const randomSpy = jest.spyOn(globalThis.Math, 'random');
@@ -425,8 +473,13 @@ describe('ClassroomsService', () => {
       cardSelected: '',
     };
 
-    const room = service.createRoom(roomId, user1);
-    room.users.push(user2);
+    const newRoom: ClassroomI = {
+      id: roomId,
+      admin: [user1.id],
+      users: [user1],
+    };
+    service.rooms.push(newRoom);
+    newRoom.users.push(user2);
 
     // Set up a spy on Math.random to control its return value
     const randomSpy = jest.spyOn(globalThis.Math, 'random');
@@ -459,8 +512,13 @@ describe('ClassroomsService', () => {
       cardSelected: '',
     };
 
-    const room = service.createRoom(roomId, user1);
-    room.users.push(user2);
+    const newRoom: ClassroomI = {
+      id: roomId,
+      admin: [user1.id],
+      users: [user1],
+    };
+    service.rooms.push(newRoom);
+    newRoom.users.push(user2);
 
     // Set up a spy on Math.random to control its return value
     const randomSpy = jest.spyOn(globalThis.Math, 'random');
@@ -493,13 +551,18 @@ describe('ClassroomsService', () => {
       cardSelected: '1',
     };
 
-    const room = service.createRoom(roomId, user1);
-    room.users.push(user2);
+    const newRoom: ClassroomI = {
+      id: roomId,
+      admin: [user1.id],
+      users: [user1],
+    };
+    service.rooms.push(newRoom);
+    newRoom.users.push(user2);
 
     service.clearSelectedCardForMockUpUsers(roomId);
 
     // Check if the selected cards for mock-up users are cleared
-    room.users.forEach((user) => expect(user.cardSelected).toBe(''));
+    newRoom.users.forEach((user) => expect(user.cardSelected).toBe(''));
   });
 
   it('should not clear selected cards for mock-up users if the room does not exist', () => {
@@ -590,11 +653,16 @@ describe('ClassroomsService', () => {
     service['userListSubject'] = userListSubject;
     service['userList$'] = userListSubject.asObservable();
 
-    const room = service.createRoom(roomId, user1);
-    room.users.push(user2);
+    const newRoom: ClassroomI = {
+      id: roomId,
+      admin: [user1.id],
+      users: [user1],
+    };
+    service.rooms.push(newRoom);
+    newRoom.users.push(user2);
     service.resetGame(roomId);
 
-    room.users.forEach((user) => expect(user.cardSelected).toBe(''));
+    newRoom.users.forEach((user) => expect(user.cardSelected).toBe(''));
   });
 
   it('should delete the room and remove all users', () => {
@@ -613,8 +681,13 @@ describe('ClassroomsService', () => {
     };
 
     // Create a room
-    const room = service.createRoom(roomId, user1);
-    room.users.push(user2);
+    const newRoom: ClassroomI = {
+      id: roomId,
+      admin: [user1.id],
+      users: [user1],
+    };
+    service.rooms.push(newRoom);
+    newRoom.users.push(user2);
     // Delete the room
     service.deleteRoom(roomId);
 
