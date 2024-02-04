@@ -143,9 +143,7 @@ export class AuthenticationComponent {
         .createUser(userUsername, userEmail, userPassword)
         .subscribe({
           next: (res: RegisterI) => {
-            res.userCreated === true
-              ? this.validateUser()
-              : alert('Something Went Wrong! Try again!');
+            if (res.userCreated === true) this.validateUser();
           },
           error: (err) => {
             alert('Something Went Wrong! Try again!' + err);
