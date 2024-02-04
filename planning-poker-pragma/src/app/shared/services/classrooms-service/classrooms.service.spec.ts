@@ -20,8 +20,8 @@ describe('ClassroomsService', () => {
 
   //createRoom()
   it('should create a new room with the given user', () => {
-    const user: UserInRoomI = {id: '1',} as any;
     const roomId = 'room1';
+    const user: UserInRoomI = {id: '1',} as any;
 
     const room = service.createRoom(roomId, user);
 
@@ -36,8 +36,8 @@ describe('ClassroomsService', () => {
 
   //getRoom()
   it('should return the room with the specified ID', () => {
-    const user: UserInRoomI = {id: '1',} as any;
     const roomId = 'room1';
+    const user: UserInRoomI = {id: '1',} as any;
 
     const newRoom: ClassroomI = {
       id: roomId,
@@ -122,11 +122,9 @@ describe('ClassroomsService', () => {
   it('should not make a user admin in non-exist room', () => {
     const roomId = 'room1';
     const user: UserInRoomI = {id: '1',} as any;
-    
-    const result = service.makeUserAdmin(roomId, user.id);
 
     // Check if the method returns false indicating user is not admin
-    expect(result).toBe(false);
+    expect(service.makeUserAdmin(roomId, user.id)).toBe(false);
   })
 
   //updateUserState()
@@ -136,7 +134,7 @@ describe('ClassroomsService', () => {
     const username = 'newUsername';
     const rol = 'spectator';
 
-    const user: UserInRoomI = {id: '1',} as any;
+    const user: UserInRoomI = {id: userId,} as any;
 
     const newRoom: ClassroomI = {
       id: roomId,
@@ -194,7 +192,7 @@ describe('ClassroomsService', () => {
     const roomId = 'room1';
     const userId = '1';
 
-    const user: UserInRoomI = {id: '1',} as any;
+    const user: UserInRoomI = {id: userId,} as any;
 
     const newRoom: ClassroomI = {
       id: roomId,
@@ -238,8 +236,7 @@ describe('ClassroomsService', () => {
 
     // Check if the new users are added to the room
     expect(newRoom.users).toContain(existingUser);
-    expect(newRoom.users).toContain(newUsers[0]);
-    expect(newRoom.users).toContain(newUsers[1]);
+    newUsers.forEach((user) => (expect(newRoom.users).toContain(user)));
   });
 
   it('should not add new users if the room does not exist', () => {
