@@ -47,7 +47,7 @@ export class AuthenticationComponent {
   public regexMessage: string = '';
 
   public isLogin: boolean = false;
-  public title: 'Sing up' | 'Register' = 'Register';
+  public title: 'Sign up' | 'Register' = 'Register';
 
   public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
 
@@ -72,7 +72,7 @@ export class AuthenticationComponent {
     if (this.location.path() === '/login') {
       this.userForm.patchValue({ userUsername: 'loginDefault' });
       this.isLogin = true;
-      this.title = 'Sing up';
+      this.title = 'Sign up';
     }
   }
 

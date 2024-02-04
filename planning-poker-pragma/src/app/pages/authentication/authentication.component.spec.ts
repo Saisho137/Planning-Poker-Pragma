@@ -47,12 +47,13 @@ describe('AuthenticationComponent', () => {
 
   //if URL === /login
   //Still cant made it work!
-  /* it('should set userForm values, isLogin, and title when path is /login', () => {
-    fixture.detectChanges();
+  it('should set userForm values, isLogin, and title when path is /login', () => {
+    router.navigate(['login'])
+    component.initializeLogin();
     expect(component.isLogin).toBe(true);
     expect(component.title).toBe('Sign up');
     expect(component?.userForm.get('userUsername')?.value).toBe('loginDefault');
-  }); */
+  });
 
   //Creation tests
   it('should initialize the userForm', () => {
