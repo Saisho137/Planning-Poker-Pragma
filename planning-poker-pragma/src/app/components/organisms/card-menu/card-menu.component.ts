@@ -8,6 +8,8 @@ import { ClassroomI } from '../../../interfaces/classroom-interface';
 import { UsersService } from '../../../shared/services/users-service/users.service';
 import { Subscription } from 'rxjs';
 
+type scoringType = 'fibonacci' | 'oneToFive' | 'oneHundred';
+
 @Component({
   selector: 'app-card-menu',
   standalone: true,
@@ -16,25 +18,26 @@ import { Subscription } from 'rxjs';
   styleUrl: './card-menu.component.scss',
 })
 export class CardMenuComponent {
-  public scoringModeOptions: ('fibonacci' | 'oneToFive' | 'oneHundred')[] = ['fibonacci', 'oneToFive', 'oneHundred']
-  public scoringSelection: 'fibonacci' | 'oneToFive' | 'oneHundred' = 'fibonacci'
-  public scoringModeWindow: boolean = false;
+  
+  public scoringModeOptions: scoringType[] = ['fibonacci', 'oneToFive', 'oneHundred']
+  public scoringSelection: scoringType = 'fibonacci'
+  public scoringModeWindow = false;
   public scoringMode: ScoringModeItemI[] = [];
 
   private userIdSubscription: Subscription | undefined;
-  private userId: string = '';
+  private userId = '';
 
-  @Input() roomId: string = ''
+  @Input() roomId = ''
   @Input() room: ClassroomI | undefined;
 
-  @Input() selectedCard: string = '';
+  @Input() selectedCard = '';
   @Input() visualization: 'player' | 'spectator' | '' = '';
 
   @Output() clickEvent: EventEmitter<string> = new EventEmitter<string>();
-  @Output() scoringModeSelection: EventEmitter<'fibonacci' | 'oneToFive' | 'oneHundred'> = new EventEmitter<'fibonacci' | 'oneToFive' | 'oneHundred'>();
+  @Output() scoringModeSelection: EventEmitter<scoringType> = new EventEmitter<scoringType>();
 
   constructor(private classroomService: ClassroomsService, private userService: UsersService) {
-    this.scoringMode = this.classroomService.createScoringMode(this.scoringSelection);
+    this.assignScoringModeOnInit()
   }
 
   ngOnInit() {
@@ -44,6 +47,10 @@ export class CardMenuComponent {
     });
   }
   
+  assignScoringModeOnInit(): void {
+    this.scoringMode = this.classroomService.createScoringMode(this.scoringSelection);
+  }
+
   getScoringMode(value: 'fibonacci' | 'oneToFive' | 'oneHundred'){
     if (this.room?.admin.includes(this.userId)) {
       this.scoringSelection = value;

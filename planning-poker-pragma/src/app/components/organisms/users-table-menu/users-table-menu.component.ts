@@ -27,11 +27,11 @@ import { ClassroomsService } from '../../../shared/services/classrooms-service/c
 export class UsersTableMenuComponent {
   public room: ClassroomI | undefined;
 
-  @Input({ required: true }) roomId: string = '';
-  @Input() selectedCard: string = '';
-  @Input() buttonText: string = '';
-  @Input() allPlayersSelected: boolean = false;
-  @Input() votationFinished: boolean = false;
+  @Input({ required: true }) roomId = '';
+  @Input() selectedCard = '';
+  @Input() buttonText = '';
+  @Input() allPlayersSelected = false;
+  @Input() votationFinished = false;
 
   @Output() clickEventReveal: EventEmitter<void> = new EventEmitter<void>();
   @Output() clickEventRestart: EventEmitter<void> = new EventEmitter<void>();
