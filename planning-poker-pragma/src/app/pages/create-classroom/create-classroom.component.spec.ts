@@ -24,6 +24,7 @@ describe('CreateClassroomComponent', () => {
     jest.spyOn(router, 'navigate');
 
     sessionStorage.clear();
+    fixture.detectChanges();
   });
 
   it('should create', () => {
