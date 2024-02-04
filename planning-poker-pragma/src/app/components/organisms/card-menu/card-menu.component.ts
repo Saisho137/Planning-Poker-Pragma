@@ -8,6 +8,8 @@ import { ClassroomI } from '../../../interfaces/classroom-interface';
 import { UsersService } from '../../../shared/services/users-service/users.service';
 import { Subscription } from 'rxjs';
 
+type scoringType = 'fibonacci' | 'oneToFive' | 'oneHundred';
+
 @Component({
   selector: 'app-card-menu',
   standalone: true,
@@ -16,8 +18,9 @@ import { Subscription } from 'rxjs';
   styleUrl: './card-menu.component.scss',
 })
 export class CardMenuComponent {
-  public scoringModeOptions: ('fibonacci' | 'oneToFive' | 'oneHundred')[] = ['fibonacci', 'oneToFive', 'oneHundred']
-  public scoringSelection: 'fibonacci' | 'oneToFive' | 'oneHundred' = 'fibonacci'
+  
+  public scoringModeOptions: scoringType[] = ['fibonacci', 'oneToFive', 'oneHundred']
+  public scoringSelection: scoringType = 'fibonacci'
   public scoringModeWindow: boolean = false;
   public scoringMode: ScoringModeItemI[] = [];
 
@@ -31,7 +34,7 @@ export class CardMenuComponent {
   @Input() visualization: 'player' | 'spectator' | '' = '';
 
   @Output() clickEvent: EventEmitter<string> = new EventEmitter<string>();
-  @Output() scoringModeSelection: EventEmitter<'fibonacci' | 'oneToFive' | 'oneHundred'> = new EventEmitter<'fibonacci' | 'oneToFive' | 'oneHundred'>();
+  @Output() scoringModeSelection: EventEmitter<scoringType> = new EventEmitter<scoringType>();
 
   constructor(private classroomService: ClassroomsService, private userService: UsersService) {
     this.assignScoringModeOnInit()
