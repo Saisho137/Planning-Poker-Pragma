@@ -17,6 +17,8 @@ export class UsersService {
   public userId$: Observable<string | null> = this.userIdSubject.asObservable();
   public username$: Observable<string | null> = this.usernameSubject.asObservable();
 
+  public urlBase = 'http://localhost:8080'
+
   constructor(private http: HttpClient) {
     this.assignBehaviorSubjectsOnInit();
   }
@@ -41,7 +43,7 @@ export class UsersService {
     email: string,
     password: string
   ): Observable<RegisterI> {
-    const url = 'http://localhost:8080/register_user';
+    const url = this.urlBase + '/register_user';
 
     const headers: HttpHeaders = new HttpHeaders().set(
       'Content-Type',
@@ -61,7 +63,7 @@ export class UsersService {
     email: string,
     password: string
   ): Observable<UserResponseI> {
-    const url = 'http://localhost:8080/sign_in_user';
+    const url = this.urlBase + '/sign_in_user';
 
     const headers: HttpHeaders = new HttpHeaders().set(
       'Content-Type',
@@ -77,7 +79,7 @@ export class UsersService {
   }
 
   public getAllUsers(): Observable<UserI[]> {
-    const url = 'http://localhost:8080/get_users';
+    const url = this.urlBase + '/get_users';
 
     return this.http.get<AllUsersI>(url).pipe(
       map((response) => response.users),
