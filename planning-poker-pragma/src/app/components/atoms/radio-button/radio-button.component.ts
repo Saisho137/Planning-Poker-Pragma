@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './radio-button.component.scss',
 })
 export class RadioButtonComponent {
-  @Input() id: string = '';
+  @Input() id = '';
   @Input() selectedMode: 'player' | 'spectator' | '' = '';
   @Input() condition: 'player' | 'spectator' | '' = '';
 

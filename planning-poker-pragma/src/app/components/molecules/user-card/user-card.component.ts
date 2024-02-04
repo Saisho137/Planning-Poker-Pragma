@@ -13,16 +13,16 @@ import { UserI } from '../../../interfaces/user-interface';
   styleUrl: './user-card.component.scss',
 })
 export class UserCardComponent {
-  public defaultUser: string = '';
+  public defaultUser = '';
 
-  private userId: string = '';
+  private userId = '';
   private getAllUsersSubscription: Subscription | undefined;
 
-  @Input() roomId: string = '';
-  @Input() cardValue: string = '';
-  @Input() selectedCard: string = '';
-  @Input() visualization: string = '';
-  @Input() votationFinished: boolean = false;
+  @Input() roomId = '';
+  @Input() cardValue = '';
+  @Input() selectedCard = '';
+  @Input() visualization = '';
+  @Input() votationFinished = false;
 
   constructor(
     private classroomService: ClassroomsService,
@@ -31,11 +31,7 @@ export class UserCardComponent {
 
   ngOnInit() {
     this.getAllUsersSubscription = this.userService.getAllUsers().subscribe({
-      next: (users: UserI[]) => {
-        const { _id: userId } =
-          users.find((user) => user.username === this.cardValue) || {};
-        this.userId = userId || '0000';
-      },
+      next: (users: UserI[]) => (users.find((user) => {if(user.username === this.cardValue) this.userId = user._id}) ?? {}),
       error: (error) => {
         console.error(error);
       },

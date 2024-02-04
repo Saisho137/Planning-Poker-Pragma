@@ -32,16 +32,16 @@ export class CreateClassroomComponent {
     validateRegex(),
   ]);
 
-  public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
+  public pragmaIconUrl = '../../../../assets/images/pragma.png';
 
-  public regexMessage: string = '';
+  public regexMessage = '';
 
   constructor(private router: Router, private ngZone: NgZone) {
-    if (!sessionStorage.getItem('session_token')) {
-      this.ngZone.run(() => {
-        this.router.navigate(['login']);
-      });
-    }
+    this.navigateToLogin();
+  }
+
+  navigateToLogin(): void {
+    if (!sessionStorage.getItem('session_token')) this.ngZone.run(() => {this.router.navigate(['login'])});
   }
 
   onInputChange(value: string): void {
@@ -49,23 +49,22 @@ export class CreateClassroomComponent {
 
     if (this.classroomName?.errors) {
       switch (this.classroomName?.errors['pattern']) {
-        case 'regex':
-          this.regexMessage = 'Solo se permiten carácteres alfanuméricos!';
-          return;
         case 'lenght':
           this.regexMessage = 'El nombre debe tener entre 5 y 20 carácteres!';
-          return;
+          break;
         case 'numbers':
           this.regexMessage = 'No debe haber más de 3 números en el nombre!';
-          return;
+          break;
         case 'spaces':
           this.regexMessage = 'Solo un espacio es permitido!';
-          return;
+          break;
         default:
-          return;
+          this.regexMessage = 'Solo se permiten carácteres alfanuméricos!';
+          break;
       }
+    } else {
+      this.regexMessage = '';
     }
-    this.regexMessage = '';
   }
 
   validateName(): void {

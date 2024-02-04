@@ -10,9 +10,13 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title: string = 'planning-poker-pragma';
+  title = 'planning-poker-pragma';
 
   constructor() {
+    this.printSessionStorage();
+  }
+
+  printSessionStorage(): void {
     if (sessionStorage.getItem('session_token')) {
       console.log('Token: ', sessionStorage.getItem('session_token'));
     }

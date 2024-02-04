@@ -46,13 +46,13 @@ describe('AuthenticationComponent', () => {
   });
 
   //if URL === /login
-  //Still cant made it work!
-  /* it('should set userForm values, isLogin, and title when path is /login', () => {
-    fixture.detectChanges();
+  it('should set userForm values, isLogin, and title when path is /login', () => {
+    router.navigate(['login'])
+    component.initializeLogin();
     expect(component.isLogin).toBe(true);
     expect(component.title).toBe('Sign up');
     expect(component?.userForm.get('userUsername')?.value).toBe('loginDefault');
-  }); */
+  });
 
   //Creation tests
   it('should initialize the userForm', () => {
@@ -137,9 +137,8 @@ describe('AuthenticationComponent', () => {
     component.userForm.setValue(userFormValue);
 
     const errorResponse = 'Some error message';
-    jest
-      .spyOn(usersService, 'createUser')
-      .mockReturnValue(throwError(() => errorResponse));
+    jest.spyOn(usersService, 'createUser')
+    .mockReturnValue(throwError(() => errorResponse));
 
     component.createUser();
 
@@ -149,6 +148,35 @@ describe('AuthenticationComponent', () => {
       userFormValue.userPassword
     );
     expect(router.navigate).toHaveBeenCalledWith(['register']);
+  });
+
+  it('should handle user creation response', () => {
+    const userFormValue = {
+      userUsername: 'testUser',
+      userEmail: 'test@example.com',
+      userPassword: 'testPassword',
+    };
+  
+    component.userForm.setValue(userFormValue);
+  
+    // Mock successful user creation response
+    const createUserResponse = { userCreated: true };
+    jest.spyOn(usersService, 'createUser')
+    .mockReturnValue(of(createUserResponse));
+  
+    // Spy on validateUser and alert
+    const validateUserSpy = jest.spyOn(component, 'validateUser');
+  
+    component.createUser();
+  
+    expect(usersService.createUser).toHaveBeenCalledWith(
+      userFormValue.userUsername,
+      userFormValue.userEmail,
+      userFormValue.userPassword
+    );
+  
+    // Check that validateUser is called when userCreated is true
+    expect(validateUserSpy).toHaveBeenCalled();
   });
 
   //ValidateUser()
@@ -259,6 +287,7 @@ describe('AuthenticationComponent', () => {
     const validUsername = 'validName123';
     const validEmail = 'test@hotmail.com'
     const validPassword = 'pass123'
+    component.regexMessage = 'test'
     component.onUsernameChange(validUsername);
     component.onEmailChange(validEmail);
     component.onPasswordChange(validPassword);

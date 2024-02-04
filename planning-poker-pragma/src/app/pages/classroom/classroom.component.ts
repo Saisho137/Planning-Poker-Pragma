@@ -32,28 +32,28 @@ import { UserI } from '../../interfaces/user-interface';
   styleUrl: './classroom.component.scss',
 })
 export class ClassroomComponent {
-  public roomId: string;
+  public roomId = '';
   public room: ClassroomI | undefined;
 
-  public pragmaIcon: string = '../../../../assets/images/pragma.png';
+  public pragmaIcon = '../../../../assets/images/pragma.png';
 
-  public configurationWindow: boolean = true;
-  public invitationWindow: boolean = false;
+  public configurationWindow = true;
+  public invitationWindow = false;
 
-  public allPlayersSelected: boolean = false;
-  public cardResultsRevealed: boolean = false;
-  public usersAlreadySelectedCard: boolean = false;
-  public alreadyInitialized: boolean = false;
+  public allPlayersSelected = false;
+  public cardResultsRevealed = false;
+  public usersAlreadySelectedCard = false;
+  public alreadyInitialized = false;
 
-  public scoringMode: ScoringModeItemI[];
+  public scoringMode: ScoringModeItemI[] = [];
   public averageScore: string | undefined = undefined;
   public numberDictionary: Record<string, number> = { '0': 0 };
 
-  public selectedCard: string = '';
+  public selectedCard = '';
   public visualization: 'player' | 'spectator' | '' = '';
 
-  private userId: string = '';
-  private username: string = '';
+  private userId = '';
+  private username = '';
 
   private userIdSubscription: Subscription | undefined;
   private usernameSubscription: Subscription | undefined;
@@ -66,9 +66,7 @@ export class ClassroomComponent {
     private userService: UsersService,
     private classroomService: ClassroomsService
   ) {
-    this.roomId = this.route.snapshot.paramMap.get('id')!;
-    this.room = this.classroomService.getRoom(this.roomId);
-    this.scoringMode = this.classroomService.createScoringMode('fibonacci');
+    this.initializeValues();
   }
 
   ngOnInit() {
@@ -96,6 +94,12 @@ export class ClassroomComponent {
       cardSelected: '',
     };
     this.classroomService.createRoom(this.roomId, user);
+  }
+
+  initializeValues(): void {
+    this.roomId = this.route.snapshot.paramMap.get('id')!;
+    this.room = this.classroomService.getRoom(this.roomId);
+    this.scoringMode = this.classroomService.createScoringMode('fibonacci');
   }
 
   initializeRoom(): void {
@@ -191,7 +195,7 @@ export class ClassroomComponent {
       //Creates a key-value pair object that counts the number of votes of each selected card
       this.numberDictionary = players.reduce(
         (accumulator: Record<string, number>, object: UserInRoomI) => {
-          const value: string = object.cardSelected;
+          const value = object.cardSelected;
           accumulator[value] = (accumulator[value] || 0) + 1;
           return accumulator;
         },
@@ -204,23 +208,14 @@ export class ClassroomComponent {
     if (this.room) {
       const players = this.room.users.filter((user) => user.rol === 'player');
       //Split number into Integer and Decimal Part.
-      let averageArray: string[] = (
+      let averageArray = (
         Math.round(
-          (players.reduce(
-            (accumulator, current) =>
-              accumulator + parseFloat(current.cardSelected),
-            0
-          ) /
-            players.length) *
-            10
+        (players.reduce( (accumulator, current) => accumulator + parseFloat(current.cardSelected), 0 ) / players.length) * 10
         ) / 10
-      )
-        .toString()
-        .split('.');
+      ).toString().split('.');
       //If number has Decimal part, replace '.' with ','.
       if (averageArray[1]) {
-        const average = averageArray[0] + ',' + averageArray[1];
-        this.averageScore = average;
+        this.averageScore = averageArray[0] + ',' + averageArray[1];;
       }
       //If not, return number.
       this.averageScore = averageArray[0];

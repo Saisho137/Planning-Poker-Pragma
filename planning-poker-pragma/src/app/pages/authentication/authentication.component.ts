@@ -44,12 +44,12 @@ export class AuthenticationComponent {
       Validators.minLength(5),
     ]),
   });
-  public regexMessage: string = '';
+  public regexMessage = '';
 
-  public isLogin: boolean = false;
-  public title: 'Sing up' | 'Register' = 'Register';
+  public isLogin = false;
+  public title: 'Sign up' | 'Register' = 'Register';
 
-  public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
+  public pragmaIconUrl = '../../../../assets/images/pragma.png';
 
   public createUserSubscription: Subscription | undefined;
   public validateUserSubscription: Subscription | undefined;
@@ -60,16 +60,19 @@ export class AuthenticationComponent {
     private location: Location,
     private ngZone: NgZone
   ) {
-    const token = sessionStorage.getItem('session_token')!;
-    if (token) {
-      this.router.navigate(['create-classroom']);
-    }
+    this.navigateToCreateClassroom();
+    this.initializeLogin();
+  }
+
+  navigateToCreateClassroom(): void {
+    if (sessionStorage.getItem('session_token')!) this.router.navigate(['create-classroom']);
+  }
+
+  initializeLogin(): void {
     if (this.location.path() === '/login') {
-      this.userForm.patchValue({
-        userUsername: 'loginDefault',
-      });
+      this.userForm.patchValue({ userUsername: 'loginDefault' });
       this.isLogin = true;
-      this.title = 'Sing up';
+      this.title = 'Sign up';
     }
   }
 
@@ -79,24 +82,22 @@ export class AuthenticationComponent {
     });
     if (this.userForm.get('userUsername')?.errors) {
       switch (this.userForm.get('userUsername')!.errors!['pattern']) {
-        case 'regex':
-          this.regexMessage = 'Solo se permiten carácteres alfanuméricos!';
-          return;
         case 'lenght':
           this.regexMessage = 'El nombre debe tener entre 5 y 20 carácteres!';
-          return;
+          break;
         case 'numbers':
           this.regexMessage = 'No debe haber más de 3 números en el nombre!';
-          return;
+          break;
         case 'spaces':
           this.regexMessage = 'Solo un espacio es permitido!';
-          return;
+          break;
         default:
-          this.regexMessage = '';
-          return;
+          this.regexMessage = 'Solo se permiten carácteres alfanuméricos!';
+          break;
       }
+    } else {
+      this.regexMessage = '';
     }
-    this.regexMessage = '';
   }
 
   onEmailChange(value: string): void {
@@ -142,9 +143,7 @@ export class AuthenticationComponent {
         .createUser(userUsername, userEmail, userPassword)
         .subscribe({
           next: (res: RegisterI) => {
-            res.userCreated === true
-              ? this.validateUser()
-              : alert('Something Went Wrong! Try again!');
+            if (res.userCreated === true) this.validateUser();
           },
           error: (err) => {
             alert('Something Went Wrong! Try again!' + err);

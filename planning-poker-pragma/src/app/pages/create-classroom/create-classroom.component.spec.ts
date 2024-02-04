@@ -135,6 +135,7 @@ describe('CreateClassroomComponent', () => {
 
   it('should reset regexMessage when onInputChange is called with valid value', () => {
     const validValue = 'validValue123';
+    component.regexMessage = 'test'
     component.onInputChange(validValue);
     expect(component.regexMessage).toEqual('');
   });

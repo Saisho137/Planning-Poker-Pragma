@@ -10,11 +10,11 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './input.component.scss',
 })
 export class InputComponent {
-  @Input() type: string = 'text';
-  @Input() id: string = '';
-  @Input() contentText: string = '';
-  @Input() required: boolean = true;
-  @Input() readOnly: boolean = false;
+  @Input() type = 'text';
+  @Input() id = '';
+  @Input() contentText = '';
+  @Input() required = true;
+  @Input() readOnly = false;
 
   @Output() InputChange: EventEmitter<string> = new EventEmitter<string>();
 

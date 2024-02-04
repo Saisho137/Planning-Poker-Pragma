@@ -21,15 +21,15 @@ import { Subscription } from 'rxjs';
   styleUrl: './create-visualization-mode.component.scss',
 })
 export class CreateVisualizationModeComponent {
-  public userId: string = '';
-  public username: string = '';
-  public initialUsername: string = '';
+  public userId = '';
+  public username = '';
+  public initialUsername = '';
   public selectedMode: 'player' | 'spectator' | '' = '';
 
   private userIdSubscription: Subscription | undefined;
   private usernameSubscription: Subscription | undefined;
 
-  @Input() classroomId: string = '';
+  @Input() classroomId = '';
 
   @Output() roomGeneratedEvent: EventEmitter<void> = new EventEmitter<void>();
 
