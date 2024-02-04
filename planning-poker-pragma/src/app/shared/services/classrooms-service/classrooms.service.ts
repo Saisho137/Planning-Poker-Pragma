@@ -76,14 +76,12 @@ export class ClassroomsService {
     return this.rooms.find((room) => room.id === classroomId);
   }
 
-  public createScoringMode(
-    mode: 'fibonacci' | 'oneToFive' | 'oneHundred'
-  ): ScoringModeItemI[] {
+  public createScoringMode(mode: 'fibonacci' | 'oneToFive' | 'oneHundred'): ScoringModeItemI[] {
     return this.scoringMode[mode];
   }
 
   public makeUserAdmin(classroomId: string, newAdminUser: string): boolean {
-    const selectedRoom: ClassroomI | undefined = this.getRoom(classroomId);
+    const selectedRoom = this.getRoom(classroomId);
     if (selectedRoom && !selectedRoom?.admin.includes(newAdminUser)) {
           selectedRoom?.admin.push(newAdminUser);
           return true;
@@ -97,7 +95,7 @@ export class ClassroomsService {
     username: string,
     rol: 'spectator' | 'player'
   ): void {
-    const selectedRoom: ClassroomI | undefined = this.getRoom(classroomId);
+    const selectedRoom = this.getRoom(classroomId);
     selectedRoom?.users.find((user) => {
       if (user.id === userId) {
         user.username = username;
@@ -107,13 +105,12 @@ export class ClassroomsService {
   }
 
   public userIsPlayer(classroomId: string, userId: string): boolean {
-    const selectedRoom: ClassroomI | undefined = this.getRoom(classroomId);
-    const userTemp = selectedRoom?.users.find((user) => (user.id === userId));
+    const userTemp = this.getRoom(classroomId)?.users.find((user) => (user.id === userId));
     return userTemp ? userTemp.rol === 'player' : false;
   }
 
   public addUsersToRoom(classroomId: string, newUsers: UserInRoomI[]): void {
-    const selectedRoom: ClassroomI | undefined = this.getRoom(classroomId);
+    const selectedRoom = this.getRoom(classroomId);
     if (selectedRoom) selectedRoom.users = [...selectedRoom.users, ...newUsers];
   }
 
@@ -122,7 +119,7 @@ export class ClassroomsService {
     userId: string,
     hostValue: string
   ): void {
-    const selectedRoom: ClassroomI | undefined = this.getRoom(classroomId);
+    const selectedRoom = this.getRoom(classroomId);
     selectedRoom?.users.forEach((user) => {
       if (user.rol === 'player' && user.id === userId)
         user.cardSelected = hostValue;
@@ -131,7 +128,7 @@ export class ClassroomsService {
   }
 
   public clearSelectedCard(classroomId: string, userId: string): void {
-    const selectedRoom: ClassroomI | undefined = this.getRoom(classroomId);
+    const selectedRoom = this.getRoom(classroomId);
     selectedRoom?.users.forEach((user) => {
       if (user.id === userId) user.cardSelected = '';
     });
@@ -143,7 +140,7 @@ export class ClassroomsService {
     classroomId: string,
     userId: string
   ): void {
-    const selectedRoom: ClassroomI | undefined = this.getRoom(classroomId);
+    const selectedRoom = this.getRoom(classroomId);
     const numericMode = mode.slice(0, mode.length - 2);
 
     selectedRoom?.users.forEach((user) => {
@@ -158,7 +155,7 @@ export class ClassroomsService {
   }
 
   public clearSelectedCardForMockUpUsers(classroomId: string): void {
-    const selectedRoom: ClassroomI | undefined = this.getRoom(classroomId);
+    const selectedRoom = this.getRoom(classroomId);
 
     selectedRoom?.users.forEach((user) => {
       user.cardSelected = '';
@@ -179,7 +176,7 @@ export class ClassroomsService {
   }
 
   public resetGame(classroomId: string): void {
-    const selectedRoom: ClassroomI | undefined = this.getRoom(classroomId);
+    const selectedRoom = this.getRoom(classroomId);
     selectedRoom?.users.forEach((user) => {
       if (user.rol === 'player') {
         user.cardSelected = '';

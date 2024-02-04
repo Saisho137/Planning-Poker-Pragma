@@ -195,7 +195,7 @@ export class ClassroomComponent {
       //Creates a key-value pair object that counts the number of votes of each selected card
       this.numberDictionary = players.reduce(
         (accumulator: Record<string, number>, object: UserInRoomI) => {
-          const value: string = object.cardSelected;
+          const value = object.cardSelected;
           accumulator[value] = (accumulator[value] || 0) + 1;
           return accumulator;
         },

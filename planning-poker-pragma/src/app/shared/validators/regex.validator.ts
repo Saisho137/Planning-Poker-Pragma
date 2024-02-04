@@ -34,7 +34,7 @@ export function validateRegex(): ValidatorFn {
 
 export function nameValidator(value: string): boolean {
   const regex: RegExp = /^[a-zA-Z0-9\s]{5,20}$/;
-  const numbers: string = value.replace(/\D/g, '');
+  const numbers = value.replace(/\D/g, '');
 
   const matchResult = regex.test(value);
 

@@ -41,7 +41,7 @@ export class UsersService {
     email: string,
     password: string
   ): Observable<RegisterI> {
-    const url: string = 'http://localhost:8080/register_user';
+    const url = 'http://localhost:8080/register_user';
 
     const headers: HttpHeaders = new HttpHeaders().set(
       'Content-Type',
@@ -61,7 +61,7 @@ export class UsersService {
     email: string,
     password: string
   ): Observable<UserResponseI> {
-    const url: string = 'http://localhost:8080/sign_in_user';
+    const url = 'http://localhost:8080/sign_in_user';
 
     const headers: HttpHeaders = new HttpHeaders().set(
       'Content-Type',
@@ -77,7 +77,7 @@ export class UsersService {
   }
 
   public getAllUsers(): Observable<UserI[]> {
-    const url: string = 'http://localhost:8080/get_users';
+    const url = 'http://localhost:8080/get_users';
 
     return this.http.get<AllUsersI>(url).pipe(
       map((response) => response.users),
