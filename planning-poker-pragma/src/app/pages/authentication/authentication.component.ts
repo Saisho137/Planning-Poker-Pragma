@@ -46,7 +46,7 @@ export class AuthenticationComponent {
   });
   public regexMessage = '';
 
-  public isLogin: boolean = false;
+  public isLogin = false;
   public title: 'Sign up' | 'Register' = 'Register';
 
   public pragmaIconUrl = '../../../../assets/images/pragma.png';

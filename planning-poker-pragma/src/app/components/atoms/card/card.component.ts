@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './card.component.scss',
 })
 export class CardComponent {
-  public isSelected: boolean = false;
+  public isSelected = false;
 
   @Input() cardValue = '';
   @Input() selectedCard = '';

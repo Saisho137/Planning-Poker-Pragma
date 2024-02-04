@@ -21,7 +21,7 @@ export class CardMenuComponent {
   
   public scoringModeOptions: scoringType[] = ['fibonacci', 'oneToFive', 'oneHundred']
   public scoringSelection: scoringType = 'fibonacci'
-  public scoringModeWindow: boolean = false;
+  public scoringModeWindow = false;
   public scoringMode: ScoringModeItemI[] = [];
 
   private userIdSubscription: Subscription | undefined;

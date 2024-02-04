@@ -10,8 +10,8 @@ import { ButtonComponent } from '../../../components/atoms/button/button.compone
   styleUrl: './table.component.scss',
 })
 export class TableComponent {
-  @Input() allPlayersSelected: boolean = false;
-  @Input() votationFinished: boolean = false;
+  @Input() allPlayersSelected = false;
+  @Input() votationFinished = false;
   @Input() buttonText = '';
 
   @Output() clickEventReveal: EventEmitter<void> = new EventEmitter<void>();

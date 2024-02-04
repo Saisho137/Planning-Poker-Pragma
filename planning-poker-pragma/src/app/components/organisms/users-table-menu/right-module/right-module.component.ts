@@ -11,7 +11,7 @@ import { UserCardComponent } from '../../../molecules/user-card/user-card.compon
   styleUrl: './right-module.component.scss',
 })
 export class RightModuleComponent {
-  @Input() votationFinished: boolean = false;
+  @Input() votationFinished = false;
   @Input() selectedCard = '';
 
   @Input({ required: true }) roomId = '';
