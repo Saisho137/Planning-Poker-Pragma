@@ -13,14 +13,14 @@ import { Subscription } from 'rxjs';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-  public username: string = '';
+  public username = '';
 
   private subscription: Subscription | undefined;
 
-  @Input() buttonText: string = '';
-  @Input() title: string = '';
-  @Input() imgUrl: string = '/';
-  @Input() roomId: string = '';
+  @Input() buttonText = '';
+  @Input() title = '';
+  @Input() imgUrl = '/';
+  @Input() roomId = '';
 
   @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
 

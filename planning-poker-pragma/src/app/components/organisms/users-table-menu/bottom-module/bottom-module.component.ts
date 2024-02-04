@@ -12,9 +12,9 @@ import { UserCardComponent } from '../../../molecules/user-card/user-card.compon
 })
 export class BottomModuleComponent {
   @Input() votationFinished: boolean = false;
-  @Input() selectedCard: string = '';
+  @Input() selectedCard = '';
 
-  @Input({ required: true }) roomId: string = '';
+  @Input({ required: true }) roomId = '';
   @Input() room: ClassroomI| undefined = {
     id: '',
     admin: [],

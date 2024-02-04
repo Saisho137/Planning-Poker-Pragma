@@ -12,7 +12,7 @@ import { ButtonComponent } from '../../../components/atoms/button/button.compone
 export class TableComponent {
   @Input() allPlayersSelected: boolean = false;
   @Input() votationFinished: boolean = false;
-  @Input() buttonText: string = '';
+  @Input() buttonText = '';
 
   @Output() clickEventReveal: EventEmitter<void> = new EventEmitter<void>();
   @Output() clickEventRestart: EventEmitter<void> = new EventEmitter<void>();

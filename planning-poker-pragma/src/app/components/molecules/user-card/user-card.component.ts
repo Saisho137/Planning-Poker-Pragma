@@ -13,16 +13,16 @@ import { UserI } from '../../../interfaces/user-interface';
   styleUrl: './user-card.component.scss',
 })
 export class UserCardComponent {
-  public defaultUser: string = '';
+  public defaultUser = '';
 
-  private userId: string = '';
+  private userId = '';
   private getAllUsersSubscription: Subscription | undefined;
 
-  @Input() roomId: string = '';
-  @Input() cardValue: string = '';
-  @Input() selectedCard: string = '';
-  @Input() visualization: string = '';
-  @Input() votationFinished: boolean = false;
+  @Input() roomId = '';
+  @Input() cardValue = '';
+  @Input() selectedCard = '';
+  @Input() visualization = '';
+  @Input() votationFinished = false;
 
   constructor(
     private classroomService: ClassroomsService,

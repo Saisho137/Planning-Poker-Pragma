@@ -32,9 +32,9 @@ export class CreateClassroomComponent {
     validateRegex(),
   ]);
 
-  public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
+  public pragmaIconUrl = '../../../../assets/images/pragma.png';
 
-  public regexMessage: string = '';
+  public regexMessage = '';
 
   constructor(private router: Router, private ngZone: NgZone) {
     this.navigateToLogin();

@@ -44,12 +44,12 @@ export class AuthenticationComponent {
       Validators.minLength(5),
     ]),
   });
-  public regexMessage: string = '';
+  public regexMessage = '';
 
   public isLogin: boolean = false;
   public title: 'Sign up' | 'Register' = 'Register';
 
-  public pragmaIconUrl: string = '../../../../assets/images/pragma.png';
+  public pragmaIconUrl = '../../../../assets/images/pragma.png';
 
   public createUserSubscription: Subscription | undefined;
   public validateUserSubscription: Subscription | undefined;

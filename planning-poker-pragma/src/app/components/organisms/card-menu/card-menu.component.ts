@@ -22,12 +22,12 @@ export class CardMenuComponent {
   public scoringMode: ScoringModeItemI[] = [];
 
   private userIdSubscription: Subscription | undefined;
-  private userId: string = '';
+  private userId = '';
 
-  @Input() roomId: string = ''
+  @Input() roomId = ''
   @Input() room: ClassroomI | undefined;
 
-  @Input() selectedCard: string = '';
+  @Input() selectedCard = '';
   @Input() visualization: 'player' | 'spectator' | '' = '';
 
   @Output() clickEvent: EventEmitter<string> = new EventEmitter<string>();

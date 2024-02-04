@@ -12,7 +12,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
   styleUrl: './invitation-link.component.scss',
 })
 export class InvitationLinkComponent {
-  @Input() link: string = '';
+  @Input() link = '';
   
   @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
 
