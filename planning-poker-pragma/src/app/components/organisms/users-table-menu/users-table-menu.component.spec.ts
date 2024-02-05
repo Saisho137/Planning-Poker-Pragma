@@ -20,7 +20,7 @@ describe('UsersTableMenuComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit click event on button click', () => {
+  it('should emit click event on revealClick button click', () => {
     const emitSpy = jest.spyOn(component.clickEventReveal, 'emit');
     
     component.revealClick()
@@ -28,7 +28,7 @@ describe('UsersTableMenuComponent', () => {
     expect(emitSpy).toHaveBeenCalled();
   });
 
-  it('should emit click event on button click', () => {
+  it('should emit click event on restartClick button click', () => {
     const emitSpy = jest.spyOn(component.clickEventRestart, 'emit');
     
     component.restartClick()

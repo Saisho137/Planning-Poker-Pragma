@@ -19,4 +19,16 @@ describe('RadioButtonsMenuComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
+  it('should emit changeEvent on click and assign to selectedMode the radioButton value', () => {
+    const emitSpy = jest.spyOn(component.changeEvent, 'emit');
+    const radio = fixture.nativeElement.querySelector('input') as HTMLElement;
+
+    expect(component.selectedMode).toBe('');
+    component.switchRadio('player');
+
+    expect(radio).toBeTruthy;
+    expect(component.selectedMode).toBe('player');
+    expect(emitSpy).toHaveBeenCalledWith('player');
+  });
 });
