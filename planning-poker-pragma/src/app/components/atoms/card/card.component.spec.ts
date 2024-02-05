@@ -19,4 +19,20 @@ describe('CardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should toggle isSelected property ', () => {
+    expect(component.isSelected).toBe(false);
+    component.toggleSelection();
+    expect(component.isSelected).toBe(true);
+  });
+
+  it('should emit click event on button click', () => {
+    const emitSpy = jest.spyOn(component.clickEvent, 'emit');
+    const card = fixture.nativeElement.querySelector('div') as HTMLElement;
+
+    component.onCardClick();
+
+    expect(card).toBeTruthy();
+    expect(emitSpy).toHaveBeenCalled();
+  });
 });
