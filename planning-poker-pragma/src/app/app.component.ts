@@ -10,8 +10,6 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'planning-poker-pragma';
-
   constructor() {
     this.printSessionStorage();
   }
