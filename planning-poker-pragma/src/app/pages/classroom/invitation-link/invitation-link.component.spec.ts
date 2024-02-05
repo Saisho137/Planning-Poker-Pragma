@@ -52,14 +52,14 @@ describe('InvitationLinkComponent', () => {
     const emitSpy = jest.spyOn(component.clickEvent, 'emit');
     const button = fixture.nativeElement.querySelector('button-atom') as HTMLElement;
     
-    component.onButtonClick()
+    component.onButtonClick();
 
     expect(button).toBeTruthy();
     expect(emitSpy).toHaveBeenCalled();
   });
 
   it('should copy to clipboard', () => {
-    const clipSpy = jest.spyOn(component['clipboard'], 'copy')
+    const clipSpy = jest.spyOn(component['clipboard'], 'copy');
     component.copyUrl();
     expect(clipSpy).toHaveBeenCalled();
 });
