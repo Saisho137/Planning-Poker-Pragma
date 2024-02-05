@@ -19,4 +19,15 @@ describe('InputComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit changeEvent on click and assign to selectedMode the radioButton value', () => {
+    const emitSpy = jest.spyOn(component.InputChange, 'emit');
+    const input = fixture.nativeElement.querySelector('input') as HTMLElement;
+
+    component.contentText = 'testing'
+    component.onInputChange();
+
+    expect(input).toBeTruthy;
+    expect(emitSpy).toHaveBeenCalledWith('testing');
+  });
 });
