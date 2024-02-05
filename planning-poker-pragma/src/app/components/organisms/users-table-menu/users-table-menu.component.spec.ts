@@ -19,4 +19,20 @@ describe('UsersTableMenuComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit click event on button click', () => {
+    const emitSpy = jest.spyOn(component.clickEventReveal, 'emit');
+    
+    component.revealClick()
+
+    expect(emitSpy).toHaveBeenCalled();
+  });
+
+  it('should emit click event on button click', () => {
+    const emitSpy = jest.spyOn(component.clickEventRestart, 'emit');
+    
+    component.restartClick()
+
+    expect(emitSpy).toHaveBeenCalled();
+  });
 });
