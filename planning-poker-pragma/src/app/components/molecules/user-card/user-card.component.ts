@@ -30,6 +30,10 @@ export class UserCardComponent {
   ) {}
 
   ngOnInit() {
+    this.assignUserId()
+  }
+
+  assignUserId(): void {
     this.getAllUsersSubscription = this.userService.getAllUsers().subscribe({
       next: (users: UserI[]) => (users.find((user) => {if(user.username === this.cardValue) this.userId = user._id}) ?? {}),
       error: (error) => {
@@ -38,7 +42,7 @@ export class UserCardComponent {
     });
   }
 
-  onClick() {
+  onClick(): void {
     this.classroomService.makeUserAdmin(this.roomId, this.userId)
       ? alert('Has hecho a ' + this.cardValue + ' administrador!')
       : alert('El usuario ya es administrador!');
