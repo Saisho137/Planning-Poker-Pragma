@@ -121,7 +121,7 @@ export class ClassroomComponent {
       : 'spectator';
   }
 
-  public addMockUpUsers(): void {
+  addMockUpUsers(): void {
     this.getAllUsersSubscription = this.userService.getAllUsers().subscribe({
       next: (users) => {
         const mockUpUsers: UserI[] = users;
@@ -189,7 +189,7 @@ export class ClassroomComponent {
     }
   }
 
-  public votesCount(): void {
+  votesCount(): void {
     if (this.room?.users) {
       const players = this.room.users.filter((user) => user.rol === 'player');
       //Creates a key-value pair object that counts the number of votes of each selected card
@@ -204,7 +204,7 @@ export class ClassroomComponent {
     }
   }
 
-  public makeAverageScore(): void {
+  makeAverageScore(): void {
     if (this.room) {
       const players = this.room.users.filter((user) => user.rol === 'player');
       //Split number into Integer and Decimal Part.

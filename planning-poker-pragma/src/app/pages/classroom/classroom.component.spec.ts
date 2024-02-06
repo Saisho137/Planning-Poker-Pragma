@@ -26,10 +26,29 @@ describe('ClassroomComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  //Initializing Room (ngOnInit, initializeValues, initializeRoom)
+
+  //setVisualization
+
+  //addMockUpUsers
+
+  //updateScoringMode
+
+  //updateRoom
+
+  //switchInvitationWindow
+
+  //selectCard
+
+  //votesCount
+
+  //makeAverageScore
+
+  //revealCards
+
+  //restartGame
   it('should show an alert', () => {
     component.restartGame()
-    expect(window.alert).toHaveBeenCalledWith(
-      'Debes ser administrador para presionar este botón!'
-    );
+    expect(window.alert).toHaveBeenCalledWith('Debes ser administrador para presionar este botón!');
   });
 });
