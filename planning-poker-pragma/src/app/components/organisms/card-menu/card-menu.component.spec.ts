@@ -4,17 +4,19 @@ import { CardMenuComponent } from './card-menu.component';
 import { ClassroomsService } from '../../../shared/services/classrooms-service/classrooms.service';
 import { ClassroomI } from '../../../interfaces/classroom-interface';
 import { ScoringModeItemI } from '../../../interfaces/scoring-mode-interface';
+import { UsersService } from '../../../shared/services/users-service/users.service';
 
 describe('CardMenuComponent', () => {
   let component: CardMenuComponent;
   let fixture: ComponentFixture<CardMenuComponent>;
 
+  let userService: UsersService;
   let classroomService: ClassroomsService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CardMenuComponent, HttpClientTestingModule],
-      providers: [ClassroomsService]
+      providers: [ClassroomsService, UsersService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(CardMenuComponent);
@@ -22,6 +24,7 @@ describe('CardMenuComponent', () => {
 
     window.alert = jest.fn()
     classroomService = TestBed.inject(ClassroomsService);
+    userService = TestBed.inject(UsersService);
 
     fixture.detectChanges();
   });
@@ -33,6 +36,16 @@ describe('CardMenuComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should assign userId and username from userService', () => {
+    const userId = 'testUserId';
+  
+    userService.userIdSubject.next(userId);
+  
+    fixture.detectChanges();
+  
+    expect(component['userId']).toBe(userId);
   });
 
   it('should update scoring mode and emit event when user is admin', () => {
@@ -68,8 +81,6 @@ describe('CardMenuComponent', () => {
 
     expect(alertSpy).toHaveBeenCalledWith('Necesitas ser administrador para cambiar el modo de cartas!')
   });
-
-  // Otras pruebas para `getScoringMode` para otros casos, como usuario no admin, alertas, etc.
 
   it('should toggle scoring mode window', () => {
     component.scoringModeWindow = false;
