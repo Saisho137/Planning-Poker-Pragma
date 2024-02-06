@@ -36,8 +36,8 @@ export class UserCardComponent {
   assignUserId(): void {
     this.getAllUsersSubscription = this.userService.getAllUsers().subscribe({
       next: (users: UserI[]) => (users.find((user) => {if(user.username === this.cardValue) this.userId = user._id}) ?? {}),
-      error: (error) => {
-        console.error(error);
+      error: () => {
+        throw new Error('Error fetching users.');
       },
     });
   }
