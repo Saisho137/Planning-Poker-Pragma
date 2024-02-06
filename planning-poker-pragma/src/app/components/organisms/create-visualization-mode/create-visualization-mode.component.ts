@@ -41,12 +41,10 @@ export class CreateVisualizationModeComponent {
   ngOnInit() {
     this.userIdSubscription = this.userService.userId$.subscribe((userId) => {
       if (userId) this.userId = userId;
-      else this.userId = '0000';
     });
     this.usernameSubscription = this.userService.username$.subscribe(
       (username) => {
         if (username) this.username = username;
-        else this.username = 'ERR';
       }
     );
     this.initialUsername = this.username;

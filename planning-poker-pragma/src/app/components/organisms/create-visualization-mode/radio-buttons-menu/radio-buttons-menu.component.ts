@@ -17,6 +17,6 @@ export class RadioButtonsMenuComponent {
 
   switchRadio(radio: 'player' | 'spectator'): void {
     this.selectedMode = radio;
-    this.changeEvent.emit(this.selectedMode);
+    this.changeEvent.emit(radio);
   }
 }

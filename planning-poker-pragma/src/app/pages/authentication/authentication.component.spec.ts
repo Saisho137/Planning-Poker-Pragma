@@ -1,4 +1,5 @@
 import { Router } from '@angular/router';
+import { NgZone } from '@angular/core';
 import { Location } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -14,13 +15,14 @@ describe('AuthenticationComponent', () => {
   let usersService: UsersService;
   let router: Router;
   let location: Location;
+  let ngZone: NgZone;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         AuthenticationComponent,
         HttpClientTestingModule,
-        RouterTestingModule,
+        RouterTestingModule
       ],
       providers: [UsersService],
     }).compileComponents();
@@ -32,6 +34,8 @@ describe('AuthenticationComponent', () => {
 
     router = TestBed.inject(Router);
     jest.spyOn(router, 'navigate');
+
+    ngZone = TestBed.inject(NgZone);
 
     location = TestBed.inject(Location);
     jest.spyOn(location, 'path').mockReturnValue('/login');
@@ -47,7 +51,9 @@ describe('AuthenticationComponent', () => {
 
   //if URL === /login
   it('should set userForm values, isLogin, and title when path is /login', () => {
-    router.navigate(['login'])
+    ngZone.run(() => {
+      router.navigate(['login'])
+    });
     component.initializeLogin();
     expect(component.isLogin).toBe(true);
     expect(component.title).toBe('Sign up');
