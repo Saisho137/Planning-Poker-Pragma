@@ -46,12 +46,21 @@ describe('ClassroomComponent', () => {
     window.alert = jest.fn();
   });
 
+  afterEach(() => {
+    //Clean Up room from service
+    classroomService.rooms.splice(0, 1);
+    classroomService.users.length = 0;
+
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
   //Initializing Room (initializeValues, ngOnInit, initializeRoom)
-  it('should initialize room properly', () => {
+  it('should initialize room values properly', () => {
     const roomId = 'testingSprint'
     const newRoom: ClassroomI = {
       id: roomId,
@@ -80,8 +89,31 @@ describe('ClassroomComponent', () => {
     expect(createSpy).toHaveBeenCalled()
   });
 
-  it('should create', () => {
+  it('should initialize room properly', () => {
+    const spy1 = jest.spyOn(component, 'addMockUpUsers')
+    const spy2 = jest.spyOn(component, 'setVisualization')
+    const spy3 = jest.spyOn(component, 'updateRoom')
+    const spy4 = jest.spyOn(component, 'selectCard')
 
+    component.configurationWindow = true;
+    component.alreadyInitialized = false;
+    component.visualization = 'spectator';
+    component.selectedCard = '';
+
+    component.initializeRoom();
+
+    //first If
+    expect(spy1).toHaveBeenCalledTimes(1);
+    expect(component.alreadyInitialized).toBe(true);
+
+    //body
+    expect(component.configurationWindow).toBe(false);
+    expect(spy2).toHaveBeenCalledTimes(1);
+    expect(spy3).toHaveBeenCalledTimes(1);
+
+    //Spectator flow
+    expect(spy4).toHaveBeenCalledWith('');
+    expect(component.allPlayersSelected).toBe(false);
   });
 
   //Html
@@ -108,7 +140,30 @@ describe('ClassroomComponent', () => {
     expect(compiled.querySelector('app-create-visualization-mode')).toBeFalsy();
     expect(compiled.querySelector('app-invitation-link')).toBeTruthy();
   });
-  //setVisualization
+  
+  //setVisualization()
+  it('should set visualization Mode', () => {
+    const roomId = 'testingSprint';
+    const userId = 'userTest'
+
+    component.roomId = roomId;
+    component['userId'] = userId;
+
+    const newRoom: ClassroomI = {
+      id: roomId,
+      users: [{
+          id: userId,
+          username: 'userTest',
+          rol: 'player',
+          cardSelected: ''
+      }]
+    } as any;
+
+    classroomService.rooms.push(newRoom);
+    component.setVisualization()
+
+    expect(component.visualization).toBe('player')
+  });
 
   //addMockUpUsers
 
@@ -128,10 +183,6 @@ describe('ClassroomComponent', () => {
 
   //restartGame
   it('should show an alert', () => {
-    //Clean Up room from service
-    classroomService.rooms.splice(0, 1);
-    classroomService.users.length = 0;
-
     component.restartGame();
     expect(window.alert).toHaveBeenCalledWith(
       'Debes ser administrador para presionar este botón!'
