@@ -1,13 +1,13 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UsersService } from './users.service';
-import { throwError, firstValueFrom } from 'rxjs';
+import { throwError, firstValueFrom, Subscription } from 'rxjs';
 import { TestBed } from '@angular/core/testing';
 import { HttpHeaders } from '@angular/common/http';
 
 describe('UsersService', () => {
   let service: UsersService;
   let httpMock: HttpTestingController;
-
+  const subscriptions: Subscription[] = []
 
   const headers: HttpHeaders = new HttpHeaders().set(
     'Content-Type',
@@ -23,13 +23,17 @@ describe('UsersService', () => {
     service = TestBed.inject(UsersService);
     httpMock = TestBed.inject(HttpTestingController);
 
-    sessionStorage.clear();
-  });
-
-  beforeEach(() => {
-    jest.resetAllMocks();
     httpMock.verify();
   });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
+
+    sessionStorage.clear();
+
+    subscriptions.forEach(sub => sub.unsubscribe());
+  })
 
   it('should be created', () => {
     expect(service).toBeTruthy();
@@ -68,8 +72,9 @@ describe('UsersService', () => {
 
     service.assignBehaviorSubjectsOnInit()
 
-    service.userId$.subscribe((value) => (resp1 = value));
-    service.username$.subscribe((value) => (resp2 = value));
+    const sub1 = service.userId$.subscribe((value) => (resp1 = value));
+    const sub2 = service.username$.subscribe((value) => (resp2 = value));
+    subscriptions.push(sub1, sub2);
 
     expect(resp1).toEqual(userId);
     expect(resp2).toEqual(username);
@@ -88,8 +93,9 @@ describe('UsersService', () => {
       userCreated: true,
     };
 
-    service.createUser(mockUser.username, mockUser.email, mockUser.password)
+    const sub3 = service.createUser(mockUser.username, mockUser.email, mockUser.password)
     .subscribe((response) => (resp = response));
+    subscriptions.push(sub3);
 
     const req = httpMock.expectOne('http://localhost:8080/register_user');
     req.flush(expectedResponse);
@@ -120,8 +126,9 @@ describe('UsersService', () => {
       token: 'xyz',
     };
 
-    service.validateUser(mockUser.email, mockUser.password)
+    const sub4 = service.validateUser(mockUser.email, mockUser.password)
     .subscribe((response) => (resp = response));
+    subscriptions.push(sub4);
 
     const req = httpMock.expectOne('http://localhost:8080/sign_in_user');
     req.flush(expectedResponse);
@@ -154,7 +161,8 @@ describe('UsersService', () => {
       },
     ];
 
-    service.getAllUsers().subscribe((users) => (resp = users));
+    const sub5 = service.getAllUsers().subscribe((users) => (resp = users));
+    subscriptions.push(sub5);
 
     const req = httpMock.expectOne('http://localhost:8080/get_users');
     req.flush({ users: expectedUsers });
