@@ -20,13 +20,17 @@ describe('InvitationLinkComponent', () => {
       ],
     }).compileComponents();
 
-    window.alert = jest.fn();
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(InvitationLinkComponent);
     component = fixture.componentInstance;
+
+    window.alert = jest.fn();
+
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
   });
 
   it('should call clipboard.copy with the link when copyUrl is called', () => {

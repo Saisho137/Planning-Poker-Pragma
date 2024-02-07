@@ -16,6 +16,11 @@ describe('CardComponent', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });

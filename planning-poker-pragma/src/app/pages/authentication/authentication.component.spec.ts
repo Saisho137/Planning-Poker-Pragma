@@ -29,20 +29,24 @@ describe('AuthenticationComponent', () => {
 
     fixture = TestBed.createComponent(AuthenticationComponent);
     component = fixture.componentInstance;
-
-    window.alert = jest.fn();
-
+    
+    usersService = TestBed.inject(UsersService);
+    ngZone = TestBed.inject(NgZone);
+    
     router = TestBed.inject(Router);
     jest.spyOn(router, 'navigate');
-
-    ngZone = TestBed.inject(NgZone);
-
+    
     location = TestBed.inject(Location);
     jest.spyOn(location, 'path').mockReturnValue('/login');
-
-    usersService = TestBed.inject(UsersService);
+    
+    window.alert = jest.fn();
 
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
   });
 
   it('should create', () => {

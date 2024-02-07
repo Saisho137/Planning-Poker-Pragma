@@ -33,6 +33,11 @@ describe('CreateVisualizationModeComponent', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -63,6 +68,8 @@ describe('CreateVisualizationModeComponent', () => {
     expect(sessionStorage.getItem('user_username')).toEqual('validUsername');
     expect(updateUserStateSpy).toHaveBeenCalledWith(component.classroomId,component.userId,'validUsername','player');
     expect(emitSpy).toHaveBeenCalled();
+
+    sessionStorage.clear()
   });
 
   it('should assign automatically selectedMode if no value is provided', () => {

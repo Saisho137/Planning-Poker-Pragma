@@ -14,6 +14,11 @@ describe('ClassroomsService', () => {
     service = TestBed.inject(ClassroomsService);
   });
 
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
+  });
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });

@@ -20,11 +20,18 @@ describe('CreateClassroomComponent', () => {
 
     fixture = TestBed.createComponent(CreateClassroomComponent);
     component = fixture.componentInstance;
+  
     router = TestBed.inject(Router);
     jest.spyOn(router, 'navigate');
 
-    sessionStorage.clear();
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
+
+    sessionStorage.clear();
   });
 
   it('should create', () => {
