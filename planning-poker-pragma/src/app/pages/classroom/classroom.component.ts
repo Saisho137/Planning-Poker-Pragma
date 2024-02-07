@@ -240,7 +240,7 @@ export class ClassroomComponent {
   }
 
   restartGame(): void {
-    if (this.room?.admin.includes(this.userId)) {
+    if (this.room?.admin && this.room?.admin.includes(this.userId)) {
       this.classroomService.resetGame(this.roomId);
       this.usersAlreadySelectedCard = false;
       this.cardResultsRevealed = false;
