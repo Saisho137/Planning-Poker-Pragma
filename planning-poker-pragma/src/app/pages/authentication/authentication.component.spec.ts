@@ -20,11 +20,9 @@ describe('AuthenticationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        AuthenticationComponent,
         HttpClientTestingModule,
         RouterTestingModule
       ],
-      providers: [UsersService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AuthenticationComponent);

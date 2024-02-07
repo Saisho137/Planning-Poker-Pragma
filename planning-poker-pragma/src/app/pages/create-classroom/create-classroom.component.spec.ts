@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CreateClassroomComponent } from './create-classroom.component';
 import { Router } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
 
 describe('CreateClassroomComponent', () => {
   let component: CreateClassroomComponent;
@@ -12,8 +11,6 @@ describe('CreateClassroomComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        ReactiveFormsModule,
-        CreateClassroomComponent,
         HttpClientTestingModule,
       ],
     });

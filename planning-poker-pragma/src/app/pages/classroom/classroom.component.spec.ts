@@ -10,7 +10,6 @@ describe('ClassroomComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        ClassroomComponent,
         HttpClientTestingModule,
         RouterTestingModule,
       ],

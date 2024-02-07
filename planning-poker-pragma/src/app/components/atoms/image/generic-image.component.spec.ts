@@ -7,9 +7,7 @@ describe('GenericImageComponent', () => {
   let fixture: ComponentFixture<GenericImageComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GenericImageComponent],
-    }).compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(GenericImageComponent);
     component = fixture.componentInstance;

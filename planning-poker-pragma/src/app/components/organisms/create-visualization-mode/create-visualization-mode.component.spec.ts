@@ -13,13 +13,8 @@ describe('CreateVisualizationModeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        CreateVisualizationModeComponent,
         HttpClientTestingModule,
       ],
-      providers: [
-        UsersService,
-        ClassroomsService,
-      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(CreateVisualizationModeComponent);

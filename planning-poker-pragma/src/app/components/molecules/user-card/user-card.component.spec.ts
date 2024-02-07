@@ -15,8 +15,7 @@ describe('UserCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserCardComponent, HttpClientTestingModule],
-      providers: [UsersService, ClassroomsService],
+      imports: [HttpClientTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(UserCardComponent);

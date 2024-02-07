@@ -14,7 +14,6 @@ describe('InvitationLinkComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [InvitationLinkComponent],
       providers: [
         { provide: Clipboard, useValue: clipboardMock },
       ],

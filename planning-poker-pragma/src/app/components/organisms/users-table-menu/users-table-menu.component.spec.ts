@@ -7,9 +7,7 @@ describe('UsersTableMenuComponent', () => {
   let fixture: ComponentFixture<UsersTableMenuComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [UsersTableMenuComponent],
-    }).compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(UsersTableMenuComponent);
     component = fixture.componentInstance;

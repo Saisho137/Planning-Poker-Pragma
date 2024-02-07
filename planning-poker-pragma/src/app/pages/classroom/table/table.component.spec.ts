@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ButtonComponent } from '../../../components/atoms/button/button.component';
-
 import { TableComponent } from './table.component';
 
 describe('TableComponent', () => {
@@ -9,9 +7,7 @@ describe('TableComponent', () => {
   let fixture: ComponentFixture<TableComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [TableComponent, ButtonComponent],
-    }).compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(TableComponent);
     component = fixture.componentInstance;

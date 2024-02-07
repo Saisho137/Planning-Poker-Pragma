@@ -15,8 +15,7 @@ describe('CardMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CardMenuComponent, HttpClientTestingModule],
-      providers: [ClassroomsService, UsersService]
+      imports: [HttpClientTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CardMenuComponent);

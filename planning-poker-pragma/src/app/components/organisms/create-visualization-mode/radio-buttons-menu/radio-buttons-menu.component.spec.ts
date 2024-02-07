@@ -7,9 +7,7 @@ describe('RadioButtonsMenuComponent', () => {
   let fixture: ComponentFixture<RadioButtonsMenuComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [RadioButtonsMenuComponent],
-    }).compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(RadioButtonsMenuComponent);
     component = fixture.componentInstance;
