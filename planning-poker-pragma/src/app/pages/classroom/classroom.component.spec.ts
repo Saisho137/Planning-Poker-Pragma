@@ -18,8 +18,10 @@ describe('ClassroomComponent', () => {
 
     fixture = TestBed.createComponent(ClassroomComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    
     window.alert = jest.fn();
+    
+    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -28,6 +30,25 @@ describe('ClassroomComponent', () => {
 
   //Initializing Room (ngOnInit, initializeValues, initializeRoom)
 
+
+  //Html
+  it('should render player/spectator view', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    component.visualization = 'player'
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('app-create-visualization-mode')).toBeTruthy();
+    expect(compiled.querySelector('app-navbar')).toBeTruthy();
+    expect(compiled.querySelector('app-users-table-menu')).toBeTruthy();
+    expect(compiled.querySelector('app-card-menu')).toBeTruthy();
+    expect(compiled.querySelector('a')).toBeTruthy();
+
+    component.visualization = 'spectator'
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('app-card-menu')).toBeFalsy();
+  });
   //setVisualization
 
   //addMockUpUsers
