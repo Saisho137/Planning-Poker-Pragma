@@ -38,8 +38,6 @@ describe('AuthenticationComponent', () => {
     jest.spyOn(location, 'path').mockReturnValue('/login');
     
     window.alert = jest.fn();
-
-    fixture.detectChanges();
   });
 
   afterEach(() => {

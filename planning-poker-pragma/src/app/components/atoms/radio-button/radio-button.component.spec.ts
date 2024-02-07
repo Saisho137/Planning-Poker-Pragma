@@ -11,7 +11,6 @@ describe('RadioButtonComponent', () => {
 
     fixture = TestBed.createComponent(RadioButtonComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   afterEach(() => {

@@ -23,8 +23,6 @@ describe('InvitationLinkComponent', () => {
     component = fixture.componentInstance;
 
     window.alert = jest.fn();
-
-    fixture.detectChanges();
   });
 
   afterEach(() => {

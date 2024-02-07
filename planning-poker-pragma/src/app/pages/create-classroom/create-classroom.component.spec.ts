@@ -21,7 +21,7 @@ describe('CreateClassroomComponent', () => {
     router = TestBed.inject(Router);
     jest.spyOn(router, 'navigate');
 
-    fixture.detectChanges();
+    sessionStorage.clear();
   });
 
   afterEach(() => {
@@ -42,7 +42,6 @@ describe('CreateClassroomComponent', () => {
 
   //Html Unit Tests
   it('should render view', () => {
-    fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('form')).toBeTruthy();
     expect(compiled.querySelector('app-navbar')).toBeTruthy();
@@ -75,7 +74,6 @@ describe('CreateClassroomComponent', () => {
   });
 
   it('should render label name', () => {
-    fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('label')?.textContent).toContain(
       'Nombra la partida'
@@ -96,13 +94,14 @@ describe('CreateClassroomComponent', () => {
     expect(compiled.querySelector('p')).toBeFalsy;
   });
 
-  //Constructor() //I havent made it work yet!
-  it('should not navigate to login with token in sessionStorage', () => {
-    expect(router.navigate).toBeTruthy();
+  //navigateToLogin()
+  it('should  navigate to login with token in sessionStorage', () => {
+    component.navigateToLogin();
+    expect(router.navigate).toHaveBeenCalledWith(['login']);
   });
   it('should not navigate to login with token in sessionStorage', () => {
     sessionStorage.setItem('session_token', 'Test');
-    fixture.detectChanges();
+    component.navigateToLogin();
     expect(router.navigate).not.toHaveBeenCalled();
   });
   //

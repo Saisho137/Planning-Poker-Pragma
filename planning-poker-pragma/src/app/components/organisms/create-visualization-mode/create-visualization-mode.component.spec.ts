@@ -24,8 +24,6 @@ describe('CreateVisualizationModeComponent', () => {
     classroomService = TestBed.inject(ClassroomsService);
 
     window.alert = jest.fn();
-
-    fixture.detectChanges();
   });
 
   afterEach(() => {
@@ -90,6 +88,7 @@ describe('CreateVisualizationModeComponent', () => {
   });
 
   it('should assign userId and username from userService', () => {
+    fixture.detectChanges();
     const userId = 'testUserId';
     const username = 'testUsername';
   

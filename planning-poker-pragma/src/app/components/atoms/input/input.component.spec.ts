@@ -11,7 +11,6 @@ describe('InputComponent', () => {
 
     fixture = TestBed.createComponent(InputComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   afterEach(() => {

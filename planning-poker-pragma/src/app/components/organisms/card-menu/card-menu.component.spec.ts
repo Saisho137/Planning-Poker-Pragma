@@ -24,8 +24,6 @@ describe('CardMenuComponent', () => {
     window.alert = jest.fn()
     classroomService = TestBed.inject(ClassroomsService);
     userService = TestBed.inject(UsersService);
-
-    fixture.detectChanges();
   });
 
   afterEach(() => {

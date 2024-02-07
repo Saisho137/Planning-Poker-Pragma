@@ -11,7 +11,6 @@ describe('CardComponent', () => {
 
     fixture = TestBed.createComponent(CardComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   afterEach(() => {
@@ -30,6 +29,7 @@ describe('CardComponent', () => {
   });
 
   it('should emit click event on button click', () => {
+    fixture.detectChanges();
     const emitSpy = jest.spyOn(component.clickEvent, 'emit');
     const card = fixture.nativeElement.querySelector('div') as HTMLElement;
 

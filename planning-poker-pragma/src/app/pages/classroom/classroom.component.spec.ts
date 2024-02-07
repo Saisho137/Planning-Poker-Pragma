@@ -19,8 +19,6 @@ describe('ClassroomComponent', () => {
     component = fixture.componentInstance;
     
     window.alert = jest.fn();
-    
-    fixture.detectChanges();
   });
 
   it('should create', () => {

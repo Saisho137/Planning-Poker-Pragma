@@ -11,7 +11,6 @@ describe('GenericImageComponent', () => {
 
     fixture = TestBed.createComponent(GenericImageComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

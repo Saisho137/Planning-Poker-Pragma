@@ -11,7 +11,6 @@ describe('UsersTableMenuComponent', () => {
 
     fixture = TestBed.createComponent(UsersTableMenuComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   afterEach(() => {

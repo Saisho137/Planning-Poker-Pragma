@@ -26,8 +26,6 @@ describe('UserCardComponent', () => {
 
     window.alert = jest.fn()
     console.error = jest.fn()
-
-    fixture.detectChanges();
   });
 
   afterEach(() => {
@@ -56,7 +54,6 @@ describe('UserCardComponent', () => {
     const errorResponse = new Error('Error fetching users');
     jest.spyOn(userService, 'getAllUsers').mockReturnValueOnce(throwError(() => errorResponse));
     component.assignUserId()
-    fixture.detectChanges();
     expect(firstValueFrom(userService.getAllUsers())).rejects.toThrow('Error fetching users.');
   });
 

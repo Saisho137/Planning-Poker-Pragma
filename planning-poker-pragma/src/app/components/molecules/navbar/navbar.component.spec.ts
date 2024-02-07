@@ -13,7 +13,6 @@ describe('NavbarComponent', () => {
 
     fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   afterEach(() => {
@@ -34,7 +33,6 @@ describe('NavbarComponent', () => {
   });
 
   it('should not initialize button-atom if buttonText isnt provided', () => {
-    fixture.detectChanges();
     const button = fixture.nativeElement.querySelector('button-atom') as HTMLElement;
     expect(button).toBeFalsy();
   });

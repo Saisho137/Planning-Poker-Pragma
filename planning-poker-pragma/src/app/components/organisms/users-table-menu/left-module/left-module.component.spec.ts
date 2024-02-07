@@ -11,7 +11,6 @@ describe('LeftModuleComponent', () => {
 
     fixture = TestBed.createComponent(LeftModuleComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

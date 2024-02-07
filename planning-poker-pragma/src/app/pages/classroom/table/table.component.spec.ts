@@ -11,7 +11,6 @@ describe('TableComponent', () => {
 
     fixture = TestBed.createComponent(TableComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   afterEach(() => {

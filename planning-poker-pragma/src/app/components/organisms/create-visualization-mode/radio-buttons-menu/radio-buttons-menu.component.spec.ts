@@ -11,7 +11,6 @@ describe('RadioButtonsMenuComponent', () => {
 
     fixture = TestBed.createComponent(RadioButtonsMenuComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   afterEach(() => {
