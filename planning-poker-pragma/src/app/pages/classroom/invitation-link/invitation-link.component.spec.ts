@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InvitationLinkComponent } from './invitation-link.component';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('InvitationLinkComponent', () => {
@@ -10,7 +9,6 @@ describe('InvitationLinkComponent', () => {
   let fixture: ComponentFixture<InvitationLinkComponent>;
 
   let clipboardMock: Partial<Clipboard>;
-  let router: Router;
 
   beforeEach(async () => {
     clipboardMock = {
@@ -26,9 +24,7 @@ describe('InvitationLinkComponent', () => {
 
     fixture = TestBed.createComponent(InvitationLinkComponent);
     component = fixture.componentInstance;
-
-    router = TestBed.inject(Router);
-
+  
     window.alert = jest.fn();
   });
 

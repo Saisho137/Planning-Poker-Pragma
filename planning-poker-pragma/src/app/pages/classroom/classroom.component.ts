@@ -107,9 +107,16 @@ export class ClassroomComponent {
       this.addMockUpUsers();
       this.alreadyInitialized = true;
     }
+    
     this.configurationWindow = !this.configurationWindow;
     this.setVisualization();
     this.updateRoom();
+    
+    if (this.visualization === 'spectator') {
+      this.selectedCard = '?';
+      this.selectCard('');
+      this.allPlayersSelected = false;
+    } 
   }
 
   setVisualization(): void {
