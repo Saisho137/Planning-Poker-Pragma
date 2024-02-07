@@ -2,11 +2,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InvitationLinkComponent } from './invitation-link.component';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('InvitationLinkComponent', () => {
   let component: InvitationLinkComponent;
   let fixture: ComponentFixture<InvitationLinkComponent>;
+
   let clipboardMock: Partial<Clipboard>;
+  let router: Router;
 
   beforeEach(async () => {
     clipboardMock = {
@@ -14,6 +18,7 @@ describe('InvitationLinkComponent', () => {
     };
 
     await TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       providers: [
         { provide: Clipboard, useValue: clipboardMock },
       ],
@@ -22,12 +27,19 @@ describe('InvitationLinkComponent', () => {
     fixture = TestBed.createComponent(InvitationLinkComponent);
     component = fixture.componentInstance;
 
+    router = TestBed.inject(Router);
+
     window.alert = jest.fn();
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
     jest.clearAllMocks();
+  });
+
+  it('should assign link on Init', () => {
+    fixture.detectChanges();
+    expect(component.link).toBe('http://localhost');
   });
 
   it('should call clipboard.copy with the link when copyUrl is called', () => {
