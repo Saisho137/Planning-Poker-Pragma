@@ -7,6 +7,7 @@ import { ClassroomsService } from '../../../shared/services/classrooms-service/c
 describe('CreateVisualizationModeComponent', () => {
   let component: CreateVisualizationModeComponent;
   let fixture: ComponentFixture<CreateVisualizationModeComponent>;
+
   let userService: UsersService;
   let classroomService: ClassroomsService;
 
@@ -88,7 +89,7 @@ describe('CreateVisualizationModeComponent', () => {
   });
 
   it('should assign userId and username from userService', () => {
-    fixture.detectChanges();
+    expect(component.initialUsername).toBe('');
     const userId = 'testUserId';
     const username = 'testUsername';
   
@@ -99,6 +100,6 @@ describe('CreateVisualizationModeComponent', () => {
   
     expect(component.userId).toBe(userId);
     expect(component.username).toBe(username);
-    expect(component.initialUsername).toBe('');
+    expect(component.initialUsername).toBe(username);
   });
 });

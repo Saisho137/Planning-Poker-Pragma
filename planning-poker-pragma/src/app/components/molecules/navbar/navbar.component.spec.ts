@@ -1,10 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NavbarComponent } from './navbar.component';
+import { UsersService } from '../../../shared/services/users-service/users.service';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
+
+  let userService: UsersService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -13,6 +16,8 @@ describe('NavbarComponent', () => {
 
     fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;
+
+    userService = TestBed.inject(UsersService);
   });
 
   afterEach(() => {
@@ -22,6 +27,18 @@ describe('NavbarComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should assign username from userService', () => {
+    fixture.detectChanges();
+    expect(component.username).toBe('ERR');
+
+    const username = 'testUsername';
+    userService.usernameSubject.next(username);
+
+    fixture.detectChanges();
+  
+    expect(component.username).toBe(username.substring(0, 2).toUpperCase());
   });
 
   it('should initialize button-atom if buttonText is provided', () => {
