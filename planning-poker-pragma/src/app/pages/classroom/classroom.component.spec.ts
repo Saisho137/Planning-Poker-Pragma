@@ -6,6 +6,7 @@ import { UsersService } from '../../shared/services/users-service/users.service'
 import { ClassroomsService } from '../../shared/services/classrooms-service/classrooms.service';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { ClassroomI } from '../../interfaces/classroom-interface';
+import { of } from 'rxjs';
 
 describe('ClassroomComponent', () => {
   let component: ClassroomComponent;
@@ -140,11 +141,11 @@ describe('ClassroomComponent', () => {
     expect(compiled.querySelector('app-create-visualization-mode')).toBeFalsy();
     expect(compiled.querySelector('app-invitation-link')).toBeTruthy();
   });
-  
+
   //setVisualization()
   it('should set visualization Mode', () => {
     const roomId = 'testingSprint';
-    const userId = 'userTest'
+    const userId = '1'
 
     component.roomId = roomId;
     component['userId'] = userId;
@@ -166,7 +167,46 @@ describe('ClassroomComponent', () => {
   });
 
   //addMockUpUsers
+  it('should add users to the room properly', () => {
+    const roomId = 'testingSprint';
+    const userId = '1'
 
+    //mock room
+    const newRoom: ClassroomI = {
+      id: roomId,
+      users: [{
+          id: userId,
+          username: 'userTest',
+          rol: 'player',
+          cardSelected: ''
+      }]
+    } as any;
+    classroomService.rooms.push(newRoom);
+
+    //mock response from userService
+    const getAllUsersMock = jest.spyOn(userService, 'getAllUsers').mockReturnValue(of([{
+      _id: '2',
+      username: 'userTest2',
+      email: 'string',
+      password: 'string',
+      __v: 0
+    }]));
+    const newUsersSpy = jest.spyOn(classroomService, 'addUsersToRoom')
+    //Mock Random selection
+    jest.spyOn(globalThis.Math, 'random').mockReturnValue(0.1);
+
+    component.addMockUpUsers();
+
+    expect(getAllUsersMock).toHaveBeenCalledTimes(1);
+    expect(newUsersSpy).toHaveBeenCalledWith(roomId, 
+      [{
+        id: '2',
+        username: 'userTest2',
+        rol: 'player',
+        cardSelected: ''
+      }]);
+  });
+  
   //updateScoringMode
 
   //updateRoom
