@@ -9,14 +9,4 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  constructor() {
-    this.printSessionStorage();
-  }
-
-  printSessionStorage(): void {
-    if (sessionStorage.getItem('session_token')) {
-      console.log('Token: ', sessionStorage.getItem('session_token'));
-    }
-  }
-}
+export class AppComponent {}
