@@ -322,7 +322,7 @@ describe('ClassroomComponent', () => {
 
   //makeAverageScore
   it('should return room average score from selected cards', () => {
-    const newRoom: ClassroomI = {
+    let newRoom: ClassroomI = {
       users: [
         {
           id: '1',
@@ -336,23 +336,35 @@ describe('ClassroomComponent', () => {
           rol: 'player',
           cardSelected: '2'
         },
-        {
-          id: '3',
-          username: 'userTest3',
-          rol: 'spectator',
-          cardSelected: ''
-        },
-    ]
+      ]
     } as any;
     component.room = newRoom;
-
     component.makeAverageScore()
-    
-
     expect(component.averageScore).toBe('1,5')
+
+    newRoom = {
+      users: [
+        {
+          id: '1',
+          username: 'userTest1',
+          rol: 'player',
+          cardSelected: '2'
+        },
+        {
+          id: '2',
+          username: 'userTest2',
+          rol: 'player',
+          cardSelected: '2'
+        },
+      ]
+    } as any;
+    component.room = newRoom;
+    component.makeAverageScore()
+    expect(component.averageScore).toBe('2')
   })
 
   //revealCards
+
 
   //restartGame
   it('should show an alert', () => {
