@@ -205,6 +205,13 @@ describe('ClassroomComponent', () => {
         cardSelected: ''
       }]);
   });
+
+  it('should handle error when getAllUsers fails',  () => {
+    const errorResponse = new Error('Error fetching users');
+    jest.spyOn(userService, 'getAllUsers').mockReturnValueOnce(throwError(() => errorResponse));
+    component.addMockUpUsers()
+    expect(firstValueFrom(userService.getAllUsers())).rejects.toThrow('Error fetching users.');
+  });
   
   //updateScoringMode
   it('should update scoringMode (Card Menu)', () => {
