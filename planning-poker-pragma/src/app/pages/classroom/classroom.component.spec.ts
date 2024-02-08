@@ -287,7 +287,38 @@ describe('ClassroomComponent', () => {
     expect(selectSpy).toHaveBeenCalledTimes(1);
     expect(updtSpy).toHaveBeenCalledTimes(1);
   }))
+
   //votesCount
+  it('should return a key-value pair object wich counts votes for each card', () => {
+    //mock room
+    const newRoom: ClassroomI = {
+      users: [
+        {
+          id: '1',
+          username: 'userTest1',
+          rol: 'player',
+          cardSelected: '1'
+        },
+        {
+          id: '2',
+          username: 'userTest2',
+          rol: 'player',
+          cardSelected: '2'
+        },
+        {
+          id: '3',
+          username: 'userTest3',
+          rol: 'player',
+          cardSelected: '1'
+        },
+    ]
+    } as any;
+    component.room = newRoom;
+
+    component.votesCount()
+
+    expect(component.numberDictionary).toEqual({'1' : 2, '2' : 1})
+  })
 
   //makeAverageScore
 
