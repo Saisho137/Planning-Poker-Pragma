@@ -209,7 +209,7 @@ describe('ClassroomComponent', () => {
   it('should handle error when getAllUsers fails',  () => {
     const errorResponse = new Error('Error fetching users');
     jest.spyOn(userService, 'getAllUsers').mockReturnValueOnce(throwError(() => errorResponse));
-    component.addMockUpUsers()
+    component.addMockUpUsers();
     expect(firstValueFrom(userService.getAllUsers())).rejects.toThrow('Error fetching users.');
   });
   
@@ -219,7 +219,7 @@ describe('ClassroomComponent', () => {
     component.selectedCard = '999';
     component.usersAlreadySelectedCard = true;
 
-    component.updateScoringMode('oneToFive')
+    component.updateScoringMode('oneToFive');
 
     expect(component.selectedCard).toBe('');
     expect(component.usersAlreadySelectedCard).toBe(false);
@@ -228,6 +228,21 @@ describe('ClassroomComponent', () => {
   });
 
   //updateRoom
+  it('should get the room correctly', () => {
+    const roomId = 'testingSprint'
+    const newRoom: ClassroomI = {
+      id: roomId,
+    } as any;
+    classroomService.rooms.push(newRoom);
+    
+    component.roomId = roomId;
+    const getSpy = jest.spyOn(classroomService, 'getRoom')
+
+    component.updateRoom();
+
+    expect(getSpy).toHaveBeenCalledTimes(1);
+    expect(component.room).toBe(newRoom);
+  })
 
   //switchInvitationWindow
 
