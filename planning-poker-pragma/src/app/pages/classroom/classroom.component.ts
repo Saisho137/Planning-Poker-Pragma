@@ -222,7 +222,8 @@ export class ClassroomComponent {
       ).toString().split('.');
       //If number has Decimal part, replace '.' with ','.
       if (averageArray[1]) {
-        this.averageScore = averageArray[0] + ',' + averageArray[1];;
+        this.averageScore = averageArray[0] + ',' + averageArray[1];
+        return;
       }
       //If not, return number.
       this.averageScore = averageArray[0];
