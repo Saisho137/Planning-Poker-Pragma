@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ClassroomComponent } from './classroom.component';
@@ -252,7 +252,41 @@ describe('ClassroomComponent', () => {
   })
 
   //selectCard
+  it('should unselect a card that has been previously selected', () => {
+    const clearSpy = jest.spyOn(classroomService, 'clearSelectedCard');
+    const updtSpy = jest.spyOn(component, 'updateRoom');
+    component.selectedCard = '99';
 
+    component.selectCard('99');
+
+    expect(clearSpy).toHaveBeenCalledTimes(1);
+    expect(component.selectedCard).toBe('');
+    expect(updtSpy).toHaveBeenCalledTimes(1);
+  })
+
+  it('should assign input value to SelectedCard ', () => {
+    const selectSpy = jest.spyOn(classroomService, 'selectCard');
+    component.selectedCard = '';
+
+    component.selectCard('99');
+
+    expect(selectSpy).toHaveBeenCalledTimes(1);
+    expect(component.selectedCard).toBe('99');
+  })
+
+  it('should assign a SelectedCard to mockUpUsers', fakeAsync (() => {
+    const selectSpy = jest.spyOn(classroomService, 'selectCardForMockUpUsers');
+    const updtSpy = jest.spyOn(component, 'updateRoom');
+    component.usersAlreadySelectedCard = false;
+    component.selectedCard = '';
+
+    component.selectCard('1');
+    tick(2000); //should speed up setTimeOut.
+
+    expect(component.usersAlreadySelectedCard).toBe(true);
+    expect(selectSpy).toHaveBeenCalledTimes(1);
+    expect(updtSpy).toHaveBeenCalledTimes(1);
+  }))
   //votesCount
 
   //makeAverageScore
