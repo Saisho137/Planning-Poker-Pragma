@@ -7,13 +7,15 @@ describe('CardComponent', () => {
   let fixture: ComponentFixture<CardComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [CardComponent],
-    }).compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(CardComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
   });
 
   it('should create', () => {
@@ -27,6 +29,7 @@ describe('CardComponent', () => {
   });
 
   it('should emit click event on button click', () => {
+    fixture.detectChanges();
     const emitSpy = jest.spyOn(component.clickEvent, 'emit');
     const card = fixture.nativeElement.querySelector('div') as HTMLElement;
 

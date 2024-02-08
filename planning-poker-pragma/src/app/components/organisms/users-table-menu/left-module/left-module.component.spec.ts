@@ -7,13 +7,10 @@ describe('LeftModuleComponent', () => {
   let fixture: ComponentFixture<LeftModuleComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [LeftModuleComponent],
-    }).compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(LeftModuleComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

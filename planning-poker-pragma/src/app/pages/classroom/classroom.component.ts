@@ -14,6 +14,7 @@ import { NavbarComponent } from '../../components/molecules/navbar/navbar.compon
 import { UserInRoomI } from '../../interfaces/user-in-room-interface';
 import { UsersService } from '../../shared/services/users-service/users.service';
 import { UserI } from '../../interfaces/user-interface';
+import { convertToUserInRoom } from '../../shared/functions/exportables';
 
 @Component({
   selector: 'app-classroom',
@@ -107,9 +108,16 @@ export class ClassroomComponent {
       this.addMockUpUsers();
       this.alreadyInitialized = true;
     }
+    
     this.configurationWindow = !this.configurationWindow;
     this.setVisualization();
     this.updateRoom();
+    
+    if (this.visualization === 'spectator') {
+      this.selectedCard = '?';
+      this.selectCard('');
+      this.allPlayersSelected = false;
+    } 
   }
 
   setVisualization(): void {
@@ -121,19 +129,10 @@ export class ClassroomComponent {
       : 'spectator';
   }
 
-  public addMockUpUsers(): void {
+  addMockUpUsers(): void {
     this.getAllUsersSubscription = this.userService.getAllUsers().subscribe({
       next: (users) => {
         const mockUpUsers: UserI[] = users;
-
-        const convertToUserInRoom = (user: UserI): UserInRoomI => {
-          return {
-            id: user._id,
-            username: user.username,
-            rol: Math.random() <= 0.7 ? 'player' : 'spectator',
-            cardSelected: '',
-          };
-        };
 
         const usersToAdd: UserInRoomI[] = mockUpUsers
           .map(convertToUserInRoom)
@@ -141,8 +140,8 @@ export class ClassroomComponent {
 
         this.classroomService.addUsersToRoom(this.roomId, usersToAdd);
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
+        throw new Error('Error fetching users.');
       },
     });
   }
@@ -189,7 +188,7 @@ export class ClassroomComponent {
     }
   }
 
-  public votesCount(): void {
+  votesCount(): void {
     if (this.room?.users) {
       const players = this.room.users.filter((user) => user.rol === 'player');
       //Creates a key-value pair object that counts the number of votes of each selected card
@@ -204,7 +203,7 @@ export class ClassroomComponent {
     }
   }
 
-  public makeAverageScore(): void {
+  makeAverageScore(): void {
     if (this.room) {
       const players = this.room.users.filter((user) => user.rol === 'player');
       //Split number into Integer and Decimal Part.
@@ -215,7 +214,8 @@ export class ClassroomComponent {
       ).toString().split('.');
       //If number has Decimal part, replace '.' with ','.
       if (averageArray[1]) {
-        this.averageScore = averageArray[0] + ',' + averageArray[1];;
+        this.averageScore = averageArray[0] + ',' + averageArray[1];
+        return;
       }
       //If not, return number.
       this.averageScore = averageArray[0];
@@ -233,7 +233,7 @@ export class ClassroomComponent {
   }
 
   restartGame(): void {
-    if (this.room?.admin.includes(this.userId)) {
+    if (this.room?.admin && this.room?.admin.includes(this.userId)) {
       this.classroomService.resetGame(this.roomId);
       this.usersAlreadySelectedCard = false;
       this.cardResultsRevealed = false;

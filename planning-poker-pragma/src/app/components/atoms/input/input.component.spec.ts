@@ -7,13 +7,15 @@ describe('InputComponent', () => {
   let fixture: ComponentFixture<InputComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [InputComponent],
-    }).compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(InputComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
   });
 
   it('should create', () => {

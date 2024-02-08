@@ -7,19 +7,15 @@ import { ClassroomsService } from '../../../shared/services/classrooms-service/c
 describe('CreateVisualizationModeComponent', () => {
   let component: CreateVisualizationModeComponent;
   let fixture: ComponentFixture<CreateVisualizationModeComponent>;
+
   let userService: UsersService;
   let classroomService: ClassroomsService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        CreateVisualizationModeComponent,
         HttpClientTestingModule,
       ],
-      providers: [
-        UsersService,
-        ClassroomsService,
-      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(CreateVisualizationModeComponent);
@@ -29,8 +25,11 @@ describe('CreateVisualizationModeComponent', () => {
     classroomService = TestBed.inject(ClassroomsService);
 
     window.alert = jest.fn();
+  });
 
-    fixture.detectChanges();
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
   });
 
   it('should create', () => {
@@ -63,6 +62,8 @@ describe('CreateVisualizationModeComponent', () => {
     expect(sessionStorage.getItem('user_username')).toEqual('validUsername');
     expect(updateUserStateSpy).toHaveBeenCalledWith(component.classroomId,component.userId,'validUsername','player');
     expect(emitSpy).toHaveBeenCalled();
+
+    sessionStorage.clear()
   });
 
   it('should assign automatically selectedMode if no value is provided', () => {
@@ -88,6 +89,7 @@ describe('CreateVisualizationModeComponent', () => {
   });
 
   it('should assign userId and username from userService', () => {
+    expect(component.initialUsername).toBe('');
     const userId = 'testUserId';
     const username = 'testUsername';
   
@@ -98,6 +100,6 @@ describe('CreateVisualizationModeComponent', () => {
   
     expect(component.userId).toBe(userId);
     expect(component.username).toBe(username);
-    expect(component.initialUsername).toBe('');
+    expect(component.initialUsername).toBe(username);
   });
 });

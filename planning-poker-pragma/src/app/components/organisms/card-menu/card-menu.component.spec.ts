@@ -15,8 +15,7 @@ describe('CardMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CardMenuComponent, HttpClientTestingModule],
-      providers: [ClassroomsService, UsersService]
+      imports: [HttpClientTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CardMenuComponent);
@@ -25,8 +24,6 @@ describe('CardMenuComponent', () => {
     window.alert = jest.fn()
     classroomService = TestBed.inject(ClassroomsService);
     userService = TestBed.inject(UsersService);
-
-    fixture.detectChanges();
   });
 
   afterEach(() => {

@@ -15,8 +15,7 @@ describe('UserCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserCardComponent, HttpClientTestingModule],
-      providers: [UsersService, ClassroomsService],
+      imports: [HttpClientTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(UserCardComponent);
@@ -27,13 +26,12 @@ describe('UserCardComponent', () => {
 
     window.alert = jest.fn()
     console.error = jest.fn()
-
-    fixture.detectChanges();
   });
 
   afterEach(() => {
-    jest.clearAllMocks()
-  })
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -56,7 +54,6 @@ describe('UserCardComponent', () => {
     const errorResponse = new Error('Error fetching users');
     jest.spyOn(userService, 'getAllUsers').mockReturnValueOnce(throwError(() => errorResponse));
     component.assignUserId()
-    fixture.detectChanges();
     expect(firstValueFrom(userService.getAllUsers())).rejects.toThrow('Error fetching users.');
   });
 

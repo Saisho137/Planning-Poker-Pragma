@@ -42,11 +42,9 @@ export class CreateVisualizationModeComponent {
     this.userIdSubscription = this.userService.userId$.subscribe((userId) => {
       if (userId) this.userId = userId;
     });
-    this.usernameSubscription = this.userService.username$.subscribe(
-      (username) => {
+    this.usernameSubscription = this.userService.username$.subscribe((username) => {
         if (username) this.username = username;
-      }
-    );
+    });
     this.initialUsername = this.username;
   }
 

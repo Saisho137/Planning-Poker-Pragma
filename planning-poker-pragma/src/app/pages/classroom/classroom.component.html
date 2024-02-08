@@ -8,7 +8,6 @@
   } @if (invitationWindow) {
   <app-invitation-link
     class="d-flex justify-content-center"
-    [link]="roomId"
     (clickEvent)="switchInvitationWindow()"
   />
   }
@@ -28,16 +27,18 @@
     (clickEventReveal)="revealCards()"
     (clickEventRestart)="restartGame()"
   />
-  @if (!cardResultsRevealed) {
-  <app-card-menu
-    [room]="room"
-    [roomId]="roomId"
-    [selectedCard]="selectedCard"
-    [visualization]="visualization"
-    (scoringModeSelection)="updateScoringMode($event)"
-    (clickEvent)="selectCard($event)"
-  />
-  } @else { @defer {
+  @if (!cardResultsRevealed) { 
+    @if (visualization === 'player') {
+      <app-card-menu
+        [room]="room"
+        [roomId]="roomId"
+        [selectedCard]="selectedCard"
+        [visualization]="visualization"
+        (scoringModeSelection)="updateScoringMode($event)"
+        (clickEvent)="selectCard($event)"
+      />
+      }
+} @else { @defer {
   <section class="row mt-5">
     <div class="col-4"></div>
     <div class="col-4 d-flex justify-content-center">

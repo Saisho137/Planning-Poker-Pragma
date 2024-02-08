@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ButtonComponent } from '../../../components/atoms/button/button.component';
 import { InputComponent } from '../../../components/atoms/input/input.component';
@@ -12,7 +12,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
   styleUrl: './invitation-link.component.scss',
 })
 export class InvitationLinkComponent {
-  @Input() link = '';
+  public link = '';
   
   @Output() clickEvent: EventEmitter<void> = new EventEmitter<void>();
 

@@ -1,23 +1,44 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NavbarComponent } from './navbar.component';
+import { UsersService } from '../../../shared/services/users-service/users.service';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
 
+  let userService: UsersService;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavbarComponent, HttpClientTestingModule]
+      imports: [HttpClientTestingModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+
+    userService = TestBed.inject(UsersService);
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should assign username from userService', () => {
+    fixture.detectChanges();
+    expect(component.username).toBe('ERR');
+
+    const username = 'testUsername';
+    userService.usernameSubject.next(username);
+
+    fixture.detectChanges();
+  
+    expect(component.username).toBe(username.substring(0, 2).toUpperCase());
   });
 
   it('should initialize button-atom if buttonText is provided', () => {
@@ -29,7 +50,6 @@ describe('NavbarComponent', () => {
   });
 
   it('should not initialize button-atom if buttonText isnt provided', () => {
-    fixture.detectChanges();
     const button = fixture.nativeElement.querySelector('button-atom') as HTMLElement;
     expect(button).toBeFalsy();
   });

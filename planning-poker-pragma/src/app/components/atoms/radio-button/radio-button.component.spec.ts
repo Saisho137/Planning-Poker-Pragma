@@ -7,13 +7,15 @@ describe('RadioButtonComponent', () => {
   let fixture: ComponentFixture<RadioButtonComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [RadioButtonComponent],
-    }).compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(RadioButtonComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
   });
 
   it('should create', () => {

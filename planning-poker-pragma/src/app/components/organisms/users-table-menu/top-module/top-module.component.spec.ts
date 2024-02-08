@@ -7,13 +7,10 @@ describe('TopModuleComponent', () => {
   let fixture: ComponentFixture<TopModuleComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [TopModuleComponent],
-    }).compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(TopModuleComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
