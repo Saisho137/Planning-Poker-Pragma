@@ -245,6 +245,11 @@ describe('ClassroomComponent', () => {
   })
 
   //switchInvitationWindow
+  it('should switch boolean window state', () => {
+    component.invitationWindow = true;
+    component.switchInvitationWindow();
+    expect(component.invitationWindow).toBe(false);
+  })
 
   //selectCard
 
