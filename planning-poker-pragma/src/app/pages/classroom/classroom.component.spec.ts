@@ -6,7 +6,7 @@ import { UsersService } from '../../shared/services/users-service/users.service'
 import { ClassroomsService } from '../../shared/services/classrooms-service/classrooms.service';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { ClassroomI } from '../../interfaces/classroom-interface';
-import { of } from 'rxjs';
+import { firstValueFrom, of, throwError } from 'rxjs';
 
 describe('ClassroomComponent', () => {
   let component: ClassroomComponent;
@@ -168,14 +168,12 @@ describe('ClassroomComponent', () => {
 
   //addMockUpUsers
   it('should add users to the room properly', () => {
-    const roomId = 'testingSprint';
-    const userId = '1'
-
     //mock room
+    const roomId = 'testingSprint';
     const newRoom: ClassroomI = {
       id: roomId,
       users: [{
-          id: userId,
+          id: '1',
           username: 'userTest',
           rol: 'player',
           cardSelected: ''
@@ -192,7 +190,8 @@ describe('ClassroomComponent', () => {
       __v: 0
     }]));
     const newUsersSpy = jest.spyOn(classroomService, 'addUsersToRoom')
-    //Mock Random selection
+
+    //Mock Random selection to always receive 'player'
     jest.spyOn(globalThis.Math, 'random').mockReturnValue(0.1);
 
     component.addMockUpUsers();
@@ -208,6 +207,18 @@ describe('ClassroomComponent', () => {
   });
   
   //updateScoringMode
+  it('should update scoringMode (Card Menu)', () => {
+    const scoringSpy = jest.spyOn(classroomService, 'createScoringMode');
+    component.selectedCard = '999';
+    component.usersAlreadySelectedCard = true;
+
+    component.updateScoringMode('oneToFive')
+
+    expect(component.selectedCard).toBe('');
+    expect(component.usersAlreadySelectedCard).toBe(false);
+    expect(scoringSpy).toHaveBeenCalledTimes(1);
+    expect(component.scoringMode).toBe(classroomService['scoringMode']['oneToFive']);
+  });
 
   //updateRoom
 

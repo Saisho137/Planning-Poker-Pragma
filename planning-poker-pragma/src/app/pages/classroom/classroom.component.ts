@@ -148,8 +148,8 @@ export class ClassroomComponent {
 
         this.classroomService.addUsersToRoom(this.roomId, usersToAdd);
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
+        throw new Error('Error fetching users.');
       },
     });
   }
