@@ -189,7 +189,7 @@ describe('ClassroomComponent', () => {
       password: 'string',
       __v: 0
     }]));
-    const newUsersSpy = jest.spyOn(classroomService, 'addUsersToRoom')
+    const newUsersSpy = jest.spyOn(classroomService, 'addUsersToRoom');
 
     //Mock Random selection to always receive 'player'
     jest.spyOn(globalThis.Math, 'random').mockReturnValue(0.1);

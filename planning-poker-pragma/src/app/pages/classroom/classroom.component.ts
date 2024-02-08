@@ -14,6 +14,7 @@ import { NavbarComponent } from '../../components/molecules/navbar/navbar.compon
 import { UserInRoomI } from '../../interfaces/user-in-room-interface';
 import { UsersService } from '../../shared/services/users-service/users.service';
 import { UserI } from '../../interfaces/user-interface';
+import { convertToUserInRoom } from '../../shared/functions/exportables';
 
 @Component({
   selector: 'app-classroom',
@@ -132,15 +133,6 @@ export class ClassroomComponent {
     this.getAllUsersSubscription = this.userService.getAllUsers().subscribe({
       next: (users) => {
         const mockUpUsers: UserI[] = users;
-
-        const convertToUserInRoom = (user: UserI): UserInRoomI => {
-          return {
-            id: user._id,
-            username: user.username,
-            rol: Math.random() <= 0.7 ? 'player' : 'spectator',
-            cardSelected: '',
-          };
-        };
 
         const usersToAdd: UserInRoomI[] = mockUpUsers
           .map(convertToUserInRoom)
