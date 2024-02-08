@@ -364,7 +364,37 @@ describe('ClassroomComponent', () => {
   })
 
   //revealCards
+  it('should set properties to define that cards has been revealed', () => {
+    //Alternative control flow
+    component.revealCards()
+    expect(jest.spyOn(window, 'alert')).toHaveBeenCalledWith('Debes ser administrador para presionar este botón!')
 
+    //mock Room
+    const userId = '1'
+    const newRoom: ClassroomI = {
+      id: 'testingSprint',
+      admin: [userId],
+      users: [{
+          id: userId,
+          username: 'userTest',
+          rol: 'player',
+          cardSelected: ''
+      }]
+    } as any;
+
+    component.room = newRoom;
+    component['userId'] = userId;
+
+    //mock methods
+    const avgSpy = jest.spyOn(component, 'makeAverageScore')
+    const votesSpy = jest.spyOn(component, 'votesCount')
+
+    component.revealCards()
+
+    expect(avgSpy).toHaveBeenCalledTimes(1);
+    expect(votesSpy).toHaveBeenCalledTimes(1);
+    expect(component.cardResultsRevealed).toBe(true);
+  })
 
   //restartGame
   it('should show an alert', () => {
