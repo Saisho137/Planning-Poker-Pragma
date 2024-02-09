@@ -82,18 +82,18 @@ export class AuthenticationComponent {
     });
     if (this.userForm.get('userUsername')?.errors) {
       switch (this.userForm.get('userUsername')!.errors!['pattern']) {
-        case 'lenght':
-          this.regexMessage = 'El nombre debe tener entre 5 y 20 carácteres!';
-          break;
-        case 'numbers':
-          this.regexMessage = 'No debe haber más de 3 números en el nombre!';
-          break;
-        case 'spaces':
-          this.regexMessage = 'Solo un espacio es permitido!';
-          break;
-        default:
-          this.regexMessage = 'Solo se permiten carácteres alfanuméricos!';
-          break;
+      case 'lenght':
+        this.regexMessage = 'El nombre debe tener entre 5 y 20 carácteres!';
+        break;
+      case 'numbers':
+        this.regexMessage = 'No debe haber más de 3 números en el nombre!';
+        break;
+      case 'spaces':
+        this.regexMessage = 'Solo un espacio es permitido!';
+        break;
+      default:
+        this.regexMessage = 'Solo se permiten carácteres alfanuméricos!';
+        break;
       }
     } else {
       this.regexMessage = '';
@@ -140,7 +140,7 @@ export class AuthenticationComponent {
       nameValidator(userUsername)
     ) {
       this.createUserSubscription = this.userService
-        .createUser(userUsername, userEmail, userPassword)
+        .createUser(/* userUsername, userEmail, userPassword */)
         .subscribe({
           next: (res: RegisterI) => {
             if (res.userCreated === true) this.validateUser();
@@ -160,7 +160,7 @@ export class AuthenticationComponent {
 
     if (userEmail && userPassword) {
       this.validateUserSubscription = this.userService
-        .validateUser(userEmail, userPassword)
+        .validateUser(/* userEmail, userPassword */)
         .subscribe({
           next: (res: UserResponseI) => {
             const token = res.token;

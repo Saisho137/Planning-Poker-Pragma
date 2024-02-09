@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UsersService } from './users.service';
 import { throwError, firstValueFrom, Subscription } from 'rxjs';
@@ -7,7 +8,7 @@ import { HttpHeaders } from '@angular/common/http';
 describe('UsersService', () => {
   let service: UsersService;
   let httpMock: HttpTestingController;
-  const subscriptions: Subscription[] = []
+  const subscriptions: Subscription[] = [];
 
   const headers: HttpHeaders = new HttpHeaders().set(
     'Content-Type',
@@ -33,7 +34,7 @@ describe('UsersService', () => {
     sessionStorage.clear();
 
     subscriptions.forEach(sub => sub.unsubscribe());
-  })
+  });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
@@ -41,24 +42,24 @@ describe('UsersService', () => {
 
   //userIdSubject
   it('should set userId correctly', () => {
-    const mockId = '1'
+    const mockId = '1';
 
     const spy = jest.spyOn(service.userIdSubject, 'next');
-    service.setUserId(mockId)
+    service.setUserId(mockId);
 
-    expect(spy).toHaveBeenCalledTimes(1)
-    expect(spy).toHaveBeenCalledWith(mockId)
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith(mockId);
   });
 
   //usernameSubject
   it('should set username correctly', () => {
-    const mockUsername = 'test'
+    const mockUsername = 'test';
 
     const spy = jest.spyOn(service.usernameSubject, 'next');
-    service.setUsername(mockUsername)
+    service.setUsername(mockUsername);
 
-    expect(spy).toHaveBeenCalledTimes(1)
-    expect(spy).toHaveBeenCalledWith(mockUsername)
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith(mockUsername);
   });
 
   it('should assign sessionStorage values to pertinent Subjects', () => {
@@ -70,7 +71,7 @@ describe('UsersService', () => {
     sessionStorage.setItem('user_id', userId);
     sessionStorage.setItem('user_username', username);
 
-    service.assignBehaviorSubjectsOnInit()
+    service.assignBehaviorSubjectsOnInit();
 
     const sub1 = service.userId$.subscribe((value) => (resp1 = value));
     const sub2 = service.username$.subscribe((value) => (resp2 = value));
@@ -93,8 +94,8 @@ describe('UsersService', () => {
       userCreated: true,
     };
 
-    const sub3 = service.createUser(mockUser.username, mockUser.email, mockUser.password)
-    .subscribe((response) => (resp = response));
+    const sub3 = service.createUser(/* mockUser.username, mockUser.email, mockUser.password */)
+      .subscribe((response) => (resp = response));
     subscriptions.push(sub3);
 
     const req = httpMock.expectOne('http://localhost:8080/register_user');
@@ -126,8 +127,8 @@ describe('UsersService', () => {
       token: 'xyz',
     };
 
-    const sub4 = service.validateUser(mockUser.email, mockUser.password)
-    .subscribe((response) => (resp = response));
+    const sub4 = service.validateUser(/* mockUser.email, mockUser.password */)
+      .subscribe((response) => (resp = response));
     subscriptions.push(sub4);
 
     const req = httpMock.expectOne('http://localhost:8080/sign_in_user');
@@ -176,8 +177,7 @@ describe('UsersService', () => {
     const errorMessage = 'Error fetching users';
     const errorResponse = new Error(errorMessage);
 
-
-    const tempMock: any = {get: jest.fn(), post: jest.fn()}
+    const tempMock: any = {get: jest.fn(), post: jest.fn()};
     const tempService = new UsersService(tempMock);
 
     tempMock.get.mockReturnValueOnce(throwError(() => errorResponse));
