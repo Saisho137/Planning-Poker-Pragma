@@ -17,7 +17,7 @@ export class UsersService {
   public userId$: Observable<string | null> = this.userIdSubject.asObservable();
   public username$: Observable<string | null> = this.usernameSubject.asObservable();
 
-  public urlBase = 'http://localhost:8080'
+  public urlBase = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {
     this.assignBehaviorSubjectsOnInit();
@@ -33,8 +33,8 @@ export class UsersService {
 
   public assignBehaviorSubjectsOnInit(): void {
     if (sessionStorage.getItem('user_id') && sessionStorage.getItem('user_username')) {
-      this.setUserId(sessionStorage.getItem('user_id')!)
-      this.setUsername(sessionStorage.getItem('user_username')!)
+      this.setUserId(sessionStorage.getItem('user_id')!);
+      this.setUsername(sessionStorage.getItem('user_username')!);
     }
   }
 
