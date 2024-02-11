@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import {
   signUp, confirmSignUp, type ConfirmSignUpInput,
-  signIn, type SignInInput,
+  autoSignIn, signIn, type SignInInput,
   signOut,
   getCurrentUser,
   fetchAuthSession,
@@ -24,6 +24,7 @@ export class CognitoService {
             email,
             nickname
           },
+          autoSignIn: true
         },
       });
       return nextStep;
@@ -40,6 +41,16 @@ export class CognitoService {
         confirmationCode,
       });
       return nextStep;
+    } catch (error) {
+      alert(error);
+      return error;
+    }
+  }
+
+  async handleAutoSignIn() {
+    try {
+      const { isSignedIn } = await autoSignIn();
+      return isSignedIn;
     } catch (error) {
       alert(error);
       return error;

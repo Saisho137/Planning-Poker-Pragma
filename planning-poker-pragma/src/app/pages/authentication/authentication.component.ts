@@ -173,6 +173,23 @@ export class AuthenticationComponent {
     }
   }
 
+  async assignUserValues(isSignedIn: boolean) {
+      if(isSignedIn) {
+        const token = await this.cognitoService.currentSession();
+        sessionStorage.setItem('session_token', token.toString());
+
+        const {username, userId} = await this.cognitoService.currentAuthenticatedUser();
+
+        this.userService.setUserId(userId);
+        sessionStorage.setItem('user_id', userId);
+
+        this.userService.setUsername(username);
+        sessionStorage.setItem('user_username', username);
+
+        this.router.navigate(['create-classroom']);
+      } 
+  }
+
   async confirmCreatedUser(): Promise<void> {
     const { userUsername } = this.userForm.value;
     const confirmation = {
@@ -181,7 +198,11 @@ export class AuthenticationComponent {
     };
     const nextStep: any = await this.cognitoService.handleSignUpConfirmation(confirmation);
 
-    if(nextStep?.signUpStep === 'DONE') this.router.navigate(['login'])
+    if(nextStep?.signUpStep === 'COMPLETE_AUTO_SIGN_IN') {
+      const isSignedIn: any = await this.cognitoService.handleAutoSignIn();
+
+      this.assignUserValues(isSignedIn);
+    }
   }
   
 
@@ -189,6 +210,13 @@ export class AuthenticationComponent {
     const { userEmail, userPassword } = this.userForm.value;
 
     if (userEmail && userPassword) {
+      const user = {
+        username: userEmail,
+        password: userPassword
+      }
+      const isSignedIn: any = await this.cognitoService.handleSignIn(user)
+      
+      this.assignUserValues(isSignedIn);
       /* this.validateUserSubscription = this.userService
         .validateUser(/* userEmail, userPassword)
         .subscribe({
@@ -215,27 +243,7 @@ export class AuthenticationComponent {
             });
           },
         });*/
-        const user = {
-          username: userEmail,
-          password: userPassword
-        }
-        const isSignedIn: any = await this.cognitoService.handleSignIn(user)
         
-        if(isSignedIn === true){
-
-          const token = await this.cognitoService.currentSession();
-          sessionStorage.setItem('session_token', token.toString());
-
-          const {username, userId} = await this.cognitoService.currentAuthenticatedUser();
-
-          this.userService.setUserId(userId);
-          sessionStorage.setItem('user_id', userId);
-
-          this.userService.setUsername(username);
-          sessionStorage.setItem('user_username', username);
-
-          this.router.navigate(['create-classroom']);
-        } 
     }
   }
 
