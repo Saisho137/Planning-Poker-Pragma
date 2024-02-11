@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, NgZone } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
@@ -43,9 +44,12 @@ export class AuthenticationComponent {
     userEmail: new FormControl('', [Validators.required]),
     userPassword: new FormControl('', [
       Validators.required,
-      Validators.minLength(5),
+      Validators.minLength(6),
     ]),
   });
+  public verificationCode = new FormControl('', [
+    Validators.required
+  ]);
   public regexMessage = '';
 
   public isLogin = false;
@@ -135,7 +139,11 @@ export class AuthenticationComponent {
     this.regexMessage = '';
   }
 
-  createUser(): void {
+  onCodeChange(value: string): void {
+    this.verificationCode.patchValue(value);
+  }
+
+  async createUser(): Promise<void> {
     const { userEmail, userPassword, userUsername } = this.userForm.value;
 
     if (userUsername && userEmail && userPassword && nameValidator(userUsername)) {
@@ -158,22 +166,23 @@ export class AuthenticationComponent {
         email: userEmail,
         password: userPassword,
       };
+
+      const nextStep: any = await this.cognitoService.handleSignUp(user);
       
-      this.cognitoService.handleSignUp(user).then(() => {
-        this.needConfirmation = true;
-      });
+      if (nextStep?.signUpStep === 'CONFIRM_SIGN_UP') this.needConfirmation = true;
     }
   }
 
-  confirmCreatedUser(): void {
+  async confirmCreatedUser(): Promise<void> {
     const { userUsername } = this.userForm.value;
     const confirmation = {
         username: userUsername ?? '',
-        confirmationCode: '172658',
+        confirmationCode: this.verificationCode.value ?? '',
     };
-    this.cognitoService.handleSignUpConfirmation(confirmation).then((resp) => {
-      //if donde navigate home
-    });
+    console.log(confirmation);
+    const nextStep: any = await this.cognitoService.handleSignUpConfirmation(confirmation);
+
+    if(nextStep?.signUpStep === 'DONE') this.router.navigate(['login'])
   }
   
 

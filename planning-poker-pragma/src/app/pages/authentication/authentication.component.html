@@ -4,6 +4,35 @@
     [title]="'Pragma'"
     [imgUrl]="pragmaIconUrl"
   />
+  @if (needConfirmation) {
+  <form
+    class="row d-flex justify-content-center align-items-start"
+    (ngSubmit)="confirmCreatedUser()"
+  >
+    <h4 class="col-12 my-3 d-flex justify-content-center">
+      Enter verification code sent to your email
+    </h4>
+    <div class="col-12 d-flex justify-content-center align-items-center">
+      <label class="col-1 mb-1 d-flex justify-content-center" for="code"
+        >Code:</label
+      >
+      <input-atom
+        class="col-3 mb-1"
+        [contentText]="''"
+        [id]="'code'"
+        [type]="'text'"
+        [required]="true"
+        (InputChange)="onCodeChange($event)"
+      />
+    </div>
+    <button-atom
+      class="col-12 my-2 d-flex justify-content-center"
+      [isSubmitType]="true"
+      [buttonText]="'Verify'"
+    />
+  </form>
+  <div class="col-1 mt-3 d-flex justify-content-center"></div>
+  } @if(!needConfirmation){
   <form
     [formGroup]="userForm"
     (ngSubmit)="isLogin ? validateUser() : createUser()"
@@ -63,6 +92,7 @@
     routerLink="/login"
     >Login</a
   >
+  }
   <a
     *ngIf="isLogin"
     class="col-1 mt-3 d-flex justify-content-center"

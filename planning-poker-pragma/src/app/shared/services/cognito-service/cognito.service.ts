@@ -23,8 +23,10 @@ export class CognitoService {
         },
       });
       console.log(isSignUpComplete, userId, nextStep);
+      return nextStep;
     } catch (error) {
       alert(error);
+      return error;
     }
   }
 
@@ -35,8 +37,10 @@ export class CognitoService {
         confirmationCode,
       });
       console.log(isSignUpComplete, nextStep);
+      return nextStep;
     } catch (error) {
       alert(error);
+      return error;
     }
   }
 }
