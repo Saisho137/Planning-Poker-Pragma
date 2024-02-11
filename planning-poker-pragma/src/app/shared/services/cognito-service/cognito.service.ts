@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
 import {
   signUp,
@@ -5,7 +6,8 @@ import {
   type ConfirmSignUpInput,
   signIn, 
   type SignInInput,
-  signOut
+  signOut,
+  getCurrentUser
 } from 'aws-amplify/auth';
 import { SignUpParameters } from '../../../interfaces/sign-up-parameters';
 
@@ -15,7 +17,7 @@ import { SignUpParameters } from '../../../interfaces/sign-up-parameters';
 export class CognitoService {
   async handleSignUp({ username, nickname, password, email }: SignUpParameters) {
     try {
-      const { isSignUpComplete, userId, nextStep } = await signUp({
+      const { /* isSignUpComplete, userId, */ nextStep } = await signUp({
         username,
         password,
         options: {
@@ -25,7 +27,6 @@ export class CognitoService {
           },
         },
       });
-      console.log(isSignUpComplete, userId, nextStep);
       return nextStep;
     } catch (error) {
       alert(error);
@@ -35,11 +36,10 @@ export class CognitoService {
 
   async handleSignUpConfirmation({username, confirmationCode}: ConfirmSignUpInput) {
     try {
-      const { isSignUpComplete, nextStep } = await confirmSignUp({
+      const { /* isSignUpComplete, */ nextStep } = await confirmSignUp({
         username,
         confirmationCode,
       });
-      console.log(isSignUpComplete, nextStep);
       return nextStep;
     } catch (error) {
       alert(error);
@@ -49,8 +49,7 @@ export class CognitoService {
 
   async  handleSignIn({ username, password }: SignInInput) {
     try {
-      const { isSignedIn, nextStep } = await signIn({ username, password });
-      console.log(isSignedIn, nextStep);
+      const { isSignedIn /* , nextStep */ } = await signIn({ username, password });
       return isSignedIn;
     } catch (error) {
       alert(error);
@@ -64,6 +63,20 @@ export class CognitoService {
       console.log('Signed out');
     } catch (error) {
       alert(error);
+    }
+  }
+
+  async currentAuthenticatedUser(): Promise<{username: string, userId: string}> {
+    try {
+      const { username, userId/* , signInDetails */ } = await getCurrentUser();
+      const userInfo = {
+        username,
+        userId
+      }
+      return userInfo;
+    } catch (error) {
+      alert(error);
+      return {} as any;
     }
   }
 }

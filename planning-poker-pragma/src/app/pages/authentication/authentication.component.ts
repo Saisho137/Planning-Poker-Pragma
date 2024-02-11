@@ -179,7 +179,6 @@ export class AuthenticationComponent {
         username: userUsername ?? '',
         confirmationCode: this.verificationCode.value ?? '',
     };
-    console.log(confirmation);
     const nextStep: any = await this.cognitoService.handleSignUpConfirmation(confirmation);
 
     if(nextStep?.signUpStep === 'DONE') this.router.navigate(['login'])
@@ -221,20 +220,18 @@ export class AuthenticationComponent {
           password: userPassword
         }
         const isSignedIn: any = await this.cognitoService.handleSignIn(user)
-        console.log(isSignedIn);
         
         if(isSignedIn === true){
-          console.log('HERE');
           const token = 'provisional';
           sessionStorage.setItem('session_token', token);
 
-          const tempUserId = '12345'
-          this.userService.setUserId(tempUserId);
-          sessionStorage.setItem('user_id', tempUserId);
+          const {username, userId} = await this.cognitoService.currentAuthenticatedUser();
 
-          const tempUsername = 'saisho'
-          this.userService.setUsername(tempUsername);
-          sessionStorage.setItem('user_username', tempUsername);
+          this.userService.setUserId(userId);
+          sessionStorage.setItem('user_id', userId);
+
+          this.userService.setUsername(username);
+          sessionStorage.setItem('user_username', username);
           this.router.navigate(['create-classroom']);
         } 
     }
