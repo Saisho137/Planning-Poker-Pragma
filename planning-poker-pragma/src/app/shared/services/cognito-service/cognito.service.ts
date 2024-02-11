@@ -3,6 +3,9 @@ import {
   signUp,
   confirmSignUp,
   type ConfirmSignUpInput,
+  signIn, 
+  type SignInInput,
+  signOut
 } from 'aws-amplify/auth';
 import { SignUpParameters } from '../../../interfaces/sign-up-parameters';
 
@@ -41,6 +44,26 @@ export class CognitoService {
     } catch (error) {
       alert(error);
       return error;
+    }
+  }
+
+  async  handleSignIn({ username, password }: SignInInput) {
+    try {
+      const { isSignedIn, nextStep } = await signIn({ username, password });
+      console.log(isSignedIn, nextStep);
+      return isSignedIn;
+    } catch (error) {
+      alert(error);
+      return error;
+    }
+  }
+
+  async handleSignOut() {
+    try {
+      await signOut();
+      console.log('Signed out');
+    } catch (error) {
+      alert(error);
     }
   }
 }

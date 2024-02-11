@@ -11,6 +11,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { CognitoService } from '../../shared/services/cognito-service/cognito.service';
 
 @Component({
   selector: 'app-create-classroom',
@@ -36,7 +37,7 @@ export class CreateClassroomComponent {
 
   public regexMessage = '';
 
-  constructor(private router: Router, private ngZone: NgZone) {
+  constructor(private cognitoService: CognitoService, private router: Router, private ngZone: NgZone) {
     this.navigateToLogin();
   }
 
@@ -78,6 +79,7 @@ export class CreateClassroomComponent {
     sessionStorage.removeItem('session_token');
     sessionStorage.removeItem('user_id');
     sessionStorage.removeItem('user_username');
+    this.cognitoService.handleSignOut();
     this.ngZone.run(() => {
       this.router.navigate(['login']);
     });

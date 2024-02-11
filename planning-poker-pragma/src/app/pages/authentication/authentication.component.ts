@@ -186,7 +186,7 @@ export class AuthenticationComponent {
   }
   
 
-  validateUser(): void {
+  async validateUser(): Promise<void> {
     const { userEmail, userPassword } = this.userForm.value;
 
     if (userEmail && userPassword) {
@@ -216,6 +216,27 @@ export class AuthenticationComponent {
             });
           },
         });*/
+        const user = {
+          username: userEmail,
+          password: userPassword
+        }
+        const isSignedIn: any = await this.cognitoService.handleSignIn(user)
+        console.log(isSignedIn);
+        
+        if(isSignedIn === true){
+          console.log('HERE');
+          const token = 'provisional';
+          sessionStorage.setItem('session_token', token);
+
+          const tempUserId = '12345'
+          this.userService.setUserId(tempUserId);
+          sessionStorage.setItem('user_id', tempUserId);
+
+          const tempUsername = 'saisho'
+          this.userService.setUsername(tempUsername);
+          sessionStorage.setItem('user_username', tempUsername);
+          this.router.navigate(['create-classroom']);
+        } 
     }
   }
 
