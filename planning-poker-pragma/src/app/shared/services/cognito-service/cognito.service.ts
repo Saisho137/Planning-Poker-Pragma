@@ -1,25 +1,42 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
-import { Amplify, Auth } from 'aws-amplify';
-import { environment } from '../../../../environments/environment';
-import { CognitoUSer } from '../../../interfaces/cognito-user';
+import {
+  signUp,
+  confirmSignUp,
+  type ConfirmSignUpInput,
+} from 'aws-amplify/auth';
+import { SignUpParameters } from '../../../interfaces/sign-up-parameters';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CognitoService {
-  constructor() {
-    Amplify.configure({
-      Auth: {
-        Cognito: environment.cognito,
-      },
-    });
+  async handleSignUp({ username, nickname, password, email }: SignUpParameters) {
+    try {
+      const { isSignUpComplete, userId, nextStep } = await signUp({
+        username,
+        password,
+        options: {
+          userAttributes: {
+            email,
+            nickname
+          },
+        },
+      });
+      console.log(isSignUpComplete, userId, nextStep);
+    } catch (error) {
+      alert(error);
+    }
   }
 
-  signUp(user: CognitoUSer): Promise<any> {
-    return Auth.signUp({
-      username: user.username,
-      password: user.password
-    })
-  } 
+  async handleSignUpConfirmation({username, confirmationCode}: ConfirmSignUpInput) {
+    try {
+      const { isSignUpComplete, nextStep } = await confirmSignUp({
+        username,
+        confirmationCode,
+      });
+      console.log(isSignUpComplete, nextStep);
+    } catch (error) {
+      alert(error);
+    }
+  }
 }

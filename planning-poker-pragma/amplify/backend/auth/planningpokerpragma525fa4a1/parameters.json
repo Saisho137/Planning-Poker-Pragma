@@ -1,0 +1,21 @@
+{
+  "authSelections": "userPoolOnly",
+  "resourceName": "planningpokerpragma525fa4a1",
+  "serviceType": "imported",
+  "region": "us-east-1",
+  "aliasAttributes": [
+    "email",
+    "preferred_username"
+  ],
+  "requiredAttributes": [
+    "nickname",
+    "email"
+  ],
+  "passwordPolicyMinLength": 6,
+  "passwordPolicyCharacters": [],
+  "mfaConfiguration": "OFF",
+  "autoVerifiedAttributes": [
+    "email"
+  ],
+  "mfaTypes": []
+}

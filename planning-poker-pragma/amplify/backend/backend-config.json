@@ -1,30 +1,45 @@
 {
   "auth": {
-    "planningpokerpragmabbde65a3": {
+    "planningpokerpragma525fa4a1": {
       "customAuth": false,
       "dependsOn": [],
-      "frontendAuthConfig": {
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyCharacters": [],
-          "passwordPolicyMinLength": 8
-        },
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
-      },
       "providerPlugin": "awscloudformation",
-      "service": "Cognito"
+      "service": "Cognito",
+      "serviceType": "imported"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_auth_planningpokerpragma525fa4a1_nativeClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "planningpokerpragma525fa4a1"
+        }
+      ]
+    },
+    "AMPLIFY_auth_planningpokerpragma525fa4a1_userPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "planningpokerpragma525fa4a1"
+        }
+      ]
+    },
+    "AMPLIFY_auth_planningpokerpragma525fa4a1_userPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "planningpokerpragma525fa4a1"
+        }
+      ]
+    },
+    "AMPLIFY_auth_planningpokerpragma525fa4a1_webClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "planningpokerpragma525fa4a1"
+        }
+      ]
     }
   }
 }

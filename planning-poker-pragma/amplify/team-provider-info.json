@@ -13,7 +13,12 @@
     },
     "categories": {
       "auth": {
-        "planningpokerpragmabbde65a3": {}
+        "planningpokerpragma525fa4a1": {
+          "userPoolId": "us-east-1_0paqoweIM",
+          "userPoolName": "planning-poker-users",
+          "webClientId": "3puifbjqqup3c65kop5trge9ss",
+          "nativeClientId": "3puifbjqqup3c65kop5trge9ss"
+        }
       }
     }
   }

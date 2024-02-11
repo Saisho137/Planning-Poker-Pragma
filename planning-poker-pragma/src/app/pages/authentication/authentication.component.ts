@@ -4,13 +4,13 @@ import { Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../shared/services/users-service/users.service';
 import {
   nameValidator,
-  validateRegex,
+  /* alidateRegex, */
 } from '../../shared/validators/regex.validator';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import { InputComponent } from '../../components/atoms/input/input.component';
 import { ButtonComponent } from '../../components/atoms/button/button.component';
-import { RegisterI } from '../../interfaces/register-interface';
-import { UserResponseI } from '../../interfaces/user-response-interface';
+//import { RegisterI } from '../../interfaces/register-interface';
+//import { UserResponseI } from '../../interfaces/user-response-interface';
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -19,6 +19,8 @@ import {
   FormGroup,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { CognitoService } from '../../shared/services/cognito-service/cognito.service';
+import { SignUpParameters } from '../../interfaces/sign-up-parameters';
 
 @Component({
   selector: 'app-register',
@@ -37,8 +39,8 @@ import { Subscription } from 'rxjs';
 })
 export class AuthenticationComponent {
   public userForm = new FormGroup({
-    userUsername: new FormControl('', [Validators.required, validateRegex()]),
-    userEmail: new FormControl('', [Validators.required, Validators.email]),
+    userUsername: new FormControl('', [Validators.required]),
+    userEmail: new FormControl('', [Validators.required]),
     userPassword: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
@@ -47,7 +49,8 @@ export class AuthenticationComponent {
   public regexMessage = '';
 
   public isLogin = false;
-  public title: 'Sign up' | 'Register' = 'Register';
+  public needConfirmation = false;
+  public title: 'Sign in' | 'Register' = 'Register';
 
   public pragmaIconUrl = '../../../../assets/images/pragma.png';
 
@@ -55,8 +58,9 @@ export class AuthenticationComponent {
   public validateUserSubscription: Subscription | undefined;
 
   constructor(
-    private router: Router,
     private userService: UsersService,
+    private cognitoService: CognitoService,
+    private router: Router,
     private location: Location,
     private ngZone: NgZone
   ) {
@@ -65,14 +69,15 @@ export class AuthenticationComponent {
   }
 
   navigateToCreateClassroom(): void {
-    if (sessionStorage.getItem('session_token')!) this.router.navigate(['create-classroom']);
+    if (sessionStorage.getItem('session_token')!)
+      this.router.navigate(['create-classroom']);
   }
 
   initializeLogin(): void {
     if (this.location.path() === '/login') {
       this.userForm.patchValue({ userUsername: 'loginDefault' });
       this.isLogin = true;
-      this.title = 'Sign up';
+      this.title = 'Sign in';
     }
   }
 
@@ -82,18 +87,18 @@ export class AuthenticationComponent {
     });
     if (this.userForm.get('userUsername')?.errors) {
       switch (this.userForm.get('userUsername')!.errors!['pattern']) {
-      case 'lenght':
-        this.regexMessage = 'El nombre debe tener entre 5 y 20 carácteres!';
-        break;
-      case 'numbers':
-        this.regexMessage = 'No debe haber más de 3 números en el nombre!';
-        break;
-      case 'spaces':
-        this.regexMessage = 'Solo un espacio es permitido!';
-        break;
-      default:
-        this.regexMessage = 'Solo se permiten carácteres alfanuméricos!';
-        break;
+        case 'lenght':
+          this.regexMessage = 'El nombre debe tener entre 5 y 20 carácteres!';
+          break;
+        case 'numbers':
+          this.regexMessage = 'No debe haber más de 3 números en el nombre!';
+          break;
+        case 'spaces':
+          this.regexMessage = 'Solo un espacio es permitido!';
+          break;
+        default:
+          this.regexMessage = 'Solo se permiten carácteres alfanuméricos!';
+          break;
       }
     } else {
       this.regexMessage = '';
@@ -130,17 +135,12 @@ export class AuthenticationComponent {
     this.regexMessage = '';
   }
 
-  public createUser(): void {
+  createUser(): void {
     const { userEmail, userPassword, userUsername } = this.userForm.value;
 
-    if (
-      userUsername &&
-      userEmail &&
-      userPassword &&
-      nameValidator(userUsername)
-    ) {
-      this.createUserSubscription = this.userService
-        .createUser(/* userUsername, userEmail, userPassword */)
+    if (userUsername && userEmail && userPassword && nameValidator(userUsername)) {
+      /* this.createUserSubscription = this.userService
+        .createUser(/* userUsername, userEmail, userPassword )
         .subscribe({
           next: (res: RegisterI) => {
             if (res.userCreated === true) this.validateUser();
@@ -151,16 +151,38 @@ export class AuthenticationComponent {
               this.router.navigate(['register']);
             });
           },
-        });
+        });*/
+      const user: SignUpParameters = {
+        username: userUsername,
+        nickname: userUsername,
+        email: userEmail,
+        password: userPassword,
+      };
+      
+      this.cognitoService.handleSignUp(user).then(() => {
+        this.needConfirmation = true;
+      });
     }
   }
 
-  public validateUser(): void {
+  confirmCreatedUser(): void {
+    const { userUsername } = this.userForm.value;
+    const confirmation = {
+        username: userUsername ?? '',
+        confirmationCode: '172658',
+    };
+    this.cognitoService.handleSignUpConfirmation(confirmation).then((resp) => {
+      //if donde navigate home
+    });
+  }
+  
+
+  validateUser(): void {
     const { userEmail, userPassword } = this.userForm.value;
 
     if (userEmail && userPassword) {
-      this.validateUserSubscription = this.userService
-        .validateUser(/* userEmail, userPassword */)
+      /* this.validateUserSubscription = this.userService
+        .validateUser(/* userEmail, userPassword)
         .subscribe({
           next: (res: UserResponseI) => {
             const token = res.token;
@@ -184,7 +206,7 @@ export class AuthenticationComponent {
               this.router.navigate(['login']);
             });
           },
-        });
+        });*/
     }
   }
 
