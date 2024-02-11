@@ -222,8 +222,9 @@ export class AuthenticationComponent {
         const isSignedIn: any = await this.cognitoService.handleSignIn(user)
         
         if(isSignedIn === true){
-          const token = 'provisional';
-          sessionStorage.setItem('session_token', token);
+
+          const token = await this.cognitoService.currentSession();
+          sessionStorage.setItem('session_token', token.toString());
 
           const {username, userId} = await this.cognitoService.currentAuthenticatedUser();
 
@@ -232,6 +233,7 @@ export class AuthenticationComponent {
 
           this.userService.setUsername(username);
           sessionStorage.setItem('user_username', username);
+
           this.router.navigate(['create-classroom']);
         } 
     }

@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
 import {
-  signUp,
-  confirmSignUp,
-  type ConfirmSignUpInput,
-  signIn, 
-  type SignInInput,
+  signUp, confirmSignUp, type ConfirmSignUpInput,
+  signIn, type SignInInput,
   signOut,
-  getCurrentUser
+  getCurrentUser,
+  fetchAuthSession,
+  JWT
 } from 'aws-amplify/auth';
 import { SignUpParameters } from '../../../interfaces/sign-up-parameters';
 
@@ -60,7 +59,6 @@ export class CognitoService {
   async handleSignOut() {
     try {
       await signOut();
-      console.log('Signed out');
     } catch (error) {
       alert(error);
     }
@@ -77,6 +75,16 @@ export class CognitoService {
     } catch (error) {
       alert(error);
       return {} as any;
+    }
+  }
+
+  async currentSession(): Promise<JWT> {
+    try {
+      const { /* accessToken, */ idToken } = (await fetchAuthSession()).tokens ?? {};
+      return idToken as JWT;
+    } catch (error) {
+      alert(error);
+      return error as any;
     }
   }
 }
