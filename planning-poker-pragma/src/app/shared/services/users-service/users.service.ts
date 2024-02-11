@@ -99,7 +99,6 @@ export class UsersService {
       })
     );*/
     const expectedUsers = [
-      {_id: '1', username: 'saisho', email: 'saisho@example.com', password: 'saisho', __v: 0},
       {_id: '2', username: 'danna', email: 'danna@example.com', password: 'danna', __v: 0},
       {_id: '3', username: 'daiko', email: 'daiko@example.com', password: 'daiko', __v: 0},
       {_id: '4', username: 'rotten', email: 'rotten@example.com', password: 'rotten', __v: 0},
