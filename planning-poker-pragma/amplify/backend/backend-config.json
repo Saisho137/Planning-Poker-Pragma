@@ -1,6 +1,6 @@
 {
   "auth": {
-    "planningpokerpragma525fa4a1": {
+    "planningpokerpragma059b9895": {
       "customAuth": false,
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
@@ -9,35 +9,35 @@
     }
   },
   "parameters": {
-    "AMPLIFY_auth_planningpokerpragma525fa4a1_nativeClientId": {
+    "AMPLIFY_auth_planningpokerpragma059b9895_nativeClientId": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "planningpokerpragma525fa4a1"
+          "resourceName": "planningpokerpragma059b9895"
         }
       ]
     },
-    "AMPLIFY_auth_planningpokerpragma525fa4a1_userPoolId": {
+    "AMPLIFY_auth_planningpokerpragma059b9895_userPoolId": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "planningpokerpragma525fa4a1"
+          "resourceName": "planningpokerpragma059b9895"
         }
       ]
     },
-    "AMPLIFY_auth_planningpokerpragma525fa4a1_userPoolName": {
+    "AMPLIFY_auth_planningpokerpragma059b9895_userPoolName": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "planningpokerpragma525fa4a1"
+          "resourceName": "planningpokerpragma059b9895"
         }
       ]
     },
-    "AMPLIFY_auth_planningpokerpragma525fa4a1_webClientId": {
+    "AMPLIFY_auth_planningpokerpragma059b9895_webClientId": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "planningpokerpragma525fa4a1"
+          "resourceName": "planningpokerpragma059b9895"
         }
       ]
     }
